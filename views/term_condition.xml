@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- inherited from the grand terms template of Odoo core without relating to invoice_terms_html field-->
+        <template id="alkeba_terms_conditions" inherit_id="account.account_terms_conditions_page" name="Syarat dan Ketentuan di Alkeba.id">
+            <xpath expr="//div[contains(@class, 'container oe_website_terms_conditions')]" position="replace">
+            
+                <!-- body contents from commons template -->
+                <div class="container-fluid">
+                    <div class="row blok-kebijakan blok-syarat">
+                        <div class="blok-title-kebijakan blok-title-syarat col-md-12 m-auto">
+                            <h2 class="title-kebijakan title-syarat">
+                                Syarat dan Ketentuan
+                            </h2>
+                            <span class="subtitle-kebijakan subtitle-syarat">
+                                Aturan penggunaan Alkeba.id
+                            </span>
+                        </div>
+                        <hr/>
+                        <div class="row main-content">
+                            <div class="blok-sidemenu col-md-3">
+
+                                <div class="floating-share">
+                                    <div class="list-sidemenu">
+                                        <span>
+                                            <a href="#teks_pendahuluan">Pendahuluan</a>
+                                        </span>
+                                        <hr/>
+                                        <span>
+                                            <a class="inactive" href="#teks_definisi">Definisi</a>
+                                        </span>
+                                        <hr/>
+                                        <span>
+                                            <a class="inactive" href="#teks_layanan">Layanan</a>
+                                        </span>
+                                        <hr/>
+                                        <span>
+                                            <a class="inactive" href="#teks_chat">Chat dan Kirim Pesan</a>
+                                        </span>
+                                        <hr/>
+                                        <span>
+                                            <a class="inactive" href="#teks_pengiriman">Pengiriman Barang</a>
+                                        </span>
+                                        <hr/>
+                                        <span>
+                                            <a class="inactive" href="#teks_bantuan">Bantuan</a>
+                                        </span>
+                                        <hr/>
+                                        <span>
+                                            <a class="inactive" href="#teks_otentikasi">Otentikasi</a>
+                                        </span>
+                                        <hr/>
+                                        <span>
+                                            <a class="inactive" href="">Self PickUp</a>
+                                        </span>
+                                        <hr/>
+                                        <span>
+                                            <a class="inactive" href="">Transaksi</a>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="blok-content-sidemenu col-md-9">
+                                <div class="content-teks">
+                                    <div id="teks_pendahuluan" class="content-paragraf">
+                                        <h1 class="title-paragraf">Pendahuluan</h1>
+                                        <p class="paragraf-teks">
+                                            Sit tristique eu, mattis libero. Integer viverra nulla laoreet tristique
+                                            tincidunt. Tellus turpis quis faucibus lectus in rhoncus, elit nec. Purus neque,
+                                            mattis consequat, amet, vitae aliquet. Nulla mi fames neque, et. Et in ornare
+                                            nascetur nulla consectetur vitae tortor, velit quis.
+                                            <br/>
+                                            Nec leo ut volutpat id porttitor arcu. Netus aliquet cursus libero ac massa
+                                            varius amet viverra. Libero eu aliquet molestie arcu. Malesuada eu metus lacus,
+                                            risus nunc tristique at. Purus vulputate tortor quis adipiscing sagittis quam.
+                                            In faucibus amet interdum elit mi suspendisse nec habitasse leo.
+                                            <br/>
+                                            Id augue adipiscing velit habitasse gravida odio nec consequat. Elementum sed
+                                            congue mauris fusce lacus, rhoncus. Placerat at scelerisque ipsum feugiat erat
+                                            risus. Morbi ut nulla feugiat quam semper scelerisque amet.
+                                        </p>
+                                    </div>
+                                    <div id="teks_definisi" class="content-paragraf">
+                                        <h1 class="title-paragraf">Definisi</h1>
+                                        <p class="paragraf-teks">
+                                            Sit tristique eu, mattis libero. Integer viverra nulla laoreet tristique
+                                            tincidunt. Tellus turpis quis faucibus lectus in rhoncus, elit nec. Purus neque,
+                                            mattis consequat, amet, vitae aliquet. Nulla mi fames neque, et. Et in ornare
+                                            nascetur nulla consectetur vitae tortor, velit quis.
+                                            <br/>
+                                            Nec leo ut volutpat id porttitor arcu. Netus aliquet cursus libero ac massa
+                                            varius amet viverra. Libero eu aliquet molestie arcu. Malesuada eu metus lacus,
+                                            risus nunc tristique at. Purus vulputate tortor quis adipiscing sagittis quam.
+                                            In faucibus amet interdum elit mi suspendisse nec habitasse leo.
+                                            <br/>
+                                            Id augue adipiscing velit habitasse gravida odio nec consequat. Elementum sed
+                                            congue mauris fusce lacus, rhoncus. Placerat at scelerisque ipsum feugiat erat
+                                            risus. Morbi ut nulla feugiat quam semper scelerisque amet.
+                                            <br/>
+                                            Tincidunt tortor, faucibus lobortis quam. Pulvinar at et proin pellentesque. Ut
+                                            odio ipsum, vitae condimentum mauris. Non, dignissim aenean id scelerisque et
+                                            tempus. At blandit ut lobortis tempus odio et. Ipsum eget porta morbi vel
+                                            molestie est ullamcorper. Netus iaculis odio integer massa vel interdum a.
+                                            Commodo placerat commodo metus, amet. Nunc tincidunt mi commodo amet et risus et
+                                            purus sagittis.
+                                            <br/>
+                                            Neque molestie vel vitae urna lorem magna. Gravida pulvinar maecenas hac gravida
+                                            posuere id adipiscing elit. At faucibus blandit risus consectetur mattis.
+                                            Adipiscing aliquam, vitae, ultrices condimentum lectus molestie nisi. Morbi in
+                                            sem euismod in habitant a vitae phasellus. Lectus duis eget sit sed amet libero
+                                            tristique. Quam orci eu ut eros, varius convallis ornare consectetur ipsum. Eu
+                                            augue sit risus, nec augue feugiat. Neque, amet nunc ut nunc libero eu. Purus
+                                            eu, aenean odio nunc. Commodo sapien, et duis amet, justo, morbi justo.
+                                        </p>
+                                    </div>
+                                    <div id="teks_layanan" class="content-paragraf">
+                                        <h1 class="title-paragraf">Layanan</h1>
+                                        <p class="paragraf-teks">
+                                            Sit tristique eu, mattis libero. Integer viverra nulla laoreet tristique
+                                            tincidunt. Tellus turpis quis faucibus lectus in rhoncus, elit nec. Purus neque,
+                                            mattis consequat, amet, vitae aliquet. Nulla mi fames neque, et. Et in ornare
+                                            nascetur nulla consectetur vitae tortor, velit quis.
+                                            <br/>
+                                            Nec leo ut volutpat id porttitor arcu. Netus aliquet cursus libero ac massa
+                                            varius amet viverra. Libero eu aliquet molestie arcu. Malesuada eu metus lacus,
+                                            risus nunc tristique at. Purus vulputate tortor quis adipiscing sagittis quam.
+                                            In faucibus amet interdum elit mi suspendisse nec habitasse leo.
+                                            <br/>
+                                            Id augue adipiscing velit habitasse gravida odio nec consequat. Elementum sed
+                                            congue mauris fusce lacus, rhoncus. Placerat at scelerisque ipsum feugiat erat
+                                            risus. Morbi ut nulla feugiat quam semper scelerisque amet.
+                                            <br/>
+                                            Tincidunt tortor, faucibus lobortis quam. Pulvinar at et proin pellentesque. Ut
+                                            odio ipsum, vitae condimentum mauris. Non, dignissim aenean id scelerisque et
+                                            tempus. At blandit ut lobortis tempus odio et. Ipsum eget porta morbi vel
+                                            molestie est ullamcorper. Netus iaculis odio integer massa vel interdum a.
+                                            Commodo placerat commodo metus, amet. Nunc tincidunt mi commodo amet et risus et
+                                            purus sagittis.
+                                            <br/>
+                                            Neque molestie vel vitae urna lorem magna. Gravida pulvinar maecenas hac gravida
+                                            posuere id adipiscing elit. At faucibus blandit risus consectetur mattis.
+                                            Adipiscing aliquam, vitae, ultrices condimentum lectus molestie nisi. Morbi in
+                                            sem euismod in habitant a vitae phasellus. Lectus duis eget sit sed amet libero
+                                            tristique. Quam orci eu ut eros, varius convallis ornare consectetur ipsum. Eu
+                                            augue sit risus, nec augue feugiat. Neque, amet nunc ut nunc libero eu. Purus
+                                            eu, aenean odio nunc. Commodo sapien, et duis amet, justo, morbi justo.
+                                        </p>
+                                    </div>
+                                    <div id="teks_chat" class="content-paragraf">
+                                        <h1 class="title-paragraf">Chat dan Kirim Pesan</h1>
+                                        <p class="paragraf-teks">
+                                            Sit tristique eu, mattis libero. Integer viverra nulla laoreet tristique
+                                            tincidunt. Tellus turpis quis faucibus lectus in rhoncus, elit nec. Purus neque,
+                                            mattis consequat, amet, vitae aliquet. Nulla mi fames neque, et. Et in ornare
+                                            nascetur nulla consectetur vitae tortor, velit quis.
+                                            <br/>
+                                            Nec leo ut volutpat id porttitor arcu. Netus aliquet cursus libero ac massa
+                                            varius amet viverra. Libero eu aliquet molestie arcu. Malesuada eu metus lacus,
+                                            risus nunc tristique at. Purus vulputate tortor quis adipiscing sagittis quam.
+                                            In faucibus amet interdum elit mi suspendisse nec habitasse leo.
+                                            <br/>
+                                            Id augue adipiscing velit habitasse gravida odio nec consequat. Elementum sed
+                                            congue mauris fusce lacus, rhoncus. Placerat at scelerisque ipsum feugiat erat
+                                            risus. Morbi ut nulla feugiat quam semper scelerisque amet.
+                                            <br/>
+                                            Tincidunt tortor, faucibus lobortis quam. Pulvinar at et proin pellentesque. Ut
+                                            odio ipsum, vitae condimentum mauris. Non, dignissim aenean id scelerisque et
+                                            tempus. At blandit ut lobortis tempus odio et. Ipsum eget porta morbi vel
+                                            molestie est ullamcorper. Netus iaculis odio integer massa vel interdum a.
+                                            Commodo placerat commodo metus, amet. Nunc tincidunt mi commodo amet et risus et
+                                            purus sagittis.
+                                            <br/>
+                                            Neque molestie vel vitae urna lorem magna. Gravida pulvinar maecenas hac gravida
+                                            posuere id adipiscing elit. At faucibus blandit risus consectetur mattis.
+                                            Adipiscing aliquam, vitae, ultrices condimentum lectus molestie nisi. Morbi in
+                                            sem euismod in habitant a vitae phasellus. Lectus duis eget sit sed amet libero
+                                            tristique. Quam orci eu ut eros, varius convallis ornare consectetur ipsum. Eu
+                                            augue sit risus, nec augue feugiat. Neque, amet nunc ut nunc libero eu. Purus
+                                            eu, aenean odio nunc. Commodo sapien, et duis amet, justo, morbi justo.
+                                        </p>
+                                    </div>
+                                    <div id="teks_pengiriman" class="content-paragraf">
+                                        <h1 class="title-paragraf">Pengiriman Barang</h1>
+                                        <p class="paragraf-teks">
+                                            Sit tristique eu, mattis libero. Integer viverra nulla laoreet tristique
+                                            tincidunt. Tellus turpis quis faucibus lectus in rhoncus, elit nec. Purus neque,
+                                            mattis consequat, amet, vitae aliquet. Nulla mi fames neque, et. Et in ornare
+                                            nascetur nulla consectetur vitae tortor, velit quis.
+                                            <br/>
+                                            Nec leo ut volutpat id porttitor arcu. Netus aliquet cursus libero ac massa
+                                            varius amet viverra. Libero eu aliquet molestie arcu. Malesuada eu metus lacus,
+                                            risus nunc tristique at. Purus vulputate tortor quis adipiscing sagittis quam.
+                                            In faucibus amet interdum elit mi suspendisse nec habitasse leo.
+                                            <br/>
+                                            Id augue adipiscing velit habitasse gravida odio nec consequat. Elementum sed
+                                            congue mauris fusce lacus, rhoncus. Placerat at scelerisque ipsum feugiat erat
+                                            risus. Morbi ut nulla feugiat quam semper scelerisque amet.
+                                            <br/>
+                                            Tincidunt tortor, faucibus lobortis quam. Pulvinar at et proin pellentesque. Ut
+                                            odio ipsum, vitae condimentum mauris. Non, dignissim aenean id scelerisque et
+                                            tempus. At blandit ut lobortis tempus odio et. Ipsum eget porta morbi vel
+                                            molestie est ullamcorper. Netus iaculis odio integer massa vel interdum a.
+                                            Commodo placerat commodo metus, amet. Nunc tincidunt mi commodo amet et risus et
+                                            purus sagittis.
+                                            <br/>
+                                            Neque molestie vel vitae urna lorem magna. Gravida pulvinar maecenas hac gravida
+                                            posuere id adipiscing elit. At faucibus blandit risus consectetur mattis.
+                                            Adipiscing aliquam, vitae, ultrices condimentum lectus molestie nisi. Morbi in
+                                            sem euismod in habitant a vitae phasellus. Lectus duis eget sit sed amet libero
+                                            tristique. Quam orci eu ut eros, varius convallis ornare consectetur ipsum. Eu
+                                            augue sit risus, nec augue feugiat. Neque, amet nunc ut nunc libero eu. Purus
+                                            eu, aenean odio nunc. Commodo sapien, et duis amet, justo, morbi justo.
+                                        </p>
+                                    </div>
+                                    <div id="teks_bantuan" class="content-paragraf">
+                                        <h1 class="title-paragraf">Bantuan</h1>
+                                        <p class="paragraf-teks">
+                                            Sit tristique eu, mattis libero. Integer viverra nulla laoreet tristique
+                                            tincidunt. Tellus turpis quis faucibus lectus in rhoncus, elit nec. Purus neque,
+                                            mattis consequat, amet, vitae aliquet. Nulla mi fames neque, et. Et in ornare
+                                            nascetur nulla consectetur vitae tortor, velit quis.
+                                            <br/>
+                                            Nec leo ut volutpat id porttitor arcu. Netus aliquet cursus libero ac massa
+                                            varius amet viverra. Libero eu aliquet molestie arcu. Malesuada eu metus lacus,
+                                            risus nunc tristique at. Purus vulputate tortor quis adipiscing sagittis quam.
+                                            In faucibus amet interdum elit mi suspendisse nec habitasse leo.
+                                            <br/>
+                                            Id augue adipiscing velit habitasse gravida odio nec consequat. Elementum sed
+                                            congue mauris fusce lacus, rhoncus. Placerat at scelerisque ipsum feugiat erat
+                                            risus. Morbi ut nulla feugiat quam semper scelerisque amet.
+                                            <br/>
+                                            Tincidunt tortor, faucibus lobortis quam. Pulvinar at et proin pellentesque. Ut
+                                            odio ipsum, vitae condimentum mauris. Non, dignissim aenean id scelerisque et
+                                            tempus. At blandit ut lobortis tempus odio et. Ipsum eget porta morbi vel
+                                            molestie est ullamcorper. Netus iaculis odio integer massa vel interdum a.
+                                            Commodo placerat commodo metus, amet. Nunc tincidunt mi commodo amet et risus et
+                                            purus sagittis.
+                                            <br/>
+                                            Neque molestie vel vitae urna lorem magna. Gravida pulvinar maecenas hac gravida
+                                            posuere id adipiscing elit. At faucibus blandit risus consectetur mattis.
+                                            Adipiscing aliquam, vitae, ultrices condimentum lectus molestie nisi. Morbi in
+                                            sem euismod in habitant a vitae phasellus. Lectus duis eget sit sed amet libero
+                                            tristique. Quam orci eu ut eros, varius convallis ornare consectetur ipsum. Eu
+                                            augue sit risus, nec augue feugiat. Neque, amet nunc ut nunc libero eu. Purus
+                                            eu, aenean odio nunc. Commodo sapien, et duis amet, justo, morbi justo.
+                                        </p>
+                                    </div>
+                                    <div id="teks_otentikasi" class="content-paragraf">
+                                        <h1 class="title-paragraf">Otentikasi</h1>
+                                        <p class="paragraf-teks">
+                                            Sit tristique eu, mattis libero. Integer viverra nulla laoreet tristique
+                                            tincidunt. Tellus turpis quis faucibus lectus in rhoncus, elit nec. Purus neque,
+                                            mattis consequat, amet, vitae aliquet. Nulla mi fames neque, et. Et in ornare
+                                            nascetur nulla consectetur vitae tortor, velit quis.
+                                            <br/>
+                                            Nec leo ut volutpat id porttitor arcu. Netus aliquet cursus libero ac massa
+                                            varius amet viverra. Libero eu aliquet molestie arcu. Malesuada eu metus lacus,
+                                            risus nunc tristique at. Purus vulputate tortor quis adipiscing sagittis quam.
+                                            In faucibus amet interdum elit mi suspendisse nec habitasse leo.
+                                            <br/>
+                                            Id augue adipiscing velit habitasse gravida odio nec consequat. Elementum sed
+                                            congue mauris fusce lacus, rhoncus. Placerat at scelerisque ipsum feugiat erat
+                                            risus. Morbi ut nulla feugiat quam semper scelerisque amet.
+                                            <br/>
+                                            Tincidunt tortor, faucibus lobortis quam. Pulvinar at et proin pellentesque. Ut
+                                            odio ipsum, vitae condimentum mauris. Non, dignissim aenean id scelerisque et
+                                            tempus. At blandit ut lobortis tempus odio et. Ipsum eget porta morbi vel
+                                            molestie est ullamcorper. Netus iaculis odio integer massa vel interdum a.
+                                            Commodo placerat commodo metus, amet. Nunc tincidunt mi commodo amet et risus et
+                                            purus sagittis.
+                                            <br/>
+                                            Neque molestie vel vitae urna lorem magna. Gravida pulvinar maecenas hac gravida
+                                            posuere id adipiscing elit. At faucibus blandit risus consectetur mattis.
+                                            Adipiscing aliquam, vitae, ultrices condimentum lectus molestie nisi. Morbi in
+                                            sem euismod in habitant a vitae phasellus. Lectus duis eget sit sed amet libero
+                                            tristique. Quam orci eu ut eros, varius convallis ornare consectetur ipsum. Eu
+                                            augue sit risus, nec augue feugiat. Neque, amet nunc ut nunc libero eu. Purus
+                                            eu, aenean odio nunc. Commodo sapien, et duis amet, justo, morbi justo.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </template>
+    </data>
+</odoo>

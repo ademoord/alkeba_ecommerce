@@ -1,0 +1,784 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="alkeba_dashboard_my_review" name="Alkeba Dashboard My Review">
+        <t t-call="theme_alkeba.alkeba_user_page_layout">
+
+            <div class="col-md-9">
+                <h6>Ulasan Saya</h6>
+                <ul class="nav nav-pills" id="pills-tab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="pills-menunggu-ulasan-tab" data-bs-toggle="pill"
+                                data-bs-target="#pills-menunggu-ulasan" type="button" role="tab"
+                                aria-controls="pills-home" aria-selected="true">Menunggu Ulasan
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="pills-ulasan-tab" data-bs-toggle="pill"
+                                data-bs-target="#pills-ulasan" type="button" role="tab" aria-controls="pills-profile"
+                                aria-selected="false">Ulasan Saya
+                        </button>
+                    </li>
+                </ul>
+                <div class="tab-content" id="pills-tabContent">
+                    <div class="tab-pane fade show active" id="pills-menunggu-ulasan" role="tabpanel"
+                         aria-labelledby="pills-menunggu-ulasan-tab">
+                        <div class="card border-0 mt-3">
+                            <t t-if="reviews['waiting_review']">
+                                <div class="card card-order card-ulasan">
+                                    <div class="card-header d-flex ">
+                                        <div class="form-group">
+                                            <label class="grey">Nomor Pesanan</label>
+                                            <p>
+                                                <b>3151496895827</b>
+                                            </p>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="grey">Tanggal Pesanan</label>
+                                            <p>
+                                                <b>20 Mar 2022 18:30</b>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="card-body pb-0">
+                                        <div class="ulasan-product belum-diulas">
+                                            <div class="d-flex align-items-baseline">
+                                                <div class="card-img">
+                                                    <img src="/theme_alkeba/static/src/images/product/prod-01.jpg"
+                                                         class="img-fluid" alt="..."/>
+                                                </div>
+                                                <div class="card-info">
+                                                    Saniter Hand Sanitizer Spray 60ml - 4pcs
+                                                    <div class="d-block">
+                                                        <span>Berat: 60ml</span>
+                                                        <span>SKU: 976006MT</span>
+                                                    </div>
+                                                </div>
+                                                <a href="javascript:void(0)" class="btn btn-outline-orange btn-ulasan">
+                                                    Berikan Ulasan
+                                                </a>
+                                            </div>
+                                            <form class="d-flex justify-content-between form-ulasan">
+                                                <div class="rating-ulasan">
+                                                    <div class="form-group">
+                                                        <label>
+                                                            <b>Deskripsi Ulasan</b>
+                                                        </label>
+                                                        <section class='rating-widget'>
+                                                            <!-- Rating Stars Box -->
+                                                            <div class='rating-stars text-center'>
+                                                                <ul id='stars'>
+                                                                    <li class='star' title='Poor' data-value='1'>
+                                                                        <i class='fa fa-star fa-fw'></i>
+                                                                    </li>
+                                                                    <li class='star' title='Fair' data-value='2'>
+                                                                        <i class='fa fa-star fa-fw'></i>
+                                                                    </li>
+                                                                    <li class='star' title='Good' data-value='3'>
+                                                                        <i class='fa fa-star fa-fw'></i>
+                                                                    </li>
+                                                                    <li class='star' title='Excellent' data-value='4'>
+                                                                        <i class='fa fa-star fa-fw'></i>
+                                                                    </li>
+                                                                    <li class='star' title='WOW!!!' data-value='5'>
+                                                                        <i class='fa fa-star fa-fw'></i>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                            <div class='success-box'>
+                                                                <div class='text-message'></div>
+                                                            </div>
+                                                        </section>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>
+                                                            <b>Foto Ulasan</b>
+                                                        </label>
+                                                        <div class="d-flex foto-upload">
+                                                            <div class="imgUp">
+                                                                <div class="imagePreview"></div>
+                                                                <label class="btn btn-primary">
+                                                                    Upload
+                                                                    <input type="file" class="uploadFile img"
+                                                                           value="Upload Photo"
+                                                                           style="width: 0px;height: 0px;overflow: hidden;"/>
+                                                                </label>
+                                                                <i class="fa fa-times del"></i>
+                                                            </div>
+                                                            <i class="fa fa-plus imgAdd"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="d-flex justify-content-end flex-wrap deskripsi-ulasan ">
+                                                    <label class="d-block w-100">
+                                                        <b>Deskripsi Ulasan</b>
+                                                    </label>
+                                                    <textarea class="form-control" style="height: 160px;"
+                                                              placeholder="Masukan ulasan untuk produk yang sudah Anda beli"></textarea>
+                                                    <div class="d-flex justify-content-end align-items-baseline">
+                                                        <a href="javascript:void(0)" data-bs-dismiss="modal"
+                                                           class="btn btn-outline-orange me-3 btn-ulasan-batal">Batal
+                                                        </a>
+                                                        <button type="button" data-bs-toggle="modal"
+                                                                data-bs-target="#SimpanUlasanModal"
+                                                                class="btn btn-primary mt-3">Simpan Ulasan
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="ulasan-product belum-diulas">
+                                            <div class="d-flex align-items-baseline">
+                                                <div class="card-img">
+                                                    <img src="/theme_alkeba/static/src/images/product/prod-04.jpg"
+                                                         class="img-fluid" alt="..."/>
+                                                </div>
+                                                <div class="card-info">
+                                                    Saniter Hand Sanitizer Spray 60ml - 4pcs
+                                                    <div class="d-block">
+                                                        <span>Berat: 60ml</span>
+                                                        <span>SKU: 976006MT</span>
+                                                    </div>
+                                                </div>
+                                                <a href="javascript:void(0)" class="btn btn-outline-orange btn-ulasan">
+                                                    Berikan Ulasan
+                                                </a>
+                                            </div>
+                                            <form class="d-flex justify-content-between form-ulasan">
+                                                <div class="rating-ulasan">
+                                                    <div class="form-group">
+                                                        <label>
+                                                            <b>Deskripsi Ulasan</b>
+                                                        </label>
+                                                        <section class='rating-widget'>
+                                                            <!-- Rating Stars Box -->
+                                                            <div class='rating-stars text-center'>
+                                                                <ul id='stars'>
+                                                                    <li class='star' title='Poor' data-value='1'>
+                                                                        <i class='fa fa-star fa-fw'></i>
+                                                                    </li>
+                                                                    <li class='star' title='Fair' data-value='2'>
+                                                                        <i class='fa fa-star fa-fw'></i>
+                                                                    </li>
+                                                                    <li class='star' title='Good' data-value='3'>
+                                                                        <i class='fa fa-star fa-fw'></i>
+                                                                    </li>
+                                                                    <li class='star' title='Excellent' data-value='4'>
+                                                                        <i class='fa fa-star fa-fw'></i>
+                                                                    </li>
+                                                                    <li class='star' title='WOW!!!' data-value='5'>
+                                                                        <i class='fa fa-star fa-fw'></i>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                            <div class='success-box'>
+                                                                <div class='text-message'></div>
+                                                            </div>
+                                                        </section>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>
+                                                            <b>Foto Ulasan</b>
+                                                        </label>
+                                                        <div class="d-flex foto-upload">
+                                                            <div class="imgUp">
+                                                                <div class="imagePreview"></div>
+                                                                <label class="btn btn-primary">
+                                                                    Upload
+                                                                    <input type="file" class="uploadFile img"
+                                                                           value="Upload Photo"
+                                                                           style="width: 0px;height: 0px;overflow: hidden;"/>
+                                                                </label>
+                                                                <i class="fa fa-times del"></i>
+                                                            </div>
+                                                            <i class="fa fa-plus imgAdd"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="d-flex justify-content-end flex-wrap deskripsi-ulasan ">
+                                                    <label class="d-block w-100">
+                                                        <b>Deskripsi Ulasan</b>
+                                                    </label>
+                                                    <textarea class="form-control" style="height: 160px;"
+                                                              placeholder="Masukan ulasan untuk produk yang sudah Anda beli"></textarea>
+                                                    <div class="d-flex justify-content-end align-items-baseline">
+                                                        <a href="javascript:void(0)" data-bs-dismiss="modal"
+                                                           class="btn btn-outline-orange me-3 btn-ulasan-batal">Batal
+                                                        </a>
+                                                        <button type="button" data-bs-toggle="modal"
+                                                                data-bs-target="#SimpanUlasanModal"
+                                                                class="btn btn-primary mt-3">Simpan Ulasan
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="ulasan-product belum-diulas">
+                                            <div class="d-flex align-items-baseline">
+                                                <div class="card-img">
+                                                    <img src="/theme_alkeba/static/src/images/product/prod-03.jpg"
+                                                         class="img-fluid" alt="..."/>
+                                                </div>
+                                                <div class="card-info">
+                                                    Saniter Hand Sanitizer Spray 60ml - 4pcs
+                                                    <div class="d-block">
+                                                        <span>Berat: 60ml</span>
+                                                        <span>SKU: 976006MT</span>
+                                                    </div>
+                                                </div>
+                                                <a href="javascript:void(0)" class="btn btn-outline-orange btn-ulasan">
+                                                    Berikan Ulasan
+                                                </a>
+                                            </div>
+                                            <form class="d-flex justify-content-between form-ulasan">
+                                                <div class="rating-ulasan">
+                                                    <div class="form-group">
+                                                        <label>
+                                                            <b>Deskripsi Ulasan</b>
+                                                        </label>
+                                                        <section class='rating-widget'>
+                                                            <!-- Rating Stars Box -->
+                                                            <div class='rating-stars text-center'>
+                                                                <ul id='stars'>
+                                                                    <li class='star' title='Poor' data-value='1'>
+                                                                        <i class='fa fa-star fa-fw'></i>
+                                                                    </li>
+                                                                    <li class='star' title='Fair' data-value='2'>
+                                                                        <i class='fa fa-star fa-fw'></i>
+                                                                    </li>
+                                                                    <li class='star' title='Good' data-value='3'>
+                                                                        <i class='fa fa-star fa-fw'></i>
+                                                                    </li>
+                                                                    <li class='star' title='Excellent' data-value='4'>
+                                                                        <i class='fa fa-star fa-fw'></i>
+                                                                    </li>
+                                                                    <li class='star' title='WOW!!!' data-value='5'>
+                                                                        <i class='fa fa-star fa-fw'></i>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                            <div class='success-box'>
+                                                                <div class='text-message'></div>
+                                                            </div>
+                                                        </section>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>
+                                                            <b>Foto Ulasan</b>
+                                                        </label>
+                                                        <div class="d-flex foto-upload">
+                                                            <div class="imgUp">
+                                                                <div class="imagePreview"></div>
+                                                                <label class="btn btn-primary">
+                                                                    Upload
+                                                                    <input type="file" class="uploadFile img"
+                                                                           value="Upload Photo"
+                                                                           style="width: 0px;height: 0px;overflow: hidden;"/>
+                                                                </label>
+                                                                <i class="fa fa-times del"></i>
+                                                            </div>
+                                                            <i class="fa fa-plus imgAdd"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="d-flex justify-content-end flex-wrap deskripsi-ulasan ">
+                                                    <label class="d-block w-100">
+                                                        <b>Deskripsi Ulasan</b>
+                                                    </label>
+                                                    <textarea class="form-control" style="height: 160px;"
+                                                              placeholder="Masukan ulasan untuk produk yang sudah Anda beli"></textarea>
+                                                    <div class="d-flex justify-content-end align-items-baseline">
+                                                        <a href="javascript:void(0)" data-bs-dismiss="modal"
+                                                           class="btn btn-outline-orange me-3 btn-ulasan-batal">Batal
+                                                        </a>
+                                                        <button type="button" data-bs-toggle="modal"
+                                                                data-bs-target="#SimpanUlasanModal"
+                                                                class="btn btn-primary mt-3">Simpan Ulasan
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="ulasan-product belum-diulas">
+                                            <div class="d-flex align-items-baseline">
+                                                <div class="card-img">
+                                                    <img src="/theme_alkeba/static/src/images/product/prod-02.jpg"
+                                                         class="img-fluid" alt="..."/>
+                                                </div>
+                                                <div class="card-info">
+                                                    Saniter Hand Sanitizer Spray 60ml - 4pcs
+                                                    <div class="d-block">
+                                                        <span>Berat: 60ml</span>
+                                                        <span>SKU: 976006MT</span>
+                                                    </div>
+                                                </div>
+                                                <a href="javascript:void(0)" class="btn btn-outline-orange btn-ulasan">
+                                                    Berikan Ulasan
+                                                </a>
+                                            </div>
+                                            <form class="d-flex justify-content-between form-ulasan">
+                                                <div class="rating-ulasan">
+                                                    <div class="form-group">
+                                                        <label>
+                                                            <b>Deskripsi Ulasan</b>
+                                                        </label>
+                                                        <section class='rating-widget'>
+                                                            <!-- Rating Stars Box -->
+                                                            <div class='rating-stars text-center'>
+                                                                <ul id='stars'>
+                                                                    <li class='star' title='Poor' data-value='1'>
+                                                                        <i class='fa fa-star fa-fw'></i>
+                                                                    </li>
+                                                                    <li class='star' title='Fair' data-value='2'>
+                                                                        <i class='fa fa-star fa-fw'></i>
+                                                                    </li>
+                                                                    <li class='star' title='Good' data-value='3'>
+                                                                        <i class='fa fa-star fa-fw'></i>
+                                                                    </li>
+                                                                    <li class='star' title='Excellent' data-value='4'>
+                                                                        <i class='fa fa-star fa-fw'></i>
+                                                                    </li>
+                                                                    <li class='star' title='WOW!!!' data-value='5'>
+                                                                        <i class='fa fa-star fa-fw'></i>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                            <div class='success-box'>
+                                                                <div class='text-message'></div>
+                                                            </div>
+                                                        </section>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>
+                                                            <b>Foto Ulasan</b>
+                                                        </label>
+                                                        <div class="d-flex foto-upload">
+                                                            <div class="imgUp">
+                                                                <div class="imagePreview"></div>
+                                                                <label class="btn btn-primary">
+                                                                    Upload
+                                                                    <input type="file" class="uploadFile img"
+                                                                           value="Upload Photo"
+                                                                           style="width: 0px;height: 0px;overflow: hidden;"/>
+                                                                </label>
+                                                                <i class="fa fa-times del"></i>
+                                                            </div>
+                                                            <i class="fa fa-plus imgAdd"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="d-flex justify-content-end flex-wrap deskripsi-ulasan ">
+                                                    <label class="d-block w-100">
+                                                        <b>Deskripsi Ulasan</b>
+                                                    </label>
+                                                    <textarea class="form-control" style="height: 160px;"
+                                                              placeholder="Masukan ulasan untuk produk yang sudah Anda beli"></textarea>
+                                                    <div class="d-flex justify-content-end align-items-baseline">
+                                                        <a href="javascript:void(0)" data-bs-dismiss="modal"
+                                                           class="btn btn-outline-orange me-3 btn-ulasan-batal">Batal
+                                                        </a>
+                                                        <button type="button" data-bs-toggle="modal"
+                                                                data-bs-target="#SimpanUlasanModal"
+                                                                class="btn btn-primary mt-3">Simpan Ulasan
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="pagination-bottom d-flex align-items-center justify-content-between">
+                                    <p class="mb-0">Menampilkan 1–40 dari 345</p>
+                                    <ul class="list-unstyled mb-0">
+                                        <li class="active">
+                                            <button class="btn">1</button>
+                                        </li>
+                                        <li>
+                                            <button class="btn">2</button>
+                                        </li>
+                                        <li>
+                                            <button class="btn">3</button>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </t>
+                            <t t-else="">
+                                <div class="ulasan-saya">
+                                    <div class="col-7 m-auto pt-5 blankslate text-center">
+                                        <img src="/theme_alkeba/static/src/images/illust-ulasan-blankslate.png"/>
+                                        <h6>Belum Ada Produk Yang Diulas</h6>
+                                        <p>Kami tidak dapat menemukan produk yang bisa untuk diulas,
+                                            silahkan lakukan pembelanjaan untuk bisa mengulas produk
+                                        </p>
+                                        <a href="/products" class="btn btn-primary">
+                                            <i class="icon-shopping-bag"></i>
+                                            Mulai Belanja
+                                        </a>
+                                    </div>
+                                </div>
+                            </t>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="pills-ulasan" role="tabpanel" aria-labelledby="pills-ulasan-tab">
+                        <div class="card border-0 mt-3">
+                            <t t-if="reviews['reviewed']">
+                                <div class="card card-order card-ulasan">
+                                    <div class="card-header d-flex ">
+                                        <div class="form-group">
+                                            <label class="grey">Nomor Pesanan</label>
+                                            <p>
+                                                <b>3151496895827</b>
+                                            </p>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="grey">Tanggal Pesanan</label>
+                                            <p>
+                                                <b>20 Mar 2022 18:30</b>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="card-body pb-0">
+                                        <div class="ulasan-product sudah-diulas">
+                                            <div class="d-flex">
+                                                <div class="card-img">
+                                                    <img src="/theme_alkeba/static/src/images/product/prod-01.jpg"
+                                                         class="img-fluid" alt="..."/>
+                                                </div>
+                                                <div class="card-info">
+                                                    Saniter Hand Sanitizer Spray 60ml - 4pcs
+                                                    <div class="d-block">
+                                                        <span>Berat: 60ml</span>
+                                                        <span>SKU: 976006MT</span>
+                                                    </div>
+                                                    <div class="review-block-rate mt-3">
+                                                        <i class="icon-star1 active"></i>
+                                                        <i class="icon-star1 active"></i>
+                                                        <i class="icon-star1 active"></i>
+                                                        <i class="icon-star1 active"></i>
+                                                        <i class="icon-star1"></i>
+                                                        (4)
+                                                    </div>
+                                                    <div class="review-block-description">Sesuai harapan. packing aman.
+                                                        tidak tumpah.
+                                                        bagus!
+                                                    </div>
+                                                    <div class="review-block-time mt-4">02 Oct 2020 22:11:55</div>
+                                                </div>
+                                                <div class="d-flex photo-review">
+                                                    <a href="javascript:void(0)" data-bs-toggle="modal"
+                                                       data-bs-target="#photoModal" class="position-relative d-block">
+                                                        <img src="/theme_alkeba/static/src/images/product/prod-53.jpg"
+                                                             class="w-100"/>
+                                                    </a>
+                                                    <a href="javascript:void(0)" data-bs-toggle="modal"
+                                                       data-bs-target="#photoModal"
+                                                       class="position-relative d-block photo-modal-btn">
+                                                        <div class="more-product">3+</div>
+                                                        <img src="/theme_alkeba/static/src/images/product/prod-54.jpeg"
+                                                             class="w-100 br-2"/>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="ulasan-product sudah-diulas">
+                                            <div class="d-flex">
+                                                <div class="card-img">
+                                                    <img src="/theme_alkeba/static/src/images/product/prod-04.jpg"
+                                                         class="img-fluid" alt="..."/>
+                                                </div>
+                                                <div class="card-info">
+                                                    Saniter Hand Sanitizer Spray 60ml - 4pcs
+                                                    <div class="d-block">
+                                                        <span>Berat: 60ml</span>
+                                                        <span>SKU: 976006MT</span>
+                                                    </div>
+                                                    <div class="review-block-rate mt-3">
+                                                        <i class="icon-star1 active"></i>
+                                                        <i class="icon-star1 active"></i>
+                                                        <i class="icon-star1 active"></i>
+                                                        <i class="icon-star1 active"></i>
+                                                        <i class="icon-star1"></i>
+                                                        (4)
+                                                    </div>
+                                                    <div class="review-block-description">Sesuai harapan. packing aman.
+                                                        tidak tumpah.
+                                                        bagus!
+                                                    </div>
+                                                    <div class="review-block-time mt-4">02 Oct 2020 22:11:55</div>
+                                                </div>
+                                                <div class="d-flex photo-review">
+                                                    <a href="javascript:void(0)" data-bs-toggle="modal"
+                                                       data-bs-target="#photoModal" class="position-relative d-block">
+                                                        <img src="/theme_alkeba/static/src/images/product/prod-53.jpg"
+                                                             class="w-100"/>
+                                                    </a>
+                                                    <a href="javascript:void(0)" data-bs-toggle="modal"
+                                                       data-bs-target="#photoModal"
+                                                       class="position-relative d-block photo-modal-btn">
+                                                        <div class="more-product">3+</div>
+                                                        <img src="/theme_alkeba/static/src/images/product/prod-54.jpeg"
+                                                             class="w-100 br-2"/>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="ulasan-product sudah-diulas">
+                                            <div class="d-flex">
+                                                <div class="card-img">
+                                                    <img src="/theme_alkeba/static/src/images/product/prod-03.jpg"
+                                                         class="img-fluid" alt="..."/>
+                                                </div>
+                                                <div class="card-info">
+                                                    Saniter Hand Sanitizer Spray 60ml - 4pcs
+                                                    <div class="d-block">
+                                                        <span>Berat: 60ml</span>
+                                                        <span>SKU: 976006MT</span>
+                                                    </div>
+                                                    <div class="review-block-rate mt-3">
+                                                        <i class="icon-star1 active"></i>
+                                                        <i class="icon-star1 active"></i>
+                                                        <i class="icon-star1 active"></i>
+                                                        <i class="icon-star1 active"></i>
+                                                        <i class="icon-star1"></i>
+                                                        (4)
+                                                    </div>
+                                                    <div class="review-block-description">Sesuai harapan. packing aman.
+                                                        tidak tumpah.
+                                                        bagus!
+                                                    </div>
+                                                    <div class="review-block-time mt-4">02 Oct 2020 22:11:55</div>
+                                                </div>
+                                                <div class="d-flex photo-review">
+                                                    <a href="javascript:void(0)" data-bs-toggle="modal"
+                                                       data-bs-target="#photoModal" class="position-relative d-block">
+                                                        <img src="/theme_alkeba/static/src/images/product/prod-53.jpg"
+                                                             class="w-100"/>
+                                                    </a>
+                                                    <a href="javascript:void(0)" data-bs-toggle="modal"
+                                                       data-bs-target="#photoModal"
+                                                       class="position-relative d-block photo-modal-btn">
+                                                        <div class="more-product">3+</div>
+                                                        <img src="/theme_alkeba/static/src/images/product/prod-54.jpeg"
+                                                             class="w-100 br-2"/>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="ulasan-product sudah-diulas">
+                                            <div class="d-flex">
+                                                <div class="card-img">
+                                                    <img src="/theme_alkeba/static/src/images/product/prod-02.jpg"
+                                                         class="img-fluid" alt="..."/>
+                                                </div>
+                                                <div class="card-info">
+                                                    Saniter Hand Sanitizer Spray 60ml - 4pcs
+                                                    <div class="d-block">
+                                                        <span>Berat: 60ml</span>
+                                                        <span>SKU: 976006MT</span>
+                                                    </div>
+                                                    <div class="review-block-rate mt-3">
+                                                        <i class="icon-star1 active"></i>
+                                                        <i class="icon-star1 active"></i>
+                                                        <i class="icon-star1 active"></i>
+                                                        <i class="icon-star1 active"></i>
+                                                        <i class="icon-star1"></i>
+                                                        (4)
+                                                    </div>
+                                                    <div class="review-block-description">Sesuai harapan. packing aman.
+                                                        tidak tumpah.
+                                                        bagus!
+                                                    </div>
+                                                    <div class="review-block-time mt-4">02 Oct 2020 22:11:55</div>
+                                                </div>
+                                                <div class="d-flex photo-review">
+                                                    <a href="javascript:void(0)" data-bs-toggle="modal"
+                                                       data-bs-target="#photoModal" class="position-relative d-block">
+                                                        <img src="/theme_alkeba/static/src/images/product/prod-53.jpg"
+                                                             class="w-100"/>
+                                                    </a>
+                                                    <a href="javascript:void(0)" data-bs-toggle="modal"
+                                                       data-bs-target="#photoModal"
+                                                       class="position-relative d-block photo-modal-btn">
+                                                        <div class="more-product">3+</div>
+                                                        <img src="/theme_alkeba/static/src/images/product/prod-54.jpeg"
+                                                             class="w-100 br-2"/>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="pagination-bottom d-flex align-items-center justify-content-between">
+                                    <p class="mb-0">Menampilkan 1–40 dari 345</p>
+                                    <ul class="list-unstyled mb-0">
+                                        <li class="active">
+                                            <button class="btn">1</button>
+                                        </li>
+                                        <li>
+                                            <button class="btn">2</button>
+                                        </li>
+                                        <li>
+                                            <button class="btn">3</button>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </t>
+                            <t t-else="">
+                                <div class="ulasan-saya">
+                                    <div class="col-7 m-auto pt-5 blankslate text-center">
+                                        <img src="/theme_alkeba/static/src/images/illust-ulasan-blankslate.png"/>
+                                        <h6>Belum Ada Produk Yang Diulas</h6>
+                                        <p>Kami tidak dapat menemukan produk yang bisa untuk diulas,
+                                            silahkan lakukan pembelanjaan untuk bisa mengulas produk
+                                        </p>
+                                        <a href="/products" class="btn btn-primary">
+                                            <i class="icon-shopping-bag"></i>
+                                            Mulai Belanja
+                                        </a>
+                                    </div>
+                                </div>
+                            </t>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal Foto-->
+            <div class="modal fade" id="photoModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">Foto Ulasan(4)
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                <i class="icon-x"></i>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="wrap-modal-slider">
+                                <div class="slider-photo-review">
+                                    <div class="box-photo-review">
+                                        <div class="caption-review">
+                                            <div class="ava-user text-center">
+                                                <img src="/theme_alkeba/static/src/images/ava-user.png"
+                                                     class="rounded-circle"/>
+                                            </div>
+                                            <div class="review-block-name">r****a</div>
+                                            <div class="review-block-rate">
+                                                <i class="icon-star1 active"></i>
+                                                <i class="icon-star1 active"></i>
+                                                <i class="icon-star1 active"></i>
+                                                <i class="icon-star1 active"></i>
+                                                <i class="icon-star1"></i>
+                                            </div>
+                                            <div class="review-block-description">Sesuai harapan. packing aman. tidak
+                                                tumpah.
+                                                bagus!
+                                            </div>
+                                            <div class="review-block-time mt-4">02 Oct 2020 22:11:55</div>
+                                        </div>
+                                        <img src="/theme_alkeba/static/src/images/product/prod-54.jpg"/>
+                                    </div>
+                                    <div class="box-photo-review">
+                                        <div class="caption-review">
+                                            <div class="ava-user text-center">
+                                                <img src="/theme_alkeba/static/src/images/ava-user.png"
+                                                     class="rounded-circle"/>
+                                            </div>
+                                            <div class="review-block-name">r****a</div>
+                                            <div class="review-block-rate">
+                                                <i class="icon-star1 active"></i>
+                                                <i class="icon-star1 active"></i>
+                                                <i class="icon-star1 active"></i>
+                                                <i class="icon-star1 active"></i>
+                                                <i class="icon-star1"></i>
+                                            </div>
+                                            <div class="review-block-description">Sesuai harapan. packing aman. tidak
+                                                tumpah.
+                                                bagus!
+                                            </div>
+                                            <div class="review-block-time mt-4">02 Oct 2020 22:11:55</div>
+                                        </div>
+                                        <img src="/theme_alkeba/static/src/images/product/prod-54.jpg"/>
+                                    </div>
+                                    <div class="box-photo-review">
+                                        <div class="caption-review">
+                                            <div class="ava-user text-center">
+                                                <img src="/theme_alkeba/static/src/images/ava-user.png"
+                                                     class="rounded-circle"/>
+                                            </div>
+                                            <div class="review-block-name">r****a</div>
+                                            <div class="review-block-rate">
+                                                <i class="icon-star1 active"></i>
+                                                <i class="icon-star1 active"></i>
+                                                <i class="icon-star1 active"></i>
+                                                <i class="icon-star1 active"></i>
+                                                <i class="icon-star1"></i>
+                                            </div>
+                                            <div class="review-block-description">Sesuai harapan. packing aman. tidak
+                                                tumpah.
+                                                bagus!
+                                            </div>
+                                            <div class="review-block-time mt-4">02 Oct 2020 22:11:55</div>
+                                        </div>
+                                        <img src="/theme_alkeba/static/src/images/product/prod-52.jpg"/>
+                                    </div>
+                                    <div class="box-photo-review">
+                                        <div class="caption-review">
+                                            <div class="ava-user text-center">
+                                                <img src="/theme_alkeba/static/src/images/ava-user.png"
+                                                     class="rounded-circle"/>
+                                            </div>
+                                            <div class="review-block-name">r****a</div>
+                                            <div class="review-block-rate">
+                                                <i class="icon-star1 active"></i>
+                                                <i class="icon-star1 active"></i>
+                                                <i class="icon-star1 active"></i>
+                                                <i class="icon-star1 active"></i>
+                                                <i class="icon-star1"></i>
+                                            </div>
+                                            <div class="review-block-description">Sesuai harapan. packing aman. tidak
+                                                tumpah.
+                                                bagus!
+                                            </div>
+                                            <div class="review-block-time mt-4">02 Oct 2020 22:11:55</div>
+                                        </div>
+                                        <img src="/theme_alkeba/static/src/images/product/prod-53.jpg"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal simpan modal-->
+            <div class="modal fade" id="SimpanUlasanModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">Simpan Ulasan
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                <i class="icon-x"></i>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="col-9 m-auto text-center my-4">
+                                <img src="/theme_alkeba/static/src/images/illust-ulasansimpan-blankslate.png"
+                                     class="mb-4"/>
+                                <h6 class="mb-3">Simpan Ulasan Anda</h6>
+                                <p>Apakah Anda yakin untuk menyimpan
+                                    hasil ulasan ini?
+                                </p>
+                            </div>
+                        </div>
+                        <div class="modal-footer d-flex justify-content-center">
+                            <a href="javascript:void(0)" data-bs-dismiss="modal" class="btn btn-outline">Batal</a>
+                            <a href="javascript:void(0)" class="btn btn-secondary">Ya, saya yakin</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </t>
+    </template>
+</odoo>

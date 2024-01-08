@@ -1,0 +1,18 @@
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Shop by brand- Active">
+<g id="Group 13056">
+<path id="primary" d="M19.7098 10.6522C19.8957 10.4648 20 10.2117 20 9.9478V4.90853C20 4.66758 19.9043 4.43649 19.7339 4.2661C19.5635 4.09572 19.3324 4 19.0915 4H14.0528C13.7886 4 13.5351 4.10456 13.3477 4.29083L4.2642 13.3216C4.09498 13.4918 4 13.7221 4 13.9621C4 14.2021 4.09498 14.4324 4.2642 14.6026L9.4065 19.7449C9.57672 19.9141 9.80699 20.0091 10.047 20.0091C10.287 20.0091 10.5173 19.9141 10.6875 19.7449L19.7098 10.6522Z" fill="url(#paint0_linear_879_131763)" stroke="#09755D" stroke-width="2"/>
+<circle id="Ellipse 98" cx="15.811" cy="8.08839" r="1.3628" fill="url(#paint1_linear_879_131763)" stroke="#C26900" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+</g>
+<defs>
+<linearGradient id="paint0_linear_879_131763" x1="12" y1="4" x2="1.74047" y2="24.2151" gradientUnits="userSpaceOnUse">
+<stop stop-color="#07876A"/>
+<stop offset="0.722028" stop-color="#07876A" stop-opacity="0"/>
+</linearGradient>
+<linearGradient id="paint1_linear_879_131763" x1="15.811" y1="6.72559" x2="14.5536" y2="10.1342" gradientUnits="userSpaceOnUse">
+<stop stop-color="#FF9000"/>
+<stop offset="1" stop-color="#FFC843"/>
+</linearGradient>
+</defs>
+</svg>

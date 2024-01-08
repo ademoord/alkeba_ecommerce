@@ -1,0 +1,1315 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="alkeba_promo_list" name="Alkeba Promo List">
+        <t t-call="theme_alkeba.alkeba_bradcrumbs_empty_bottom">
+
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="promo-list col-md-12 m-auto">
+                        <!-- JANGAN DI HAPUS< HIDE UNTUK SEMENTARA -->
+                        <!-- ===================================== -->
+                        <!-- <div class="d-flex justify-content-center mt-3 mb-4">
+                            <ul class="nav nav-pills">
+                                <li class="nav-item">
+                                    <a class="nav-link active" data-bs-toggle="pill" href="#promo-list-01">Semua</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" data-bs-toggle="pill" href="#promo-list-02">Pengguna Baru</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" data-bs-toggle="pill" href="#promo-list-03">Transaksi</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" data-bs-toggle="pill" href="#promo-list-04">Pengiriman</a>
+                                </li>
+                            </ul>
+                        </div> 
+                        <div class="d-flex justify-content-between filter-promo">
+                            <form class="search-box col-md-7">
+                                <div class="search-header">
+                                    <input type="search" class="form-control" placeholder="Cari Promo"
+                                           aria-label="Search"/>
+                                    <button type="button">
+                                        <i class="icon-search"></i>
+                                    </button>
+                                </div>
+                            </form>
+                            <div class="dropdown dropdown-sorting">
+                                <button class="btn btn-input dropdown-toggle" type="button" id="dropdownMenuButton1"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                    Urut Berdasarkan
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                    <li>
+                                        <a class="dropdown-item" href="javascript:void(0)">Terbaru</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="javascript:void(0)">Terlama</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        -->
+
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="promo-list-01">
+                                <div class="row">
+                                    <t t-foreach="promo" t-as="is_promo">
+                                        <div class="col-md-4">
+                                            <div class="card-promo-box">
+                                                <div class="card-promo-head">
+                                                    <!-- <img src="/theme_alkeba/static/src/images/img-promo-4.png"/> -->
+                                                    <img t-attf-src="data:image/*;base64,{{is_promo.image_promo}}" class="img-fluid"/>
+                                                    <!-- <t t-if="is_promo.image">                                                    
+                                                        <img t-att-src="image_data_uri(is_promo.image)"
+                                                             class="img-fluid" t-att-alt="is_promo.name"/>
+                                                    </t>
+                                                    <t t-else="">
+                                                        <img src="/web/static/img/placeholder.png"
+                                                             class="img-fluid" alt="..."/>
+                                                    </t> -->
+                                                </div>
+                                                <div class="card-promo-body">
+                                                    <h6>
+                                                        <t t-esc="is_promo.name"/>
+                                                    </h6>
+                                                    <p class="grey">
+                                                        <small class="grey">Periode Promo</small>
+                                                        <br/>
+                                                        <b>
+                                                            <t t-esc="is_promo.start_date"/> - <t t-esc="is_promo.end_date"/>
+                                                        </b>
+                                                    </p>
+                                                    <div class="d-flex justify-content-between">
+                                                        <!-- <p>
+                                                            <small class="grey">Kode Voucher</small>
+                                                            <br/>
+                                                            <b class="orange">B213DHA09</b>
+                                                        </p> -->
+                                                        <a t-attf-href="/detail_promo_gift/{{ is_promo.id }}" class="btn btn-outline">
+                                                            lihat Detail
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </t>
+                                </div>
+                                <div class="pagination-bottom d-flex align-items-center justify-content-between">
+                                    <p class="mb-0">
+                                        Menampilkan <t t-esc="pagination['showing']" />
+                                    </p>
+                                    <ul class="list-unstyled mb-0">
+                                        <li class="active">
+                                            <button class="btn">1</button>
+                                        </li>
+                                        <li>
+                                            <button class="btn">2</button>
+                                        </li>
+                                        <li>
+                                            <button class="btn">3</button>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="promo-list-02">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="card-promo-box">
+                                            <div class="card-promo-head">
+                                                <img src="/theme_alkeba/static/src/images/img-promo-4.png"/>
+                                            </div>
+                                            <div class="card-promo-body">
+                                                <h6>Pormo berkah ramadahan dengan minimal order Rp. 150.000</h6>
+                                                <p class="grey">
+                                                    <small class="grey">Periode Promo</small>
+                                                    <br/>
+                                                    <b>1 - 30 April 2022</b>
+                                                </p>
+                                                <div class="d-flex justify-content-between">
+                                                    <p>
+                                                        <small class="grey">Kode Voucher</small>
+                                                        <br/>
+                                                        <b class="orange">B213DHA09</b>
+                                                    </p>
+                                                    <a href="" class="btn btn-outline">Salin Kode</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="card-promo-box">
+                                            <div class="card-promo-head">
+                                                <img src="/theme_alkeba/static/src/images/img-promo-5.png"/>
+                                            </div>
+                                            <div class="card-promo-body">
+                                                <h6>Pormo berkah ramadahan dengan minimal order Rp. 150.000</h6>
+                                                <p class="grey">
+                                                    <small class="grey">Periode Promo</small>
+                                                    <br/>
+                                                    <b>1 - 30 April 2022</b>
+                                                </p>
+                                                <div class="d-flex justify-content-between">
+                                                    <p>
+                                                        <small class="grey">Kode Voucher</small>
+                                                        <br/>
+                                                        <b class="orange">B213DHA09</b>
+                                                    </p>
+                                                    <a href="" class="btn btn-outline">Salin Kode</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="card-promo-box">
+                                            <div class="card-promo-head">
+                                                <img src="/theme_alkeba/static/src/images/img-promo-6.png"/>
+                                            </div>
+                                            <div class="card-promo-body">
+                                                <h6>Pormo berkah ramadahan dengan minimal order Rp. 150.000</h6>
+                                                <p class="grey">
+                                                    <small class="grey">Periode Promo</small>
+                                                    <br/>
+                                                    <b>1 - 30 April 2022</b>
+                                                </p>
+                                                <div class="d-flex justify-content-between">
+                                                    <p>
+                                                        <small class="grey">Kode Voucher</small>
+                                                        <br/>
+                                                        <b class="orange">B213DHA09</b>
+                                                    </p>
+                                                    <a href="" class="btn btn-outline">Salin Kode</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="card-promo-box">
+                                            <div class="card-promo-head">
+                                                <img src="/theme_alkeba/static/src/images/img-promo-1.png"/>
+                                            </div>
+                                            <div class="card-promo-body">
+                                                <h6>Pormo berkah ramadahan dengan minimal order Rp. 150.000</h6>
+                                                <p class="grey">
+                                                    <small class="grey">Periode Promo</small>
+                                                    <br/>
+                                                    <b>1 - 30 April 2022</b>
+                                                </p>
+                                                <div class="d-flex justify-content-between">
+                                                    <p>
+                                                        <small class="grey">Kode Voucher</small>
+                                                        <br/>
+                                                        <b class="orange">B213DHA09</b>
+                                                    </p>
+                                                    <a href="" class="btn btn-outline">Salin Kode</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="card-promo-box">
+                                            <div class="card-promo-head">
+                                                <img src="/theme_alkeba/static/src/images/img-promo-2.png"/>
+                                            </div>
+                                            <div class="card-promo-body">
+                                                <h6>Pormo berkah ramadahan dengan minimal order Rp. 150.000</h6>
+                                                <p class="grey">
+                                                    <small class="grey">Periode Promo</small>
+                                                    <br/>
+                                                    <b>1 - 30 April 2022</b>
+                                                </p>
+                                                <div class="d-flex justify-content-between">
+                                                    <p>
+                                                        <small class="grey">Kode Voucher</small>
+                                                        <br/>
+                                                        <b class="orange">B213DHA09</b>
+                                                    </p>
+                                                    <a href="" class="btn btn-outline">Salin Kode</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="card-promo-box">
+                                            <div class="card-promo-head">
+                                                <img src="/theme_alkeba/static/src/images/img-promo-3.png"/>
+                                            </div>
+                                            <div class="card-promo-body">
+                                                <h6>Pormo berkah ramadahan dengan minimal order Rp. 150.000</h6>
+                                                <p class="grey">
+                                                    <small class="grey">Periode Promo</small>
+                                                    <br/>
+                                                    <b>1 - 30 April 2022</b>
+                                                </p>
+                                                <div class="d-flex justify-content-between">
+                                                    <p>
+                                                        <small class="grey">Kode Voucher</small>
+                                                        <br/>
+                                                        <b class="orange">B213DHA09</b>
+                                                    </p>
+                                                    <a href="" class="btn btn-outline">Salin Kode</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="card-promo-box">
+                                            <div class="card-promo-head">
+                                                <img src="/theme_alkeba/static/src/images/img-promo-4.png"/>
+                                            </div>
+                                            <div class="card-promo-body">
+                                                <h6>Pormo berkah ramadahan dengan minimal order Rp. 150.000</h6>
+                                                <p class="grey">
+                                                    <small class="grey">Periode Promo</small>
+                                                    <br/>
+                                                    <b>1 - 30 April 2022</b>
+                                                </p>
+                                                <div class="d-flex justify-content-between">
+                                                    <p>
+                                                        <small class="grey">Kode Voucher</small>
+                                                        <br/>
+                                                        <b class="orange">B213DHA09</b>
+                                                    </p>
+                                                    <a href="" class="btn btn-outline">Salin Kode</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="card-promo-box">
+                                            <div class="card-promo-head">
+                                                <img src="/theme_alkeba/static/src/images/img-promo-5.png"/>
+                                            </div>
+                                            <div class="card-promo-body">
+                                                <h6>Pormo berkah ramadahan dengan minimal order Rp. 150.000</h6>
+                                                <p class="grey">
+                                                    <small class="grey">Periode Promo</small>
+                                                    <br/>
+                                                    <b>1 - 30 April 2022</b>
+                                                </p>
+                                                <div class="d-flex justify-content-between">
+                                                    <p>
+                                                        <small class="grey">Kode Voucher</small>
+                                                        <br/>
+                                                        <b class="orange">B213DHA09</b>
+                                                    </p>
+                                                    <a href="" class="btn btn-outline">Salin Kode</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="card-promo-box">
+                                            <div class="card-promo-head">
+                                                <img src="/theme_alkeba/static/src/images/img-promo-6.png"/>
+                                            </div>
+                                            <div class="card-promo-body">
+                                                <h6>Pormo berkah ramadahan dengan minimal order Rp. 150.000</h6>
+                                                <p class="grey">
+                                                    <small class="grey">Periode Promo</small>
+                                                    <br/>
+                                                    <b>1 - 30 April 2022</b>
+                                                </p>
+                                                <div class="d-flex justify-content-between">
+                                                    <p>
+                                                        <small class="grey">Kode Voucher</small>
+                                                        <br/>
+                                                        <b class="orange">B213DHA09</b>
+                                                    </p>
+                                                    <a href="" class="btn btn-outline">Salin Kode</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="card-promo-box">
+                                            <div class="card-promo-head">
+                                                <img src="/theme_alkeba/static/src/images/img-promo-1.png"/>
+                                            </div>
+                                            <div class="card-promo-body">
+                                                <h6>Pormo berkah ramadahan dengan minimal order Rp. 150.000</h6>
+                                                <p class="grey">
+                                                    <small class="grey">Periode Promo</small>
+                                                    <br/>
+                                                    <b>1 - 30 April 2022</b>
+                                                </p>
+                                                <div class="d-flex justify-content-between">
+                                                    <p>
+                                                        <small class="grey">Kode Voucher</small>
+                                                        <br/>
+                                                        <b class="orange">B213DHA09</b>
+                                                    </p>
+                                                    <a href="" class="btn btn-outline">Salin Kode</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="card-promo-box">
+                                            <div class="card-promo-head">
+                                                <img src="/theme_alkeba/static/src/images/img-promo-2.png"/>
+                                            </div>
+                                            <div class="card-promo-body">
+                                                <h6>Pormo berkah ramadahan dengan minimal order Rp. 150.000</h6>
+                                                <p class="grey">
+                                                    <small class="grey">Periode Promo</small>
+                                                    <br/>
+                                                    <b>1 - 30 April 2022</b>
+                                                </p>
+                                                <div class="d-flex justify-content-between">
+                                                    <p>
+                                                        <small class="grey">Kode Voucher</small>
+                                                        <br/>
+                                                        <b class="orange">B213DHA09</b>
+                                                    </p>
+                                                    <a href="" class="btn btn-outline">Salin Kode</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="card-promo-box">
+                                            <div class="card-promo-head">
+                                                <img src="/theme_alkeba/static/src/images/img-promo-3.png"/>
+                                            </div>
+                                            <div class="card-promo-body">
+                                                <h6>Pormo berkah ramadahan dengan minimal order Rp. 150.000</h6>
+                                                <p class="grey">
+                                                    <small class="grey">Periode Promo</small>
+                                                    <br/>
+                                                    <b>1 - 30 April 2022</b>
+                                                </p>
+                                                <div class="d-flex justify-content-between">
+                                                    <p>
+                                                        <small class="grey">Kode Voucher</small>
+                                                        <br/>
+                                                        <b class="orange">B213DHA09</b>
+                                                    </p>
+                                                    <a href="" class="btn btn-outline">Salin Kode</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="pagination-bottom d-flex align-items-center justify-content-between">
+                                    <p class="mb-0">Menampilkan 1–40 dari 345</p>
+                                    <ul class="list-unstyled mb-0">
+                                        <li class="active">
+                                            <button class="btn">1</button>
+                                        </li>
+                                        <li>
+                                            <button class="btn">2</button>
+                                        </li>
+                                        <li>
+                                            <button class="btn">3</button>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="promo-list-03">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="card-promo-box">
+                                            <div class="card-promo-head">
+                                                <img src="/theme_alkeba/static/src/images/img-promo-4.png"/>
+                                            </div>
+                                            <div class="card-promo-body">
+                                                <h6>Pormo berkah ramadahan dengan minimal order Rp. 150.000</h6>
+                                                <p class="grey">
+                                                    <small class="grey">Periode Promo</small>
+                                                    <br/>
+                                                    <b>1 - 30 April 2022</b>
+                                                </p>
+                                                <div class="d-flex justify-content-between">
+                                                    <p>
+                                                        <small class="grey">Kode Voucher</small>
+                                                        <br/>
+                                                        <b class="orange">B213DHA09</b>
+                                                    </p>
+                                                    <a href="" class="btn btn-outline">Salin Kode</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="card-promo-box">
+                                            <div class="card-promo-head">
+                                                <img src="/theme_alkeba/static/src/images/img-promo-5.png"/>
+                                            </div>
+                                            <div class="card-promo-body">
+                                                <h6>Pormo berkah ramadahan dengan minimal order Rp. 150.000</h6>
+                                                <p class="grey">
+                                                    <small class="grey">Periode Promo</small>
+                                                    <br/>
+                                                    <b>1 - 30 April 2022</b>
+                                                </p>
+                                                <div class="d-flex justify-content-between">
+                                                    <p>
+                                                        <small class="grey">Kode Voucher</small>
+                                                        <br/>
+                                                        <b class="orange">B213DHA09</b>
+                                                    </p>
+                                                    <a href="" class="btn btn-outline">Salin Kode</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="card-promo-box">
+                                            <div class="card-promo-head">
+                                                <img src="/theme_alkeba/static/src/images/img-promo-6.png"/>
+                                            </div>
+                                            <div class="card-promo-body">
+                                                <h6>Pormo berkah ramadahan dengan minimal order Rp. 150.000</h6>
+                                                <p class="grey">
+                                                    <small class="grey">Periode Promo</small>
+                                                    <br/>
+                                                    <b>1 - 30 April 2022</b>
+                                                </p>
+                                                <div class="d-flex justify-content-between">
+                                                    <p>
+                                                        <small class="grey">Kode Voucher</small>
+                                                        <br/>
+                                                        <b class="orange">B213DHA09</b>
+                                                    </p>
+                                                    <a href="" class="btn btn-outline">Salin Kode</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="card-promo-box">
+                                            <div class="card-promo-head">
+                                                <img src="/theme_alkeba/static/src/images/img-promo-1.png"/>
+                                            </div>
+                                            <div class="card-promo-body">
+                                                <h6>Pormo berkah ramadahan dengan minimal order Rp. 150.000</h6>
+                                                <p class="grey">
+                                                    <small class="grey">Periode Promo</small>
+                                                    <br/>
+                                                    <b>1 - 30 April 2022</b>
+                                                </p>
+                                                <div class="d-flex justify-content-between">
+                                                    <p>
+                                                        <small class="grey">Kode Voucher</small>
+                                                        <br/>
+                                                        <b class="orange">B213DHA09</b>
+                                                    </p>
+                                                    <a href="" class="btn btn-outline">Salin Kode</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="card-promo-box">
+                                            <div class="card-promo-head">
+                                                <img src="/theme_alkeba/static/src/images/img-promo-2.png"/>
+                                            </div>
+                                            <div class="card-promo-body">
+                                                <h6>Pormo berkah ramadahan dengan minimal order Rp. 150.000</h6>
+                                                <p class="grey">
+                                                    <small class="grey">Periode Promo</small>
+                                                    <br/>
+                                                    <b>1 - 30 April 2022</b>
+                                                </p>
+                                                <div class="d-flex justify-content-between">
+                                                    <p>
+                                                        <small class="grey">Kode Voucher</small>
+                                                        <br/>
+                                                        <b class="orange">B213DHA09</b>
+                                                    </p>
+                                                    <a href="" class="btn btn-outline">Salin Kode</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="card-promo-box">
+                                            <div class="card-promo-head">
+                                                <img src="/theme_alkeba/static/src/images/img-promo-3.png"/>
+                                            </div>
+                                            <div class="card-promo-body">
+                                                <h6>Pormo berkah ramadahan dengan minimal order Rp. 150.000</h6>
+                                                <p class="grey">
+                                                    <small class="grey">Periode Promo</small>
+                                                    <br/>
+                                                    <b>1 - 30 April 2022</b>
+                                                </p>
+                                                <div class="d-flex justify-content-between">
+                                                    <p>
+                                                        <small class="grey">Kode Voucher</small>
+                                                        <br/>
+                                                        <b class="orange">B213DHA09</b>
+                                                    </p>
+                                                    <a href="" class="btn btn-outline">Salin Kode</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="card-promo-box">
+                                            <div class="card-promo-head">
+                                                <img src="/theme_alkeba/static/src/images/img-promo-4.png"/>
+                                            </div>
+                                            <div class="card-promo-body">
+                                                <h6>Pormo berkah ramadahan dengan minimal order Rp. 150.000</h6>
+                                                <p class="grey">
+                                                    <small class="grey">Periode Promo</small>
+                                                    <br/>
+                                                    <b>1 - 30 April 2022</b>
+                                                </p>
+                                                <div class="d-flex justify-content-between">
+                                                    <p>
+                                                        <small class="grey">Kode Voucher</small>
+                                                        <br/>
+                                                        <b class="orange">B213DHA09</b>
+                                                    </p>
+                                                    <a href="" class="btn btn-outline">Salin Kode</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="card-promo-box">
+                                            <div class="card-promo-head">
+                                                <img src="/theme_alkeba/static/src/images/img-promo-5.png"/>
+                                            </div>
+                                            <div class="card-promo-body">
+                                                <h6>Pormo berkah ramadahan dengan minimal order Rp. 150.000</h6>
+                                                <p class="grey">
+                                                    <small class="grey">Periode Promo</small>
+                                                    <br/>
+                                                    <b>1 - 30 April 2022</b>
+                                                </p>
+                                                <div class="d-flex justify-content-between">
+                                                    <p>
+                                                        <small class="grey">Kode Voucher</small>
+                                                        <br/>
+                                                        <b class="orange">B213DHA09</b>
+                                                    </p>
+                                                    <a href="" class="btn btn-outline">Salin Kode</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="card-promo-box">
+                                            <div class="card-promo-head">
+                                                <img src="/theme_alkeba/static/src/images/img-promo-6.png"/>
+                                            </div>
+                                            <div class="card-promo-body">
+                                                <h6>Pormo berkah ramadahan dengan minimal order Rp. 150.000</h6>
+                                                <p class="grey">
+                                                    <small class="grey">Periode Promo</small>
+                                                    <br/>
+                                                    <b>1 - 30 April 2022</b>
+                                                </p>
+                                                <div class="d-flex justify-content-between">
+                                                    <p>
+                                                        <small class="grey">Kode Voucher</small>
+                                                        <br/>
+                                                        <b class="orange">B213DHA09</b>
+                                                    </p>
+                                                    <a href="" class="btn btn-outline">Salin Kode</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="card-promo-box">
+                                            <div class="card-promo-head">
+                                                <img src="/theme_alkeba/static/src/images/img-promo-1.png"/>
+                                            </div>
+                                            <div class="card-promo-body">
+                                                <h6>Pormo berkah ramadahan dengan minimal order Rp. 150.000</h6>
+                                                <p class="grey">
+                                                    <small class="grey">Periode Promo</small>
+                                                    <br/>
+                                                    <b>1 - 30 April 2022</b>
+                                                </p>
+                                                <div class="d-flex justify-content-between">
+                                                    <p>
+                                                        <small class="grey">Kode Voucher</small>
+                                                        <br/>
+                                                        <b class="orange">B213DHA09</b>
+                                                    </p>
+                                                    <a href="" class="btn btn-outline">Salin Kode</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="card-promo-box">
+                                            <div class="card-promo-head">
+                                                <img src="/theme_alkeba/static/src/images/img-promo-2.png"/>
+                                            </div>
+                                            <div class="card-promo-body">
+                                                <h6>Pormo berkah ramadahan dengan minimal order Rp. 150.000</h6>
+                                                <p class="grey">
+                                                    <small class="grey">Periode Promo</small>
+                                                    <br/>
+                                                    <b>1 - 30 April 2022</b>
+                                                </p>
+                                                <div class="d-flex justify-content-between">
+                                                    <p>
+                                                        <small class="grey">Kode Voucher</small>
+                                                        <br/>
+                                                        <b class="orange">B213DHA09</b>
+                                                    </p>
+                                                    <a href="" class="btn btn-outline">Salin Kode</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="card-promo-box">
+                                            <div class="card-promo-head">
+                                                <img src="/theme_alkeba/static/src/images/img-promo-3.png"/>
+                                            </div>
+                                            <div class="card-promo-body">
+                                                <h6>Pormo berkah ramadahan dengan minimal order Rp. 150.000</h6>
+                                                <p class="grey">
+                                                    <small class="grey">Periode Promo</small>
+                                                    <br/>
+                                                    <b>1 - 30 April 2022</b>
+                                                </p>
+                                                <div class="d-flex justify-content-between">
+                                                    <p>
+                                                        <small class="grey">Kode Voucher</small>
+                                                        <br/>
+                                                        <b class="orange">B213DHA09</b>
+                                                    </p>
+                                                    <a href="" class="btn btn-outline">Salin Kode</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="pagination-bottom d-flex align-items-center justify-content-between">
+                                    <p class="mb-0">Menampilkan 1–40 dari 345</p>
+                                    <ul class="list-unstyled mb-0">
+                                        <li class="active">
+                                            <button class="btn">1</button>
+                                        </li>
+                                        <li>
+                                            <button class="btn">2</button>
+                                        </li>
+                                        <li>
+                                            <button class="btn">3</button>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="promo-list-04">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="card-promo-box">
+                                            <div class="card-promo-head">
+                                                <img src="/theme_alkeba/static/src/images/img-promo-4.png"/>
+                                            </div>
+                                            <div class="card-promo-body">
+                                                <h6>Pormo berkah ramadahan dengan minimal order Rp. 150.000</h6>
+                                                <p class="grey">
+                                                    <small class="grey">Periode Promo</small>
+                                                    <br/>
+                                                    <b>1 - 30 April 2022</b>
+                                                </p>
+                                                <div class="d-flex justify-content-between">
+                                                    <p>
+                                                        <small class="grey">Kode Voucher</small>
+                                                        <br/>
+                                                        <b class="orange">B213DHA09</b>
+                                                    </p>
+                                                    <a href="" class="btn btn-outline">Salin Kode</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="card-promo-box">
+                                            <div class="card-promo-head">
+                                                <img src="/theme_alkeba/static/src/images/img-promo-5.png"/>
+                                            </div>
+                                            <div class="card-promo-body">
+                                                <h6>Pormo berkah ramadahan dengan minimal order Rp. 150.000</h6>
+                                                <p class="grey">
+                                                    <small class="grey">Periode Promo</small>
+                                                    <br/>
+                                                    <b>1 - 30 April 2022</b>
+                                                </p>
+                                                <div class="d-flex justify-content-between">
+                                                    <p>
+                                                        <small class="grey">Kode Voucher</small>
+                                                        <br/>
+                                                        <b class="orange">B213DHA09</b>
+                                                    </p>
+                                                    <a href="" class="btn btn-outline">Salin Kode</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="card-promo-box">
+                                            <div class="card-promo-head">
+                                                <img src="/theme_alkeba/static/src/images/img-promo-6.png"/>
+                                            </div>
+                                            <div class="card-promo-body">
+                                                <h6>Pormo berkah ramadahan dengan minimal order Rp. 150.000</h6>
+                                                <p class="grey">
+                                                    <small class="grey">Periode Promo</small>
+                                                    <br/>
+                                                    <b>1 - 30 April 2022</b>
+                                                </p>
+                                                <div class="d-flex justify-content-between">
+                                                    <p>
+                                                        <small class="grey">Kode Voucher</small>
+                                                        <br/>
+                                                        <b class="orange">B213DHA09</b>
+                                                    </p>
+                                                    <a href="" class="btn btn-outline">Salin Kode</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="card-promo-box">
+                                            <div class="card-promo-head">
+                                                <img src="/theme_alkeba/static/src/images/img-promo-1.png"/>
+                                            </div>
+                                            <div class="card-promo-body">
+                                                <h6>Pormo berkah ramadahan dengan minimal order Rp. 150.000</h6>
+                                                <p class="grey">
+                                                    <small class="grey">Periode Promo</small>
+                                                    <br/>
+                                                    <b>1 - 30 April 2022</b>
+                                                </p>
+                                                <div class="d-flex justify-content-between">
+                                                    <p>
+                                                        <small class="grey">Kode Voucher</small>
+                                                        <br/>
+                                                        <b class="orange">B213DHA09</b>
+                                                    </p>
+                                                    <a href="" class="btn btn-outline">Salin Kode</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="card-promo-box">
+                                            <div class="card-promo-head">
+                                                <img src="/theme_alkeba/static/src/images/img-promo-2.png"/>
+                                            </div>
+                                            <div class="card-promo-body">
+                                                <h6>Pormo berkah ramadahan dengan minimal order Rp. 150.000</h6>
+                                                <p class="grey">
+                                                    <small class="grey">Periode Promo</small>
+                                                    <br/>
+                                                    <b>1 - 30 April 2022</b>
+                                                </p>
+                                                <div class="d-flex justify-content-between">
+                                                    <p>
+                                                        <small class="grey">Kode Voucher</small>
+                                                        <br/>
+                                                        <b class="orange">B213DHA09</b>
+                                                    </p>
+                                                    <a href="" class="btn btn-outline">Salin Kode</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="card-promo-box">
+                                            <div class="card-promo-head">
+                                                <img src="/theme_alkeba/static/src/images/img-promo-3.png"/>
+                                            </div>
+                                            <div class="card-promo-body">
+                                                <h6>Pormo berkah ramadahan dengan minimal order Rp. 150.000</h6>
+                                                <p class="grey">
+                                                    <small class="grey">Periode Promo</small>
+                                                    <br/>
+                                                    <b>1 - 30 April 2022</b>
+                                                </p>
+                                                <div class="d-flex justify-content-between">
+                                                    <p>
+                                                        <small class="grey">Kode Voucher</small>
+                                                        <br/>
+                                                        <b class="orange">B213DHA09</b>
+                                                    </p>
+                                                    <a href="" class="btn btn-outline">Salin Kode</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="card-promo-box">
+                                            <div class="card-promo-head">
+                                                <img src="/theme_alkeba/static/src/images/img-promo-4.png"/>
+                                            </div>
+                                            <div class="card-promo-body">
+                                                <h6>Pormo berkah ramadahan dengan minimal order Rp. 150.000</h6>
+                                                <p class="grey">
+                                                    <small class="grey">Periode Promo</small>
+                                                    <br/>
+                                                    <b>1 - 30 April 2022</b>
+                                                </p>
+                                                <div class="d-flex justify-content-between">
+                                                    <p>
+                                                        <small class="grey">Kode Voucher</small>
+                                                        <br/>
+                                                        <b class="orange">B213DHA09</b>
+                                                    </p>
+                                                    <a href="" class="btn btn-outline">Salin Kode</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="card-promo-box">
+                                            <div class="card-promo-head">
+                                                <img src="/theme_alkeba/static/src/images/img-promo-5.png"/>
+                                            </div>
+                                            <div class="card-promo-body">
+                                                <h6>Pormo berkah ramadahan dengan minimal order Rp. 150.000</h6>
+                                                <p class="grey">
+                                                    <small class="grey">Periode Promo</small>
+                                                    <br/>
+                                                    <b>1 - 30 April 2022</b>
+                                                </p>
+                                                <div class="d-flex justify-content-between">
+                                                    <p>
+                                                        <small class="grey">Kode Voucher</small>
+                                                        <br/>
+                                                        <b class="orange">B213DHA09</b>
+                                                    </p>
+                                                    <a href="" class="btn btn-outline">Salin Kode</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="card-promo-box">
+                                            <div class="card-promo-head">
+                                                <img src="/theme_alkeba/static/src/images/img-promo-6.png"/>
+                                            </div>
+                                            <div class="card-promo-body">
+                                                <h6>Pormo berkah ramadahan dengan minimal order Rp. 150.000</h6>
+                                                <p class="grey">
+                                                    <small class="grey">Periode Promo</small>
+                                                    <br/>
+                                                    <b>1 - 30 April 2022</b>
+                                                </p>
+                                                <div class="d-flex justify-content-between">
+                                                    <p>
+                                                        <small class="grey">Kode Voucher</small>
+                                                        <br/>
+                                                        <b class="orange">B213DHA09</b>
+                                                    </p>
+                                                    <a href="" class="btn btn-outline">Salin Kode</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="card-promo-box">
+                                            <div class="card-promo-head">
+                                                <img src="/theme_alkeba/static/src/images/img-promo-1.png"/>
+                                            </div>
+                                            <div class="card-promo-body">
+                                                <h6>Pormo berkah ramadahan dengan minimal order Rp. 150.000</h6>
+                                                <p class="grey">
+                                                    <small class="grey">Periode Promo</small>
+                                                    <br/>
+                                                    <b>1 - 30 April 2022</b>
+                                                </p>
+                                                <div class="d-flex justify-content-between">
+                                                    <p>
+                                                        <small class="grey">Kode Voucher</small>
+                                                        <br/>
+                                                        <b class="orange">B213DHA09</b>
+                                                    </p>
+                                                    <a href="" class="btn btn-outline">Salin Kode</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="card-promo-box">
+                                            <div class="card-promo-head">
+                                                <img src="/theme_alkeba/static/src/images/img-promo-2.png"/>
+                                            </div>
+                                            <div class="card-promo-body">
+                                                <h6>Pormo berkah ramadahan dengan minimal order Rp. 150.000</h6>
+                                                <p class="grey">
+                                                    <small class="grey">Periode Promo</small>
+                                                    <br/>
+                                                    <b>1 - 30 April 2022</b>
+                                                </p>
+                                                <div class="d-flex justify-content-between">
+                                                    <p>
+                                                        <small class="grey">Kode Voucher</small>
+                                                        <br/>
+                                                        <b class="orange">B213DHA09</b>
+                                                    </p>
+                                                    <a href="" class="btn btn-outline">Salin Kode</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="card-promo-box">
+                                            <div class="card-promo-head">
+                                                <img src="/theme_alkeba/static/src/images/img-promo-3.png"/>
+                                            </div>
+                                            <div class="card-promo-body">
+                                                <h6>Pormo berkah ramadahan dengan minimal order Rp. 150.000</h6>
+                                                <p class="grey">
+                                                    <small class="grey">Periode Promo</small>
+                                                    <br/>
+                                                    <b>1 - 30 April 2022</b>
+                                                </p>
+                                                <div class="d-flex justify-content-between">
+                                                    <p>
+                                                        <small class="grey">Kode Voucher</small>
+                                                        <br/>
+                                                        <b class="orange">B213DHA09</b>
+                                                    </p>
+                                                    <a href="" class="btn btn-outline">Salin Kode</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="pagination-bottom d-flex align-items-center justify-content-between">
+                                    <p class="mb-0">Menampilkan 1–40 dari 345</p>
+                                    <ul class="list-unstyled mb-0">
+                                        <li class="active">
+                                            <button class="btn">1</button>
+                                        </li>
+                                        <li>
+                                            <button class="btn">2</button>
+                                        </li>
+                                        <li>
+                                            <button class="btn">3</button>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </t>
+    </template>
+
+    <template id="alkeba_promo_detail" name="Alkeba Promo Detail">
+        <t t-call="theme_alkeba.alkeba_bradcrumbs_empty_bottom">
+
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-8 m-auto">
+                        <div class="card-promo-box card-promo-detail">
+                            <div class="card-promo-head">
+                                <img src="/theme_alkeba/static/src/images/img-promo-8.png"/>
+                            </div>
+                            <div class="card-promo-info">
+                                <div class="d-flex justify-content-between">
+                                    <p>
+                                        <small class="grey">Periode Promo</small>
+                                        <br/>
+                                        <b>1 - 30 April 2022</b>
+                                    </p>
+                                    <p>
+                                        <small class="grey">Minimal Belanja</small>
+                                        <br/>
+                                        <b>Rp. 500.000</b>
+                                    </p>
+                                    <div class="d-flex justify-content-between align-items-baseline">
+                                        <p>
+                                            <small class="grey">Kode Voucher</small>
+                                            <br/>
+                                            <b class="orange">B213DHA09</b>
+                                        </p>
+                                        <a href="" class="orange">
+                                            <b>Salin Kode</b>
+                                        </a>
+                                    </div>
+                                    <a href="" class="btn btn-outline">Belanja Sekarang</a>
+                                </div>
+                            </div>
+                            <div class="card-promo-body">
+                                <h2 class="mb-4">Pormo berkah ramadahan dengan minimal order Rp. 150.000</h2>
+                                <h6 class="my-3">Deskripsi</h6>
+                                <p class="grey">Proin feugiat justo orci auctor porttitor. Nunc nunc a ac, accumsan est.
+                                    Sagittis leo dis et, lobortis nulla in libero. Odio nisl massa eget faucibus nullam
+                                    nisl aenean faucibus duis. Porta etiam at arcu enim lacus eu sit. Integer odio
+                                    auctor ullamcorper adipiscing leo mi volutpat varius. Erat urna etiam id sit tortor
+                                    cursus. Dictumst.
+                                </p>
+                                <h6 class="my-3">Syarat dan Ketentuan</h6>
+                                <ul class="grey">
+                                    <li>
+                                        <p>
+                                            Promo berlaku pada tanggal 20 April 2022 (00.00 WIB) hingga 24 April 2022
+                                            (23.59 WIB).
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <p>
+                                            Cashback berlaku dengan minimum pembelian Rp65.000.
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <p>
+                                            Cashback akan diterima maksimal 1 x 24 jam setelah transaksi berhasil serta
+                                            sesuai dengan Syarat dan Ketentuan yang berlaku.
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <p>
+                                            Jika transaksi dibatalkan atau masuk ke Pusat Resolusi, dana yang kembali ke
+                                            pembeli akan sesuai dengan nominal pembayaran yang dilakukan (tidak termasuk
+                                            subsidi ongkir).
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <p>
+                                            Syarat dan Ketentuan promo ini merupakan bagian yang tidak terpisahkan dan
+                                            satu kesatuan dengan Syarat dan Ketentuan Tokopedia, serta dapat berubah
+                                            sewaktu-waktu untuk disesuaikan dengan kebijakan sehubungan dengan promo
+                                            ini.
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <p>
+                                            Dengan mengikuti promo ini, pengguna dianggap mengerti dan menyetujui semua
+                                            syarat &amp; ketentuan yang berlaku.
+                                        </p>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <h6 class="text-center my-5">Promo Lainnya</h6>
+                    </div>
+                    <div class="slider-promo">
+                        <div class="col-md-4">
+                            <div class="card-promo-box">
+                                <div class="card-promo-head">
+                                    <img src="/theme_alkeba/static/src/images/img-promo-4.png"/>
+                                </div>
+                                <div class="card-promo-body">
+                                    <h6>Pormo berkah ramadahan dengan minimal order Rp. 150.000</h6>
+                                    <p class="grey">
+                                        <small class="grey">Periode Promo</small>
+                                        <br/>
+                                        <b>1 - 30 April 2022</b>
+                                    </p>
+                                    <div class="d-flex justify-content-between">
+                                        <p>
+                                            <small class="grey">Kode Voucher</small>
+                                            <br/>
+                                            <b class="orange">B213DHA09</b>
+                                        </p>
+                                        <a href="" class="btn btn-outline">Salin Kode</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card-promo-box">
+                                <div class="card-promo-head">
+                                    <img src="/theme_alkeba/static/src/images/img-promo-5.png"/>
+                                </div>
+                                <div class="card-promo-body">
+                                    <h6>Pormo berkah ramadahan dengan minimal order Rp. 150.000</h6>
+                                    <p class="grey">
+                                        <small class="grey">Periode Promo</small>
+                                        <br/>
+                                        <b>1 - 30 April 2022</b>
+                                    </p>
+                                    <div class="d-flex justify-content-between">
+                                        <p>
+                                            <small class="grey">Kode Voucher</small>
+                                            <br/>
+                                            <b class="orange">B213DHA09</b>
+                                        </p>
+                                        <a href="" class="btn btn-outline">Salin Kode</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card-promo-box">
+                                <div class="card-promo-head">
+                                    <img src="/theme_alkeba/static/src/images/img-promo-6.png"/>
+                                </div>
+                                <div class="card-promo-body">
+                                    <h6>Pormo berkah ramadahan dengan minimal order Rp. 150.000</h6>
+                                    <p class="grey">
+                                        <small class="grey">Periode Promo</small>
+                                        <br/>
+                                        <b>1 - 30 April 2022</b>
+                                    </p>
+                                    <div class="d-flex justify-content-between">
+                                        <p>
+                                            <small class="grey">Kode Voucher</small>
+                                            <br/>
+                                            <b class="orange">B213DHA09</b>
+                                        </p>
+                                        <a href="" class="btn btn-outline">Salin Kode</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card-promo-box">
+                                <div class="card-promo-head">
+                                    <img src="/theme_alkeba/static/src/images/img-promo-4.png"/>
+                                </div>
+                                <div class="card-promo-body">
+                                    <h6>Pormo berkah ramadahan dengan minimal order Rp. 150.000</h6>
+                                    <p class="grey">
+                                        <small class="grey">Periode Promo</small>
+                                        <br/>
+                                        <b>1 - 30 April 2022</b>
+                                    </p>
+                                    <div class="d-flex justify-content-between">
+                                        <p>
+                                            <small class="grey">Kode Voucher</small>
+                                            <br/>
+                                            <b class="orange">B213DHA09</b>
+                                        </p>
+                                        <a href="" class="btn btn-outline">Salin Kode</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card-promo-box">
+                                <div class="card-promo-head">
+                                    <img src="/theme_alkeba/static/src/images/img-promo-5.png"/>
+                                </div>
+                                <div class="card-promo-body">
+                                    <h6>Pormo berkah ramadahan dengan minimal order Rp. 150.000</h6>
+                                    <p class="grey">
+                                        <small class="grey">Periode Promo</small>
+                                        <br/>
+                                        <b>1 - 30 April 2022</b>
+                                    </p>
+                                    <div class="d-flex justify-content-between">
+                                        <p>
+                                            <small class="grey">Kode Voucher</small>
+                                            <br/>
+                                            <b class="orange">B213DHA09</b>
+                                        </p>
+                                        <a href="" class="btn btn-outline">Salin Kode</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card-promo-box">
+                                <div class="card-promo-head">
+                                    <img src="/theme_alkeba/static/src/images/img-promo-6.png"/>
+                                </div>
+                                <div class="card-promo-body">
+                                    <h6>Pormo berkah ramadahan dengan minimal order Rp. 150.000</h6>
+                                    <p class="grey">
+                                        <small class="grey">Periode Promo</small>
+                                        <br/>
+                                        <b>1 - 30 April 2022</b>
+                                    </p>
+                                    <div class="d-flex justify-content-between">
+                                        <p>
+                                            <small class="grey">Kode Voucher</small>
+                                            <br/>
+                                            <b class="orange">B213DHA09</b>
+                                        </p>
+                                        <a href="" class="btn btn-outline">Salin Kode</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card-promo-box">
+                                <div class="card-promo-head">
+                                    <img src="/theme_alkeba/static/src/images/img-promo-4.png"/>
+                                </div>
+                                <div class="card-promo-body">
+                                    <h6>Pormo berkah ramadahan dengan minimal order Rp. 150.000</h6>
+                                    <p class="grey">
+                                        <small class="grey">Periode Promo</small>
+                                        <br/>
+                                        <b>1 - 30 April 2022</b>
+                                    </p>
+                                    <div class="d-flex justify-content-between">
+                                        <p>
+                                            <small class="grey">Kode Voucher</small>
+                                            <br/>
+                                            <b class="orange">B213DHA09</b>
+                                        </p>
+                                        <a href="" class="btn btn-outline">Salin Kode</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card-promo-box">
+                                <div class="card-promo-head">
+                                    <img src="/theme_alkeba/static/src/images/img-promo-5.png"/>
+                                </div>
+                                <div class="card-promo-body">
+                                    <h6>Pormo berkah ramadahan dengan minimal order Rp. 150.000</h6>
+                                    <p class="grey">
+                                        <small class="grey">Periode Promo</small>
+                                        <br/>
+                                        <b>1 - 30 April 2022</b>
+                                    </p>
+                                    <div class="d-flex justify-content-between">
+                                        <p>
+                                            <small class="grey">Kode Voucher</small>
+                                            <br/>
+                                            <b class="orange">B213DHA09</b>
+                                        </p>
+                                        <a href="" class="btn btn-outline">Salin Kode</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card-promo-box">
+                                <div class="card-promo-head">
+                                    <img src="/theme_alkeba/static/src/images/img-promo-6.png"/>
+                                </div>
+                                <div class="card-promo-body">
+                                    <h6>Pormo berkah ramadahan dengan minimal order Rp. 150.000</h6>
+                                    <p class="grey">
+                                        <small class="grey">Periode Promo</small>
+                                        <br/>
+                                        <b>1 - 30 April 2022</b>
+                                    </p>
+                                    <div class="d-flex justify-content-between">
+                                        <p>
+                                            <small class="grey">Kode Voucher</small>
+                                            <br/>
+                                            <b class="orange">B213DHA09</b>
+                                        </p>
+                                        <a href="" class="btn btn-outline">Salin Kode</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </t>
+    </template>
+
+</odoo>

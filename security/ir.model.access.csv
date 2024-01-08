@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_alkeba_home_slider,alkeba_home_slider,model_alkeba_home_slider,base.group_user,1,1,1,1
+access_alkeba_home_event,alkeba_home_event,model_alkeba_home_event,base.group_user,1,1,1,1
+access_alkeba_home_event_category,alkeba_home_event_category,model_alkeba_home_event_category,base.group_user,1,1,1,1

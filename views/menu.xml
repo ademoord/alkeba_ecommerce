@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <menuitem id="alkeba_banner_root"
+                  name="Banner"
+                  parent="website.menu_website_configuration"
+                  sequence="12"/>
+
+        <menuitem id="alkeba_home_slider_menu"
+                  name="Home Slider"
+                  action="theme_alkeba.alkeba_home_slider_action"
+                  parent="alkeba_banner_root"
+                  sequence="0"/>
+
+        <menuitem id="alkeba_home_event_menu"
+                  name="Home Event"
+                  action="theme_alkeba.alkeba_home_event_action"
+                  parent="alkeba_banner_root"
+                  sequence="1"/>
+
+    </data>
+</odoo>

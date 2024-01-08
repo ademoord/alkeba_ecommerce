@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="alkeba_self_pickup_product" model="product.template">
+            <field name="name">Self Pickup</field>
+            <field name="detailed_type">service</field>
+            <field name="sale_ok">True</field>
+            <field name="purchase_ok">False</field>
+        </record>
+        <record id="alkeba_alkeba_express_product" model="product.template">
+            <field name="name">Alkeba Express</field>
+            <field name="detailed_type">service</field>
+            <field name="sale_ok">True</field>
+            <field name="purchase_ok">False</field>
+        </record>
+
+        <record id="alkeba_self_pickup_method" model="delivery.carrier">
+            <field name="name">Self Pickup</field>
+            <field name="delivery_type">fixed</field>
+            <field name="product_id" ref="alkeba_self_pickup_product"/>
+        </record>
+        <record id="alkeba_alkeba_express_method" model="delivery.carrier">
+            <field name="name">Alkeba Express</field>
+            <field name="delivery_type">fixed</field>
+            <field name="product_id" ref="alkeba_alkeba_express_product"/>
+        </record>
+
+    </data>
+</odoo>

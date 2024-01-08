@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+		<record id="alkeba_theme_sale_order_form_view" model="ir.ui.view">
+			<field name="name">alkeba.theme.sale.order.alkeba.form.view</field>
+			<field name="model">sale.order</field>
+			<field name="inherit_id" ref="sale.view_order_form"/>
+			<field name="arch" type="xml">
+				<xpath expr="//field[@name='tag_ids']" position="after">
+					<field name="host_url" string="Host URL" invisible="1"/>
+					<field name="template_id" string="Email Template"/>
+				</xpath>
+            </field>
+        </record>
+
+        <record id="alkeba_theme_sale_order_inherit_form_view" model="ir.ui.view">
+            <field name="name">alkeba.theme.sale.order.form.view</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form//header//button[@name='action_draft']" position="after">
+                </xpath>
+                
+                <field name="payment_term_id" position="after">
+                    <field name="payment_option" readonly="1" force_save="1" attrs="{'invisible': [('order_type', '=', 'b2b')]}"/>
+                    <field name="payment_state" force_save="1" attrs="{'invisible': [('order_type', '=', 'b2b')]}"/>
+                    <field name="payment_date" readonly="1" force_save="1" attrs="{'invisible': [('order_type', '=', 'b2b')]}"/>
+                </field>
+
+                <xpath expr="//group[@name='sale_shipping']" position="after">
+                    <group>
+                        <group name="alkeba_id" string="alkeba.id" attrs="{'invisible': [('order_type', '=', 'b2b')]}">
+                            <label for="delivery_state" string="Delivery State"/>
+                            <div name="delivery_state_div" class="o_row">
+                                <field name="delivery_state" force_save="1"/>
+                            </div>
+                            <div>
+                                <button name="buttonProcess" string="Process Order" class="oe_highlight"
+                                type="object" data-hotkey="v"
+                                attrs="{'invisible': ['|', '|','|', ('delivery_state', '=', 'process'), ('delivery_state', '=', 'deliver'), ('delivery_state', '=', 'received'), ('delivery_state', '=', 'done')]}"
+                                />
+
+                                <button name="buttonDeliver" string="Deliver" class="oe_highlight"
+                                type="object" data-hotkey="v"
+                                attrs="{'invisible': ['|', '|','|', ('delivery_state', '=', 'draft'), ('delivery_state', '=', 'deliver'), ('delivery_state', '=', 'received'), ('delivery_state', '=', 'done')]}"
+                                />
+
+                                <button name="buttonDeliverReceived" string="Received Deliver" class="oe_highlight"
+                                type="object" data-hotkey="v"
+                                attrs="{'invisible': ['|', '|','|', ('delivery_state', '=', 'draft'), ('delivery_state', '=', 'process'), ('delivery_state', '=', 'received'), ('delivery_state', '=', 'done')]}"
+                                />
+
+                                <button name="buttonDeliverDone" string="Done Deliver" class="oe_highlight"
+                                type="object" data-hotkey="v"
+                                attrs="{'invisible': ['|', '|','|', ('delivery_state', '=', 'draft'), ('delivery_state', '=', 'process'), ('delivery_state', '=', 'deliver'), ('delivery_state', '=', 'done')]}"
+                                />
+                            </div>
+                            <br></br>
+                            <br></br>
+                            <br></br>
+                            <label for="no_resi" string="Nomor Resi Pengiriman Lion Parcel"/>
+                            <div name="lion_parcel_div" class="o_row">
+                                <field name="no_resi"/>
+                            </div>
+                        </group>
+                    </group>
+                </xpath>
+
+            </field>
+        </record>
+
+    </data>
+</odoo>

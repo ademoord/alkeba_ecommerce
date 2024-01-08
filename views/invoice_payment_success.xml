@@ -1,0 +1,478 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_saleorder_payment_success">
+        <t t-call="web.basic_layout">
+            <body>
+                <div bgcolor="#FFFFFF" style="font-family:Arial,sans-serif">
+                    <table align="center" bgcolor="#fff" border="0" cellpadding="0" cellspacing="0" style="margin:5% auto;width:100%;max-width:600px;">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="#09755D" style="padding:10px 20px;font-size:14px;border-radius:10px 10px 0px 0px">
+                                        <tbody>
+                                        <tr>
+                                            <td width="50%" align="left" style="padding:10px 5px">
+                                                <img src="/theme_alkeba/static/src/images/alkeba-logo.svg" width="120"/>
+                                            </td>
+                                            <td width="50%" align="right" style="padding:10px 5px">
+                                                <h1 style="font-size: 20px; font-weight: bold; color: #fff">
+                                                    Pembayaran Sukses
+                                                </h1>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding:30px 0px 20px;background: #FFFFFF;border-left: 1px solid #e7e7e7; border-right: 1px solid #e7e7e7;">
+                                <table width="100%">
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <p style="margin: 0; padding:15px 20px 0px;font-size: 14px;font-weight:bold; line-height: 24px;color:#4A4A4A;text-align: left;">
+                                                    Hai, <t t-esc="doc.partner_id.name"/>
+                                                </p>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 0 25px; border-left: 1px solid #e7e7e7; border-right: 1px solid #e7e7e7;">
+                                <table width="100%" style="margin: 0;border-collapse: collapse;">
+                                    <tbody>
+                                    <tr>
+                                        <td style="line-height: 24px;color: #999999;text-align: left;font-size: 14px;padding: 10px 0px 20px;">
+                                            Terima Kasih telah berbelanja di Alkeba,
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="line-height: 24px;color: #999999;text-align: left;font-size: 14px;">
+                                            Pembayaran Anda telah berhasil dan sudah dikonfrimasi, kami akan segera memproses pesanan Anda.
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding: 20px 0px">
+                                            <div style="border-top: 1px solid #efefef; width:100%; margin: 0 auto;">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                        <table width="100%" style="border-collapse: collapse;">
+                                            <tbody>
+                                            <tr>
+                                                <td colspan="2">
+                                                <div>
+                                                    <table width="100%">
+                                                        <tbody>
+                                                            <tr style="display: inline-block; width: 50%">
+                                                                <td style="line-height: 24px;color: #666666;text-align: left;font-size: 12px;font-weight:normal;">
+                                                                    Nomor Pesanan
+                                                                    <span style="font-weight: bold;display: block; font-size: 16px; color:#FF9000;">
+                                                                        <t t-esc="doc.name"/>
+                                                                    </span>
+                                                                </td>
+                                                            </tr>
+                                                            <tr style="display: inline-block; width: 50%; text-align: right; vertical-align: bottom;">
+                                                                <td style="font-weight: normal;display: inline-block; font-size: 12px; color: #999999">
+                                                                    Tanggal Order
+                                                                    <span style="font-weight: bold;display: block; font-size: 16px; color:#FF9000;">
+                                                                        <!-- Selasa, 21/07/2022, 13:30 -->
+                                                                        <t t-esc="doc.date_order"/>
+                                                                    </span>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                            <td style="padding: 15px 0px">
+                                                                <div style="border-top: 1px solid #efefef; width:100%; margin: 0 auto;">
+                                                                </div>
+                                                            </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="line-height: 24px;color: #666666;text-align: left;font-size: 12px;font-weight: normal;">
+                                                    Total Pesanan
+                                                    <span style="font-weight: bold; font-size: 14px;display: block;margin-bottom: 20px;color: #464646;">
+                                                        Rp <t t-esc="doc.amount_total" t-options='{"widget": "float", "precision": 2}'/>
+                                                    </span>
+                                                </td>
+                                                <td style="line-height: 24px;color: #666666;text-align: left;font-size: 12px;font-weight: normal;">
+                                                    Metode Pembayaran
+                                                    <span style="font-weight: bold;display: block;margin-bottom: 10px; font-size: 14px;color: #464646;">
+                                                        <t t-esc="doc.payment_option"/>
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="line-height: 24px;color: #666666;text-align: left;font-size: 12px;font-weight: normal;">Status Pembayaran<span style="font-weight: bold; font-size: 14px;display: block;margin-bottom: 30px;color: #464646;">Pembayaran Berhasil</span></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="line-height: 24px;color: #999999;text-align: left;font-size: 14px; padding-bottom: 20px;">
+                                            Untuk melihat status pesanan Anda, Silahkan kunjungi halaman<span style="padding-left: 10px; color: #FF9000; font-weight: bold; ">Pesanan Saya</span>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="border-left: 1px solid #e7e7e7; border-right: 1px solid #e7e7e7;">
+                                <div style="border-top: 1px solid #efefef; width: 85%; padding:10px; margin: 0 auto;">
+                                </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 0px 25px;border-left: 1px solid #e7e7e7; border-right: 1px solid #e7e7e7;">
+                                <table width="100%;" style="border-collapse:collapse">
+                                    <thead style="background: #f9f9f9;">
+                                    <tr style="padding: 0px 25px;">
+                                        <th width="70%" style="font-size: 12px;color: #999999;font-weight: bold;padding: 10px;text-align: left;">Nama Produk</th>
+                                        <th style="font-size: 12px;color: #999999;font-weight: bold;padding: 10px;text-align: left;">Jumlah</th>
+                                        <!-- <th style="font-size: 12px;color: #999999;font-weight: bold;padding: 10px;text-align: center;">Estimasi Sampai</th> -->
+                                        <th width="25%" style="font-size: 12px;color: #999999;font-weight: bold;padding: 15px;text-align: right;">Total Harga</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <t t-foreach="doc.order_line" t-as="products">
+                                            <t t-if="products.product_id.detailed_type != 'service'">
+                                                <tr>
+                                                    <td style="padding: 10px;vertical-align: top;position: relative;">
+                                                        <table>
+                                                            <tr>
+                                                                <td style="width: 30%; padding-right: 10px" valign="top">
+                                                                    <!-- <img style="width: 85px; border-radius: 10px; border: 1px solid #E7E7E7" src="images/alkeba-produk1.jpg"/> -->
+                                                                    <img t-attf-src="data:image/jpg;base64,{{ products.product_id.image_1920 }}" style="width: 85px; border-radius: 10px; border: 1px solid #E7E7E7"/>
+                                                                </td>
+                                                                <td style="width: 70%;">
+                                                                    <h5 style="font-size: 12px;color: #464646;margin: 0;line-height: 24px;">
+                                                                        <!-- Saniter Hand Sanitizer Spray 60ml - 4pcs -->
+                                                                        <t t-esc="products.product_id.name"/>
+                                                                    </h5>
+                                                                    <div style="line-height: 20px">
+                                                                        <p style="color: #999999;font-size: 12px;width: 30%;float: left; margin: 0px">
+                                                                            Berat
+                                                                            <span style="float: right;">:</span>
+                                                                        </p>
+                                                                        <p style="font-size: 12px;color: #999999;padding-left: 10px;width: 60%;float: left; margin: 0px">
+                                                                            <!-- 60ml -->
+                                                                            <t t-esc="products.product_id.weight"/><t t-esc="products.product_id.weight_uom_id.name"/>
+                                                                        </p>
+                                                                    </div>
+                                                                    <div style="line-height: 20px">
+                                                                        <p style="color: #999999;font-size: 12px;width: 30%;float: left; margin: 0px">
+                                                                            SKU<span style="float: right;">:</span>
+                                                                        </p>
+                                                                        <p style="font-size: 12px;color: #999999;padding-left: 10px;width: 60%;float: left; margin: 0px">
+                                                                            976006MT
+                                                                        </p>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+                                                    <td style="padding: 15px 0px;vertical-align: top;color: #464646;">
+                                                        <p style="font-size: 14px;font-weight: bold; margin: 0; line-height: 18px; text-align: center;">
+                                                            <!-- (500) -->
+                                                            <t t-esc="products.product_uom_qty"/>
+                                                        </p>
+                                                    </td>
+                                                    <!-- HIDE UNTUK SEMENTARA - ESTIMASI TIBA -->
+                                                    <!-- <td width="30%" style="padding: 15px 0px;text-align: center;vertical-align: top;">
+                                                        <p style="font-size: 12px;font-weight: bold; margin: 0; line-height: 18px; color: #464646;text-align: left; padding: 0px 10px">
+                                                            08 Aug 2017 - <br/>11 Aug 2017
+                                                        </p>
+                                                    </td> -->
+                                                    <td width="50%" style="padding: 15px;text-align: left;vertical-align: top; white-space: nowrap;">
+                                                        <p style="color: #09755D;font-size: 14px; font-weight: bold;margin: 0;line-height: 18px;">
+                                                            <!-- Rp 3.500.000 -->
+                                                            Rp <t t-esc="products.price_subtotal" t-options='{"widget": "float", "precision": 2}'/>
+
+                                                        </p>
+                                                        <!-- HIDE UNTUK SEMENTARA - POTONGAN HARGA -->
+                                                        <!-- <p style="color: #999999;text-decoration: line-through;font-size: 12px;margin: 0;line-height: 18px;">Rp 10.000.000</p>
+                                                        <p style="color: #FFFFFF;background-color: #D82731;border-radius: 5px;margin: 5px 0 0 0;font-size: 12px;padding: 5px;display: inline-block;">50% off</p> -->
+                                                    </td>
+                                                </tr>
+                                            </t>
+                                        </t>
+                                        <tr style="border-top: 0.5px solid #efefef; width: 85%; padding:10px; margin: 0 auto;">
+                                            <td>
+                                                <div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr style="border-top: 0.5px solid #efefef; width: 85%; padding:10px; margin: 0 auto;">
+                                            <td>
+                                                <div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2" style="font-size: 14px;font-weight: bold;color: #464646;padding: 10px 0px;">
+                                                Subtotal
+                                            </td>
+                                            <td colspan="2" style="font-size: 14px;color: #09755D;font-weight: bold;text-align: right;padding: 10px 0px;">
+                                                <!-- Rp. 2.800.000 -->
+                                                Rp <t t-esc="doc.amount_total" t-options='{"widget": "float", "precision": 2}'/>
+                                            </td>
+                                        </tr>
+                                        <tr style="border-top: 0.5px solid #efefef; width: 85%; padding:10px; margin: 0 auto;">
+                                            <td>
+                                                <div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <t t-foreach="doc.order_line" t-as="expedition">
+                                                <t t-if="expedition.product_id.detailed_type == 'service'">
+                                                    <td colspan="2" style="font-size: 14px;font-weight: bold;color: #464646;padding: 10px 0px;">
+                                                        Ongkos Kirim
+                                                        <p style="font-size: 12px; font-weight: normal; color: #999999; margin: 5px 0px 0px">
+                                                            <!-- Sicepat REG -->
+                                                            <t t-esc="expedition.product_id.name"/>
+                                                        </p>
+                                                    </td>
+                                                    <td colspan="2" style="font-size: 14px;color: #09755D;font-weight: bold;text-align: right;padding: 10px 0px;">
+                                                        <!-- Rp. 100.000 -->
+                                                        Rp <t t-esc="expedition.price_subtotal" t-options='{"widget": "float", "precision": 2}'/>
+
+                                                    </td>
+                                                </t>
+                                            </t>
+                                        </tr>
+                                        <tr style="border-top: 0.5px solid #efefef; width: 85%; padding:10px; margin: 0 auto;">
+                                            <td>
+                                                <div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <!-- HIDe UNTUK SEMENTARA  -->
+                                        <!-- JANGAN DIHAPUS -->
+                                        <!-- <tr>
+                                            <td colspan="2" style="font-size: 14px;font-weight: bold;color: #464646;padding: 10px 0px">
+                                                Voucher
+                                            </td>
+                                            <td colspan="2" style="font-size: 14px;color: #FF9000;font-weight: bold;text-align: right;padding: 10px 0px">Rp. 500.000</td>
+                                        </tr> -->
+                                        <tr style="border-top: 0.5px solid #efefef; width: 85%; padding:10px; margin: 0 auto;">
+                                            <td>
+                                                <div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <!-- HIDE UNTUK SEMENTARA -->
+                                        <!-- JANGAN DIHAPUS -->
+                                        <!-- <tr>
+                                            <td colspan="2" style="font-size: 14px;font-weight: bold;color: #464646;padding: 10px 0px;">Promo</td>
+                                            <td colspan="2" style="font-size: 14px;color: #FF9000;font-weight: bold;text-align: right;padding: 10px 0px;">Rp. 100.000</td>
+                                        </tr> -->
+                                        </tbody>
+                                    </table>
+                                    <tbody>
+                                        <tr>
+                                            <td style="padding: 0px;border-left: 1px solid #e7e7e7; border-right: 1px solid #e7e7e7;">
+                                                <table width="100%" style="border-collapse:collapse">
+                                                    <tbody>
+                                                        <tr style="background-color: #DBEFEB">
+                                                            <td colspan="2" style="font-size: 14px;font-weight: bold;color: #464646;padding: 15px 25px">
+                                                                Total Pesanan
+                                                            </td>
+                                                            <td colspan="2" style="font-size: 14px;color: #09755D;font-weight: bold;text-align: right;padding: 15px 25px">
+                                                                Rp <t t-esc="doc.amount_total" t-options='{"widget": "float", "precision": 2}'/>
+                                                            </td>
+                                                        </tr>
+                                                        <!-- HIDE UNTUK SEMENTARA -->
+                                                        <!-- <tr>
+                                                            <td colspan="2" style="font-size: 14px;font-weight: normal;color: #09755D;padding: 20px 25px;">
+                                                                Anda Menghemat
+                                                            </td>
+                                                            <td colspan="2" style="font-size: 14px;color: #FF9000;font-weight: normal;text-align: right;padding: 20px 25px;">
+                                                                Rp 2.000.000
+                                                            </td>
+                                                        </tr> -->
+                                                        <tr style="border-top: 0.5px solid #efefef; width: 85%; padding:10px; margin: 0 auto;">
+                                                            <td>
+                                                                <div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="
+                                    padding: 10px 15px;
+                                    border-left: 1px solid #e7e7e7; 
+                                    border-right: 1px solid #e7e7e7;"
+                                >
+                                <table width="100%">
+                                    <tbody>
+                                    <tr>
+                                        <td width="50%" style="vertical-align: top; padding:0px 10px;">
+                                            <table width="100%">
+                                                <tbody>
+                                                    <tr>
+                                                        <td style="color: #464646;border: 1px solid #efefef;font-size: 14px;font-weight: bold;padding: 20px 15px;border-radius: 10px 10px 0px 0px">
+                                                            Alamat Pengiriman
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="color: #464646;border: 1px solid #efefef;font-size: 14px;padding: 0px 10px;border-radius: 0px 0px 10px 0px">
+                                                            <p style="color: #999999;font-size: 14px;line-height: 24px;">
+                                                                <span style="font-weight: normal; color: #464646;">
+                                                                    <!-- Januari Satya Kencana -->
+                                                                    <t t-esc="doc.partner_id.name"/>
+                                                                </span>
+                                                                <br/>
+                                                                <t t-esc="doc.partner_shipping_id.name"/><br/>
+                                                                <t t-esc="doc.partner_shipping_id.city_ids.name"/>, <t t-esc="doc.partner_shipping_id.state_ids.name"/><br/>
+                                                                Email : <t t-esc="doc.partner_id.email"/> <br/>
+                                                                Mobile : <t t-esc="doc.partner_id.mobile"/> <br/>
+                                                            </p>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </td>
+                                        <!-- HIDE UNTUK SEMENTARA -->
+                                        <!-- ALAMAT PENAGIHAN HANYA UNTUK B2B -->
+                                        <!-- ================================ -->
+                                        <!-- <td width="50%" style="vertical-align: top; padding:0px 10px;">
+                                            <table width="100%">
+                                                <tbody>
+                                                    <tr>
+                                                        <td style="color: #464646;border: 1px solid #efefef;font-size: 14px;font-weight: bold;padding: 20px 15px;border-radius: 10px 10px 0px 0px">
+                                                            Alamat Penagihan
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="color: #464646;border: 1px solid #efefef;font-size: 14px;padding: 0px 10px;border-radius: 0px 0px 10px 0px">
+                                                        <p style="color: #999999;font-size: 14px;line-height: 24px;">
+                                                            <span style="font-weight: normal; color: #464646;">Januari Satya Kencana</span><br/>
+                                                            Jl. Ibu Inggit Garnasih No. 100 Ciateul - Regol <br/>
+                                                            Bandung, Jawa Barat <br/>
+                                                            Email : anditaha.maharani@gmail.com <br/>
+                                                            Mobile : 08562211225
+                                                        </p>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </td> -->
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <table width="100%" style="background: #09755D; border-top: 1px solid #efefef;">
+                                        <tbody>
+                                            <tr>
+                                                <td style="padding:25px 80px;line-height: 17px;color:rgba(0,0,0,0.70);font-size:14px;" align="center">
+                                                    <h2 style="margin-top: 0;color: #FFFFFF;font-size: 16px;font-weight: bold;text-align: center;margin-bottom: 20px;">
+                                                        Butuh Bantuan?
+                                                    </h2>
+                                                    <p style="font-size: 14px;color: #FFFFFF;margin-bottom: 20px; line-height: 20px;">
+                                                        jika Anda membutuhkan bantuan dan ada beberapa hal yang ingin ditanyakan, jangan ragu untuk segera menghubungi customer service kami di alamat Email ini 
+                                                        <a href="" style="color: #FDDF76;font-weight:bold; text-decoration: none;">
+                                                            contact@alkeba.id
+                                                        </a> 
+                                                        atau telepon di nomor 
+                                                        <a href="https://api.whatsapp.com/send?phone=6283817934830" style="font-weight: bold;text-decoration: none;color: #FDDF76">
+                                                            +6283817934830
+                                                        </a>.
+                                                    </p>
+                                                    <p style="font-size: 12px;color: #FFFFFF; font-weight: bold; margin-top: 30px">
+                                                        Mohon untuk tidak membalas pesan ini melalui email.<br/>Alamat ini otomatis, tanpa pengawasan, dan tidak dapat membantu dengan pertanyaan atau permintaan.
+                                                    </p>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div style="
+                                        background:#FFFFFF;
+                                        padding:10px 0px; 
+                                        border: 1px solid #efefef;
+                                        margin-bottom: 20px; 
+                                        border-radius: 0px 0px 10px 10px;"
+                                    >
+                                        <table cellpadding="0" cellspacing="0" border="0" width="60%" style="border-collapse:collapse; margin: 0px 60px; text-align: center;">
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                         <a href="https://www.tiktok.com/@alkeba.store">
+                                                            <img src="/theme_alkeba/static/src/images/social/tiktok.svg" style="height:20px;width:2opx;"/>
+                                                        </a>
+                                                    </td>
+                                                    <td>
+                                                        <a href="https://www.youtube.com/channel/UCMm38_2UEzrJElitL8xSZ6w/videos">
+                                                            <img src="/theme_alkeba/static/src/images/social/social-03.svg"/>
+                                                        </a>
+                                                    </td>
+                                                    <td>
+                                                        <a href="https://www.instagram.com/alkeba.store/?hl=en">
+                                                            <img src="/theme_alkeba/static/src/images/social/social-04.svg"/>
+                                                        </a>
+                                                    </td>
+                                                    <td>
+                                                        <a href="https://www.linkedin.com/company/alkebaid/">
+                                                            <img src="/theme_alkeba/static/src/images/social/social-05.svg"/>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div style="padding: 10px 0;border-top:1px solid #efefef;">
+                                        <table cellspacing="0" border="0" width="100%" style="border-collapse:collapse;">
+                                            <tbody>
+                                                <tr>
+                                                    <td width="100%" align="center" style="padding:0px 25px;font-size: 12px;color: #999999;text-align: center;">
+                                                        Hak Cipta © PT. Sinergi Pangan Sawargi
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </body>
+        </t>
+    </template>
+
+
+    <template id="report_payment_success">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="theme_alkeba.report_saleorder_payment_success" t-lang="doc.partner_id.lang"/>
+            </t>
+        </t>
+    </template>
+</odoo>

@@ -1,0 +1,1731 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="alkeba_cart_layout" name="Alkeba Cart Layout">
+        <t t-call="theme_alkeba.alkeba_bradcrumbs_with_product_recom">
+        
+            <div class="modal fade" id="AlertCheckout" tabindex="-1" aria-labelledby="exampleModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-body text-center p-4">
+                            <p>
+                                <!-- <i class="icon-heart"></i> -->
+                                <a href="#">
+                                    <img src="/theme_alkeba/static/src/images/icon/remove.png" style="width:20px"/>
+                                </a>
+                                <br/>
+                                <strong>
+                                    Anda Belum Memilih Produk Yang Akan di Checkout <br/>
+                                    Tandai Produk Yang Akan di Checkout
+                                </strong>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- alert pointless -->
+            <div class="modal fade" id="AlertPointless" tabindex="-1" aria-labelledby="exampleModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-body text-center p-4">
+                            <p>
+                                <!-- <i class="icon-heart"></i> -->
+                                <a href="#">
+                                    <img src="/theme_alkeba/static/src/images/icon/remove.png" style="width:20px"/>
+                                </a>
+                                <br/>
+                                <strong>
+                                    Anda Belum Memiliki Poin Member Untuk Digunakan Berbelanja<br/> 
+                                </strong>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="wizard-checkout">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <ul class="d-flex align-items-baseline justify-content-center list-unstyled cart-step-wizard ">
+                                <li class="active">
+                                    <button>
+                                        <div class="box">
+                                            <i class="icon-shopping-bag"></i>
+                                        </div>
+                                        <span>Keranjang Belanja</span>
+                                    </button>
+                                </li>
+                                <li class="">
+                                    <button>
+                                        <div class="box">
+                                            <i class="icon-archive"></i>
+                                        </div>
+                                        <span>Pilih Pengiriman</span>
+                                    </button>
+                                </li>
+                                <li class="">
+                                    <button>
+                                        <div class="box">
+                                            <i class="icon-cash"></i>
+                                        </div>
+                                        <span>Pembayaran</span>
+                                    </button>
+                                </li>
+                                <li class="">
+                                    <button>
+                                        <div class="box">
+                                            <i class="icon-clipboard-check"></i>
+                                        </div>
+                                        <span>Konfirmasi Pembayaran</span>
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cart mt-3">
+                <div class="container-fluid">
+                    <div class="nav-cart">
+                        <a href="02.product-list.html" class="mobile-only">
+                            <i class="icon-arrow-left"></i>
+                        </a>
+                        <h2 class="title mb-3">Keranjang belanja</h2>
+                    </div>
+                    <div class="cart-filled">
+                        <div class="row">
+                            <div class="col-md-9">
+                                <t t-if="products_by_location">
+                                    <t t-foreach="products_by_location" t-as="location">
+                                        <div class="table-responsive mb-4">
+                                            <div class="location-selected">
+                                                <label>Area Pengiriman:</label>
+                                                <t t-esc="location['area_name']"/>
+                                            </div>
+                                            <table class="table" t-attf-id="location_table_{{ location['location_id'] }}">
+                                                <thead>
+                                                    <tr>
+                                                        <t t-if="location['area_name'] == 'Bandung'">
+                                                            <th colspan="1" width="45%" style="background-color: #91cdeb;">
+                                                                <div class="d-flex align-items-center">
+                                                                    <div class="checkbox master">
+                                                                        <input type="checkbox"
+                                                                            t-attf-id="checkAll_{{ location['location_id'] }}"
+                                                                            t-attf-data-loc="{{ location['location_id'] }}"/>
+                                                                        <label
+                                                                            t-attf-for="checkAll_{{ location['location_id'] }}"
+                                                                            t-attf-id="productCountLoc_{{ location['location_id'] }}">
+                                                                            Produk (<t
+                                                                            t-esc="location['product_count']"/>)
+                                                                        </label>
+                                                                    </div>
+                                                                    <button class="ms-2 btn delete-all"
+                                                                            t-attf-data-loc="{{ location['location_id'] }}"
+                                                                            style="display: none">
+                                                                        <i class="icomoon icon-trash"></i>
+                                                                        Hapus Semua
+                                                                    </button>
+                                                                </div>
+                                                            </th>
+                                                        </t>
+                                                        <t t-elif="location['area_name'] == 'Jakarta'">
+                                                            <th colspan="1" width="45%" style="background-color: #edc168;">
+                                                                <div class="d-flex align-items-center">
+                                                                    <div class="checkbox master">
+                                                                        <input type="checkbox"
+                                                                            t-attf-id="checkAll_{{ location['location_id'] }}"
+                                                                            t-attf-data-loc="{{ location['location_id'] }}"/>
+                                                                        <label
+                                                                            t-attf-for="checkAll_{{ location['location_id'] }}"
+                                                                            t-attf-id="productCountLoc_{{ location['location_id'] }}">
+                                                                            Produk (<t
+                                                                            t-esc="location['product_count']"/>)
+                                                                        </label>
+                                                                    </div>
+                                                                    <button class="ms-2 btn delete-all"
+                                                                            t-attf-data-loc="{{ location['location_id'] }}"
+                                                                            style="display: none">
+                                                                        <i class="icomoon icon-trash"></i>
+                                                                        Hapus Semua
+                                                                    </button>
+                                                                </div>
+                                                            </th>
+                                                        </t>
+                                                        <t t-elif="location['area_name'] == 'Surabaya'">
+                                                            <th colspan="1" width="45%" style="background-color: #e68e96;">
+                                                                <div class="d-flex align-items-center">
+                                                                    <div class="checkbox master">
+                                                                        <input type="checkbox"
+                                                                            t-attf-id="checkAll_{{ location['location_id'] }}"
+                                                                            t-attf-data-loc="{{ location['location_id'] }}"/>
+                                                                        <label
+                                                                            t-attf-for="checkAll_{{ location['location_id'] }}"
+                                                                            t-attf-id="productCountLoc_{{ location['location_id'] }}">
+                                                                            Produk (<t
+                                                                            t-esc="location['product_count']"/>)
+                                                                        </label>
+                                                                    </div>
+                                                                    <button class="ms-2 btn delete-all"
+                                                                            t-attf-data-loc="{{ location['location_id'] }}"
+                                                                            style="display: none">
+                                                                        <i class="icomoon icon-trash"></i>
+                                                                        Hapus Semua
+                                                                    </button>
+                                                                </div>
+                                                            </th>
+                                                        </t>
+                                                        <t t-else="">
+                                                            <th colspan="1" width="45%"></th>
+                                                        </t>
+                                                        <th width="20%" t-attf-style="background-color: {{ location['area_name'] == 'Bandung' and '#91cdeb' or location['area_name'] == 'Jakarta' and '#edc168' or location['area_name'] == 'Surabaya' and '#e68e96' }};">Kuantitas</th>
+                                                        <th width="15%" t-attf-style="background-color: {{ location['area_name'] == 'Bandung' and '#91cdeb' or location['area_name'] == 'Jakarta' and '#edc168' or location['area_name'] == 'Surabaya' and '#e68e96' }};">Harga</th>
+                                                        <th width="10%" t-attf-style="background-color: {{ location['area_name'] == 'Bandung' and '#91cdeb' or location['area_name'] == 'Jakarta' and '#edc168' or location['area_name'] == 'Surabaya' and '#e68e96' }};">Subtotal</th>
+                                                        <th width="10%" t-attf-style="background-color: {{ location['area_name'] == 'Bandung' and '#91cdeb' or location['area_name'] == 'Jakarta' and '#edc168' or location['area_name'] == 'Surabaya' and '#e68e96' }};"></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td colspan="5">
+                                                            <table class="table">
+                                                                <tbody>
+                                                                    <t t-foreach="location['products']" t-as="product">
+                                                                        <tr t-attf-id="productLine_{{ product['product_id'] }}_{{ location['location_id'] }}">
+                                                                            <td width="45%">
+                                                                                <div class="checkbox">
+                                                                                    <t t-if="product['is_checked']">
+                                                                                        <input type="checkbox"
+                                                                                            t-attf-id="zanana_{{ product['product_id'] }}_{{ location['location_id'] }}"
+                                                                                            t-attf-class="brand_{{ product['product_id'] }}_{{ location['location_id'] }}"
+                                                                                            t-attf-data-id="{{ product['product_id'] }}"
+                                                                                            t-attf-data-loc="{{ location['location_id'] }}"
+                                                                                            checked="checked"/>
+                                                                                    </t>
+                                                                                    <t t-else="">
+                                                                                        <input type="checkbox"
+                                                                                            t-attf-id="zanana_{{ product['product_id'] }}_{{ location['location_id'] }}"
+                                                                                            t-attf-class="brand_{{ product['product_id'] }}_{{ location['location_id'] }}"
+                                                                                            t-attf-data-id="{{ product['product_id'] }}"
+                                                                                            t-attf-data-loc="{{ location['location_id'] }}"/>
+                                                                                    </t>
+                                                                                    <label
+                                                                                        t-attf-for="zanana_{{ product['product_id'] }}_{{ location['location_id'] }}">
+                                                                                        <div class="d-flex">
+                                                                                            <div class="left-cart">
+                                                                                                <a t-att-href="product['product'].website_url" class="d-block">
+                                                                                                    <t t-if="product['product'].image_1920">
+                                                                                                        <img
+                                                                                                            t-att-src="image_data_uri(product['product'].image_1920)"
+                                                                                                            class="img-fluid"
+                                                                                                            t-att-alt="product['product_name']"/>
+                                                                                                    </t>
+                                                                                                    <t t-else="">
+                                                                                                        <img
+                                                                                                            src="/web/static/img/placeholder.png"
+                                                                                                            class="img-fluid"
+                                                                                                            alt="..."/>
+                                                                                                    </t>
+                                                                                                </a>
+                                                                                            </div>
+                                                                                            <div class="right-cart">
+                                                                                                <t t-esc="product['product_name']"/>
+                                                                                                <div class="d-block">
+                                                                                                    <span>Berat:
+                                                                                                        <t t-esc="product['product_weight']"/>
+                                                                                                        <t t-esc="product['product_weight_uom']"/>
+                                                                                                    </span>
+                                                                                                    <span>SKU:
+                                                                                                        <t t-esc="product['product_sku']"/>
+                                                                                                    </span>
+                                                                                                </div>
+                                                                                                <div class="notes-form">
+                                                                                                    <i class="icon-document-text"></i>
+                                                                                                    <p>Notes
+                                                                                                        <a href="javascript:void(0)"
+                                                                                                        class="edit-notes">
+                                                                                                            Ubah
+                                                                                                        </a>
+                                                                                                        <a href="javascript:void(0)"
+                                                                                                        class="save-notes"
+                                                                                                        t-attf-data-id="{{ product['product_id'] }}"
+                                                                                                        t-attf-data-loc="{{ location['location_id'] }}">
+                                                                                                            Simpan
+                                                                                                        </a>
+                                                                                                    </p>
+                                                                                                    <div
+                                                                                                        class="notes-input">
+                                                                                                        <textarea
+                                                                                                            t-attf-id="notes_{{ product['product_id'] }}_{{ location['location_id'] }}"
+                                                                                                            class="auto-grow">
+                                                                                                            <t t-esc="product['notes']"/>
+                                                                                                        </textarea>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </label>
+                                                                                </div>
+                                                                            </td>
+                                                                            <td width="20%" valign="middle">
+                                                                                <div class="qty-buy no-border">
+                                                                                    <div class="number">
+                                                                                        <span class="minus"
+                                                                                            t-attf-data-id="{{ product['product_id'] }}"
+                                                                                            t-attf-data-loc="{{ location['location_id'] }}">
+                                                                                            -
+                                                                                        </span>
+                                                                                        <input class="product-line-qty"
+                                                                                            type="number"
+                                                                                            t-attf-data-id="{{ product['product_id'] }}"
+                                                                                            t-attf-data-loc="{{ location['location_id'] }}"
+                                                                                            t-attf-data-locname="{{ location['area_name'] }}"
+                                                                                            t-attf-value="{{ product['qty'] }}"/>
+                                                                                        <span class="plus"
+                                                                                            t-attf-data-id="{{ product['product_id'] }}"
+                                                                                            t-attf-data-loc="{{ location['location_id'] }}">
+                                                                                            +
+                                                                                        </span>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </td>
+                                                                            <td width="15%" valign="middle">
+                                                                                <div class="card-product h-auto">
+                                                                                    <p class="card-price"
+                                                                                    t-attf-id="productUnitPrice_{{ product['product_id'] }}_{{ location['location_id'] }}">
+                                                                                        Rp<t t-esc="'{0:,.2f}'.format(int(product['price']))"/>
+                                                                                    </p>
+                                                                                </div>
+                                                                            </td>
+                                                                            <td width="10%" valign="middle" align="center">
+                                                                                <div class="card-product h-auto">
+                                                                                    <p class="card-price"
+                                                                                    t-attf-id="productSubtotal_{{ product['product_id'] }}_{{ location['area_name'] }}">
+                                                                                        Rp<t t-esc="'{0:,.2f}'.format(int(product['subtotal']))"/>
+                                                                                    </p>
+                                                                                </div>
+                                                                            </td>
+                                                                            <td width="10%" valign="middle" align="center">
+                                                                                <a href="javascript:void(0)"
+                                                                                class="delete-product"
+                                                                                t-attf-data-id="{{ product['product_id'] }}"
+                                                                                t-attf-data-loc="{{ location['location_id'] }}">
+                                                                                    <i class="icomoon icon-trash"></i>
+                                                                                </a>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </t>
+                                                                </tbody>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </t>
+                                </t>
+                                <t t-else="">
+                                    <tbody>
+                                        <tr>
+                                            <td colspan="3">
+                                                <div class="col-7 m-auto blankslate text-center">
+                                                    <img src="/theme_alkeba/static/src/images/order-empty.png"/>
+                                                    <p>Belum ada produk pilihan di keranjang Belanja</p>
+                                                    <a href="/products" class="btn btn-primary">
+                                                        <i class="icon-shopping-bag"></i>
+                                                        Mulai Belanja
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </t>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="floating-share">
+                                    <div class="qty-buy">
+                                        <h3>Ringkasan Pesanan</h3>
+                                        <div class=" p-3 pt-0">
+                                            <t t-foreach="products_by_location" t-as="location">
+                                                <t t-set="subtotal_id" t-value="location['area_name'] + '_' + str(location['location_id'])"/>
+
+                                                <div class="d-flex align-items-center mt-4">
+                                                    <p class="mb-0">Sub Total<t t-if="location['area_name']"> <t t-esc="' ' + location['area_name']"/>:</t></p>
+                                                    <p class="mb-0 ms-auto" t-attf-id="subTots{{ location['area_name'] }}">
+                                                        <t t-set="area_subtotal" t-value="sum(product['subtotal'] for product in location['products'])"/>
+                                                        <t t-esc="'Rp {:>12,.2f}'.format(int(area_subtotal))"/>
+                                                    </p>
+                                                </div>
+                                            </t>
+                                            <div class="d-flex align-items-center mt-4">
+                                                <p class="mb-0 ">Sub Total:</p>
+                                                <p class="mb-0 standard ms-auto" id="totalPrice">Rp
+                                                    <t t-esc="'{0:,.2f}'.format(int(subtotal))"/>
+                                                </p>
+                                            </div>
+                                            <hr/>
+                                            <div class="voucher-code">
+                                                <p>Pilih Promo</p>
+                                                <select id="pilihPromoGift" class="select-styled" name="Pilih Promo">
+                                                    <option value="0">
+                                                        Pilih Promo
+                                                    </option>
+                                                    <!-- <option>Pilih Promo</option>
+                                                    <t t-foreach="promo" t-as="is_promo">
+                                                        <option id="giftvalue" t-attf-value="{{ is_promo.promo_gift_id.code_promo }}">
+                                                            <t t-esc="is_promo.promo_gift_id.name"/>
+                                                        </option>
+                                                    </t> -->
+                                                </select>
+                                            </div>
+                                            <hr/>
+                                            <!-- <div class="voucher-code">
+                                                <p>Kode Voucher</p>
+                                                <form class="d-flex">
+                                                    <div class="position-relative  me-2">
+                                                        <input type="text" class="form-control"
+                                                               placeholder="Masukkan disini..."/>
+                                                        <i class="icon-x-circle"></i>
+                                                    </div>
+                                                    <a href="javascript:void(0)"
+                                                       class="btn btn-outline-orange apply-voucher">Pakai
+                                                    </a>
+                                                    <a href="javascript:void(0)"
+                                                       class="btn btn-outline-red delete-voucher">Hapus
+                                                    </a>
+                                                </form>
+                                            </div> -->
+                                            <!-- <hr/> -->
+                                            <div class="use-alkeba-point clearfix">
+                                                <p>Gunakan Poin</p>
+                                                <span id="CurrentPoint" class="current-point">
+                                                    <t t-esc="cart.user_id.point"/> Poin
+                                                    <!-- <span>(-Rp 0)</span> -->
+                                                </span>
+                                                <span id="nominalPoint">
+                                                    (-Rp. <t t-esc="'{0:,.2f}'.format(int(cart.user_id.point * 1000))"/>)
+                                                </span>
+                                                <br/>
+                                                <label class="switch">
+                                                    <input type="checkbox" id="CheckboxPoint" value="0"/>
+                                                    <span class="slider round"></span>
+                                                </label>
+                                            </div>
+                                            <hr/>
+                                            <div class="use-alkeba-point clearfix">
+                                                <p>Point yang akan didapatkan
+                                                </p>
+                                                <br/>
+                                                    <span id="orderPoint" class="current-point" t-attf-data-point="{{ point }}">
+                                                        <t t-esc="point"/> Point
+                                                    </span>
+                                            </div>
+                                            <hr/>
+                                            <div class="nav-cart-total">
+                                                <div id="totalOrder" class="d-flex align-items-center mt-3">
+                                                    <p class="mb-0 ">
+                                                        <strong>Total</strong>
+                                                    </p>
+                                                    <p id="grandTotal" class="mb-0 standard ms-auto">Rp
+                                                        <t t-esc="'{0:,.2f}'.format(int(subtotal))"/>
+                                                    </p>
+                                                </div>
+                                                <div class="button mt-4" id="btncheckout" t-attf-data-cart-grandtotal="{{ products }}">
+                                                <!-- <a href="/proceed-checkout" class="btn btn-primary d-block w-100">
+                                                    Proses Checkout
+                                                </a> -->
+
+                                                    <a href="javascript:void(0)" id="btncheckoutprocess" class="btn btn-primary d-block w-100">
+                                                        Proses Checkout
+                                                    </a>
+                                                </div>                                  
+                                            </div>
+                                            <p class="help-info">Mengalami kesulitan dalam pemesanan?<br></br>
+                                                <a href="https://api.whatsapp.com/send?phone=6283817934830&amp;text=Saya%20terkendala%20dalam%20memesan%20produk%20di%20Alkeba.id">
+                                                    Hubungi Kami disini
+                                                </a>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Modal -->
+            <div class="modal fade" id="favouriteModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-body text-center p-4">
+                            <img src="/theme_alkeba/static/src/images/icon/favourite.png" class="img-fluid mb-3"/>
+                            <h2 class="mb-3">Product successfully added to Wishlist</h2>
+                            <p>
+                                <strong>
+                                    You can see which products have been added to your favorites on the 'Wishlist' Page
+                                </strong>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="removeFromCartModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-body text-center p-4">
+                            <p>
+                                <i class="icon-heart"></i>
+                                <strong>Produk berhasil dihapus dari Keranjang Belanja.</strong>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </t>
+    </template>
+
+    <template id="alkeba_cart_confirmed_payment_cardless_credit" name="Alkeba Confirmed Payment - Cardless Credit">
+        <t t-call="theme_alkeba.alkeba_bradcrumbs_empty_bottom">
+
+            <div class="wizard-checkout">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <ul class="d-flex align-items-baseline justify-content-center list-unstyled cart-step-wizard ">
+                                <li class="active line">
+                                    <button>
+                                        <div class="box">
+                                            <i class="icon-shopping-bag"></i>
+                                        </div>
+                                        <span>Keranjang Belanja</span>
+                                    </button>
+                                </li>
+                                <li class="active line">
+                                    <button>
+                                        <div class="box">
+                                            <i class="icon-archive"></i>
+                                        </div>
+                                        <span>Pilih Pengiriman</span>
+                                    </button>
+                                </li>
+                                <li class="active line">
+                                    <button>
+                                        <div class="box">
+                                            <i class="icon-cash"></i>
+                                        </div>
+                                        <span>Pembayaran</span>
+                                    </button>
+                                </li>
+                                <li class="active">
+                                    <button>
+                                        <div class="box">
+                                            <i class="icon-clipboard-check"></i>
+                                        </div>
+                                        <span>Konfirmasi Pembayaran</span>
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cart checkout mt-5">
+                <div class="container-fluid">
+                    <div class="cart-filled">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="nav-cart">
+                                    <a href="02.product-list.html" class="mobile-only">
+                                        <i class="icon-arrow-left"></i>
+                                    </a>
+                                    <h2 class="title mb-3">Konfirmasi Pembayaran</h2>
+                                </div>
+                                <div class="payment-confirmation my-5">
+                                    <div class="d-flex justify-content-center">
+                                        <div class="col-md-9">
+                                            <h6>Cardless Credit</h6>
+                                            <div class="card">
+                                                <div class="col-7 m-auto text-center my-4">
+                                                    <img
+                                                        src="/theme_alkeba/static/src/images/payment-confirmation-illust-02.png"
+                                                        class=" my-5"/>
+                                                    <h6>Pembayaran menggunakan Indodana Berhasil</h6>
+                                                    <p>
+                                                        Anda telah berhasil melakukan checkout pesanan Anda menggunakan
+                                                        Indodana sebagai metode pembayaran. Pesanan Anda akan segera
+                                                        diproses.
+                                                    </p>
+                                                </div>
+                                                <div class="d-flex justify-content-between confirmation-detail-info ">
+                                                    <div class="form-group col-4 confirmation-method-payment">
+                                                        <label class="grey">Metode Pembayaran:</label>
+                                                        <div class="d-flex">
+                                                            <img
+                                                                src="/theme_alkeba/static/src/images/payment/ewallet-02.png"/>
+                                                            <p>Indodana
+                                                                <br/>
+                                                                <small>
+                                                                    <b>30 Hari Rp30.000</b>
+                                                                    <br/>
+                                                                    Bunga 0% X per Bulan
+                                                                </small>
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group confirmation-courier col-5">
+                                                        <label class="grey">Kurir:</label>
+                                                        <div class="d-flex w-100 justify-content-between ">
+                                                            <p>
+                                                                <b>Sicepat REG</b>
+                                                                <br/>
+                                                                <small>1-2 Hari</small>
+                                                            </p>
+                                                            <img
+                                                                src="/theme_alkeba/static/src/images/metode/pengiriman_6.png"/>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group col-3">
+                                                        <label class="grey">Total Pesanan :</label>
+                                                        <p class="green">
+                                                            <b>RP. 210.000</b>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-6 m-auto text-center mb-5">
+                                                    <a href="" class="btn btn-outline-orange me-3">Cek Status Pesanan
+                                                    </a>
+                                                    <a href="" class="btn btn-primary">Kembali ke halaman awal</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </t>
+    </template>
+
+    <template id="alkeba_cart_confirmed_payment_direct_debit" name="Alkeba Confirmed Payment - Direct Debit">
+        <t t-call="theme_alkeba.alkeba_bradcrumbs_empty_bottom">
+
+            <div class="wizard-checkout">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <ul class="d-flex align-items-baseline justify-content-center list-unstyled cart-step-wizard ">
+                                <li class="active line">
+                                    <button>
+                                        <div class="box">
+                                            <i class="icon-shopping-bag"></i>
+                                        </div>
+                                        <span>Keranjang Belanja</span>
+                                    </button>
+                                </li>
+                                <li class="active line">
+                                    <button>
+                                        <div class="box">
+                                            <i class="icon-archive"></i>
+                                        </div>
+                                        <span>Pilih Pengiriman</span>
+                                    </button>
+                                </li>
+                                <li class="active line">
+                                    <button>
+                                        <div class="box">
+                                            <i class="icon-cash"></i>
+                                        </div>
+                                        <span>Pembayaran</span>
+                                    </button>
+                                </li>
+                                <li class="active">
+                                    <button>
+                                        <div class="box">
+                                            <i class="icon-clipboard-check"></i>
+                                        </div>
+                                        <span>Konfirmasi Pembayaran</span>
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cart checkout mt-5">
+                <div class="container-fluid">
+                    <div class="cart-filled">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="nav-cart">
+                                    <a href="02.product-list.html" class="mobile-only">
+                                        <i class="icon-arrow-left"></i>
+                                    </a>
+                                    <h2 class="title mb-3">Konfirmasi Pembayaran</h2>
+                                </div>
+                                <div class="payment-confirmation my-5">
+                                    <div class="d-flex justify-content-center">
+                                        <div class="col-md-9">
+                                            <h6>Direct Debit</h6>
+                                            <div class="card">
+                                                <div class="col-7 m-auto text-center my-4">
+                                                    <img
+                                                        src="/theme_alkeba/static/src/images/payment-confirmation-illust-02.png"
+                                                        class=" my-5"/>
+                                                    <h6>Pembayaran menggunakan Direct Debit Berhasil</h6>
+                                                    <p>
+                                                        Anda telah berhasil melakukan checkout pesanan Anda menggunakan
+                                                        Direct Debit sebagai metode pembayaran. Pesanan Anda akan segera
+                                                        diproses.
+                                                    </p>
+                                                </div>
+                                                <div class="d-flex justify-content-between confirmation-detail-info ">
+                                                    <div class="form-group col-4 confirmation-method-payment">
+                                                        <label class="grey">Metode Pembayaran:</label>
+                                                        <div class="d-flex">
+                                                            <img
+                                                                src="/theme_alkeba/static/src/images/payment/ewallet-02.png"/>
+                                                            <p>Dana
+                                                            </p>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group confirmation-courier col-5">
+                                                        <label class="grey">Kurir:</label>
+                                                        <t t-foreach="shipping_price_per_location" t-as="courier">
+                                                            <div class="d-flex w-100 justify-content-between ">
+                                                                <p>
+                                                                    <b><t t-esc="courier['courier']"/></b>
+                                                                    <br/>
+<!--                                                                    <small>1-2 Hari</small>-->
+                                                                </p>
+                                                                <t t-if="courier['courier_option'] in ['sp', 'alkeba_express']">
+                                                                    <img src="/theme_alkeba/static/src/images/metode/pengiriman_2.png"/>
+                                                                </t>
+
+                                                            </div>
+                                                        </t>
+                                                    </div>
+
+                                                    <div class="form-group col-3">
+                                                        <label class="grey">Total Pesanan :</label>
+                                                        <p class="green">
+                                                            <b>Rp <t t-esc="'{0:,.2f}'.format(int(grand_total))"/></b>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-6 m-auto text-center mb-5">
+                                                    <a href="/my-orders" class="btn btn-outline-orange me-3">Cek Status Pesanan
+                                                    </a>
+                                                    <a href="/" class="btn btn-primary">Kembali ke halaman awal</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </t>
+    </template>
+
+    <template id="alkeba_cart_confirmed_payment_in_shop" name="Alkeba Confirmed Payment - In Shop">
+        <t t-call="theme_alkeba.alkeba_bradcrumbs_empty_bottom">
+
+            <div class="wizard-checkout">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <ul class="d-flex align-items-baseline justify-content-center list-unstyled cart-step-wizard ">
+                                <li class="active line">
+                                    <button>
+                                        <div class="box">
+                                            <i class="icon-shopping-bag"></i>
+                                        </div>
+                                        <span>Keranjang Belanja</span>
+                                    </button>
+                                </li>
+                                <li class="active line">
+                                    <button>
+                                        <div class="box">
+                                            <i class="icon-archive"></i>
+                                        </div>
+                                        <span>Pilih Pengiriman</span>
+                                    </button>
+                                </li>
+                                <li class="active line">
+                                    <button>
+                                        <div class="box">
+                                            <i class="icon-cash"></i>
+                                        </div>
+                                        <span>Pembayaran</span>
+                                    </button>
+                                </li>
+                                <li class="active">
+                                    <button>
+                                        <div class="box">
+                                            <i class="icon-clipboard-check"></i>
+                                        </div>
+                                        <span>Konfirmasi Pembayaran</span>
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cart checkout mt-5">
+                <div class="container-fluid">
+                    <div class="cart-filled">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="nav-cart">
+                                    <a href="02.product-list.html" class="mobile-only">
+                                        <i class="icon-arrow-left"></i>
+                                    </a>
+                                    <h2 class="title mb-3">Konfirmasi Pembayaran</h2>
+                                </div>
+                                <div class="payment-confirmation my-5">
+                                    <div class="d-flex justify-content-center">
+                                        <div class="col-md-9">
+                                            <h6>Bayar di Toko</h6>
+                                            <div class="d-flex justify-content-between alert-orange mt-3">
+                                                <p>
+                                                    <i class="icon-information-circle"></i>
+                                                    Waktu pembayaran di Toko harus dilakukan maksimal 3 hari setelah
+                                                    melakukan pemesanan
+                                                </p>
+                                                <div class="d-flex payment-time">
+                                                    <img src="/theme_alkeba/static/src/images/ic-watch-red.svg"/>
+                                                    <div id="countdown-box"></div>
+                                                </div>
+                                            </div>
+                                            <div class="card">
+                                                <div class="col-7 m-auto text-center my-4">
+                                                    <img
+                                                        src="/theme_alkeba/static/src/images/payment-confirmation-illust-02.png"
+                                                        class=" my-5"/>
+                                                    <h6>Permintaan Bayar di Toko Berhasil</h6>
+                                                    <p>
+                                                        Pastikan Anda menyiapkan uang tunai sesuai dengan tagihan &amp;
+                                                        dan
+                                                        melakukan pembayaran di toko
+                                                    </p>
+                                                </div>
+                                                <div class="d-flex justify-content-between confirmation-detail-info ">
+                                                    <div class="form-group col-4 confirmation-method-payment">
+                                                        <label class="grey">Metode Pembayaran:</label>
+                                                        <p>Bayar di Toko</p>
+                                                    </div>
+                                                    <div class="form-group confirmation-courier col-5">
+                                                        <label class="grey">Kurir:</label>
+                                                        <!-- <t t-foreach="shipping_price_per_location" t-as="courier"> -->
+                                                        <div class="d-flex w-100 justify-content-between ">
+                                                            <p>
+                                                                <!-- <b><t t-esc="courier['courier']"/></b> -->
+                                                                <b><t t-esc="courier_product_name"/></b>
+                                                                <br/>
+<!--                                                                    <small>1-2 Hari</small>-->
+                                                            </p>
+                                                            <!-- <t t-if="courier['courier_option'] in ['sp', 'alkeba_express']"> -->
+                                                                <img src="/theme_alkeba/static/src/images/metode/pengiriman_2.png"/>
+                                                            <!-- </t> -->
+
+                                                        </div>
+                                                        <!-- </t> -->
+                                                    </div>
+
+                                                    <div class="form-group col-3">
+                                                        <label class="grey">Total Pesanan :</label>
+                                                        <p class="green">
+                                                            <b>Rp <t t-esc="'{0:,.2f}'.format(int(grand_total))"/></b>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-6 m-auto text-center mb-5">
+                                                    <a href="/my-orders" class="btn btn-outline-orange me-3">Cek Status Pesanan
+                                                    </a>
+                                                    <a href="/" class="btn btn-primary">Kembali ke halaman awal</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </t>
+    </template>
+
+    <template id="alkeba_cart_confirmed_payment_ewallet" name="Alkeba Confirmed Payment - E-Wallet">
+        <t t-call="theme_alkeba.alkeba_bradcrumbs_empty_bottom">
+
+            <div class="wizard-checkout">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <ul class="d-flex align-items-baseline justify-content-center list-unstyled cart-step-wizard ">
+                                <li class="active line">
+                                    <button>
+                                        <div class="box">
+                                            <i class="icon-shopping-bag"></i>
+                                        </div>
+                                        <span>Keranjang Belanja</span>
+                                    </button>
+                                </li>
+                                <li class="active line">
+                                    <button>
+                                        <div class="box">
+                                            <i class="icon-archive"></i>
+                                        </div>
+                                        <span>Pilih Pengiriman</span>
+                                    </button>
+                                </li>
+                                <li class="active line">
+                                    <button>
+                                        <div class="box">
+                                            <i class="icon-cash"></i>
+                                        </div>
+                                        <span>Pembayaran</span>
+                                    </button>
+                                </li>
+                                <li class="active">
+                                    <button>
+                                        <div class="box">
+                                            <i class="icon-clipboard-check"></i>
+                                        </div>
+                                        <span>Konfirmasi Pembayaran</span>
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cart checkout mt-5">
+                <div class="container-fluid">
+                    <div class="cart-filled">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="nav-cart">
+                                    <a href="02.product-list.html" class="mobile-only">
+                                        <i class="icon-arrow-left"></i>
+                                    </a>
+                                    <h2 class="title mb-3">Konfirmasi Pembayaran</h2>
+                                </div>
+                                <div class="payment-confirmation my-5">
+                                    <div class="d-flex justify-content-center">
+                                        <div class="col-md-9">
+                                            <h6>eWallet</h6>
+                                            <div class="card">
+                                                <div class="col-7 m-auto text-center my-4">
+                                                    <img
+                                                        src="/theme_alkeba/static/src/images/payment-confirmation-illust-02.png"
+                                                        class=" my-5"/>
+                                                    <h6>Pembayaran menggunakan Dana Berhasil</h6>
+                                                    <p>
+                                                        Anda telah berhasil melakukan checkout pesanan Anda menggunakan
+                                                        Dana sebagai metode pembayaran. Pesanan Anda akan segera
+                                                        diproses.
+                                                    </p>
+                                                </div>
+                                                <div class="d-flex justify-content-between confirmation-detail-info ">
+                                                    <div class="form-group col-4 confirmation-method-payment">
+                                                        <label class="grey">Metode Pembayaran:</label>
+                                                        <div class="d-flex">
+                                                            <img
+                                                                src="/theme_alkeba/static/src/images/payment/ewallet-02.png"/>
+                                                            <p>Dana
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group confirmation-courier col-5">
+                                                        <label class="grey">Kurir:</label>
+                                                        <div class="d-flex w-100 justify-content-between ">
+                                                            <p>
+                                                                <b>Sicepat REG</b>
+                                                                <br/>
+                                                                <small>1-2 Hari</small>
+                                                            </p>
+                                                            <img
+                                                                src="/theme_alkeba/static/src/images/metode/pengiriman_6.png"/>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group col-3">
+                                                        <label class="grey">Total Pesanan :</label>
+                                                        <p class="green">
+                                                            <b>RP. 210.000</b>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-6 m-auto text-center mb-5">
+                                                    <a href="" class="btn btn-outline-orange me-3">Cek Status Pesanan
+                                                    </a>
+                                                    <a href="" class="btn btn-primary">Kembali ke halaman awal</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </t>
+    </template>
+
+    <template id="alkeba_cart_confirmed_payment_cc" name="Alkeba Confirmed Payment - Credit Card">
+        <t t-call="theme_alkeba.alkeba_bradcrumbs_empty_bottom">
+
+            <div class="wizard-checkout">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <ul class="d-flex align-items-baseline justify-content-center list-unstyled cart-step-wizard ">
+                                <li class="active line">
+                                    <button>
+                                        <div class="box">
+                                            <i class="icon-shopping-bag"></i>
+                                        </div>
+                                        <span>Keranjang Belanja</span>
+                                    </button>
+                                </li>
+                                <li class="active line">
+                                    <button>
+                                        <div class="box">
+                                            <i class="icon-archive"></i>
+                                        </div>
+                                        <span>Pilih Pengiriman</span>
+                                    </button>
+                                </li>
+                                <li class="active line">
+                                    <button>
+                                        <div class="box">
+                                            <i class="icon-cash"></i>
+                                        </div>
+                                        <span>Pembayaran</span>
+                                    </button>
+                                </li>
+                                <li class="active">
+                                    <button>
+                                        <div class="box">
+                                            <i class="icon-clipboard-check"></i>
+                                        </div>
+                                        <span>Konfirmasi Pembayaran</span>
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cart checkout mt-5">
+                <div class="container-fluid">
+                    <div class="cart-filled">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="nav-cart">
+                                    <a href="02.product-list.html" class="mobile-only">
+                                        <i class="icon-arrow-left"></i>
+                                    </a>
+                                    <h2 class="title mb-3">Konfirmasi Pembayaran</h2>
+                                </div>
+                                <div class="payment-confirmation my-5">
+                                    <div class="d-flex justify-content-center">
+                                        <div class="col-md-9">
+                                            <h6>Kartu Kredit</h6>
+                                            <div class="card">
+                                                <div class="col-7 m-auto text-center my-4">
+                                                    <img
+                                                        src="/theme_alkeba/static/src/images/payment-confirmation-illust-02.png"
+                                                        class=" my-5"/>
+                                                    <h6>Pembayaran menggunakan Kartu Kredit Berhasil</h6>
+                                                    <p>
+                                                        Anda telah berhasil melakukan checkout pesanan Anda menggunakan
+                                                        Kartu Kredit sebagai metode pembayaran. Pesanan Anda akan segera
+                                                        diproses.
+                                                    </p>
+                                                </div>
+                                                <div class="d-flex justify-content-between confirmation-detail-info ">
+                                                    <div class="form-group col-4 confirmation-method-payment">
+                                                        <label class="grey">Metode Pembayaran:</label>
+                                                        <div class="d-flex">
+                                                            <img
+                                                                src="/theme_alkeba/static/src/images/payment/va-02.png"/>
+                                                            <p>Kartu Kredit BCA
+                                                                <br/>
+                                                                <small>Cicilan 3 Bulan</small>
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group confirmation-courier col-5">
+                                                        <label class="grey">Kurir:</label>
+                                                        <div class="d-flex w-100 justify-content-between ">
+                                                            <p>
+                                                                <b>Sicepat REG</b>
+                                                                <br/>
+                                                                <small>1-2 Hari</small>
+                                                            </p>
+                                                            <img
+                                                                src="/theme_alkeba/static/src/images/metode/pengiriman_6.png"/>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group col-3">
+                                                        <label class="grey">Total Pesanan :</label>
+                                                        <p class="green">
+                                                            <b>RP. 210.000</b>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-6 m-auto text-center mb-5">
+                                                    <a href="" class="btn btn-outline-orange me-3">Cek Status Pesanan
+                                                    </a>
+                                                    <a href="" class="btn btn-primary">Kembali ke halaman awal</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </t>
+    </template>
+
+    <template id="alkeba_cart_confirmed_payment_cod" name="Alkeba Confirmed Payment - COD">
+        <t t-call="theme_alkeba.alkeba_bradcrumbs_empty_bottom">
+
+            <div class="wizard-checkout">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <ul class="d-flex align-items-baseline justify-content-center list-unstyled cart-step-wizard ">
+                                <li class="active line">
+                                    <button>
+                                        <div class="box">
+                                            <i class="icon-shopping-bag"></i>
+                                        </div>
+                                        <span>Keranjang Belanja</span>
+                                    </button>
+                                </li>
+                                <li class="active line">
+                                    <button>
+                                        <div class="box">
+                                            <i class="icon-archive"></i>
+                                        </div>
+                                        <span>Pilih Pengiriman</span>
+                                    </button>
+                                </li>
+                                <li class="active line">
+                                    <button>
+                                        <div class="box">
+                                            <i class="icon-cash"></i>
+                                        </div>
+                                        <span>Pembayaran</span>
+                                    </button>
+                                </li>
+                                <li class="active">
+                                    <button>
+                                        <div class="box">
+                                            <i class="icon-clipboard-check"></i>
+                                        </div>
+                                        <span>Konfirmasi Pembayaran</span>
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cart checkout mt-5">
+                <div class="container-fluid">
+                    <div class="cart-filled">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="nav-cart">
+                                    <a href="02.product-list.html" class="mobile-only">
+                                        <i class="icon-arrow-left"></i>
+                                    </a>
+                                    <h2 class="title mb-3">Konfirmasi Pembayaran</h2>
+                                </div>
+                                <div class="payment-confirmation my-5">
+                                    <div class="d-flex justify-content-center">
+                                        <div class="col-md-9">
+                                            <h6>COD (Bayar di Tempat)</h6>
+                                            <div class="alert-orange mt-3">
+                                                <p>
+                                                    <i class="icon-information-circle"></i>
+                                                    Lakukan pembayaran ke kurir setelah menerima barang pesanan
+                                                </p>
+                                            </div>
+                                            <div class="card">
+                                                <div class="col-7 m-auto text-center my-4">
+                                                    <img
+                                                        src="/theme_alkeba/static/src/images/payment-confirmation-illust-01.png"
+                                                        class=" my-5"/>
+                                                    <h6>Permintaan Bayar di Tempat Berhasil</h6>
+                                                    <p>
+                                                        Pastikan Anda menyiapkan uang tunai sesuai dengan tagihan &amp;
+                                                        lakukan pembayaran terhadap kurir
+                                                    </p>
+                                                </div>
+                                                <div class="d-flex justify-content-between confirmation-detail-info ">
+                                                    <div class="form-group col-4 confirmation-method-payment">
+                                                        <label class="grey">Metode Pembayaran:</label>
+                                                        <p>COD (Bayar di Tempat)</p>
+                                                    </div>
+                                                    <div class="form-group confirmation-courier col-5">
+                                                        <label class="grey">Kurir:</label>
+                                                        <!-- <t t-foreach="shipping_price_per_location" t-as="courier"> -->
+                                                        <div class="d-flex w-100 justify-content-between ">
+                                                            <p>
+                                                                <!-- <b><t t-esc="courier['courier']"/></b> -->
+                                                                <b><t t-esc="courier_product_name"/></b>
+                                                                <br/>
+<!--                                                                    <small>1-2 Hari</small>-->
+                                                            </p>
+                                                            <!-- <t t-if="courier['courier_option'] in ['sp', 'alkeba_express']"> -->
+                                                                <img src="/theme_alkeba/static/src/images/metode/pengiriman_2.png"/>
+                                                            <!-- </t> -->
+
+                                                        </div>
+                                                        <!-- </t> -->
+                                                    </div>
+
+                                                    <div class="form-group col-3">
+                                                        <label class="grey">Total Pesanan :</label>
+                                                        <p class="green">
+                                                            <b>Rp <t t-esc="'{0:,.2f}'.format(int(grand_total))"/></b>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-6 m-auto text-center mb-5">
+                                                    <a href="/my-orders" class="btn btn-outline-orange me-3">Cek Status Pesanan
+                                                    </a>
+                                                    <a href="/" class="btn btn-primary">Kembali ke halaman awal</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </t>
+    </template>
+
+    <template id="alkeba_cart_confirmed_payment_qrcode" name="Alkeba Confirmed Payment - QR Code">
+        <t t-call="theme_alkeba.alkeba_bradcrumbs_empty_bottom">
+
+            <div class="wizard-checkout">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <ul class="d-flex align-items-baseline justify-content-center list-unstyled cart-step-wizard ">
+                                <li class="active line">
+                                    <button>
+                                        <div class="box">
+                                            <i class="icon-shopping-bag"></i>
+                                        </div>
+                                        <span>Keranjang Belanja</span>
+                                    </button>
+                                </li>
+                                <li class="active line">
+                                    <button>
+                                        <div class="box">
+                                            <i class="icon-archive"></i>
+                                        </div>
+                                        <span>Pilih Pengiriman</span>
+                                    </button>
+                                </li>
+                                <li class="active line">
+                                    <button>
+                                        <div class="box">
+                                            <i class="icon-cash"></i>
+                                        </div>
+                                        <span>Pembayaran</span>
+                                    </button>
+                                </li>
+                                <li class="active">
+                                    <button>
+                                        <div class="box">
+                                            <i class="icon-clipboard-check"></i>
+                                        </div>
+                                        <span>Konfirmasi Pembayaran</span>
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cart checkout mt-5">
+                <div class="container-fluid">
+                    <div class="cart-filled">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="nav-cart">
+                                    <a href="02.product-list.html" class="mobile-only">
+                                        <i class="icon-arrow-left"></i>
+                                    </a>
+                                    <h2 class="title mb-3">Konfirmasi Pembayaran</h2>
+                                </div>
+                                <div class="payment-confirmation my-5">
+                                    <div class="d-flex justify-content-center">
+                                        <div class="col-md-9">
+                                            <h6>QR Code</h6>
+                                            <div class="alert-orange mt-3">
+                                                <p>
+                                                    <i class="icon-information-circle"></i>
+                                                    Scan QR code yang tertera, untuk menyelesaikan pembayaran
+                                                </p>
+                                            </div>
+                                            <div class="col-6 m-auto mt-4">
+
+                                                <div class="card confirmation-qr">
+                                                    <div class="d-flex justify-content-between p-3 pb-0">
+                                                        <div class="form-group">
+                                                            <label class="grey">Total Pesanan</label>
+                                                            <p class="mb-0">
+                                                                <b class="green">RP. 210.000</b>
+                                                            </p>
+                                                        </div>
+                                                        <a href="" class="btn btn-link-orange">Detail Pesanan</a>
+                                                    </div>
+                                                    <hr class="m-0"/>
+                                                    <p class="text-center">
+                                                        <img src="/theme_alkeba/static/src/images/qrcode.png"
+                                                             class=" my-5"/>
+                                                    </p>
+
+                                                </div>
+                                                <div class="col-6 m-auto text-center mt-5">
+                                                    <a href="" class="btn btn-primary">Kembali ke halaman awal</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </t>
+    </template>
+
+    <template id="alkeba_cart_confirmed_payment_retail" name="Alkeba Confirmed Payment - Retail">
+        <t t-call="theme_alkeba.alkeba_bradcrumbs_empty_bottom">
+
+            <div class="wizard-checkout">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <ul class="d-flex align-items-baseline justify-content-center list-unstyled cart-step-wizard ">
+                                <li class="active line">
+                                    <button>
+                                        <div class="box">
+                                            <i class="icon-shopping-bag"></i>
+                                        </div>
+                                        <span>Keranjang Belanja</span>
+                                    </button>
+                                </li>
+                                <li class="active line">
+                                    <button>
+                                        <div class="box">
+                                            <i class="icon-archive"></i>
+                                        </div>
+                                        <span>Pilih Pengiriman</span>
+                                    </button>
+                                </li>
+                                <li class="active line">
+                                    <button>
+                                        <div class="box">
+                                            <i class="icon-cash"></i>
+                                        </div>
+                                        <span>Pembayaran</span>
+                                    </button>
+                                </li>
+                                <li class="active">
+                                    <button>
+                                        <div class="box">
+                                            <i class="icon-clipboard-check"></i>
+                                        </div>
+                                        <span>Konfirmasi Pembayaran</span>
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cart checkout mt-5">
+                <div class="container-fluid">
+                    <div class="cart-filled">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="nav-cart">
+                                    <a href="02.product-list.html" class="mobile-only">
+                                        <i class="icon-arrow-left"></i>
+                                    </a>
+                                    <h2 class="title mb-3">Konfirmasi Pembayaran</h2>
+                                </div>
+                                <div class="payment-confirmation my-5">
+                                    <div class="d-flex justify-content-center">
+                                        <div class="col-md-9">
+                                            <h6>Retail Outlets / Over-the-Counter​</h6>
+                                            <div class="d-flex justify-content-between alert-orange mt-3">
+                                                <p>
+                                                    <i class="icon-information-circle"></i>
+                                                    Mohon selesaikan pembayaran Anda sebelum tanggal 02 Juli 2022
+                                                </p>
+                                                <div class="d-flex payment-time">
+                                                    <img src="/theme_alkeba/static/src/images/ic-watch-red.svg"/>
+                                                    <div id="countdown-box"></div>
+                                                </div>
+                                            </div>
+                                            <div class="card">
+                                                <div class="confirmation-va text-center pb-4 pt-4">
+                                                    <span href="" class="badge badge-yellow badge-lg mb-3">Menunggu
+                                                        Pembayaran
+                                                    </span>
+                                                    <br/>
+                                                    <label class="grey">Total Pesanan</label>
+                                                    <p>
+                                                        <b class="green">RP. 210.000</b>
+                                                    </p>
+                                                    <hr/>
+                                                    <label class="grey">Kode Pembayaran Alfamart</label>
+                                                    <p>
+                                                        <b class="green">120182938149193</b>
+                                                        <a href="" class="orange">
+                                                            <b>Salin</b>
+                                                        </a>
+                                                    </p>
+                                                    <hr/>
+                                                    <p class="red col-8 m-auto">*Pembayaran akan otomatis dibatalkan
+                                                        apabila Anda tidak melakukan pembayaran lebih dari satu (1) hari
+                                                        setelah kode pembayaran diberikan
+                                                    </p>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-6 m-auto text-center mb-5 mt-4">
+                                                <p>Transaksi Anda baru dilanjutkan setelah pembayaran terverifikasi.</p>
+                                                <a href="" class="btn btn-outline-orange me-3">Cek Status Pesanan</a>
+                                                <a href="" class="btn btn-primary">Kembali ke halaman awal</a>
+                                            </div>
+                                            <h6 class="mb-3">Petunjuk Pembayaran “​Alfamarts”</h6>
+                                            <div class="accordion" id="accordionHow">
+                                                <div class="accordion-item">
+                                                    <h2 class="accordion-header" id="headingOne">
+                                                        <button class="accordion-button" type="button"
+                                                                data-bs-toggle="collapse" data-bs-target="#collapseOne"
+                                                                aria-expanded="true" aria-controls="collapseOne">
+                                                            Pembayaran Menggunakan Alfamarts
+                                                        </button>
+                                                    </h2>
+                                                    <div id="collapseOne" class="accordion-collapse collapse show"
+                                                         aria-labelledby="headingOne"
+                                                         data-bs-parent="#accordionExample">
+                                                        <div class="accordion-body">
+
+                                                            <ol>
+                                                                <li>
+                                                                    Sampaikan kepada kasir alfamart untuk melakukan
+                                                                    pembayaran ke merchant alkeba
+                                                                </li>
+                                                                <li>Tunjukan kode pembayaran ke kasir dan lakukan
+                                                                    pembayaran sesuai dengan nominal tertera di detail
+                                                                    informasi
+                                                                </li>
+                                                                <li>Setelah transaksi berhasil kamu akan mendapatkan
+                                                                    bukti pembayaran. Mohon simpan bukti pembayaran
+                                                                    sebagai jaminan apabila diperlukan verifikasi lebih
+                                                                    lanjut
+                                                                </li>
+                                                                <li>Pesanan kamu akan terverifikasi secara otomatis
+                                                                    dalam detail pesanan di website alkeba setelah
+                                                                    pembayaran berhasil
+                                                                </li>
+                                                            </ol>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </t>
+    </template>
+
+    <template id="alkeba_cart_confirmed_payment_va" name="Alkeba Confirmed Payment - Virtual Account">
+        <t t-call="theme_alkeba.alkeba_bradcrumbs_empty_bottom">
+
+            <div class="wizard-checkout">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <ul class="d-flex align-items-baseline justify-content-center list-unstyled cart-step-wizard ">
+                                <li class="active line">
+                                    <button>
+                                        <div class="box">
+                                            <i class="icon-shopping-bag"></i>
+                                        </div>
+                                        <span>Keranjang Belanja</span>
+                                    </button>
+                                </li>
+                                <li class="active line">
+                                    <button>
+                                        <div class="box">
+                                            <i class="icon-archive"></i>
+                                        </div>
+                                        <span>Pilih Pengiriman</span>
+                                    </button>
+                                </li>
+                                <li class="active line">
+                                    <button>
+                                        <div class="box">
+                                            <i class="icon-cash"></i>
+                                        </div>
+                                        <span>Pembayaran</span>
+                                    </button>
+                                </li>
+                                <li class="active">
+                                    <button>
+                                        <div class="box">
+                                            <i class="icon-clipboard-check"></i>
+                                        </div>
+                                        <span>Konfirmasi Pembayaran</span>
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cart checkout mt-5">
+                <div class="container-fluid">
+                    <div class="cart-filled">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="nav-cart">
+                                    <a href="#" class="mobile-only">
+                                        <i class="icon-arrow-left"></i>
+                                    </a>
+                                    <h2 class="title mb-3">Konfirmasi Pembayaran</h2>
+                                </div>
+                                <div class="payment-confirmation my-5">
+                                    <div class="d-flex justify-content-center">
+                                        <div class="col-md-9">
+                                            <h6>Virtual Account</h6>
+                                            <div class="d-flex justify-content-between alert-orange mt-3">
+                                                <p>
+                                                    <i class="icon-information-circle"></i>
+                                                    Mohon selesaikan pembayaran Anda sebelum tanggal
+                                                    <t t-esc="datetime.datetime.strptime(expired_date, '%Y-%m-%dT%H:%M:%S.%fZ').strftime('%d/%m/%Y %H:%M')"/>
+                                                </p>
+                                                <div class="d-flex payment-time">
+                                                    <img src="/theme_alkeba/static/src/images/ic-watch-red.svg"/>
+                                                    <div id="countdown-box"></div>
+                                                </div>
+                                            </div>
+                                            <div class="card">
+                                                <div class="confirmation-va text-center pb-4 pt-4">
+                                                    <span href="" class="badge badge-yellow badge-lg mb-3">
+                                                        Menunggu Pembayaran
+                                                    </span>
+                                                    <br/>
+                                                    <label class="grey">Total Pesanan</label>
+                                                    <p>
+                                                        <b class="green">Rp <t t-esc="'{0:,.2f}'.format(int(grand_total))"/></b>
+                                                    </p>
+                                                    <hr/>
+                                                    <label class="grey">Nomor Rekening Virtual Account <t t-esc="payment_option"/></label>
+                                                    <p class="form-control-static" id="cartVANumber">
+                                                        <b class="green"><t t-esc="account_number"/></b>
+                                                        <button class="btn btn-primary btn-sm" id="copyVAButton">
+                                                            <i class="fa fa-copy"></i>
+                                                        </button>
+                                                    </p>
+                                                    <hr/>
+                                                    <label class="grey">Nomor Invoice</label>
+                                                    <p>
+                                                        <b class="green"><t t-esc="invoice_number"/></b>
+                                                    </p>
+                                                    <hr/>
+                                                    <p class="red col-8 m-auto">*Pembayaran akan otomatis dibatalkan
+                                                        apabila Anda tidak melakukan pembayaran lebih dari satu (1) hari
+                                                        setelah kode pembayaran diberikan
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div class="col-6 m-auto text-center mb-5 mt-4">
+                                                <p>Transaksi Anda baru dilanjutkan setelah pembayaran terverifikasi.</p>
+                                                <a href="/my-orders" class="btn btn-outline-orange me-3">Cek Status Pesanan</a>
+                                                <a href="/" class="btn btn-primary">Kembali ke halaman awal</a>
+                                            </div>
+
+<!--                                            <h6 class="mb-3">Petunjuk Pembayaran “Rekening Virtual BCA”</h6>-->
+<!--                                            <div class="accordion" id="accordionHow">-->
+<!--                                                <div class="accordion-item">-->
+<!--                                                    <h2 class="accordion-header" id="headingOne">-->
+<!--                                                        <button class="accordion-button" type="button"-->
+<!--                                                                data-bs-toggle="collapse" data-bs-target="#collapseOne"-->
+<!--                                                                aria-expanded="true" aria-controls="collapseOne">-->
+<!--                                                            Pembayaran Menggunakan M-BCA-->
+<!--                                                        </button>-->
+<!--                                                    </h2>-->
+<!--                                                    <div id="collapseOne" class="accordion-collapse collapse show"-->
+<!--                                                         aria-labelledby="headingOne"-->
+<!--                                                         data-bs-parent="#accordionExample">-->
+<!--                                                        <div class="accordion-body">-->
+
+<!--                                                            <ol>-->
+<!--                                                                <li>-->
+<!--                                                                    Login ke Aplikasi M-BCA , masukkan PIN M-BCA .-->
+<!--                                                                </li>-->
+<!--                                                                <li>Pilih “m-Transfer” lalu pilih “BCA Virtual Account”-->
+<!--                                                                    .-->
+<!--                                                                </li>-->
+<!--                                                                <li>Pilih “Masukkan No Virtual Account” , lalu masukkan-->
+<!--                                                                    No Virtual Account BCA Anda 735101712000001 .-->
+<!--                                                                </li>-->
+<!--                                                                <li>Tekan "OK" &amp; "Kirim" .</li>-->
+<!--                                                                <li>Pastikan No. Virtual Account BCA dan Jumlah Total-->
+<!--                                                                    sudah benar. Tekan “OK” lalu masukkan PIN M-BCA Anda-->
+<!--                                                                    .-->
+<!--                                                                </li>-->
+<!--                                                                <li>Cek kembali data transaksi Anda lalu tekan “OK” .-->
+<!--                                                                </li>-->
+<!--                                                            </ol>-->
+<!--                                                        </div>-->
+<!--                                                    </div>-->
+<!--                                                </div>-->
+<!--                                                <div class="accordion-item">-->
+<!--                                                    <h2 class="accordion-header" id="headingTwo">-->
+<!--                                                        <button class="accordion-button collapsed" type="button"-->
+<!--                                                                data-bs-toggle="collapse" data-bs-target="#collapseTwo"-->
+<!--                                                                aria-expanded="false" aria-controls="collapseTwo">-->
+<!--                                                            Pembayaran Menggunakan Klik BCA-->
+<!--                                                        </button>-->
+<!--                                                    </h2>-->
+<!--                                                    <div id="collapseTwo" class="accordion-collapse collapse"-->
+<!--                                                         aria-labelledby="headingTwo"-->
+<!--                                                         data-bs-parent="#accordionExample">-->
+<!--                                                        <div class="accordion-body">-->
+
+<!--                                                            <ol>-->
+<!--                                                                <li>-->
+<!--                                                                    Login ke Aplikasi M-BCA , masukkan PIN M-BCA .-->
+<!--                                                                </li>-->
+<!--                                                                <li>Pilih “m-Transfer” lalu pilih “BCA Virtual Account”-->
+<!--                                                                    .-->
+<!--                                                                </li>-->
+<!--                                                                <li>Pilih “Masukkan No Virtual Account” , lalu masukkan-->
+<!--                                                                    No Virtual Account BCA Anda 735101712000001 .-->
+<!--                                                                </li>-->
+<!--                                                                <li>Tekan "OK" &amp; "Kirim" .</li>-->
+<!--                                                                <li>Pastikan No. Virtual Account BCA dan Jumlah Total-->
+<!--                                                                    sudah benar. Tekan “OK” lalu masukkan PIN M-BCA Anda-->
+<!--                                                                    .-->
+<!--                                                                </li>-->
+<!--                                                                <li>Cek kembali data transaksi Anda lalu tekan “OK” .-->
+<!--                                                                </li>-->
+<!--                                                            </ol>-->
+<!--                                                        </div>-->
+<!--                                                    </div>-->
+<!--                                                </div>-->
+<!--                                                <div class="accordion-item">-->
+<!--                                                    <h2 class="accordion-header" id="headingThree">-->
+<!--                                                        <button class="accordion-button collapsed" type="button"-->
+<!--                                                                data-bs-toggle="collapse"-->
+<!--                                                                data-bs-target="#collapseThree" aria-expanded="false"-->
+<!--                                                                aria-controls="collapseThree">-->
+<!--                                                            Pembayaran Menggunakan ATM BCA-->
+<!--                                                        </button>-->
+<!--                                                    </h2>-->
+<!--                                                    <div id="collapseThree" class="accordion-collapse collapse"-->
+<!--                                                         aria-labelledby="headingThree"-->
+<!--                                                         data-bs-parent="#accordionExample">-->
+<!--                                                        <div class="accordion-body">-->
+
+<!--                                                            <ol>-->
+<!--                                                                <li>-->
+<!--                                                                    Login ke Aplikasi M-BCA , masukkan PIN M-BCA .-->
+<!--                                                                </li>-->
+<!--                                                                <li>Pilih “m-Transfer” lalu pilih “BCA Virtual Account”-->
+<!--                                                                    .-->
+<!--                                                                </li>-->
+<!--                                                                <li>Pilih “Masukkan No Virtual Account” , lalu masukkan-->
+<!--                                                                    No Virtual Account BCA Anda 735101712000001 .-->
+<!--                                                                </li>-->
+<!--                                                                <li>Tekan "OK" &amp; "Kirim" .</li>-->
+<!--                                                                <li>Pastikan No. Virtual Account BCA dan Jumlah Total-->
+<!--                                                                    sudah benar. Tekan “OK” lalu masukkan PIN M-BCA Anda-->
+<!--                                                                    .-->
+<!--                                                                </li>-->
+<!--                                                                <li>Cek kembali data transaksi Anda lalu tekan “OK” .-->
+<!--                                                                </li>-->
+<!--                                                            </ol>-->
+<!--                                                        </div>-->
+<!--                                                    </div>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </t>
+    </template>
+
+</odoo>

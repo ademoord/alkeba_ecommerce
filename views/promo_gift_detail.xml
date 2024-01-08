@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<template id="alkeba_detail_promo_gift" name="Alkeba Promo List">
+		<t t-call="theme_alkeba.alkeba_bradcrumbs_empty_bottom">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-md-8 m-auto">
+						<div class="card-promo-box card-promo-detail">
+							<div class="card-promo-head">
+                                <img t-attf-src="data:image/*;base64,{{promo_detail.image_promo}}" class="img-fluid"/>
+							</div>
+							<div class="card-promo-info">
+								<div class="d-flex justify-content-between">
+									<p>
+										<small class="grey">Periode Promo</small><br />
+										<b>
+											<!-- 1 - 99 April 2022 -->
+											<t t-esc="promo_detail.start_date.strftime('%d %b %Y')"/> - <t t-esc="promo_detail.end_date.strftime('%d %b %Y')"/>
+										</b>
+									</p>
+									<p>
+										<small class="grey">Minimal Belanja</small><br />
+										<b>Rp. <t t-esc="'{0:,.2f}'.format(int(promo_detail.min_order))"/></b>
+									</p>
+									<div class="d-flex justify-content-between align-items-baseline">
+										<p >
+										<small class="grey">Promo Gift</small><br />
+										<!-- <b class="orange" id="p1">B213DHA09</b> -->
+										</p>
+										<!-- <a href="javascript:void(0)" class="orange" onclick="copyToClipboard('#p1')"><b>Salin Kode</b></a> -->
+									</div>
+									<a href="/products" class="btn btn-outline">Belanja Sekarang</a>
+								</div>
+							</div>
+							<div class="card-promo-body">
+								<h2 class="mb-4">
+									<t t-esc="promo_detail.name"/>
+								</h2>
+								<h6 class="my-3">Deskripsi</h6>
+								<p class="grey">
+									<t t-esc="promo_detail.description"/>
+								</p>
+
+								<h6 class="my-3">Syarat dan Ketentuan</h6>
+								<t t-esc="promo_detail.terms_condition_promo"/>
+								<!-- <ul class="grey">
+									<li>
+										<p>
+											Promo berlaku pada tanggal 
+											<t t-esc="promo_detail.start_date"/> hingga <t t-esc="promo_detail.end_date"/>
+										</p>
+									</li>
+									<li>
+										<p>
+										Cashback berlaku dengan minimum pembelian Rp65.000.
+										</p>
+									</li>
+									<li>
+										<p>
+										Cashback akan diterima maksimal 1 x 24 jam setelah transaksi berhasil serta sesuai dengan Syarat dan Ketentuan yang berlaku.
+										</p>
+									</li>
+									<li>
+										<p>
+										Jika transaksi dibatalkan atau masuk ke Pusat Resolusi, dana yang kembali ke pembeli akan sesuai dengan nominal pembayaran yang dilakukan (tidak termasuk subsidi ongkir).
+										</p>
+									</li>
+									<li>
+										<p>
+										Syarat dan Ketentuan promo ini merupakan bagian yang tidak terpisahkan dan satu kesatuan dengan Syarat dan Ketentuan Tokopedia, serta dapat berubah sewaktu-waktu untuk disesuaikan dengan kebijakan sehubungan dengan promo ini.
+										</p>
+									</li>
+									<li>
+										<p>
+											Dengan mengikuti promo ini, pengguna dianggap mengerti dan menyetujui semua syarat And ketentuan yang berlaku.
+										</p>
+									</li>
+								</ul> -->
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<h6 class="text-center my-5">Promo Lainnya</h6>
+					</div>
+					<div class="slider-promo">
+						<t t-foreach="other_promo" t-as="op">
+							<div class="col-md-4">
+								<div class="card-promo-box"/>
+								<div class="card-promo-head">
+									<a t-attf-href="/detail_promo_gift/{{ op.id }}">
+										<img src="assets/img/img-promo-4.png" />
+									</a>
+								</div>
+								<div class="card-promo-body">
+									<h6>
+										<a t-attf-href="/detail_promo_gift/{{ op.id }}">
+											<t t-esc="op.promo_gift_id.name"/>
+										</a>
+									</h6>
+									<p class="grey">
+										<small class="grey">Periode Promo</small><br />
+										<b>
+											<t t-esc="op.promo_gift_id.start_date"/> - <t t-esc="op.promo_gift_id.end_date"/>
+										</b>
+									</p>
+									<!-- <div class="d-flex justify-content-between">
+										<p >
+											<small class="grey">Kode Voucher</small><br />
+											<b class="orange" id="p2">B213DHA09</b>
+											</p>
+											<a href="javascript:void(0)" class="btn btn-outline" onclick="copyToClipboard('#p2')"><b>Salin Kode</b></a>
+									</div> -->
+								</div>
+							</div>
+						</t>
+					</div>
+					<!-- <div class="col-md-4">
+						<div class="card-promo-box">
+							<div class="card-promo-head">
+								<img src="assets/img/img-promo-5.png" />
+							</div>
+							<div class="card-promo-body">
+								<h6>Pormo berkah ramadahan  dengan  minimal order Rp. 150.000</h6>
+								<p class="grey">
+									<small class="grey">Periode Promo</small><br />
+									<b>1 - 30 April 2022</b>
+								</p>
+								<div class="d-flex justify-content-between">
+									<p >
+										<small class="grey">Kode Voucher</small><br />
+										<b class="orange" id="p3">B213DHA09</b>
+										</p>
+										<a href="javascript:void(0)" class="btn btn-outline" onclick="copyToClipboard('#p3')"><b>Salin Kode</b></a>
+								</div>
+							</div>
+						</div>
+					</div> -->
+				</div>
+			</div>
+		</t>
+	</template>
+</odoo>

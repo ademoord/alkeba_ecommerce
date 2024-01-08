@@ -1,0 +1,505 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    
+    <template id="alkeba_address_settings_customer" name="Alkeba Address Settings Customer">
+        <t t-call="theme_alkeba.alkeba_user_page_layout">
+
+           <div class="modal fade" id="AlertAddresNotFill" tabindex="-1" aria-labelledby="exampleModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-body text-center p-4">
+                            <a href="" class="closeDialog">
+                                <img src="/theme_alkeba/static/src/images/icon/remove.png" style="width:30px"/>
+                            </a>
+                            <br/>
+                            <br/>
+                            <p>
+                                <!-- <i class="icon-heart"></i> -->
+                                <strong>
+                                    Alamat Tidak Tersimpan<br/>
+                                    Pastikan Mengisi Semua Kolom
+                                </strong>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-9">
+                <h6>Daftar Alamat</h6>
+                <div class="buyer-info setup-address">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <table class="table">
+                                    <thead>
+                                        <tr style="vertical-align: middle;">
+                                            <th width="20%">Nama</th>
+                                            <th width="50%">Alamat</th>
+                                            <th width="30%" style="text-align: right;">
+                                                <a href="javascript:void(0)" data-bs-toggle="modal"
+                                                   data-bs-target="#TambahAlamatPengirimanModal"
+                                                   class="btn btn-primary">
+                                                    <i class="icon-plus"></i>
+                                                    Tambah Alamat
+                                                </a>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <t t-if="addresses">
+                                        <tbody>
+                                            <t t-foreach="addresses" t-as="address">
+                                                <tr>
+                                                    <td>
+                                                        <b id="nameAddressProfile">
+                                                            <t t-esc="address.name"/>
+                                                        </b>
+                                                    </td>
+                                                    <td>
+                                                        <div class="address-info">
+                                                            <p>
+                                                                <i class="icon-location-marker"></i>
+                                                                <b>
+                                                                    <t t-esc="address.parent_id.name"/>
+                                                                </b>
+                                                                <br/>
+                                                                <t t-esc="address.street"/>,
+                                                                Desa/Kel. <t t-esc="address.village_ids.name"/>, Kec. <t t-esc="address.districts_ids.name"/>,
+                                                                Kab./Kota <t t-esc="address.city_ids.name"/>, <t t-esc="address.state_ids.name"/>,
+                                                                <t t-esc="address.zip"/>
+                                                            </p>
+                                                            <!-- DINYALAKAN SAAT BISA MENGGUNAKAN INSTANT KURIR -->
+                                                            <!-- <div class="update-address">
+                                                                <p class="grey">
+                                                                    <img
+                                                                        src="/theme_alkeba/static/src/images/ic-location-2.svg"/>
+                                                                    Koordinat telah ditambahkan
+                                                                    <a href="#" data-bs-toggle="modal"
+                                                                       data-bs-target="#UbahAlamatKoordinatModal"
+                                                                       class="btn btn-link-orange h-auto">Ubah
+                                                                    </a>
+                                                                </p>
+                                                            </div> -->
+                                                        </div>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <t t-if="address.is_primary_address">
+                                                            <div class="text-center">
+                                                                <p class="green">
+                                                                    <i class="icon-check-circle"></i>
+                                                                    Alamat Utama
+                                                                </p>
+                                                            </div>
+                                                        </t>
+                                                        <t t-else="">
+                                                            <div class="text-center">
+                                                                <a t-attf-href="/set-primary-address/{{ address.id }}"
+                                                                   class="btn btn-outline-orange btn-small ">
+                                                                    Set Alamat Utama
+                                                                </a>
+                                                            </div>
+                                                        </t>
+                                                        <div class="action mt-4">
+                                                            <a href="#" data-bs-toggle="modal"
+                                                            t-attf-data-bs-target="#UbahAlamatProfileModal{{ address.id }}">
+                                                                <i class="icon-pencil-alt"></i>
+                                                            </a>
+                                                            <!-- <a href="javascript:void(0)" data-bs-toggle="modal"
+                                                               t-attf-data-bs-target="#HapusAlamatModal{{ address.id }}">
+                                                                <i class="icon-trash"></i>
+                                                            </a> -->
+                                                            <a t-attf-href="/set-delete-address/{{ address.id }}">
+                                                                <i class="icon-trash"></i>
+                                                            </a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </t>
+                                        </tbody>
+                                    </t>
+                                    <t t-else="">
+                                        <tbody>
+                                            <tr>
+                                                <td colspan="3">
+                                                    <div class="col-7 m-auto blankslate text-center">
+                                                        <img
+                                                            src="/theme_alkeba/static/src/images/illust-hapus-alamat-blankslate.png"/>
+                                                        <h6>Belum Ada Alamat Yang Ditambahkan</h6>
+                                                        <p>Kami tidak dapat menemukan Alamat Anda,
+                                                            silahkan tambahkan alamat Anda
+                                                        </p>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </t>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal tambah alamat pengiriman-->
+            <div class="modal fade" id="TambahAlamatPengirimanModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">Tambah Alamat Pengiriman
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                <i class="icon-x"></i>
+                            </button>
+                        </div>
+                        <div>
+                            <center>
+                                <img src="/theme_alkeba/static/src/images/icon/attention.png" style="width:15px; padding-top:10px;"/>
+                                <br/>
+                                <p>
+                                    <b style="color:#000000; font-size: 10px;">
+                                        Sementara Hanya Untuk Area Kota Bandung
+                                    </b>
+                                </p>
+                            </center>
+                        </div>
+                        <!-- <form action="/add-address" method="POST"> -->
+                        <form>
+                            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <label class="grey">Label Alamat</label>
+                                    <input id="labelAlamat" type="text" name="label" class="form-control"/>
+                                </div>
+                                <div class="form-group">
+                                    <label class="grey">Alamat</label>
+                                    <input id="detailAlamat" type="text" name="street" class="form-control" value=""/>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <div class="form-group col-6 pe-3">
+                                        <label class="grey">Pilih Provinsi</label>
+                                        <select id="province" class="select2-container select-styled province" name="state">
+                                            <option value="">
+                                                <!-- Pilih Provinsi -->
+                                            </option>
+                                            <t t-foreach="address_values['states']" t-as="state">
+                                                <option t-attf-value="{{ state.id }}">
+                                                    <t t-esc="state.name"/>
+                                                </option>
+                                            </t>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-6">
+                                        <label class="grey">Pilih Kota/Kab</label>
+                                        <select id="citylist" class="select-styled citylist" name="city">
+                                            <option value="">
+                                                <!-- Pilih Kota/Kabupaten -->
+                                            </option>
+                                            <!-- <option value="0">Pilih Kota/Kabupaten</option> -->
+                                            <!-- <t t-foreach="address_values['cities']" t-as="city">
+                                                <option t-attf-value="{{ city.id }}">
+                                                    <t t-esc="city.name"/>
+                                                </option>
+                                            </t> -->
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <div class="form-group col-6">
+                                        <label class="grey">Pilih Kecamatan</label>
+                                        <select id="districtlist" class="select-styled districtlist" name="district">
+                                            <option value="">
+                                                <!-- Pilih Kecamatan -->
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group  col-6 pe-3">
+                                        <label class="grey">Pilih Kelurahan</label>
+                                        <select id="villagelist" class="select-styled villagelist" name="village">
+                                            <option value="">
+                                                <!-- Pilih Kelurahan -->
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="grey">Kode Pos</label>
+                                    <input id="postcode" type="text" name="zip" class="form-control" value=""/>
+                                </div>
+                            </div>
+                            <div class="modal-footer d-flex justify-content-center">
+                                <a href="#" class="btn btn-outline" data-bs-dismiss="modal">Batal</a>
+                                <a href="javascript:void(0)" id="submitAddress" class="btn btn-outline" data-bs-dismiss="modal" data-value="isAddAddress">Simpan</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal ubah alamat pengiriman DASHBOARD PROFILE USERS-->
+            <t t-foreach="addresses" t-as="address">
+                <div class="modal fade" t-attf-id="UbahAlamatProfileModal{{ address.id }}" tabindex="-1"
+                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">Ubah Alamat Pengiriman
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                    <i class="icon-x"></i>
+                                </button>
+                            </div>
+                            <form t-attf-action="/update-address-in-cart/{{ address.id }}" method="POST">
+                                <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                                <input type="hidden" id="address_id" name="address_id" t-attf-value="{{ address.id }}"/>
+                                <div class="modal-body">
+
+                                    <!--                                    <div class="form-group">-->
+                                    <!--                                        <label class="grey">Nama Penerima</label>-->
+                                    <!--                                        <input type="text" class="form-control" value="Januari Satya Kencana"/>-->
+                                    <!--                                    </div>-->
+                                    <div class="form-group">
+                                        <label class="grey">Label Alamat</label>
+                                        <input id="labelAlamat" type="text" name="label" class="form-control labelAlamat" t-attf-value="{{ address.name }}"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="grey">Alamat</label>
+                                        <input id="detailAlamat" type="text" name="street" class="form-control" t-attf-value="{{ address.street }}"/>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <div class="form-group col-6 pe-3">
+                                            <label class="grey">Provinsi</label>
+                                            <!-- <select class="select-styled" name="state"> -->
+                                            <select id="province" class="select-styled province" name="state">
+                                                <option value="0">Pilih Provinsi</option>
+                                                <t t-foreach="address_values['states']" t-as="state">
+                                                    <t t-if="state.id == address.state_ids.id">
+                                                        <option t-attf-value="{{ state.id }}" selected="selected">
+                                                            <t t-esc="state.name"/>
+                                                        </option>
+                                                    </t>
+                                                    <t t-else="">
+                                                        <option t-attf-value="{{ state.id }}">
+                                                            <t t-esc="state.name"/>
+                                                        </option>
+                                                    </t>
+                                                </t>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-6">
+                                            <label class="grey">Kota/Kabupaten</label>
+                                            <!-- <select class="select-styled" name="city"> -->
+                                            <select id="citylist" class="select-styled citylist" name="city">
+                                                <option value="">Pilih Kota/Kabupaten</option>
+                                                <!-- <t t-foreach="address_values['cities']" t-as="city">
+                                                    <t t-if="city.id == address.city_ids.id">
+                                                        <option t-attf-value="{{ city.id }}" selected="selected">
+                                                            <t t-esc="city.name"/>
+                                                        </option>
+                                                    </t>
+                                                    <t t-else="">
+                                                        <option t-attf-value="{{ city.id }}">
+                                                            <t t-esc="city.name"/>
+                                                        </option>
+                                                    </t>
+                                                </t> -->
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <div class="form-group  col-6 pe-3">
+                                            <label class="grey">Kelurahan</label>
+                                            <!-- <select class="select-styled" name="village"> -->
+                                            <select id="villagelist" class="select-styled" name="village">
+                                                <option value="0">Pilih Kelurahan</option>
+                                                <!-- <t t-foreach="address_values['villages']" t-as="village">
+                                                    <t t-if="village.id == address.village_ids.id">
+                                                        <option t-attf-value="{{ village.id }}" selected="selected">
+                                                            <t t-esc="village.name"/>
+                                                        </option>
+                                                    </t>
+                                                    <t t-else="">
+                                                        <option t-attf-value="{{ village.id }}">
+                                                            <t t-esc="village.name"/>
+                                                        </option>
+                                                    </t>
+                                                </t> -->
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-6">
+                                            <label class="grey ">Kecamatan</label>
+                                            <!-- <select class="select-styled" name="district"> -->
+                                            <select id="districtlist" class="select-styled" name="district">
+                                                <option value="">Pilih Kecamatan</option>
+                                                <!-- <t t-foreach="address_values['districts']" t-as="district">
+                                                    <t t-if="district.id == address.districts_ids.id">
+                                                        <option t-attf-value="{{ district.id }}" selected="selected">
+                                                            <t t-esc="district.name"/>
+                                                        </option>
+                                                    </t>
+                                                    <t t-else="">
+                                                        <option t-attf-value="{{ district.id }}">
+                                                            <t t-esc="district.name"/>
+                                                        </option>
+                                                    </t>
+                                                </t> -->
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="grey">Kode Pos</label>
+                                        <input id="postcode" type="text" name="zip" class="form-control" t-attf-value="{{ address.zip }}"/>
+                                        <!-- <input type="text" name="zip" class="form-control" t-attf-value="{{ address.zip }}"/> -->
+                                    </div>
+
+                                </div>
+                                <div class="modal-footer d-flex justify-content-center">
+                                    <a href="#" class="btn btn-outline" data-bs-dismiss="modal">Batal</a>
+                                    <!-- <input type="submit" class="btn btn-secondary" value="Simpan"/> -->
+                                    <a href="javascript:void(0)" id="submitAddress" class="btn btn-outline" data-bs-dismiss="modal" data-value="isupdatecart">Simpan</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </t>
+
+            <!-- Modal hapus alamat-->
+            <t t-foreach="addresses" t-as="address">
+                <div class="modal fade" t-attf-id="HapusAlamatModal{{ address.id }}" tabindex="-1"
+                     aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">Hapus Alamat
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                    <i class="icon-x"></i>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="col-7 m-auto text-center my-4">
+                                    <img src="/theme_alkeba/static/src/images/illust-hapus-alamat.png" class="mb-4"/>
+                                    <h6 class="mb-3">Hapus Alamat Pengiriman</h6>
+                                    <p>Apakah Anda yakin untuk Alamat pengiriman ini?</p>
+                                </div>
+                            </div>
+                            <div class="modal-footer d-flex justify-content-center">
+                                <a href="javascript:void(0)" data-bs-dismiss="modal" class="btn btn-outline">Batal</a>
+                                <a t-attf-href="/delete-address/{{ address.id }}" class="btn btn-secondary">Ya, saya
+                                    yakin
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </t>
+
+            <!-- Modal alamat pengiriman-->
+            <div class="modal fade" id="UbahAlamatKoordinatModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog" style="max-width: 580px">
+                    <div class="modal-content">
+                        <div class="modal-header">Koordinat Peta Pengiriman
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                <i class="icon-x"></i>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p class="grey">Pastikan lokasi yang Anda pilih tidak berbeda jauh dengan Alamat yang diisi
+                                dikolom Alamat
+                            </p>
+                            <div id="map" style="width:100%;height:300px;"></div>
+                        </div>
+                        <div class="modal-footer d-flex justify-content-center">
+                            <a href="#" class="btn btn-secondary">Simpan</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal alamat penagihan-->
+            <div class="modal fade" id="UbahAlamatPenagihanModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">Ubah Alamat Penagihan
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                <i class="icon-x"></i>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <div class="checkbox mb-3">
+                                    <input type="checkbox" id="checkAll"/>
+                                    <label for="checkAll">Gunakan Alamat Pengiriman sebagai Alamat Penagihan</label>
+                                </div>
+                                <div class="form-group">
+                                    <label class="grey">Nama Penerima</label>
+                                    <input type="text" class="form-control" value="Januari Satya Kencana"/>
+                                </div>
+                                <div class="form-group">
+                                    <label class="grey">Label Alamat</label>
+                                    <input type="text" class="form-control" value="Rumah"/>
+                                </div>
+                                <div class="form-group">
+                                    <label class="grey">Alamat</label>
+                                    <input type="text" class="form-control"
+                                           value="Jl. Masjid Zamrud II A-2 No.26 RT 005/012"/>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <div class="form-group col-6 pe-3">
+                                        <label class="grey">Provinsi</label>
+                                        <select class="select-styled">
+                                            <option>Pilih Provinsi</option>
+                                            <option value="CA">California</option>
+                                            <option value="NV">Nevada</option>
+                                            <option value="OR">Oregon</option>
+                                            <option value="WA">Washington</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-6">
+                                        <label class="grey">Kota/Kabupaten</label>
+                                        <select class="select-styled">
+                                            <option>Pilih Kota/Kabupaten</option>
+                                            <option value="CA">California</option>
+                                            <option value="NV">Nevada</option>
+                                            <option value="OR">Oregon</option>
+                                            <option value="WA">Washington</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <div class="form-group  col-6 pe-3">
+                                        <label class="grey">Kelurahan</label>
+                                        <select class="select-styled">
+                                            <option>Pilih Kelurahan</option>
+                                            <option value="CA">California</option>
+                                            <option value="NV">Nevada</option>
+                                            <option value="OR">Oregon</option>
+                                            <option value="WA">Washington</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-6">
+                                        <label class="grey ">Kecamatan</label>
+                                        <select class="select-styled">
+                                            <option>Pilih Kecamatan</option>
+                                            <option value="CA">California</option>
+                                            <option value="NV">Nevada</option>
+                                            <option value="OR">Oregon</option>
+                                            <option value="WA">Washington</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="grey">Kode Pos</label>
+                                    <input type="text" class="form-control" value="40378"/>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer d-flex justify-content-center">
+                            <a href="#" class="btn btn-outline">Batal</a>
+                            <a href="#" class="btn btn-secondary">Simpan</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </t>
+    </template>
+</odoo>

@@ -1,0 +1,918 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="alkeba_cart_payment_options" name="Alkeba Payment Option">
+        <t t-call="theme_alkeba.alkeba_bradcrumbs_empty_bottom"> 
+
+            <div class="modal fade" id="UpdateProfielModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="tab-content" id="pills-tabContent">
+                            <div class="tab-pane fade show active" id="pills-akun" role="tabpanel"
+                             aria-labelledby="pills-akun-tab">
+                                <div class="card cart-card-data-profil mt-3">
+                                    <div class="d-flex justify-content-between mb-3">
+                                        <div style="padding-left:30px;">
+                                            <h6>Informasi Pribadi</h6>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div style="width:100%;" class="col-md-9">
+                                            <div class="d-flex">
+                                                <div style="padding-left:30px;">
+                                                    <h6>Data Diri</h6>
+                                                    <div class="form-group">
+                                                        <label class="grey">Nama</label>
+                                                        <input type="text" name="nama" id="name" class="form-control"/>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="grey">Tanggal Lahir</label>
+                                                        <input type="date" name="date_birth" id="date_birth" class="form-control input-date"/>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="grey">Jenis Kelamin</label>
+                                                        <br/>
+                                                        <select class="selection-gender form-control" id="gender">
+                                                            <option value="pria">Pria</option>
+                                                            <option value="wanita">Wanita</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div style="padding-left:40px;">
+                                                    <h6>Data Kontak</h6>
+                                                    <div class="form-group">
+                                                        <label class="grey">Email</label>
+                                                        <input type="text" name="email" id="email" class="form-control"/>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="grey">Nomor Telepon</label>
+                                                        <input type="text" name="mobile_phone" id="mobile" class="form-control"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <hr />
+                                        <div style="padding-right:30px; padding-bottom:10px;" class="col-md-12 text-end">
+                                            <a href="/account-settings" class="btn btn-outline-orange me-3">Batal</a>
+                                            <!-- <a href="" class="btn btn-primary">Simpan</a> -->
+                                            <a href="javascript:void(0)" id="btnUpdateProfileUserAtOrder" t-attf-data-user-profile="{{ partner }}" class="btn btn-primary">Simpan</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                       </div>
+                    </div>
+                </div>                            
+            </div>                            
+
+            <div class="modal fade" id="AlertNotFillProfile" tabindex="-1" aria-labelledby="exampleModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-body text-center p-4">
+                            <a href="">
+                                <img src="/theme_alkeba/static/src/images/icon/remove.png" style="width:30px"/>
+                            </a>
+                            <br/>
+                            <p>
+                                <!-- <i class="icon-heart"></i> -->
+                                <strong>
+                                    Profil Anda Belum Lengkap<br/>
+                                    Silakan Lengkapi Profil Anda Terlebih Dahulu
+                                </strong>
+                                <br/>
+                                <br/>
+                                <a href="javascript:void(0)" id="cartCheckProfile" class="btn btn-outline">
+                                    Cek Profil
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="AlertPaymentMethod" tabindex="-1" aria-labelledby="exampleModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-body text-center p-4">
+                            <img src="/theme_alkeba/static/src/images/icon/remove.png" style="width:30px"/>
+                            <br/>
+                            <p>
+                                <!-- <i class="icon-heart"></i> -->
+                                <strong>
+                                    Metode Pembayaran Belum Di Pilih <br/>
+                                    Silahkan Pilih Metode Pembayaran
+                                </strong>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="wizard-checkout">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <ul class="d-flex align-items-baseline justify-content-center list-unstyled cart-step-wizard ">
+                                <li class="active line">
+                                    <button>
+                                        <div class="box">
+                                            <i class="icon-shopping-bag"></i>
+                                        </div>
+                                        <span>Keranjang Belanja</span>
+                                    </button>
+                                </li>
+                                <li class="active line">
+                                    <button>
+                                        <div class="box">
+                                            <i class="icon-archive"></i>
+                                        </div>
+                                        <span>Pilih Pengiriman</span>
+                                    </button>
+                                </li>
+                                <li class="active">
+                                    <button>
+                                        <div class="box">
+                                            <i class="icon-cash"></i>
+                                        </div>
+                                        <span>Pembayaran</span>
+                                    </button>
+                                </li>
+                                <li class="">
+                                    <button>
+                                        <div class="box">
+                                            <i class="icon-clipboard-check"></i>
+                                        </div>
+                                        <span>Konfirmasi Pembayaran</span>
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cart checkout mt-5">
+                <div class="container-fluid">
+                    <div class="cart-filled">
+                        <div class="row">
+                            <div class="col-md-9">
+                                <div class="nav-cart">
+                                    <a href="02.product-list.html" class="mobile-only">
+                                        <i class="icon-arrow-left"></i>
+                                    </a>
+                                    <h2 class="title mb-3">Pembayaran</h2>
+                                </div>
+                                <h6 class="mt-5 mb-3">Pilih Metode Pembayaran</h6>
+                                <div class="payment-method">
+                                    <div class="payment-top">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <!-- <div class="card payment-options pym-opt active" data-payment-option="cod"> -->
+                                                <t t-if="status_cod == true or is_pelanggan_lama == true">
+                                                <!-- <t t-if="status_cod == true and courier_name != 'Self Pickup' or is_pelanggan_lama == true"> -->
+                                                    <div>
+                                                        <a class="card payment-options pym-opt"
+                                                            href="javascript:void(0)"
+                                                            data-payment-option="cod">
+                                                            <label class="radio-orange">
+                                                                <input type="radio" class="payment-opt" value="cod"/>
+                                                                <span></span>
+                                                            </label>
+                                                            <h6>COD (Bayar di Tempat)</h6>
+                                                            <div class="mt-2 p-info">
+                                                                <p>
+                                                                    Selamat Anda Sudah Dapat Menggunakan Metode Pembayaran COD
+                                                                </p>
+                                                                <p>
+                                                                    <i class="icon-information-circle"></i>
+                                                                    Lakukan pembayaran ke kurir setelah menerima barang pesanan
+                                                                </p>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                </t>
+                                                <!-- <t t-else="status_cod == false and courier_name == 'Self Pickup' or is_pelanggan_lama == false"> -->
+                                                <t t-else="status_cod == false or is_pelanggan_lama == false">
+                                                    <div class="card payment-options pym-opt">
+                                                        <label class="radio-orange">
+                                                            <img src="/theme_alkeba/static/src/images/icon/remove.png" style="width:20px"/>
+                                                            <span></span>
+                                                        </label>
+                                                        <h6>COD (Bayar di Tempat)</h6>
+                                                        <div class="mt-2 p-info">
+                                                            <p>
+                                                                Syarat:
+                                                                <ol>
+                                                                    <li>Minimal 3x Transaksi</li>
+                                                                    <li>Tidak Menggunakan Kurir "Self Pickup"</li>
+                                                                    <li>Sementara Khusus Area Bandung</li>
+                                                                </ol>
+                                                            </p>
+                                                            <p>
+                                                                <i class="icon-information-circle"></i>
+                                                                Lakukan pembayaran ke kurir setelah menerima barang pesanan
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </t>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div>
+                                                    <a class="card payment-options pym-opt"
+                                                        href="javascript:void(0)"
+                                                        data-payment-option="shop">
+                                                        <label class="radio-orange">
+                                                            <input type="radio" class="payment-opt" value="shop"/>
+                                                            <span></span>
+                                                        </label>
+                                                        <h6>Bayar di Toko</h6>
+                                                        <div class="mt-2 p-info">
+                                                            <p>
+                                                                Info:
+                                                                <br/>
+                                                                Pembayaran dan pengambilan barang dilakukan di Toko official
+                                                                Alkeba terdekat dari tempat Anda
+                                                            </p>
+                                                            <p>
+                                                                <i class="icon-information-circle"></i>
+                                                                Untuk Self Pick Up Barang akan di packing ketika pembayaran
+                                                                sudah dilakukan
+                                                            </p>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="payment-bottom">
+                                        <div class="accordion" id="accordionExample">
+                                            <div class="accordion-item">
+                                                <h2 class="accordion-header payment-options" id="headingOne">
+                                                    <button class="accordion-button" type="button"
+                                                            data-bs-toggle="collapse" data-bs-target="#collapseOne"
+                                                            aria-expanded="false" aria-controls="collapseOne">
+                                                        <label class="radio-orange">
+                                                            <input type="radio"/>
+                                                            <span></span>
+                                                        </label>
+                                                        <div
+                                                            class="d-flex justify-content-between w-100 align-items-center">
+                                                            Virtual Account
+                                                            <div class="payment-icon">
+                                                                <img
+                                                                    src="/theme_alkeba/static/src/images/payment/payment-01.jpg"/>
+                                                            </div>
+                                                        </div>
+                                                    </button>
+                                                </h2>
+                                                <div id="collapseOne" class="accordion-collapse collapse"
+                                                     aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                                    <div class="accordion-body">
+                                                        <div class="d-flex align-items-center flex-wrap w-50">
+                                                            <label class="standard d-block w-100">Pilih Bank:</label>
+                                                            <div class="dropdown dropdown-payment w-100">
+                                                                <button class="btn btn-input dropdown-toggle  w-100"
+                                                                        type="button" id="dropdownMenuButton1"
+                                                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                                                    <img
+                                                                        src="/theme_alkeba/static/src/images/payment/va_icon.png"/>
+                                                                    <span class="payment-selected" style="color:#BDBDBD">
+                                                                        Silahkan Pilih Virtual Account...
+                                                                    </span>
+                                                                </button>
+                                                                <ul class="dropdown-menu"
+                                                                    aria-labelledby="dropdownMenuButton1">
+                                                                    <t t-if="check_va_baca == true">
+                                                                        <li>
+                                                                            <a class="dropdown-item pym-opt"
+                                                                            href="javascript:void(0)"
+                                                                            data-payment-option="va_bca">
+                                                                                <span class="payment-box">
+                                                                                    <img
+                                                                                        src="/theme_alkeba/static/src/images/payment/va-02.png"/>
+                                                                                    Virtual Account Bank BCA
+                                                                                </span>
+                                                                            </a>
+                                                                        </li>
+                                                                    </t>
+                                                                    <li>
+                                                                        <a class="dropdown-item pym-opt"
+                                                                           href="javascript:void(0)"
+                                                                           data-payment-option="va_bri">
+                                                                            <span class="payment-box">
+                                                                                <img
+                                                                                    src="/theme_alkeba/static/src/images/payment/va-03.png"/>
+                                                                                Virtual Account Bank BRI
+                                                                            </span>
+                                                                        </a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a class="dropdown-item pym-opt"
+                                                                           href="javascript:void(0)"
+                                                                           data-payment-option="va_bni">
+                                                                            <span class="payment-box">
+                                                                                <img
+                                                                                    src="/theme_alkeba/static/src/images/payment/va-04.png"/>
+                                                                                Virtual Account Bank BNI
+                                                                            </span>
+                                                                        </a>
+                                                                    </li>
+<!--                                                                    <li>-->
+<!--                                                                        <a class="dropdown-item pym-opt"-->
+<!--                                                                           href="javascript:void(0)"-->
+<!--                                                                           data-payment-option="va_per">-->
+<!--                                                                            <span class="payment-box">-->
+<!--                                                                                <img-->
+<!--                                                                                    src="/theme_alkeba/static/src/images/payment/va-05.png"/>-->
+<!--                                                                                Virtual Account Bank Permata-->
+<!--                                                                            </span>-->
+<!--                                                                        </a>-->
+<!--                                                                    </li>-->
+                                                                    <li>
+                                                                        <a class="dropdown-item pym-opt"
+                                                                           href="javascript:void(0)"
+                                                                           data-payment-option="va_man">
+                                                                            <span class="payment-box">
+                                                                                <img
+                                                                                    src="/theme_alkeba/static/src/images/payment/va-01.png"/>
+                                                                                Virtual Account Bank Mandiri
+                                                                            </span>
+                                                                        </a>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="mt-2 p-info" style="margin-left:50px;margin-right:20px;">
+                                                        <p>
+                                                            <i class="icon-information-circle"></i>Info:
+                                                            <br/>
+                                                            Virtual Account BCA Pembayaran Untuk Minimal Rp 10.000<br/>
+                                                            Kurang Dari Itu, Virtual Account BCA Tidak Aktif
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- ===================================== -->
+<!--                                            <div class="accordion-item">-->
+<!--                                                <h2 class="accordion-header payment-options" id="headingFive" data-payment-option="direct_debit">-->
+<!--                                                    <button class="accordion-button collapsed" type="button"-->
+<!--                                                            data-bs-toggle="collapse" data-bs-target="#collapseFive"-->
+<!--                                                            aria-expanded="false" aria-controls="collapseFive">-->
+<!--                                                        <label class="radio-orange">-->
+<!--                                                            <input type="radio"/>-->
+<!--                                                            <span></span>-->
+<!--                                                        </label>-->
+<!--                                                        <div-->
+<!--                                                            class="d-flex justify-content-between w-100 align-items-center">-->
+<!--                                                            Direct Debit-->
+<!--                                                            <div class="payment-icon">-->
+<!--                                                                <img-->
+<!--                                                                    src="/theme_alkeba/static/src/images/payment/payment-05.jpg"/>-->
+<!--                                                            </div>-->
+<!--                                                        </div>-->
+<!--                                                    </button>-->
+<!--                                                </h2>-->
+<!--                                                <div id="collapseFive" class="accordion-collapse collapse"-->
+<!--                                                     aria-labelledby="headingThree" data-bs-parent="#accordionExample">-->
+<!--                                                    <div class="accordion-body">-->
+<!--                                                        <div class="d-flex">-->
+<!--                                                            <div class="col-8 pe-5">-->
+<!--                                                                <form>-->
+<!--                                                                    <div class="form-group">-->
+<!--                                                                        <label>Nomor kartu</label>-->
+<!--                                                                        <input type="text" class="form-control" id="directDebitCardNumber"-->
+<!--                                                                               placeholder="Masukan nomor kartu,  contoh: 0000 0000 0000 0000"/>-->
+<!--                                                                        <small>16 digit angka yang tertera di kartu-->
+<!--                                                                            debit-->
+<!--                                                                        </small>-->
+<!--                                                                    </div>-->
+<!--                                                                    <div class="form-group">-->
+<!--                                                                        <label>Nomor Ponsel</label>-->
+<!--                                                                        <input type="text" class="form-control" id="directDebitPhoneNumber"-->
+<!--                                                                               placeholder="Masukan nomor telepon,  contoh: 081329849479"/>-->
+<!--                                                                        <small>Nomor terdaftar di internet / mobile-->
+<!--                                                                            banking BRI-->
+<!--                                                                        </small>-->
+<!--                                                                    </div>-->
+<!--&lt;!&ndash;                                                                    <div class="d-flex justify-content-end">&ndash;&gt;-->
+<!--&lt;!&ndash;                                                                        <a href="#" class="btn btn-primary">Simpan</a>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                                    </div>&ndash;&gt;-->
+<!--                                                                </form>-->
+<!--                                                            </div>-->
+<!--                                                            <div class="col-4">-->
+<!--                                                                <div class="d-flex p-info">-->
+<!--                                                                    <i class="icon-information-circle"></i>-->
+<!--                                                                    <ol>-->
+<!--                                                                        <li>Informasi kartu debit akan tersimpan &amp;-->
+<!--                                                                            bisa-->
+<!--                                                                            dipakai untuk tiap transaksi.-->
+<!--                                                                        </li>-->
+<!--                                                                        <li>Kamu akan dikenai tarif pulsa SMS untuk tiap-->
+<!--                                                                            kode verifikasi yang dikirim oleh bank.-->
+<!--                                                                            Pastikan kamu telah-->
+<!--                                                                        </li>-->
+<!--                                                                        <li>Mengaktifkan transaksi debit online di bank-->
+<!--                                                                            atau melalui m-banking.-->
+<!--                                                                        </li>-->
+<!--                                                                    </ol>-->
+<!--                                                                </div>-->
+<!--                                                            </div>-->
+<!--                                                        </div>-->
+<!--                                                    </div>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                            <div class="accordion-item">-->
+<!--                                                <h2 class="accordion-header payment-options" id="headingTwo">-->
+<!--                                                    <button class="accordion-button collapsed" type="button"-->
+<!--                                                            data-bs-toggle="collapse" data-bs-target="#collapseTwo"-->
+<!--                                                            aria-expanded="false" aria-controls="collapseTwo">-->
+<!--                                                        <label class="radio-orange">-->
+<!--                                                            <input type="radio"/>-->
+<!--                                                            <span></span>-->
+<!--                                                        </label>-->
+<!--                                                        <div-->
+<!--                                                            class="d-flex justify-content-between w-100 align-items-center">-->
+<!--                                                            Kartu Kredit-->
+<!--                                                            <div class="payment-icon">-->
+<!--                                                                <img-->
+<!--                                                                    src="/theme_alkeba/static/src/images/payment/payment-02.jpg"/>-->
+<!--                                                            </div>-->
+<!--                                                        </div>-->
+<!--                                                    </button>-->
+<!--                                                </h2>-->
+<!--                                                <div id="collapseTwo" class="accordion-collapse collapse"-->
+<!--                                                     aria-labelledby="headingTwo" data-bs-parent="#accordionExample">-->
+<!--                                                    <div class="accordion-body">-->
+<!--                                                        <div class="d-flex">-->
+<!--                                                            <div class="col-8 pe-5">-->
+<!--                                                                <form>-->
+<!--                                                                    <div class="form-group">-->
+<!--                                                                        <label>Nomor kartu</label>-->
+<!--                                                                        <input type="text" class="form-control" name=""-->
+<!--                                                                               placeholder="Masukan nomor kartu,  contoh: 0000 0000 0000 0000"/>-->
+<!--                                                                    </div>-->
+<!--                                                                    <div class="d-flex justify-content-between w-100">-->
+<!--                                                                        <div-->
+<!--                                                                            class="d-flex justify-content-between w-50 pe-3">-->
+<!--                                                                            <div class="form-group">-->
+<!--                                                                                <label>Tanggal Expired</label>-->
+<!--                                                                                <div class="d-flex">-->
+<!--                                                                                    <input type="text"-->
+<!--                                                                                           class="form-control me-3"-->
+<!--                                                                                           name="" placeholder="Bulan"/>-->
+<!--                                                                                    <input type="text"-->
+<!--                                                                                           class="form-control me-3"-->
+<!--                                                                                           name="" placeholder="Tahun"/>-->
+<!--                                                                                </div>-->
+<!--                                                                            </div>-->
+<!--                                                                        </div>-->
+<!--                                                                        <div class="form-group w-50">-->
+<!--                                                                            <label>CVV</label>-->
+<!--                                                                            <input type="text" class="form-control me-3"-->
+<!--                                                                                   name="" placeholder="CVV"/>-->
+<!--                                                                        </div>-->
+<!--                                                                    </div>-->
+<!--                                                                    <div class="form-group">-->
+<!--                                                                        <label>Tipe Pembayaran</label>-->
+<!--                                                                        <select class="form-control">-->
+<!--                                                                            <option>Pilih</option>-->
+<!--                                                                        </select>-->
+<!--                                                                    </div>-->
+<!--                                                                </form>-->
+<!--                                                            </div>-->
+<!--                                                            <div class="col-4">-->
+<!--                                                                <div class="p-info">-->
+<!--                                                                    <p>-->
+<!--                                                                        <i class="icon-information-circle"></i>-->
+<!--                                                                        Kami memastikan informasi kartu kredit Anda-->
+<!--                                                                        tetap terlindungi. Alkeba tidak akan mengakses-->
+<!--                                                                        info kartu kredit Anda.-->
+<!--                                                                    </p>-->
+<!--                                                                </div>-->
+<!--                                                            </div>-->
+<!--                                                        </div>-->
+<!--                                                    </div>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                            <div class="accordion-item">-->
+<!--                                                <h2 class="accordion-header  payment-options" id="headingThree">-->
+<!--                                                    <button class="accordion-button collapsed" type="button"-->
+<!--                                                            data-bs-toggle="collapse" data-bs-target="#collapseThree"-->
+<!--                                                            aria-expanded="false" aria-controls="collapseThree">-->
+<!--                                                        <label class="radio-orange">-->
+<!--                                                            <input type="radio"/>-->
+<!--                                                            <span></span>-->
+<!--                                                        </label>-->
+<!--                                                        <div-->
+<!--                                                            class="d-flex justify-content-between w-100 align-items-center">-->
+<!--                                                            e-Wallet-->
+<!--                                                            <div class="payment-icon">-->
+<!--                                                                <img-->
+<!--                                                                    src="/theme_alkeba/static/src/images/payment/payment-03.jpg"/>-->
+<!--                                                            </div>-->
+<!--                                                        </div>-->
+<!--                                                    </button>-->
+<!--                                                </h2>-->
+<!--                                                <div id="collapseThree" class="accordion-collapse collapse"-->
+<!--                                                     aria-labelledby="headingThree" data-bs-parent="#accordionExample">-->
+<!--                                                    <div class="accordion-body">-->
+<!--                                                        <div class="d-flex">-->
+<!--                                                            <div class="col-8">-->
+<!--                                                                <div class="select-ewallet">-->
+<!--                                                                    <label class="radio-orange-ewallet">-->
+<!--                                                                        <input type="radio" name="list-ewallet"/>-->
+<!--                                                                        <span></span>-->
+<!--                                                                        <img-->
+<!--                                                                            src="/theme_alkeba/static/src/images/payment/ewallet-01.png"/>-->
+<!--                                                                        <a href="#"-->
+<!--                                                                           class="btn btn-link-orange activate">-->
+<!--                                                                            <i class="icon-check-circle"></i>-->
+<!--                                                                            Aktif-->
+<!--                                                                        </a>-->
+<!--                                                                    </label>-->
+<!--                                                                    <label class="radio-orange-ewallet">-->
+<!--                                                                        <input type="radio" name="list-ewallet"/>-->
+<!--                                                                        <span></span>-->
+<!--                                                                        <img-->
+<!--                                                                            src="/theme_alkeba/static/src/images/payment/ewallet-02.png"/>-->
+<!--                                                                        <a href="#" class="btn btn-link-orange">-->
+<!--                                                                            Aktifkan-->
+<!--                                                                        </a>-->
+<!--                                                                    </label>-->
+<!--                                                                    <label class="radio-orange-ewallet">-->
+<!--                                                                        <input type="radio" name="list-ewallet"/>-->
+<!--                                                                        <span></span>-->
+<!--                                                                        <img-->
+<!--                                                                            src="/theme_alkeba/static/src/images/payment/ewallet-03.png"/>-->
+<!--                                                                        <a href="#" class="btn btn-link-orange">-->
+<!--                                                                            Aktifkan-->
+<!--                                                                        </a>-->
+<!--                                                                    </label>-->
+<!--                                                                    <label class="radio-orange-ewallet">-->
+<!--                                                                        <input type="radio" name="list-ewallet"/>-->
+<!--                                                                        <span></span>-->
+<!--                                                                        <img-->
+<!--                                                                            src="/theme_alkeba/static/src/images/payment/ewallet-04.png"/>-->
+<!--                                                                        <a href="#" class="btn btn-link-orange">-->
+<!--                                                                            Aktifkan-->
+<!--                                                                        </a>-->
+<!--                                                                    </label>-->
+<!--                                                                </div>-->
+<!--                                                            </div>-->
+<!--                                                            <div class="col-4">-->
+<!--                                                                <div class="d-flex p-info">-->
+<!--                                                                    <i class="icon-information-circle"></i>-->
+<!--                                                                    <ol>-->
+<!--                                                                        <li>Sambungkan akun e-wallet Anda dengan cara-->
+<!--                                                                            klik link aktifkan-->
+<!--                                                                        </li>-->
+<!--                                                                        <li>Isi data sesuai dengan akun e-wallet Anda-->
+<!--                                                                        </li>-->
+<!--                                                                        <li>Apabila sudah aktif maka pembayaran dengan-->
+<!--                                                                            e-wallet dapat digunakan-->
+<!--                                                                        </li>-->
+<!--                                                                    </ol>-->
+<!--                                                                </div>-->
+<!--                                                            </div>-->
+<!--                                                        </div>-->
+<!--                                                    </div>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                            <div class="accordion-item">-->
+<!--                                                <h2 class="accordion-header payment-options" id="headingFour">-->
+<!--                                                    <button class="accordion-button collapsed" type="button"-->
+<!--                                                            data-bs-toggle="collapse" data-bs-target="#collapseFour"-->
+<!--                                                            aria-expanded="false" aria-controls="collapseFour">-->
+<!--                                                        <label class="radio-orange">-->
+<!--                                                            <input type="radio"/>-->
+<!--                                                            <span></span>-->
+<!--                                                        </label>-->
+<!--                                                        <div-->
+<!--                                                            class="d-flex justify-content-between w-100 align-items-center">-->
+<!--                                                            QR Code-->
+<!--                                                            <div class="payment-icon">-->
+<!--                                                                <img-->
+<!--                                                                    src="/theme_alkeba/static/src/images/payment/payment-04.jpg"/>-->
+<!--                                                            </div>-->
+<!--                                                        </div>-->
+<!--                                                    </button>-->
+<!--                                                </h2>-->
+<!--                                                <div id="collapseFour" class="accordion-collapse collapse"-->
+<!--                                                     aria-labelledby="headingFour" data-bs-parent="#accordionExample">-->
+<!--                                                    <div class="accordion-body">-->
+<!--                                                        <div class="d-flex">-->
+<!--                                                            <div class="col-9">-->
+<!--                                                                <div class="p-info">-->
+<!--                                                                    <p>-->
+<!--                                                                        Pembayaran dengan QRIS-->
+<!--                                                                    </p>-->
+<!--                                                                    <ol>-->
+<!--                                                                        <li>Pastikan kamu memiliki aplikasi pembayaran-->
+<!--                                                                            bank atau e-wallet yang mendukung QRIS.-->
+<!--                                                                        </li>-->
+<!--                                                                        <li>Setelah klik “Bayar”, kamu akan menerima QR-->
+<!--                                                                            code. Selesaikan pembayaran dalam batas-->
+<!--                                                                            waktu 75 detik setelah QR code diberikan.-->
+<!--                                                                        </li>-->
+<!--                                                                        <li>Dengan membayar, kamu menyetujui <a href="">-->
+<!--                                                                            syarat dan ketentuan-->
+<!--                                                                        </a>  pembayaran dengan QRIS.-->
+<!--                                                                        </li>-->
+<!--                                                                    </ol>-->
+<!--                                                                </div>-->
+<!--                                                            </div>-->
+<!--                                                        </div>-->
+<!--                                                    </div>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+
+<!--                                            <div class="accordion-item">-->
+<!--                                                <h2 class="accordion-header payment-options" id="headingSix">-->
+<!--                                                    <button class="accordion-button collapsed" type="button"-->
+<!--                                                            data-bs-toggle="collapse" data-bs-target="#collapseSix"-->
+<!--                                                            aria-expanded="false" aria-controls="collapseSix">-->
+<!--                                                        <label class="radio-orange">-->
+<!--                                                            <input type="radio"/>-->
+<!--                                                            <span></span>-->
+<!--                                                        </label>-->
+<!--                                                        <div-->
+<!--                                                            class="d-flex justify-content-between w-100 align-items-center">-->
+<!--                                                            Retail Outlets / Over-the-Counter​-->
+<!--                                                            <div class="payment-icon">-->
+<!--                                                                <img-->
+<!--                                                                    src="/theme_alkeba/static/src/images/payment/payment-06.jpg"/>-->
+<!--                                                            </div>-->
+<!--                                                        </div>-->
+<!--                                                    </button>-->
+<!--                                                </h2>-->
+<!--                                                <div id="collapseSix" class="accordion-collapse collapse"-->
+<!--                                                     aria-labelledby="headingTwo" data-bs-parent="#accordionExample">-->
+<!--                                                    <div class="accordion-body">-->
+<!--                                                        <div class="d-flex align-items-center flex-wrap w-50">-->
+<!--                                                            <label class="standard d-block w-100">Pilih :</label>-->
+<!--                                                            <div class="dropdown dropdown-payment w-100">-->
+<!--                                                                <button class="btn btn-input dropdown-toggle  w-100"-->
+<!--                                                                        type="button" id="dropdownMenuButton1"-->
+<!--                                                                        data-bs-toggle="dropdown" aria-expanded="false">-->
+<!--                                                                    <img-->
+<!--                                                                        src="/theme_alkeba/static/src/images/payment/retail-01.png"/>-->
+<!--                                                                    <span class="payment-selected">Alfamart</span>-->
+<!--                                                                </button>-->
+<!--                                                                <ul class="dropdown-menu"-->
+<!--                                                                    aria-labelledby="dropdownMenuButton1">-->
+<!--                                                                    <li>-->
+<!--                                                                        <a class="dropdown-item active"-->
+<!--                                                                           href="javascript:void(0)">-->
+<!--                                                                            <span class="payment-box">-->
+<!--                                                                                <img-->
+<!--                                                                                    src="/theme_alkeba/static/src/images/payment/retail-02.png"/>-->
+<!--                                                                                Alfamart-->
+<!--                                                                            </span>-->
+<!--                                                                        </a>-->
+<!--                                                                    </li>-->
+<!--                                                                    <li>-->
+<!--                                                                        <a class="dropdown-item"-->
+<!--                                                                           href="javascript:void(0)">-->
+<!--                                                                            <span class="payment-box">-->
+<!--                                                                                <img-->
+<!--                                                                                    src="/theme_alkeba/static/src/images/payment/retail-03.png"/>-->
+<!--                                                                                Alfamidi-->
+<!--                                                                            </span>-->
+<!--                                                                        </a>-->
+<!--                                                                    </li>-->
+<!--                                                                    <li>-->
+<!--                                                                        <a class="dropdown-item"-->
+<!--                                                                           href="javascript:void(0)">-->
+<!--                                                                            <span class="payment-box">-->
+<!--                                                                                <img-->
+<!--                                                                                    src="/theme_alkeba/static/src/images/payment/retail-05.png"/>-->
+<!--                                                                                Indomaret-->
+<!--                                                                            </span>-->
+<!--                                                                        </a>-->
+<!--                                                                    </li>-->
+<!--                                                                    <li>-->
+<!--                                                                        <a class="dropdown-item"-->
+<!--                                                                           href="javascript:void(0)">-->
+<!--                                                                            <span class="payment-box">-->
+<!--                                                                                <img-->
+<!--                                                                                    src="/theme_alkeba/static/src/images/payment/retail-04.png"/>-->
+<!--                                                                                DanDan-->
+<!--                                                                            </span>-->
+<!--                                                                        </a>-->
+<!--                                                                    </li>-->
+<!--                                                                </ul>-->
+<!--                                                            </div>-->
+<!--                                                        </div>-->
+<!--                                                    </div>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                            <div class="accordion-item">-->
+<!--                                                <h2 class="accordion-header  payment-options" id="headingSeven">-->
+<!--                                                    <button class="accordion-button collapsed" type="button"-->
+<!--                                                            data-bs-toggle="collapse" data-bs-target="#collapseSeven"-->
+<!--                                                            aria-expanded="false" aria-controls="collapseSeven">-->
+<!--                                                        <label class="radio-orange">-->
+<!--                                                            <input type="radio"/>-->
+<!--                                                            <span></span>-->
+<!--                                                        </label>-->
+<!--                                                        <div-->
+<!--                                                            class="d-flex justify-content-between w-100 align-items-center">-->
+<!--                                                            Cardless Credit-->
+<!--                                                            <div class="payment-icon">-->
+<!--                                                                <img-->
+<!--                                                                    src="/theme_alkeba/static/src/images/payment/payment-07.jpg"/>-->
+<!--                                                            </div>-->
+<!--                                                        </div>-->
+<!--                                                    </button>-->
+<!--                                                </h2>-->
+<!--                                                <div id="collapseSeven" class="accordion-collapse collapse"-->
+<!--                                                     aria-labelledby="headingThree" data-bs-parent="#accordionExample">-->
+<!--                                                    <div class="accordion-body">-->
+<!--                                                        <div class="d-flex">-->
+<!--                                                            <div class="col-8 pe-5">-->
+<!--                                                                <form>-->
+<!--                                                                    <div class="d-flex justify-content-between w-100">-->
+<!--                                                                        <div class="form-group w-50">-->
+<!--                                                                            <label>Pilih Platform Pembayaran</label>-->
+<!--                                                                            <input type="text" class="form-control"-->
+<!--                                                                                   name=""-->
+<!--                                                                                   placeholder="Masukan nomor kartu,  contoh: 0000 0000 0000 0000"/>-->
+<!--                                                                        </div>-->
+<!--                                                                        <div class="form-group ms-2 w-50">-->
+<!--                                                                            <label>Jenis Pembayaran</label>-->
+<!--                                                                            <select class="form-control">-->
+<!--                                                                                <option>30 Hari Rp30.000</option>-->
+<!--                                                                            </select>-->
+<!--                                                                            <small>Bunga 0% X per Bulan-->
+<!--                                                                            </small>-->
+<!--                                                                        </div>-->
+<!--                                                                    </div>-->
+<!--                                                                    <div class="d-flex justify-content-end">-->
+<!--                                                                        <a href="#" class="btn btn-primary">Lanjut</a>-->
+<!--                                                                    </div>-->
+<!--                                                                </form>-->
+<!--                                                            </div>-->
+<!--                                                            <div class="col-4">-->
+<!--                                                                <div class="d-flex p-info">-->
+<!--                                                                    <i class="icon-information-circle"></i>-->
+<!--                                                                    <ol>-->
+<!--                                                                        <li>Pastikan kamu sudah punya akun Indodana dan-->
+<!--                                                                            dapat limit untuk belanja.-->
+<!--                                                                        </li>-->
+<!--                                                                        <li>Kamu akan diarahkan ke halaman Indodana-->
+<!--                                                                            setelah klik “Lanjut”-->
+<!--                                                                        </li>-->
+<!--                                                                        <li style="list-style: none">-->
+<!--                                                                            <br/>-->
+<!--                                                                            <a href="">Syarat &amp; Ketentuan</a>-->
+<!--                                                                        </li>-->
+<!--                                                                    </ol>-->
+<!--                                                                </div>-->
+<!--                                                            </div>-->
+<!--                                                        </div>-->
+<!--                                                    </div>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="floating-share">
+                                    <div class="qty-buy">
+                                        <h3>Ringkasan Pesanan</h3>
+                                        <div class=" p-3 pt-0">
+                                            <!-- <div class="d-flex align-items-center mt-4"> -->
+                                                <!-- <p class="mb-0 ">Sub Total:</p> -->
+                                                <!-- <p class="mb-0 standard ms-auto">Rp
+                                                    <t t-esc="'{0:,.2f}'.format(int(subtotal))"/>
+                                                    <input id="subtotalCheckOut" type="hidden" name="csrf_token" t-att-value="'{0:,.2f}'.format(int(subtotal))"/>
+                                                </p> -->
+                                            <!-- </div> -->
+                                            <!-- <hr/> -->
+                                            <!-- <t t-if="name_promo">
+                                                <div class="voucher-code">
+                                                    <p>Promo Yang Digunakan</p>
+                                                    <b><t t-esc="name_promo"/></b>
+                                                    <br/>
+                                                    <input type="text" 
+                                                        style="display:None;"
+                                                        id="code_prg_payment" 
+                                                        t-attf-value="{{ code_promo }}"
+                                                    />
+                                                </div>
+                                                <hr/>
+                                            </t> -->
+                                            <!-- <p>Est. Ongkos Kirim:</p>
+                                            <t t-foreach="shipping_price_per_location" t-as="location">
+                                                <div class="mt-3">
+                                                    <p>
+                                                        <b><t t-esc="location['area_name']"/></b>
+                                                    </p>
+                                                    <div class="d-flex align-items-center ">
+                                                        <p class="mb-0" t-attf-id="{{ courier_id }}">
+                                                            <t t-esc="courier_name"/>
+                                                        </p>
+                                                        <p class="mb-0 standard ms-auto" t-attf-id="courierPriceLoc{{ location['location_id'] }}">Rp <t t-esc="'{0:,.2f}'.format(int(location['price']))"/></p>
+                                                    </div>
+                                                </div>
+                                                <hr/>
+                                            </t> -->
+                                            <!-- HIDE UNTUK SEMENTARA -->
+                                            <!-- JANGAN DI HAPUS -->
+                                            <!-- ================================= -->
+                                            <!-- <div class="voucher-code">
+                                                <p>Kode Voucher</p>
+                                                <form class="d-flex">
+                                                    <div class="position-relative  me-2">
+                                                        <input type="text" class="form-control"
+                                                               placeholder="Masukkan disini..." value=""/>
+                                                        <i class="icon-x-circle"></i>
+                                                    </div>
+                                                    <a href="javascript:void(0)"
+                                                       class="btn btn-outline-orange apply-voucher">Pakai
+                                                    </a>
+                                                    <a href="javascript:void(0)"
+                                                       class="btn btn-outline-red delete-voucher">Hapus
+                                                    </a>
+                                                </form>
+                                                <div class="d-flex align-items-center mt-3">
+                                                    <p class="mb-0 ">Voucher Diskon</p>
+                                                    <p class="mb-0 standard ms-auto" style="color: #D82731">Rp 0
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <hr/> -->
+                                            <!-- <div class="use-alkeba-point clearfix">
+                                                <p>Gunakan Poin</p>
+                                                <span id="CurrentPoint" class="current-point">
+                                                    <t t-esc="current_point"/> Poin -->
+                                                    <!-- <span>(-Rp. 0)</span> -->
+                                                <!-- </span>
+                                                <span id="nominalPoint">
+                                                    (-Rp. <t t-esc="'{0:,.2f}'.format(int(is_existing_point))"/>)
+                                                </span>
+                                                <br/>
+                                                <br/>
+                                                <t t-if="active_point == int(1)">
+                                                    <span>
+                                                        <b>Belanja Dengan Point Aktif</b>
+                                                    </span>
+                                                </t>
+                                                <t t-if="not active_point == int(1)">
+                                                    <span>
+                                                        <b>Belanja Tidak Menggunakan Point</b>
+                                                    </span>
+                                                </t>
+                                            </div> -->
+                                            <!-- <hr/>
+                                            <div class="use-alkeba-point clearfix">
+                                                <p>Point Yang Akan Dapat
+                                                </p>
+                                                <span id="paymentgetPoint" class="current-point" t-attf-data-point="{{ point }}">
+                                                    <t t-esc="point"/> Point
+                                                </span>
+                                            </div>
+                                            <hr/> -->
+                                            <div class="nav-cart-total">
+                                                <div class="d-flex align-items-center mt-3">
+                                                    <p class="mb-0 ">
+                                                        <strong>Total</strong>
+                                                    </p>
+                                                    <p class="mb-0 standard ms-auto text-end" id="grandTotal">
+                                                        Rp
+                                                        <t t-esc="'{0:,.2f}'.format(int(grand_total))"/>
+                                                        <br/>
+                                                        <!--                                                        <span class="price-before">Rp.88,900</span>-->
+                                                    </p>
+                                                </div>
+                                                <div class="button mt-4">
+                                                    <a href="javascript:void(0)" id="btnConfirmPayment"
+                                                       class="btn btn-primary d-block w-100">
+                                                        Konfirmasi
+                                                        Pembayaran
+                                                    </a>
+                                                    <!-- <a href="/proceed-payment" class="btn btn-primary d-block w-100">-->
+                                                    <!-- Lanjutkan ke-->
+                                                    <!-- Pembayaran-->
+                                                    <!-- </a>-->
+                                                </div>
+                                            </div>
+                                            <p class="help-info">Mengalami kesulitan dalam pemesanan?
+                                                <a href="">Hubungi Kami disini</a>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </t>
+    </template>
+</odoo>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+    
+        <template id="inherit_signup_alkeba" inherit_id="auth_signup.fields">
+            <xpath expr="//div[@class='form-group field-password pt-2']" position="replace">
+                <div class="form-group field-password pt-2">
+                    <label for="password">Password</label>
+                    <input type="password" name="password" id="password" class="form-control form-control-sm"
+                        required="required" t-att-autofocus="'autofocus' if only_passwords else None"/>
+                    <span toggle="#main-password-field" class="fa fa-fw fa-eye field-icon-main-password toggle-main-password"></span>
+                </div>
+            </xpath>
+
+            <xpath expr="//div[@class='form-group field-confirm_password']" position="replace">
+                <div class="form-group field-confirm_password">
+                    <label for="confirm_password">Confirm Password</label>
+                    <input type="password" name="confirm_password" id="confirm_password" class="form-control form-control-sm" required="required"/>
+                    <span toggle="#password-field" class="fa fa-fw fa-eye field-icon-confirm toggle-confirm-password"></span>
+                </div>
+            </xpath>
+
+            <!-- <xpath expr="//input[@id='confirm_password']" position="after"> -->
+            <xpath expr="//div[@class='form-group field-confirm_password']" position="after">
+                <div style="margin-top:30px;text-align:center;">
+                    <input type="checkbox" id="term_condition" name="term_condition" value="termCondition" checked=""/>
+                    <a href="/terms">
+                        <label style="cursor:pointer;color:#17755d !important;" for="termCondition"> Term &amp; Condition</label><br/>
+                    </a>
+                    <p>
+                        Dengan Anda Mengaktifkan Kolom Ini Berarti Anda Setuju Dengan Syarat Dan Ketentuan Kami
+                    </p>
+                </div>
+            </xpath>
+        </template>
+
+        <template id="inherit_signup_button_alkeba" inherit_id="auth_signup.signup">
+            <xpath expr="//div[@class='text-center oe_login_buttons pt-3']" position="replace">
+                <div class="text-center oe_login_buttons pt-3">
+                    <button type="submit" id="signUpBtnAlkeba" class="btn btn-primary btn-block"> Sign Up</button>
+                    <a t-attf-href="/web/login?{{ keep_query() }}" class="btn btn-link btn-sm" role="button">Already have an account?</a>
+                    <div class="o_login_auth"/>
+                </div>
+            </xpath>
+        </template>
+
+        <template id="inherit_login_layout" inherit_id="web.login">
+            <xpath expr="//div[@class='form-group field-password']" position="replace">
+                <div class="form-group field-password">
+                    <label for="password">Password</label>
+                    <input type="password" placeholder="Password" name="password" id="password" t-attf-class="form-control #{'form-control-sm' if form_small else ''}" required="required" autocomplete="current-password" t-att-autofocus="'autofocus' if login else None" maxlength="4096"/>
+                    <span toggle="#main-password-field" class="fa fa-fw fa-eye field-icon-main-password toggle-main-password"></span>
+                </div>
+            </xpath>
+        </template>
+
+    </data>
+</odoo>

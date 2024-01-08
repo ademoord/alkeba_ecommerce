@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>    
+    <template id="alkeba_dashboard_wishlist" name="Alkeba Dashboard Wishlist">
+        <t t-call="theme_alkeba.alkeba_user_page_layout">
+            <div class="modal fade" id="addToCartWishlistModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-body text-center p-4">
+                            <p>
+                                <i class="icon-heart"></i>
+                                <strong>Produk berhasil dimasukkan ke dalam Keranjang Belanja.</strong>
+                            </p>
+                            <a href="/cart" id="wishListCart" class="btn btn-outline">
+                                Lihat Keranjang
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-9">
+                <h6 class="title">Daftar Wishlist
+                    <span>Menampilkan 1–8 dari 8</span>
+                </h6>
+                <div class="buyer-info wishlist-page">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <form class="d-flex align-items-center mb-4 py-2 px-3">
+                                <ul class="list-unstyled sort d-md-flex align-items-center mb-0">
+                                    <li>
+                                        <ul class="list-unstyled mode-product d-flex align-items-center mb-0 me-2">
+                                            <li>
+                                                <a href="javascript:void(0)" class="grid-views active">
+                                                    <i class="icon-list-filter"></i>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0)" class="list-views">
+                                                    <i class="icon-grid-filter"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <div class="dropdown dropdown-sorting">
+                                            <button class="btn btn-input dropdown-toggle" type="button"
+                                                    id="dropdownMenuButton1" data-bs-toggle="dropdown"
+                                                    aria-expanded="false">
+                                                Urut Berdasarkan
+                                            </button>
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                                <li>
+                                                    <a class="dropdown-item" href="javascript:void(0)">Terbaru</a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item" href="javascript:void(0)">Produk A-Z</a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item" href="javascript:void(0)">Produk Z-A</a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item" href="javascript:void(0)">Harga Rendah ke
+                                                        Tinggi
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item" href="javascript:void(0)">Harga Tinggi ke
+                                                        Rendah
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="dropdown dropdown-show">
+                                            <button class="btn btn-input dropdown-toggle" type="button"
+                                                    id="dropdownMenuButton1" data-bs-toggle="dropdown"
+                                                    aria-expanded="false">
+                                                Tampilkan : 20
+                                            </button>
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                                <li>
+                                                    <a class="dropdown-item" href="javascript:void(0)">Tampilkan: 20</a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item" href="javascript:void(0)">Tampilkan: 30</a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item" href="javascript:void(0)">Tampilkan: 40</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <div class="ms-auto d-flex align-items-center">
+                                    <ul class="list-unstyled tab-product d-flex align-items-center mb-0">
+                                        <li>
+                                            <input type="text" class="form-control" value="1"/>
+                                        </li>
+                                        <li>
+                                            <span>of 3</span>
+                                        </li>
+                                        <li>
+                                            <button>
+                                                <i class="fas fa-long-arrow-alt-right"></i>
+                                            </button>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </form>
+                            <div class="list-product">
+                                <t t-if="wishlist and wishlist.product_wishlist_id">
+                                    <t t-foreach="wishlist.product_wishlist_id" t-as="line">
+                                        <div class="d-block">
+                                            <a t-att-href="line.product_id.website_url" class="d-block">
+                                                <div class="card card-product">
+                                                    <i class="icon-heart"></i>
+                                                    <div class="card-img-top">
+                                                        <t t-if="line.product_id.image_1920">
+                                                            <img t-att-src="image_data_uri(line.product_id.image_1920)"
+                                                                class="img-fluid" t-att-alt="line.product_id.name"/>
+                                                        </t>
+                                                        <t t-else="">
+                                                            <img src="/web/static/img/placeholder.png"
+                                                                class="img-fluid" alt="..."/>
+                                                        </t>
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <h5 class="card-title">
+                                                            <t t-esc="line.product_id.name"/>
+                                                        </h5>
+                                                        <t t-set="original_price" t-value="line.product_id.list_price"/>
+                                                        <t t-if="pricelist">
+                                                            <t t-set="pricelist_price"
+                                                            t-value="pricelist.get_product_price(line.product_id, 1, user_id.partner_id)"/>
+                                                            <t t-if="pricelist_price &gt; 0.0">
+                                                                <t t-if="original_price &lt; pricelist_price">
+                                                                    <p class="card-price">
+                                                                        <b>
+                                                                            Rp.
+                                                                            <t t-esc="'{0:,.2f}'.format(int(original_price))"/>
+                                                                        </b>
+                                                                    </p>
+                                                                </t>
+                                                                <t t-if="pricelist_price &lt; original_price">
+                                                                    <p class="card-price price-discount">
+                                                                        <b>
+                                                                            Rp
+                                                                            <t t-esc="'{0:,.2f}'.format(int(pricelist_price))"/>
+                                                                            <span class="price-before">Rp
+                                                                                <t t-esc="'{0:,.2f}'.format(int(original_price))"/>
+                                                                            </span>
+                                                                        </b>
+                                                                    </p>
+                                                                </t>
+                                                                <t t-if="original_price == pricelist_price">
+                                                                    <p class="card-price">
+                                                                        Rp.
+                                                                        <t t-esc="'{0:,.2f}'.format(int(original_price))"/>
+                                                                    </p>
+                                                                </t>
+                                                            </t>
+                                                            <t t-else="">
+                                                                <p class="card-price">
+                                                                    Rp.
+                                                                    <t t-esc="'{0:,.2f}'.format(int(original_price))"/>
+                                                                </p>
+                                                            </t>
+                                                        </t>
+                                                        <t t-else="">
+                                                            <p class="card-price">
+                                                                Rp.
+                                                                <t t-esc="'{0:,.2f}'.format(int(original_price))"/>
+                                                            </p>
+                                                        </t>
+                                                        <div>
+                                                            <t t-if="line.product_id.qty_available &gt; 0.0">
+                                                                <span class="badge badge-success">Ready Stock</span>
+                                                            </t>
+
+                                                            <t t-if="line.product_id.qty_available == 0.0">
+                                                                <span class="badge badge-out-stock">Out Of Stock</span>
+                                                            </t>
+                                                            
+                                                            <span class="badge badge-light">Terjual
+                                                                <t t-esc="int(line.product_id.sales_count)"/>
+                                                            </span>
+                                                        </div>
+                                                        <!-- HIDE SEMENTARA -->
+                                                        <!-- JANGAN DI HAPUS -->
+                                                        <!-- <div class="d-flex align-items-center">
+                                                            <div class="rating">
+                                                                <i class="icon-star-product active"></i>
+                                                                <i class="icon-star-product active"></i>
+                                                                <i class="icon-star-product active"></i>
+                                                                <i class="icon-star-product active"></i>
+                                                                <i class="icon-star-product"></i>
+                                                            </div>
+                                                            <span>(12)</span>
+                                                        </div> -->
+                                                        <small class="grey">
+                                                            Ditambahkan <t t-esc="line.product_id.create_date.strftime('%Y-%m-%d')"/>
+                                                        </small>
+                                                        <a href="javascript:void(0)" id="addToCartWishlist" t-attf-data-id="{{ line.product_id.id }}" class="btn btn-outline">
+                                                            Masukan Keranjang
+                                                        </a>
+                                                        <ul class="action-info">
+                                                            <li>
+                                                                <a href="javascript:void(0)" t-attf-data-id="{{ line.product_id.id }}" id="deleteWishlist" class="hapus-favorite" data-bs-toggle="modal"
+                                                                    data-bs-target="#HapusFavoriteModal">
+                                                                    <i class="icon-trash"></i>
+                                                                    Hapus
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <div class="dropdown dropdown-share">
+                                                                    <button class="dropdown-toggle" type="button"
+                                                                            id="dropdownMenuButton1"
+                                                                            data-bs-toggle="dropdown"
+                                                                            aria-expanded="false">
+                                                                        <i class="icon-share"></i>
+                                                                        <span>Share</span>
+                                                                    </button>
+                                                                    <ul class="dropdown-menu"
+                                                                        aria-labelledby="dropdownMenuButton1">
+                                                                        <li>
+                                                                            <a href="#">
+                                                                                <img
+                                                                                    src="/theme_alkeba/static/src/images/icon/share_2.svg"/>
+                                                                            </a>
+                                                                            <a href="#">
+                                                                                <img
+                                                                                    src="/theme_alkeba/static/src/images/icon/share_4.svg"/>
+                                                                            </a>
+                                                                            <a href="#">
+                                                                                <img
+                                                                                    src="/theme_alkeba/static/src/images/icon/share_3.svg"/>
+                                                                            </a>
+                                                                            <a href="#">
+                                                                                <img
+                                                                                    src="/theme_alkeba/static/src/images/icon/share_1.svg"/>
+                                                                            </a>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </t>
+                                </t>
+                                <t t-else="">
+                                    <div class="col-7 m-auto pt-5 blankslate text-center">
+                                        <img src="/theme_alkeba/static/src/images/illust-favorite-blankslate.png"/>
+                                        <h6>Belum Ada Produk Di Wishlist Anda</h6>
+                                        <p>Kami tidak dapat menemukan produk dalam daftar
+                                            wishlist Anda, silahkan mencari produk untuk dimasukan ke daftar wishlist
+                                        </p>
+                                        <a href="/products" class="btn btn-primary">
+                                            <i class="icon-shopping-bag"></i>
+                                            Mulai Belanja
+                                        </a>
+                                    </div>
+                                </t>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal Wishlist-->
+            <div class="modal fade" id="HapusFavoriteModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-body text-center p-4">
+                            <p>
+                                <i class="icon-trash"></i>
+                                <strong>
+                                    Produk berhasil dihapus dari Wishlist Anda.
+                                </strong>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </t>
+    </template>
+</odoo>

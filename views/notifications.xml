@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    
+    <template id="alkeba_customer_notifications" name="Alkeba Customer Notifications">
+        <t t-call="theme_alkeba.alkeba_user_page_layout">
+
+            <div class="col-md-9">
+                <h6>Notifikasi Saya</h6>
+                <div class="buyer-info notif-dboard">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <table class="table">
+                                    <thead>
+                                        <tr style="vertical-align: middle;">
+                                            <th width="20%">Tanggal</th>
+                                            <th width="50%">Keterangan</th>
+                                        </tr>
+                                    </thead>
+                                    <t t-if="notifications">
+                                        <tbody>
+                                            <t t-foreach="notifications" t-as="notification">
+                                                <tr>
+                                                    <td>
+                                                        <t t-set="date_month" t-value="notification.mail_mail_id.date.strftime('%Y-%m')"/>
+
+                                                        <b id="dateNotif">
+                                                            <t t-if="current_month == date_month">
+                                                                <t t-esc="notification.mail_mail_id.date.strftime('%d %B %Y')"/>
+                                                            </t>
+                                                        </b>
+                                                    </td>
+                                                    <td>
+                                                        <div class="notif-info">
+                                                            <p>
+                                                                <b>
+                                                                    <t t-esc="notification.res_partner_id.name"/>
+                                                                </b>
+                                                                <br/>
+                                                                <t t-esc="notification.mail_mail_id.subject"/>
+                                                            </p>
+
+                                                        </div>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <t t-if="notification.is_read == True">
+                                                            <div class="text-center">
+                                                                <p class="green">
+                                                                    <i class="icon-check-circle"></i>
+                                                                    Sudah Dibaca
+                                                                </p>
+                                                            </div>
+                                                        </t>
+                                                        <t t-else="">
+                                                            <div class="text-center">
+                                                                <a t-attf-href="/set-notif-read/{{ notification.id }}"
+                                                                   class="btn btn-outline-orange btn-small ">
+                                                                    Tandai Sudah Dibaca
+                                                                </a>
+                                                            </div>
+                                                        </t>
+                                                        <div class="action mt-4">
+                                                            <!-- <a t-attf-href="/set-delete-notif/{{ notif.id }}"> -->
+                                                                <!-- <i class="icon-trash"></i> -->
+                                                            <!-- </a> -->
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </t>
+                                        </tbody>
+                                    </t>
+                                    <t t-else="">
+                                        <tbody>
+                                            <tr>
+                                                <td colspan="3">
+                                                    <div class="col-7 m-auto blankslate text-center">
+                                                        <img
+                                                            src="/theme_alkeba/static/src/images/illust-hapus-alamat-blankslate.png"/>
+                                                        <h6>Belum Ada Notifikasi Terkini</h6>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </t>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal hapus alamat-->
+            <!-- <t t-foreach="addresses" t-as="address">
+                <div class="modal fade" t-attf-id="HapusAlamatModal{{ address.id }}" tabindex="-1"
+                     aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">Hapus Alamat
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                    <i class="icon-x"></i>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="col-7 m-auto text-center my-4">
+                                    <img src="/theme_alkeba/static/src/images/illust-hapus-alamat.png" class="mb-4"/>
+                                    <h6 class="mb-3">Hapus Alamat Pengiriman</h6>
+                                    <p>Apakah Anda yakin untuk Alamat pengiriman ini?</p>
+                                </div>
+                            </div>
+                            <div class="modal-footer d-flex justify-content-center">
+                                <a href="javascript:void(0)" data-bs-dismiss="modal" class="btn btn-outline">Batal</a>
+                                <a t-attf-href="/delete-address/{{ address.id }}" class="btn btn-secondary">Ya, saya
+                                    yakin
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </t> -->
+
+        </t>
+    </template>
+</odoo>

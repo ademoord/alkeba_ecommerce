@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="alkeba_bradcrumbs_empty_bottom" name="Alkeba Beradcrumbs Empty Bottom">
+        <t t-call="website.layout">
+
+            <section>
+                <t t-if="breadcrumbs">
+                    <nav aria-label="breadcrumb">
+                        <div class="container-fluid">
+                            <ol class="breadcrumb">
+                                <t t-foreach="breadcrumbs" t-as="bc">
+                                    <t t-if="bc['active']">
+                                        <li class="breadcrumb-item active" aria-current="page">
+                                            <span t-esc="bc['label']"/>
+                                        </li>
+                                    </t>
+                                    <t t-else="">
+                                        <li class="breadcrumb-item">
+                                            <a t-att-href="bc['path']">
+                                                <span t-esc="bc['label']"/>
+                                            </a>
+                                        </li>
+                                    </t>
+                                </t>
+                            </ol>
+                        </div>
+                    </nav>
+                </t>
+
+                <t t-out="0"/>
+            </section>
+
+            <script>
+                let menuCategory = document.getElementsByClassName('dropdown-category');
+                if (menuCategory.length > 0) {
+                menuCategory[0].classList.remove('show');
+                }
+            </script>
+
+        </t>
+    </template>
+
+    <template id="alkeba_bradcrumbs_with_benefit" name="Alkeba Beradcrumbs with Benefit">
+        <t t-call="website.layout">
+
+            <section>
+                <t t-if="breadcrumbs">
+                    <nav aria-label="breadcrumb">
+                        <div class="container-fluid">
+                            <ol class="breadcrumb">
+                                <t t-foreach="breadcrumbs" t-as="bc">
+                                    <t t-if="bc['active']">
+                                        <li class="breadcrumb-item active" aria-current="page">
+                                            <span t-esc="bc['label']"/>
+                                        </li>
+                                    </t>
+                                    <t t-else="">
+                                        <li class="breadcrumb-item">
+                                            <a t-att-href="bc['path']">
+                                                <span t-esc="bc['label']"/>
+                                            </a>
+                                        </li>
+                                    </t>
+                                </t>
+
+                            </ol>
+                        </div>
+                    </nav>
+                </t>
+
+                <t t-out="0"/>
+            </section>
+
+            <section class="alkeba-benefit mt-5">
+                <div class="container-fluid">
+                    <div class="mb-3 d-flex align-items-center pb-2 justify-content-center">
+                        <h2 class="title mb-0 d-flex align-items-center">Kenapa Anda Memilih Alkeba?</h2>
+                    </div>
+                    <div class="d-flex benefit-slider">
+                        <div class="list-benefit">
+                            <img src="/theme_alkeba/static/src/images/Gratis_Ongkir.png"/>
+                            <h6 style="text-align:center;font-weight:bold;">Gratis Ongkir</h6>
+                            <p style="text-align:center;">Dapatkan keuntungan gratis ongkir khusus member alkeba store</p>
+                        </div>
+                        <div class="list-benefit">
+                            <img src="/theme_alkeba/static/src/images/24Jam_Support.png"/>
+                            <h6 style="text-align:center;font-weight:bold;">24Jam Support</h6>
+                            <p style="text-align:center;">Kami siap melayani demi pengalaman belanja yang mudah</p>
+                        </div>
+                        <div class="list-benefit">
+                            <img src="/theme_alkeba/static/src/images/Mesin_Bergaransi.png"/>
+                            <h6 style="text-align:center;font-weight:bold;">Mesin Bergaransi</h6>
+                            <p style="text-align:center;">Setiap mesin yang dibeli memiliki garansi selama 2 tahun</p>
+                        </div>
+                        <div class="list-benefit">
+                            <img src="/theme_alkeba/static/src/images/Pembayaran_Aman_Mudah.png"/>
+                            <h6 style="text-align:center;font-weight:bold;">Pembayaran Aman &amp; Mudah</h6>
+                            <p style="text-align:center;">Anda dapat melakukan pembayaran melalui banyak bank</p>
+                        </div>
+                        <div class="list-benefit">
+                            <img src="/theme_alkeba/static/src/images/Harga_Terbaik.png"/>
+                            <h6 style="text-align:center;font-weight:bold;">Harga Terbaik</h6>
+                            <p style="text-align:center;">Kami menjual produk dengan harga yang kompetitif</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <script>
+                let menuCategory = document.getElementsByClassName('dropdown-category');
+                if (menuCategory.length > 0) {
+                menuCategory[0].classList.remove('show');
+                }
+            </script>
+
+        </t>
+    </template>
+
+    <template id="alkeba_bradcrumbs_with_product_recom" name="Alkeba Beradcrumbs with Product Recommendation">
+        <t t-call="website.layout">
+
+            <section>
+                <t t-if="breadcrumbs">
+                    <nav aria-label="breadcrumb">
+                        <div class="container-fluid">
+                            <ol class="breadcrumb">
+                                <t t-foreach="breadcrumbs" t-as="bc">
+                                    <t t-if="bc['active']">
+                                        <li class="breadcrumb-item active" aria-current="page">
+                                            <span t-esc="bc['label']"/>
+                                        </li>
+                                    </t>
+                                    <t t-else="">
+                                        <li class="breadcrumb-item">
+                                            <a t-att-href="bc['path']">
+                                                <span t-esc="bc['label']"/>
+                                            </a>
+                                        </li>
+                                    </t>
+                                </t>
+
+                            </ol>
+                        </div>
+                    </nav>
+                </t>
+
+                <t t-out="0"/>
+            </section>
+
+            <t t-if="recomended_products">
+                <section class="product-popular mt-5">
+                    <div class="container-fluid">
+                        <div class="mb-3 d-flex align-items-center pb-2 justify-content-between heading-title">
+                            <h2 class="title mb-0 d-flex align-items-center">Produk Rekomendasi</h2>
+                            <a href="" class="btn btn-outline-orange small-btn">Lihat Semua
+                                <img src="/theme_alkeba/static/src/images/icon/next-arrow-orange.svg"/>
+                            </a>
+                        </div>
+                        <div class="row middle-arrow list-product-flash">
+                            <div class="col-md-12 position-relative">
+                                <div class="slider product-slider">
+                                    <t t-foreach="recomended_products" t-as="product">
+                                        <a t-att-href="product.website_url" class="d-block">
+
+                                            <div class="card card-product">
+                                                <div class="card-img-top">
+                                                    <t t-if="product.image_1920">
+                                                        <img t-att-src="image_data_uri(product.image_1920)"
+                                                             class="img-fluid" t-att-alt="product.name"/>
+                                                    </t>
+                                                    <t t-else="">
+                                                        <img src="/web/static/img/placeholder.png"
+                                                             class="img-fluid" alt="..."/>
+                                                    </t>
+                                                </div>
+                                                <div class="card-body">
+                                                    <h5 class="card-title">
+                                                        <t t-esc="product.name"/>
+                                                    </h5>
+                                                    <t t-set="original_price" t-value="product.list_price"/>
+                                                    <t t-if="pricelist">
+                                                        <t t-set="pricelist_price"
+                                                           t-value="pricelist.get_product_price(product, 1, user_id.partner_id)"/>
+                                                        <t t-if="pricelist_price &gt; 0.0">
+                                                            <t t-if="original_price &lt; pricelist_price">
+                                                                <p class="card-price">
+                                                                    Rp.
+                                                                    <t t-esc="'{0:,.2f}'.format(int(original_price))"/>
+                                                                </p>
+                                                            </t>
+                                                            <t t-if="pricelist_price &lt; original_price">
+                                                                <p class="card-price price-discount">
+                                                                    Rp
+                                                                    <t t-esc="'{0:,.2f}'.format(int(pricelist_price))"/>
+                                                                    <span class="price-before">Rp
+                                                                        <t t-esc="'{0:,.2f}'.format(int(original_price))"/>
+                                                                    </span>
+                                                                </p>
+                                                            </t>
+                                                            <t t-if="original_price == pricelist_price">
+                                                                <p class="card-price">
+                                                                    Rp.
+                                                                    <t t-esc="'{0:,.2f}'.format(int(original_price))"/>
+                                                                </p>
+                                                            </t>
+                                                        </t>
+                                                        <t t-else="">
+                                                            <p class="card-price">
+                                                                Rp.
+                                                                <t t-esc="'{0:,.2f}'.format(int(original_price))"/>
+                                                            </p>
+                                                        </t>
+                                                    </t>
+                                                    <div>
+                                                        <t t-if="product.qty_available &gt; 0.0">
+                                                            <span class="badge badge-success">Ready Stock</span>
+                                                        </t>
+                                                        <span class="badge badge-light">Terjual
+                                                            <t t-esc="int(product.sales_count)"/>
+                                                        </span>
+                                                    </div>
+                                                    <!-- HIDE SEMENTARA -->
+                                                    <!-- JANGAN DI HAPUS -->
+                                                    <!-- <div class="d-flex align-items-center">
+                                                        <div class="rating">
+                                                            <i class="icon-star-product active"></i>
+                                                            <i class="icon-star-product active"></i>
+                                                            <i class="icon-star-product active"></i>
+                                                            <i class="icon-star-product"></i>
+                                                            <i class="icon-star-product"></i>
+                                                        </div>
+                                                        <span>(STAR_COUNT)</span>
+                                                    </div> -->
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </t>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </t>
+
+            <script>
+                let menuCategory = document.getElementsByClassName('dropdown-category');
+                if (menuCategory.length > 0) {
+                menuCategory[0].classList.remove('show');
+                }
+            </script>
+
+        </t>
+    </template>
+
+</odoo>

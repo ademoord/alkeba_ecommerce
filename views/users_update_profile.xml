@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    
+    <template id="users_update_profile" name="Alkeba Users Update Profile">
+        <t t-call="theme_alkeba.alkeba_user_page_layout">
+            <div class="modal fade" id="AlertPasswordNotSame" tabindex="-1" aria-labelledby="exampleModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-body text-center p-4">
+                            <img src="/theme_alkeba/static/src/images/icon/remove.png" style="width:30px"/>
+                            <br/>
+                            <br/>
+                            <p>
+                                <!-- <i class="icon-heart"></i> -->
+                                <strong>
+                                    Password Tidak Sama <br/>
+                                    Pastikan Password Sama
+                                </strong>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-9">
+                <h6>Pengaturan Akun</h6>
+                <div class="pengaturan-akun">
+                    <ul class="nav nav-pills" id="pills-tab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="pills-akun-tab" data-bs-toggle="pill"
+                                    data-bs-target="#pills-akun" type="button" role="tab"
+                                    aria-controls="pills-home" aria-selected="true">Akun
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="pills-keamanan-tab" data-bs-toggle="pill"
+                                    data-bs-target="#pills-keamanan" type="button" role="tab"
+                                    aria-controls="pills-profile" aria-selected="false">Keamanan
+                            </button>
+                        </li>
+                        <!-- <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="pills-notif-tab" data-bs-toggle="pill"
+                                    data-bs-target="#pills-notif" type="button" role="tab"
+                                    aria-controls="pills-profile" aria-selected="false">Notifikasi
+                            </button>
+                        </li> -->
+                    </ul>
+                    <div class="tab-content" id="pills-tabContent">
+                        <div class="tab-pane fade show active" id="pills-akun" role="tabpanel"
+                             aria-labelledby="pills-akun-tab">
+                            <div class="card card-data-profil mt-3">
+                                <div class="d-flex justify-content-between mb-3">
+                                    <div>
+                                        <h6>Informasi Pribadi</h6>
+                                        <p class="grey">Informasi mengenai data pribadi Anda</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="profile-picture">
+                                            <div class="change-photo">
+                                                <input type="file" id="image" onchange="imageReadURL(this);"/>
+                                            </div>
+                                            <t t-set="avatar_source" t-value="image_data_uri(user_id.avatar_256)"/>
+                                            <img id="is_image" t-att-src="avatar_source"/>
+                                        </div>
+                                        <!-- <small class="grey mb-3" style="display: none"> -->
+                                        <small class="grey mb-3">
+                                            <b>Besar file:</b>
+                                            <br/>
+                                            Maksimum 10Mb. Ekstensi file yang diperbolehkan JPG. JPEG, PNG.
+                                        </small>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <div class="d-flex">
+                                            <div>
+                                                <h6>Data Diri</h6>
+                                                <div class="form-group">
+                                                    <label class="grey">Nama</label>
+                                                    <input type="text" name="nama" id="name" class="form-control" t-att-value="partner.name"/>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="grey">Tanggal Lahir</label>
+                                                    <!-- <input type="text" name="date_birth" id="date_birth" class="form-control input-date" data-target="#date_birth" data-toggle="datetimepicker" t-att-value="partner.date_birth"/> -->
+                                                    <input type="date" name="date_birth" id="date_birth" class="form-control input-date" t-att-value="partner.date_birth"/>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="grey">Jenis Kelamin</label>
+                                                    <br/>
+                                                    <select class="selection-gender form-control" id="gender">
+                                                        <option value="pria">Pria</option>
+                                                        <option value="wanita">Wanita</option>
+                                                    </select>
+                                                   <!--  <div class="select2-container select-gender select2-container-active select2-dropdown-open" id="s2id_autogen9">
+                                                        <a href="javascript:void(0)" onclick="return false;" class="select2-choice" tabindex="-1">   
+                                                            <span>Perempuan</span>
+                                                            <abbr class="select2-search-choice-close" style="display:none;"></abbr>   
+                                                            <div>
+                                                                <b></b>
+                                                            </div>
+                                                        </a>
+                                                        <input class="select2-focusser select2-offscreen" type="text" id="s2id_autogen10" disabled="disabled"/>
+                                                    </div>
+                                                    <select class="select-gender select2-offscreen" tabindex="-1">
+                                                        <option value="man">Laki-Laki</option>
+                                                        <option value="woman">Perempuan</option>
+                                                    </select> -->
+                                                    <!-- <input type="text" name="gender" class="form-control" t-att-value="partner.gender"/> -->
+                                                    <!-- 
+                                                        <p>
+                                                            <b>Laki - Laki</b>
+                                                        </p> 
+                                                    -->
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <h6>Data Kontak</h6>
+                                                <div class="form-group">
+                                                    <label class="grey">Email</label>
+                                                    <input type="text" name="email" id="email" class="form-control" t-att-value="partner.email"/>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="grey">Nomor Telepon</label>
+                                                    <input type="text" name="mobile_phone" id="mobile" class="form-control" t-att-value="partner.mobile"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr />
+                                    <div class="col-md-12 text-end">
+                                        <a href="/account-settings" class="btn btn-outline-orange me-3">Batal</a>
+                                        <!-- <a href="" class="btn btn-primary">Simpan</a> -->
+                                        <a href="javascript:void(0)" id="btnUpdateProfileUser" t-attf-data-user-profile="{{ partner }}" class="btn btn-primary">Simpan</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="pills-keamanan" role="tabpanel"
+                             aria-labelledby="pills-keamanan-tab">
+                            <div class="card card-atur-sandi mt-3">
+                                <div class="d-flex justify-content-between mb-3">
+                                    <div>
+                                        <h6>Kata Sandi</h6>
+                                        <p class="grey">Perubahan Terakhir: 09 Agustus 2022</p>
+                                    </div>
+                                    <!-- <a href="javascript:void(0)" class="btn btn-primary">Ubah Kata Sandi</a> -->
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                       <p><b>Ganti Kata Sandi</b></p>
+                                       <p class="grey">Kata sandi harus mengandung huruf dan angka. Sedikitnya 6 Karakter.<br />
+Masukan kata sandi unutk akun Alkeba. bukan kata sandi Email atau Sosial Media lainnya</p>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="form-group">
+                                            <!-- <label class="grey">Kata Sandi</label>
+                                            <div class="input-password">
+                                                <span toggle="#password-field"
+                                                      class="icon-eye field_icon toggle-password"></span>
+                                                <input type="password" class="form-control pass_log_id"
+                                                       t-att-value="user.password" disabled="disabled"/>
+                                            </div> -->
+                                             <div class="form-group">
+                                                <label class="grey">Kata Sandi Baru</label>
+                                                <div class="input-password">
+                                                   <span toggle="#password-field" class="icon-eye field_icon toggle-password"></span>
+                                                   <input type="password" id="new_password" class="form-control pass_log_id"/>
+                                                </div>
+                                             </div>
+                                             <div class="form-group">
+                                                <label class="grey">Konfirmasi Kata Sandi Baru</label>
+                                                <div class="input-password">
+                                                   <span toggle="#password-field" class="icon-eye field_icon toggle-password"></span>
+                                                   <input type="password" id="confirm_new_password" class="form-control pass_log_id"/>
+                                                </div>
+                                             </div>
+                                        </div>
+                                    </div>
+                                    <hr />
+                                    <div class="col-md-12 text-end">
+                                        <a href="/account-settings" class="btn btn-outline-orange me-3">Batal</a>
+                                        <!-- <a href="" class="btn btn-primary">Simpan</a> -->
+                                        <a href="javascript:void(0)" id="btnUpdatePasswordUser" t-attf-data-user-profile="{{ partner }}" class="btn btn-primary">Simpan</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="pills-notif" role="tabpanel"
+                             aria-labelledby="pills-notif-tab">
+                            <div class="card  mt-3">
+                                <div>
+                                    <h6>Notifikasi</h6>
+                                    <p class="grey">Atur notifikasi yang ingin kamu terima disni</p>
+                                </div>
+                                <div class=" set-notifikasi">
+                                    <h6>Transaksi Pembelian</h6>
+                                    <div class="d-flex justify-content-between">
+                                        <p>Menunggu Pembayaran</p>
+                                        <div class="checkbox">
+                                            <input type="checkbox" id="checkAll" checked="checked"/>
+                                            <label></label>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <p>Menunggu Konfirmasi</p>
+                                        <div class="checkbox">
+                                            <input type="checkbox" id="checkAll" checked="checked"/>
+                                            <label></label>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <p>Pesanan Diproses</p>
+                                        <div class="checkbox">
+                                            <input type="checkbox" id="checkAll" checked="checked"/>
+                                            <label></label>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <p>Pesanan Dikirim</p>
+                                        <div class="checkbox">
+                                            <input type="checkbox" id="checkAll" checked="checked"/>
+                                            <label></label>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <p>Pesanan Tiba</p>
+                                        <div class="checkbox">
+                                            <input type="checkbox" id="checkAll" checked="checked"/>
+                                            <label></label>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <p>Pengingat</p>
+                                        <div class="checkbox">
+                                            <input type="checkbox" id="checkAll" checked="checked"/>
+                                            <label></label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class=" set-notifikasi">
+                                    <h6>Promo</h6>
+                                    <div class="d-flex justify-content-between">
+                                        <p>Newsletter Alkeba</p>
+                                        <div class="checkbox">
+                                            <input type="checkbox" id="checkAll" checked="checked"/>
+                                            <label></label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </t>
+    </template>
+
+</odoo>

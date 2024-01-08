@@ -1,0 +1,174 @@
+/* --> Generic hierarcy checkbox fields*/
+
+.hierarchy-checkboxes{
+    
+    width: 100%;
+position: relative;}
+input.hierarchy-root-checkbox[type=checkbox]{
+    float: left;
+    margin: 6px 5px 0 5px;
+}
+label.hierarchy-root-label{
+    font-weight: normal;
+    padding: 3px;
+    margin: 0;
+}
+label.hierarchy-root-label:hover,
+.hierarchy-root-child .hierarchy-label:hover{
+    
+}
+.hierarchy-checkboxes.child-expanded{
+position: relative;}
+.hierarchy-root-child{
+    position: static;
+    display: none;
+    width: 100%;
+    z-index: 55;
+    
+}
+.hierarchy-root-child .hierarchy-node{
+    clear: both;
+    display: block;
+    padding-left: 8px;
+    background: url("dashed-line-vertical.gif") repeat-y scroll left top rgba(0, 0, 0, 0);
+    margin-left: 14px;
+
+padding: 10px 0 0;position: relative;}
+.hierarchy-root-child .hierarchy-label{
+    background: url("dashed-line-horizontal.gif") no-repeat scroll 13px 12px rgba(0, 0, 0, 0);
+    margin: 0 0 0 -5px;
+    font-weight: normal;
+    padding: 5px 10px 0 25px;
+    display:block;
+}
+
+.hierarchy-checkboxes .expand-collapse-button,
+.hierarchy-root-child .hierarchy-node .expand-collapse-button{
+  display:block;
+  content:" ";
+  float: right;
+  background: url(/theme_alkeba/static/src/images/icon/ic-up-black.svg) no-repeat;background-position: center;
+  width:16px;
+  height:16px;
+  margin-top: 1px;
+position: absolute;right: 0;}
+.hierarchy-checkboxes.child-expanded .expand-collapse-button,
+.hierarchy-root-child .hierarchy-node.child-expanded >.expand-collapse-button{
+ background: url(/theme_alkeba/static/src/images/icon/ic-up-black.svg) no-repeat;background-position: center;
+}
+.hierarchy-root-child .hierarchy-node.leaf .expand-collapse-button{
+  background:none;
+  width:6px;
+}
+.hierarchy-root-child input[type=checkbox]{
+    float: left;
+    margin: 3px;
+    margin-top: 8px;
+position: absolute;left: -6px;z-index: 5;}
+
+
+/* <-- Generic hierarcy checkbox fields*/
+
+.hierarchy-node  input[type="checkbox"],.hierarchy-checkboxes > input[type="checkbox"]{
+  opacity: 0;
+  /* display: none; */
+width: 82%;}
+
+.hierarchy-node label::before,.hierarchy-checkboxes > label::before{
+  content: "";
+  display: inline-block;
+  border: 1px solid #999999;
+  box-sizing: border-box;
+  border-radius: 5px;
+  width: 17px;
+  height: 17px;
+}
+
+.hierarchy-node label::after ,.hierarchy-checkboxes > label::after {
+  content: "";
+  display: inline-block;
+  height: 6px;
+  width: 9px;
+  border-left: 2px solid;
+  border-bottom: 2px solid;
+  transform: rotate(-45deg);
+}
+
+.hierarchy-node label  ,.hierarchy-checkboxes > label {
+  position: relative;
+  padding-left: 25px;
+  width: 100%;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  color: #333333;
+  margin: 0;
+}
+
+.hierarchy-node label span  ,.hierarchy-checkboxes > label span{
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+  /* identical to box height, or 129% */
+  letter-spacing: 0.144px;
+  color: #ACACAC;
+}
+
+.hierarchy-node label::before,
+.hierarchy-node label::after ,.hierarchy-checkboxes > label::before ,.hierarchy-checkboxes > label::after {
+  position: absolute;
+}
+
+
+/*Outer-box*/
+
+.hierarchy-node  label::before ,.hierarchy-checkboxes > label::before {
+  top: 4px;
+  left: 0
+}
+
+
+/*Checkmark*/
+
+.hierarchy-node  label::after,.hierarchy-checkboxes > label::after {
+  left: 4px;
+  top: 9px;
+}
+
+
+/*Hide the checkmark by default*/
+
+.hierarchy-node  input[type="checkbox"]+label::after,
+.hierarchy-checkboxes > input[type="checkbox"]+label::after {
+  content: none;
+}
+
+
+/*Unhide the checkmark on the checked state*/
+
+.hierarchy-node  input[type="checkbox"]:checked+label::after ,
+.hierarchy-checkboxes >  input[type="checkbox"]:checked+label::after {
+  content: "";
+  color: #FFFFFF
+}
+
+.hierarchy-node  input[type="checkbox"]:checked+label::before,
+.hierarchy-checkboxes >  input[type="checkbox"]:checked+label::before {
+  background: #17755d;
+  border: 1px solid #17755d;
+  box-sizing: border-box;
+  border-radius: 5px;
+  top: 5px;
+}
+
+
+/*Adding focus styles on the outer-box of the fake checkbox*/
+
+.hierarchy-node  input[type="checkbox"]:focus+label::before ,
+
+.hierarchy-checkboxes >  input[type="checkbox"]:focus+label::before {
+  outline: rgb(59, 153, 252) auto 5px;
+}
+.hierarchy-checkboxes > input[type="checkbox"] {position: absolute;left: 0;z-index: 5;}
+
+.hierarchy-node.child-expanded .hierarchy-node {display: block !important;}

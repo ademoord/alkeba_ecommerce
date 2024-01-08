@@ -1,0 +1,915 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="alkeba_index" name="Alkeba Layout">
+            <t t-call="website.layout">
+
+            <section class="top-banner">
+                <div class="container-fluid">
+                    <div class="row d-flex justify-content-end">
+                        <div class="col-md-9">
+                            <div class="slick-wrapper">
+                                <div id="slick-main">
+                                    <!-- <t t-if="main_banner.id == true">
+
+                                        <t t-if="main_banner.image1">
+                                            <div class="slide-item" style="display: block !important;">
+                                                <img t-attf-src="data:image/*;base64,{{main_banner.image1}}" class="img-fluid"/>
+                                            </div>
+                                        </t>
+
+                                        <t t-if="main_banner.image2">
+                                            <div class="slide-item" style="display: block !important;">
+                                                <img t-attf-src="data:image/*;base64,{{main_banner.image2}}" class="img-fluid"/>
+                                            </div>
+                                        </t>
+
+                                        <t t-if="main_banner.image3">
+                                            <div class="slide-item" style="display: block !important;">
+                                                <img t-attf-src="data:image/*;base64,{{main_banner.image3}}" class="img-fluid"/>
+                                            </div>
+                                        </t>
+
+                                        <t t-if="main_banner.image4">
+                                            <div class="slide-item" style="display: block !important;">
+                                                <img t-attf-src="data:image/*;base64,{{main_banner.image4}}" class="img-fluid"/>
+                                            </div>
+                                        </t>
+
+                                        <t t-if="main_banner.image5">
+                                            <div class="slide-item" style="display: block !important;">
+                                                <img t-attf-src="data:image/*;base64,{{main_banner.image5}}" class="img-fluid"/>
+                                            </div>
+                                        </t>
+                                    </t> -->
+                                    
+                                    <!-- <t t-else=""> -->
+                                        <div class="slide-item" style="display: block !important;">
+                                            <img src="/theme_alkeba/static/src/images/1.png" class="img-fluid"/>
+                                        </div>
+                                        <div class="slide-item" style="display: block !important;">
+                                            <img src="/theme_alkeba/static/src/images/2.png" class="img-fluid"/>
+                                        </div>
+                                        <div class="slide-item" style="display: block !important;">
+                                            <img src="/theme_alkeba/static/src/images/3.png" class="img-fluid"/>
+                                        </div>
+                                        <div class="slide-item" style="display: block !important;">
+                                            <img src="/theme_alkeba/static/src/images/4.png" class="img-fluid"/>
+                                        </div>
+                                    <!-- </t> -->
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+            <!-- HIDE UNTUK SEMENTARA, JANGAN DI HAPUS. CODE PROMO BULANAN BY KANG NCEP -->
+            <!-- <t t-if="this_month_promo_products">
+                <section class="product-flash mt-5">
+
+                    <div class="container-fluid">
+                        <div class="mb-2 d-flex align-items-center pb-1 justify-content-between  heading-title">
+                            <h2 class="title mb-0 d-flex align-items-center">Promo Bulan Ini</h2>
+                            <a href="" class="btn btn-outline-orange small-btn">Lihat Semua
+                                <img src="/theme_alkeba/static/src/images/icon/next-arrow-orange.svg"/>
+                            </a>
+                        </div>
+                        <div class="row middle-arrow list-product-flash">
+                            <div class="col-md-3">
+                                <div class="flash-bg">
+                                    <![CDATA[&nbsp;]]>
+                                </div>
+                            </div>
+                            <div class="col-md-9 position-relative">
+                                <div class="slider flash-product-slider">
+                                    <t t-foreach="this_month_promo_products" t-as="promo_product">
+                                        <a t-att-href="promo_product['product'].website_url" class="d-block">
+                                            <div class="card card-product">
+                                                <div class="badge-discount"><t t-esc="int(promo_product['disc'])"/>% off
+                                                </div>
+                                                <div class="card-img-top">
+                                                    <t t-if="promo_product['product'].image_1920">
+                                                        <img
+                                                            t-att-src="image_data_uri(promo_product['product'].image_1920)"
+                                                            class="img-fluid"
+                                                            t-att-alt="promo_product['product'].name"/>
+                                                    </t>
+                                                    <t t-else="">
+                                                        <img src="/web/static/img/placeholder.png"
+                                                             class="img-fluid" alt="..."/>
+                                                    </t>
+                                                </div>
+                                                <div class="card-body">
+                                                    <h5 class="card-title">
+                                                        <t t-esc="promo_product['product'].name"/>
+                                                    </h5>
+                                                    <p class="card-price price-discount">Rp
+                                                        <t t-esc="'{0:,.2f}'.format(int(promo_product['price']))"/>
+                                                        <span class="price-before">Rp
+                                                            <t t-esc="'{0:,.2f}'.format(int(promo_product['product'].list_price))"/>
+                                                        </span>
+                                                    </p>
+                                                    <div>
+                                                        <t t-if="promo_product['product'].qty_available &gt; 0.0">
+                                                            <span class="badge badge-success">Ready Stock</span>
+                                                        </t>
+                                                        <span class="badge badge-light">Terjual
+                                                            <t t-esc="int(promo_product['product'].sales_count)"/>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </t>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </t> -->
+
+            <!-- HIDE UNTUK SEMENTARA, JANGAN DI HAPUS. CODE Produk Terlaris BY KANG NCEP -->
+            <!-- <t t-if="popular_products">
+                <section class="product-popular mt-5">
+                    <div class="container-fluid">
+                        <div class="mb-3 d-flex align-items-center pb-2 justify-content-between heading-title">
+                            <h2 class="title mb-0 d-flex align-items-center">Produk Terlaris</h2>
+                            <a href="" class="btn btn-outline-orange small-btn">Lihat Semua
+                                <img src="/theme_alkeba/static/src/images/icon/next-arrow-orange.svg"/>
+                            </a>
+                        </div>
+                        <div class="row middle-arrow list-product-flash">
+                            <div class="col-md-12 position-relative">
+                                <div class="slider product-slider">
+                                    <t t-foreach="popular_products" t-as="product">
+                                        <a t-att-href="product.website_url" class="d-block">
+
+                                            <div class="card card-product">
+                                                <div class="card-img-top">
+                                                    <t t-if="product.image_1920">
+                                                        <img t-att-src="image_data_uri(product.image_1920)"
+                                                             class="img-fluid" t-att-alt="product.name"/>
+                                                    </t>
+                                                    <t t-else="">
+                                                        <img src="/web/static/img/placeholder.png"
+                                                             class="img-fluid" alt="..."/>
+                                                    </t>
+                                                </div>
+                                                <div class="card-body">
+                                                    <h5 class="card-title">
+                                                        <t t-esc="product.name"/>
+                                                    </h5>
+                                                    <t t-set="original_price" t-value="product.list_price"/>
+                                                    <p class="card-price">
+                                                        Rp.
+                                                        <t t-esc="'{0:,.2f}'.format(int(original_price))"/>
+                                                    </p>
+                                                    <div>
+                                                        <t t-if="product.qty_available &gt; 0.0">
+                                                            <span class="badge badge-success">Ready Stock</span>
+                                                        </t>
+                                                        <span class="badge badge-light">Terjual
+                                                            <t t-esc="int(product.sales_count)"/>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </t>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </t> -->
+
+            <!-- Promo Diskon Bulanan -->
+            <section class="product-flash mt-5">
+                <!-- <t t-if="promo.id == true"> -->
+                <t t-if="pricelist">
+                    <div class="container-fluid">
+                        <div class="mb-2 d-flex align-items-center pb-1 justify-content-between  heading-title">
+                            <h2 class="title mb-0 d-flex align-items-center">
+                                Promo Bulan Ini
+                            </h2>
+                            <a href="/products-promo?terlaris=true&amp;limit=20&amp;sort=latest" class="btn btn-outline-orange small-btn">Lihat Semua
+                                <img src="/theme_alkeba/static/src/images/icon/next-arrow-orange.svg"/>
+                            </a>
+                        </div>
+                        <div class="row middle-arrow list-product-flash">
+                            <div class="col-md-3">
+                                <div class="flash-bg">
+                                    <![CDATA[&nbsp;]]>
+                                </div>
+                            </div>
+                            <div class="col-md-9 position-relative">
+                                <div class="slider flash-product-slider">
+                                    <t t-foreach="pricelist.item_ids" t-as="product_promo">
+                                        <a href="" class="d-block">
+                                        <div class="card card-product">
+                                            <div class="badge-discount">
+                                                <!-- 15% off -->
+                                                <!-- Diskon <t t-esc="int(product_promo.promo_discount)"/>% -->
+                                            </div>
+
+                                            <div class="card-img-top">
+                                                <img t-att-src="product_promo.product_tmpl_id.image_256" class="img-fluid"/>
+                                            </div>
+
+                                            <!-- <div class="card-img-top"> -->
+                                                <!-- <img src="assets/img/product/prod-01.jpg" class="img-fluid" alt="..."/> -->
+                                                <!-- <img t-attf-src="data:image/*;base64,{{product_promo.product_tmpl_id.image_256}}" class="img-fluid"/>
+                                            </div> -->
+
+                                            <div class="card-body">
+                                                <h5 class="card-title">
+                                                    <t t-esc="product_promo.product_tmpl_id.name"/>
+                                                </h5>
+                                                <p class="card-price price-discount"> 
+                                                    Rp.
+                                                    <t t-esc="'{0:,.2f}'.format(int(product_promo.fixed_price))"/>
+                                                    <br/>
+                                                    <span class="price-before">
+                                                        Rp.
+                                                        <t t-esc="'{0:,.2f}'.format(int(product_promo.product_tmpl_id.list_price))"/>
+                                                    </span>
+                                                </p>
+                                                <div>
+                                                    <!-- <span class="badge badge-orange">Pre-Order</span> -->
+                                                    <t t-if="product_promo.product_tmpl_id.qty_available &gt; 0.0">
+                                                        <span class="badge badge-success">Ready Stock</span>
+                                                    </t>
+                                                    <t t-if="product_promo.product_tmpl_id.qty_available == 0.0">
+                                                        <span class="badge badge-orange">Pre-Order</span>
+                                                    </t>
+                                                    <span class="badge badge-light">Terjual
+                                                        <t t-esc="int(product_promo.product_tmpl_id.sales_count)"/>
+                                                    </span>
+                                                </div>
+                                                <!-- <div class="d-flex align-items-center">
+                                                    <div class="rating">
+                                                        <i class="icon-star-product active"></i>
+                                                        <i class="icon-star-product active"></i>
+                                                        <i class="icon-star-product active"></i>
+                                                        <i class="icon-star-product active"></i>
+                                                        <i class="icon-star-product"></i>
+                                                    </div>
+                                                    <span>(12)</span>
+                                                </div>
+                                                <div class="progress-flash">
+                                                    <div class="progress">
+                                                    <div class="progress-bar bg-danger" role="progressbar" style="width: 80%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                                                    </div>
+                                                    <small>Segera Habis</small>
+                                                </div> -->
+                                            </div>
+                                        </div>
+                                        </a>
+                                    
+                                    </t>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </section>
+
+            <!-- Product Terlaris -->
+            <section class="product-choice mt-5">
+                <div class="container-fluid">
+                    <div class="row middle-arrow list-product-choice-terlaris">
+                        <!-- <div class="col-md-2"> -->
+                            <!-- <div class="icon-box"> -->
+                                <h2 style="text-align: center;">Paling Laris di Alkeba</h2>
+                                <!-- <img class="banner-product-alkeba" src="/theme_alkeba/static/src/images/new_assets/Best Seller-208x320.png"/>
+                                <a href="/products?terlaris=true&amp;limit=20&amp;sort=latest" id="productTerlarisBtn">
+                                    <img class="banner-button-product-alkeba" src="/theme_alkeba/static/src/images/new_assets/Button 148x32-01.png"/>
+                                </a> -->
+                            <!-- </div> -->
+                        <!-- </div> -->
+                        <div class="row-alkeba col-md-10 position-relative">
+                            <div class="slider best-product-slider">
+                                <t t-foreach="produk_terlaris" t-as="product">
+                                    <t t-if="product.product_id.detailed_type != 'service'">
+                                        <a t-att-href="product.product_id.website_url" class="d-block">
+                                            <div class="card card-product">
+                                                <div class="card-img-top">
+                                                    <t t-if="product.product_id.image_256">
+                                                        <img t-att-src="image_data_uri(product.product_id.image_256)"
+                                                                class="img-fluid" t-att-alt="product.product_id.name"/>
+                                                    </t>
+                                                    <t t-else="">
+                                                        <img src="/web/static/img/placeholder.png"
+                                                            class="img-fluid" alt="..."/>
+                                                    </t>
+                                                </div>
+                                            125678      <div class="card-body">
+                                                    <h5 class="card-title">
+                                                        <t t-esc="product.product_id.name"/>
+                                                    </h5>
+                                                    <t t-set="original_price" t-value="product.product_id.list_price"/>
+                                                    <t t-if="pricelist">
+                                                        <t t-foreach="pricelist.item_ids" t-as="pricelist_items">
+                                                            <t t-if="product.id == pricelist_items.product_tmpl_id.id">
+                                                                <p class="card-price price-discount">
+                                                                    Rp
+                                                                    <t t-esc="'{0:,.2f}'.format(int(pricelist_items.fixed_price))"/>
+                                                                    <span class="price-before">Rp
+                                                                        <t t-esc="'{0:,.2f}'.format(int(product.product_id.list_price))"/>
+                                                                    </span>
+                                                                </p>
+                                                            </t>
+                                                        </t>
+                                                        <t t-if="not product.id in list_pricelist_product_ids">
+                                                            <p class="card-price">
+                                                                Rp.
+                                                                <t t-esc="'{0:,.2f}'.format(int(product.product_id.list_price))"/>
+                                                            </p>
+                                                        </t>
+                                                    </t>
+                                                    <t t-else="">
+                                                        <p class="card-price">
+                                                            Rp.
+                                                            <t t-esc="'{0:,.2f}'.format(int(original_price))"/>
+                                                        </p>
+                                                    </t>
+                                                    <div>
+                                                        <t t-if="product.product_id.qty_available &gt; 0.0">
+                                                            <span class="badge badge-success">Ready Stock</span>
+                                                        </t>
+                                                        <t t-if="product.product_id.qty_available == 0.0">
+                                                            <span class="badge badge-orange">Pre-Order</span>
+                                                        </t>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </t>
+                                </t>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <t t-if="event">
+                <section class="product-event">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="category-product-event">
+                                    <t t-foreach="event.category_ids" t-as="cat_line">
+                                        <div class="box-category">
+                                            <img
+                                                t-attf-src="/web/image/product.public.category/{{ cat_line.category_id.id }}/image_256"/>
+                                            <div class="box-category-nav">
+                                                <h6>
+                                                    <a t-attf-href="/products?categ={{ cat_line.category_id.id }}">
+                                                        <t t-esc="cat_line.category_id.name"/>
+                                                    </a>
+                                                </h6>
+                                                <t t-set="count_pr" t-value="0"/>
+                                                <t t-foreach="cat_line.category_id.product_tmpl_ids" t-as="tmpl">
+                                                    <t t-foreach="tmpl.product_variant_ids" t-as="product">
+                                                        <t t-if="count_pr &lt;= 3">
+                                                            <a t-att-href="product.website_url">
+                                                                <t t-esc="product.name"/>
+                                                            </a>
+                                                        </t>
+                                                        <t t-set="count_pr" t-value="count_pr + 1"/>
+                                                    </t>
+                                                </t>
+                                                <a t-attf-href="/products?categ={{ cat_line.category_id.id }}"
+                                                   class="btn btn-outline">Lihat Semua
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </t>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </t>
+
+            <t t-if="new_products">
+                <section class="product-newest ">
+
+                    <div class="container-fluid">
+                        <div class="mb-3 d-flex align-items-center pb-2 justify-content-between heading-title">
+                            <h2 id="text-newprod" class="title mb-0 d-flex align-items-center">Produk Terbaru di Alkeba</h2>
+
+                        </div>
+                        <div class="row middle-arrow list-product-flash">
+                            <div class="col-md-12 position-relative">
+                                <div class="slider product-slider">
+                                    <t t-foreach="new_products" t-as="product">
+                                        <a t-att-href="product.website_url" class="d-block">
+                                            <div class="card card-product">
+                                                <div class="badge-new">New</div>
+                                                <div class="card-img-top">
+                                                    <t t-if="product.image_256">
+                                                        <img t-att-src="image_data_uri(product.image_256)"
+                                                             class="img-fluid" t-att-alt="product.name"/>
+                                                    </t>
+                                                    <t t-else="">
+                                                        <img src="/web/static/img/placeholder.png"
+                                                             class="img-fluid" alt="..."/>
+                                                    </t>
+                                                </div>
+                                                <div class="card-body">
+                                                    <h5 class="card-title">
+                                                        <t t-esc="product.name"/>
+                                                    </h5>
+                                                    <t t-set="original_price" t-value="product.list_price"/>
+                                                    <t t-if="pricelist">
+                                                        <t t-foreach="pricelist.item_ids" t-as="pricelist_items">
+                                                            <t t-if="product.id == pricelist_items.product_tmpl_id.id">
+                                                                <p class="card-price price-discount">
+                                                                    Rp
+                                                                    <t t-esc="'{0:,.2f}'.format(int(pricelist_items.fixed_price))"/>
+                                                                    <span class="price-before">Rp
+                                                                        <t t-esc="'{0:,.2f}'.format(int(product.list_price))"/>
+                                                                    </span>
+                                                                </p>
+                                                            </t>
+                                                        </t>
+                                                        <t t-if="not product.id in list_pricelist_product_ids">
+                                                            <p class="card-price">
+                                                                Rp.
+                                                                <t t-esc="'{0:,.2f}'.format(int(product.list_price))"/>
+                                                            </p>
+                                                        </t>
+                                                        <!-- ========================================== -->
+                                                        <!-- <t t-set="pricelist_price"
+                                                           t-value="pricelist.get_product_price(product, 1, user_id.partner_id)"/>
+                                                        <t t-if="pricelist_price &gt; 0.0">
+                                                            <t t-if="original_price &lt; pricelist_price">
+                                                                <p class="card-price">
+                                                                    Rp.
+                                                                    <t t-esc="'{0:,.2f}'.format(int(original_price))"/>
+                                                                </p>
+                                                            </t>
+                                                            <t t-if="pricelist_price &lt; original_price">
+                                                                <p class="card-price price-discount">
+                                                                    Rp
+                                                                    <t t-esc="'{0:,.2f}'.format(int(pricelist_price))"/>
+                                                                    <span class="price-before">Rp
+                                                                        <t t-esc="'{0:,.2f}'.format(int(original_price))"/>
+                                                                    </span>
+                                                                </p>
+                                                            </t>
+                                                            <t t-if="original_price == pricelist_price">
+                                                                <p class="card-price">
+                                                                    Rp.
+                                                                    <t t-esc="'{0:,.2f}'.format(int(original_price))"/>
+                                                                </p>
+                                                            </t>
+                                                        </t>
+                                                        <t t-else="">
+                                                            <p class="card-price">
+                                                                Rp.
+                                                                <t t-esc="'{0:,.2f}'.format(int(original_price))"/>
+                                                            </p>
+                                                        </t> -->
+                                                    </t>
+                                                    <t t-else="">
+                                                        <p class="card-price">
+                                                            Rp.
+                                                            <t t-esc="'{0:,.2f}'.format(int(product.list_price))"/>
+                                                        </p>
+                                                    </t>
+                                                    <div>
+                                                        <t t-if="product.qty_available &gt; 0.0">
+                                                            <span class="badge badge-success">Ready Stock</span>
+                                                        </t>
+                                                        <span class="badge badge-light">Terjual
+                                                            <t t-esc="int(product.sales_count)"/>
+                                                        </span>
+                                                    </div>
+                                                    <!--                                                <div class="d-flex align-items-center">-->
+                                                    <!--                                                    <div class="rating">-->
+                                                    <!--                                                        <i class="icon-star-product active"></i>-->
+                                                    <!--                                                        <i class="icon-star-product active"></i>-->
+                                                    <!--                                                        <i class="icon-star-product active"></i>-->
+                                                    <!--                                                        <i class="icon-star-product active"></i>-->
+                                                    <!--                                                        <i class="icon-star-product"></i>-->
+                                                    <!--                                                    </div>-->
+                                                    <!--                                                    <span>(12)</span>-->
+                                                    <!--                                                </div>-->
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </t>
+                                </div>
+                            </div>
+                        </div>
+                    <a href="/products" class="btn btn-outline-orange small-btn centered-link">
+                        Lihat Semua
+                    <img src="/theme_alkeba/static/src/images/icon/next-arrow-orange.svg"/>
+                    </a>
+                    </div>
+                </section>
+            </t>
+
+            <t t-foreach="featured_categories" t-as="category">
+                <section class="product-choice mt-5">
+                    <div class="container-fluid">
+                        <div class="row middle-arrow list-product-choice">
+                            <div class="col-md-2">
+                                <div class="d-flex box-star-banner flex-wrap align-items-center text-center">
+                                    <div>
+                                        <div class="icon-box">
+                                            <img
+                                                t-attf-src="/web/image/product.public.category/{{ category.id }}/image_background"/>
+                                        </div>
+                                        <h2>
+                                            <t t-esc="category.name"/>
+                                        </h2>
+                                        <p>
+                                            <t t-esc="category.short_description"/>
+                                        </p>
+                                        <a t-attf-href="/products?categ={{ category.id }}" class="btn btn-secondary">
+                                            Belanja Sekarang
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-10 position-relative">
+                                <div class="slider best-product-slider">
+                                    <t t-set="count_pt_line" t-value="0"/>
+                                    <t t-foreach="category.product_tmpl_ids" t-as="tmpl">
+                                        <t t-foreach="tmpl.product_variant_ids" t-as="product">
+                                            <t t-if="count_pt_line &lt;= 10">
+                                                <a t-att-href="product.website_url" class="d-block">
+
+                                                    <div class="card card-product">
+                                                        <div class="card-img-top">
+                                                            <t t-if="product.image_256">
+                                                                <img t-att-src="image_data_uri(product.image_256)"
+                                                                     class="img-fluid" t-attf-alt="product.name"/>
+                                                            </t>
+                                                            <t t-else="">
+                                                                <img src="/web/static/img/placeholder.png"
+                                                                     class="img-fluid" alt="..."/>
+                                                            </t>
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <h5 class="card-title">
+                                                                <t t-esc="product.name"/>
+                                                            </h5>
+                                                            <t t-set="original_price" t-value="product.list_price"/>
+                                                            <t t-if="pricelist">
+                                                                <t t-foreach="pricelist.item_ids" t-as="pricelist_items">
+                                                                    <t t-if="product.id == pricelist_items.product_tmpl_id.id">
+                                                                        <p class="card-price price-discount">
+                                                                            Rp
+                                                                            <t t-esc="'{0:,.2f}'.format(int(pricelist_items.fixed_price))"/>
+                                                                            <span class="price-before">Rp
+                                                                                <t t-esc="'{0:,.2f}'.format(int(product.list_price))"/>
+                                                                            </span>
+                                                                        </p>
+                                                                    </t>
+                                                                </t>
+                                                                <t t-if="not product.id in list_pricelist_product_ids">
+                                                                    <p class="card-price">
+                                                                        Rp.
+                                                                        <t t-esc="'{0:,.2f}'.format(int(product.list_price))"/>
+                                                                    </p>
+                                                                </t>
+                                                                <!-- ========================================== -->
+                                                                <!-- <t t-set="pricelist_price"
+                                                                t-value="pricelist.get_product_price(product, 1, user_id.partner_id)"/>
+                                                                <t t-if="pricelist_price &gt; 0.0">
+                                                                    <t t-if="original_price &lt; pricelist_price">
+                                                                        <p class="card-price">
+                                                                            Rp.
+                                                                            <t t-esc="'{0:,.2f}'.format(int(original_price))"/>
+                                                                        </p>
+                                                                    </t>
+                                                                    <t t-if="pricelist_price &lt; original_price">
+                                                                        <p class="card-price price-discount">
+                                                                            Rp
+                                                                            <t t-esc="'{0:,.2f}'.format(int(pricelist_price))"/>
+                                                                            <span class="price-before">Rp
+                                                                                <t t-esc="'{0:,.2f}'.format(int(original_price))"/>
+                                                                            </span>
+                                                                        </p>
+                                                                    </t>
+                                                                    <t t-if="original_price == pricelist_price">
+                                                                        <p class="card-price">
+                                                                            Rp.
+                                                                            <t t-esc="'{0:,.2f}'.format(int(original_price))"/>
+                                                                        </p>
+                                                                    </t>
+                                                                </t>
+                                                                <t t-else="">
+                                                                    <p class="card-price">
+                                                                        Rp.
+                                                                        <t t-esc="'{0:,.2f}'.format(int(original_price))"/>
+                                                                    </p>
+                                                                </t> -->
+                                                            </t>
+                                                            <t t-else="">
+                                                                <p class="card-price">
+                                                                    Rp.
+                                                                    <t t-esc="'{0:,.2f}'.format(int(original_price))"/>
+                                                                </p>
+                                                            </t>
+                                                            <div>
+                                                                <t t-if="product.qty_available &gt; 0.0">
+                                                                    <span class="badge badge-success">Ready Stock</span>
+                                                                </t>
+                                                                <span class="badge badge-light">Terjual
+                                                                    <t t-esc="int(product.sales_count)"/>
+                                                                </span>
+                                                            </div>
+                                                            <!-- <div class="d-flex align-items-center">-->
+                                                            <!-- <div class="rating">-->
+                                                            <!-- <i class="icon-star-product active"></i>-->
+                                                            <!-- <i class="icon-star-product active"></i>-->
+                                                            <!-- <i class="icon-star-product active"></i>-->
+                                                            <!-- <i class="icon-star-product active"></i>-->
+                                                            <!-- <i class="icon-star-product"></i>-->
+                                                            <!-- </div>-->
+                                                            <!-- <span>(12)</span>-->
+                                                            <!-- </div>-->
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </t>
+                                            <t t-set="count_pt_line" t-value="count_pt_line + 1"/>
+                                        </t>
+                                    </t>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </t>
+            <!-- ================================================================================= -->
+            <!--            <section class="make-offer mt-5">-->
+            <!--                <div class="container-fluid">-->
+            <!--                    <div class="row">-->
+            <!--                        <div class="col-md-12">-->
+            <!--                            <div class="make-offer-form">-->
+            <!--                                <form>-->
+            <!--                                    <h2>Buat Penawaran</h2>-->
+            <!--                                    <p>Jelaskan mengenai barang yang Anda butuhkan untuk mendapat penawaran terbaik</p>-->
+            <!--                                    <div class="d-flex justify-content-evenly">-->
+            <!--                                        <div class="form-group">-->
+            <!--                                            <label>-->
+            <!--                                                Nama Barang-->
+            <!--                                            </label>-->
+            <!--                                            <input type="text" placeholder="Masukkan nama/jenis barang"-->
+            <!--                                                   class="form-control" name=""/>-->
+            <!--                                        </div>-->
+            <!--                                        <div class="form-group">-->
+            <!--                                            <label>-->
+            <!--                                                Kategori-->
+            <!--                                            </label>-->
+            <!--                                            <select class="form-control">-->
+            <!--                                                <option>-->
+            <!--                                                    Alat Kebersihan-->
+            <!--                                                </option>-->
+            <!--                                                <option>-->
+            <!--                                                    Kimia Pembersih-->
+            <!--                                                </option>-->
+            <!--                                                <option>-->
+            <!--                                                    Spare Part-->
+            <!--                                                </option>-->
+            <!--                                                <option>-->
+            <!--                                                    Masker-->
+            <!--                                                </option>-->
+            <!--                                            </select>-->
+            <!--                                        </div>-->
+            <!--                                    </div>-->
+            <!--                                    <div class="d-flex justify-content-evenly">-->
+            <!--                                        <div class="form-group">-->
+            <!--                                            <label>-->
+            <!--                                                Jumlah-->
+            <!--                                            </label>-->
+            <!--                                            <input type="text" placeholder="Masukkan Jumlah" class="form-control"-->
+            <!--                                                   name=""/>-->
+            <!--                                        </div>-->
+            <!--                                        <div class="form-group">-->
+            <!--                                            <label>-->
+            <!--                                                Satuan-->
+            <!--                                            </label>-->
+            <!--                                            <select class="form-control">-->
+            <!--                                                <option>-->
+            <!--                                                    Alat Kebersihan-->
+            <!--                                                </option>-->
+            <!--                                                <option>-->
+            <!--                                                    Kimia Pembersih-->
+            <!--                                                </option>-->
+            <!--                                                <option>-->
+            <!--                                                    Spare Part-->
+            <!--                                                </option>-->
+            <!--                                                <option>-->
+            <!--                                                    Masker-->
+            <!--                                                </option>-->
+            <!--                                            </select>-->
+            <!--                                        </div>-->
+            <!--                                    </div>-->
+            <!--                                    <div class="d-flex justify-content-end">-->
+            <!--                                        <button type="submit" class="btn btn-primary">Berikan Saya Penawaran</button>-->
+            <!--                                    </div>-->
+            <!--                                </form>-->
+            <!--                            </div>-->
+            <!--                        </div>-->
+            <!--                    </div>-->
+            <!--                </div>-->
+            <!--            </section>-->
+
+            <!--            <div class="news-tips mt-5">-->
+            <!--                <div class="container-fluid">-->
+            <!--                    <div class="mb-3 d-flex align-items-center pb-2 justify-content-between  heading-title">-->
+            <!--                        <h2 class="title mb-0 d-flex align-items-center">Berita &amp; Tips</h2>-->
+            <!--                        <a href="/news" class="btn btn-outline-orange small-btn">Lihat Semua Berita</a>-->
+            <!--                    </div>-->
+            <!--                    <div class="row middle-arrow m-0">-->
+            <!--                        <div class="insight-slider">-->
+            <!--                            <div class="col-md-3 col-6">-->
+            <!--                                <div class="post-slide5">-->
+            <!--                                    <div class="post-img">-->
+            <!--                                        <img src="/theme_alkeba/static/src/images/news_1.jpg" alt=""/>-->
+            <!--                                    </div>-->
+            <!--                                    <div class="post-review">-->
+            <!--                                        <img src="/theme_alkeba/static/src/images/logo-icon.png" class="logo-icon"/>-->
+            <!--                                        <h3 class="post-title">-->
+            <!--                                            <a href="#">Ini Dia, Tips Pengusaha Sukses untuk Memenangkan Pasar</a>-->
+            <!--                                        </h3>-->
+            <!--                                        <div class="post-bar">-->
+            <!--                                            <span class="post-date">22 September 2021</span>-->
+            <!--                                            <a href="" class="btn btn-link-orange">Baca Selengkapnya →</a>-->
+            <!--                                        </div>-->
+            <!--                                    </div>-->
+            <!--                                </div>-->
+            <!--                            </div>-->
+            <!--                            <div class="col-md-3 col-6">-->
+            <!--                                <div class="post-slide5">-->
+            <!--                                    <div class="post-img">-->
+            <!--                                        <img src="/theme_alkeba/static/src/images/news_2.jpg" alt=""/>-->
+            <!--                                    </div>-->
+            <!--                                    <div class="post-review">-->
+            <!--                                        <img src="/theme_alkeba/static/src/images/logo-icon.png" class="logo-icon"/>-->
+            <!--                                        <h3 class="post-title">-->
+            <!--                                            <a href="#">Ini Dia, Tips Pengusaha Sukses untuk Memenangkan Pasar</a>-->
+            <!--                                        </h3>-->
+            <!--                                        <div class="post-bar">-->
+            <!--                                            <span class="post-date">22 September 2021</span>-->
+            <!--                                            <a href="" class="btn btn-link-orange">Baca Selengkapnya →</a>-->
+            <!--                                        </div>-->
+            <!--                                    </div>-->
+            <!--                                </div>-->
+            <!--                            </div>-->
+            <!--                            <div class="col-md-3 col-6">-->
+            <!--                                <div class="post-slide5">-->
+            <!--                                    <div class="post-img">-->
+            <!--                                        <img src="/theme_alkeba/static/src/images/news_3.jpg" alt=""/>-->
+            <!--                                    </div>-->
+            <!--                                    <div class="post-review">-->
+            <!--                                        <img src="/theme_alkeba/static/src/images/logo-icon.png" class="logo-icon"/>-->
+            <!--                                        <h3 class="post-title">-->
+            <!--                                            <a href="#">Ini Dia, Tips Pengusaha Sukses untuk Memenangkan Pasar</a>-->
+            <!--                                        </h3>-->
+            <!--                                        <div class="post-bar">-->
+            <!--                                            <span class="post-date">22 September 2021</span>-->
+            <!--                                            <a href="" class="btn btn-link-orange">Baca Selengkapnya →</a>-->
+            <!--                                        </div>-->
+            <!--                                    </div>-->
+            <!--                                </div>-->
+            <!--                            </div>-->
+            <!--                            <div class="col-md-3 col-6">-->
+            <!--                                <div class="post-slide5">-->
+            <!--                                    <div class="post-img">-->
+            <!--                                        <img src="/theme_alkeba/static/src/images/news_4.jpg" alt=""/>-->
+            <!--                                    </div>-->
+            <!--                                    <div class="post-review">-->
+            <!--                                        <img src="/theme_alkeba/static/src/images/logo-icon.png" class="logo-icon"/>-->
+            <!--                                        <h3 class="post-title">-->
+            <!--                                            <a href="#">Ini Dia, Tips Pengusaha Sukses untuk Memenangkan Pasar</a>-->
+            <!--                                        </h3>-->
+            <!--                                        <div class="post-bar">-->
+            <!--                                            <span class="post-date">22 September 2021</span>-->
+            <!--                                            <a href="" class="btn btn-link-orange">Baca Selengkapnya →</a>-->
+            <!--                                        </div>-->
+            <!--                                    </div>-->
+            <!--                                </div>-->
+            <!--                            </div>-->
+            <!--                            <div class="col-md-3 col-6">-->
+            <!--                                <div class="post-slide5">-->
+            <!--                                    <div class="post-img">-->
+            <!--                                        <img src="/theme_alkeba/static/src/images/news_1.jpg" alt=""/>-->
+            <!--                                    </div>-->
+            <!--                                    <div class="post-review">-->
+            <!--                                        <img src="/theme_alkeba/static/src/images/logo-icon.png" class="logo-icon"/>-->
+            <!--                                        <h3 class="post-title">-->
+            <!--                                            <a href="#">Ini Dia, Tips Pengusaha Sukses untuk Memenangkan Pasar</a>-->
+            <!--                                        </h3>-->
+            <!--                                        <div class="post-bar">-->
+            <!--                                            <span class="post-date">22 September 2021</span>-->
+            <!--                                            <a href="" class="btn btn-link-orange">Baca Selengkapnya →</a>-->
+            <!--                                        </div>-->
+            <!--                                    </div>-->
+            <!--                                </div>-->
+            <!--                            </div>-->
+            <!--                            <div class="col-md-3 col-6">-->
+            <!--                                <div class="post-slide5">-->
+            <!--                                    <div class="post-img">-->
+            <!--                                        <img src="/theme_alkeba/static/src/images/news_2.jpg" alt=""/>-->
+            <!--                                    </div>-->
+            <!--                                    <div class="post-review">-->
+            <!--                                        <img src="/theme_alkeba/static/src/images/logo-icon.png" class="logo-icon"/>-->
+            <!--                                        <h3 class="post-title">-->
+            <!--                                            <a href="#">Ini Dia, Tips Pengusaha Sukses untuk Memenangkan Pasar</a>-->
+            <!--                                        </h3>-->
+            <!--                                        <div class="post-bar">-->
+            <!--                                            <span class="post-date">22 September 2021</span>-->
+            <!--                                            <a href="" class="btn btn-link-orange">Baca Selengkapnya →</a>-->
+            <!--                                        </div>-->
+            <!--                                    </div>-->
+            <!--                                </div>-->
+            <!--                            </div>-->
+            <!--                            <div class="col-md-3 col-6">-->
+            <!--                                <div class="post-slide5">-->
+            <!--                                    <div class="post-img">-->
+            <!--                                        <img src="/theme_alkeba/static/src/images/news_3.jpg" alt=""/>-->
+            <!--                                    </div>-->
+            <!--                                    <div class="post-review">-->
+            <!--                                        <img src="/theme_alkeba/static/src/images/logo-icon.png" class="logo-icon"/>-->
+            <!--                                        <h3 class="post-title">-->
+            <!--                                            <a href="#">Ini Dia, Tips Pengusaha Sukses untuk Memenangkan Pasar</a>-->
+            <!--                                        </h3>-->
+            <!--                                        <div class="post-bar">-->
+            <!--                                            <span class="post-date">22 September 2021</span>-->
+            <!--                                            <a href="" class="btn btn-link-orange">Baca Selengkapnya →</a>-->
+            <!--                                        </div>-->
+            <!--                                    </div>-->
+            <!--                                </div>-->
+            <!--                            </div>-->
+            <!--                            <div class="col-md-3 col-6">-->
+            <!--                                <div class="post-slide5">-->
+            <!--                                    <div class="post-img">-->
+            <!--                                        <img src="/theme_alkeba/static/src/images/news_4.jpg" alt=""/>-->
+            <!--                                    </div>-->
+            <!--                                    <div class="post-review">-->
+            <!--                                        <img src="/theme_alkeba/static/src/images/logo-icon.png" class="logo-icon"/>-->
+            <!--                                        <h3 class="post-title">-->
+            <!--                                            <a href="#">Ini Dia, Tips Pengusaha Sukses untuk Memenangkan Pasar</a>-->
+            <!--                                        </h3>-->
+            <!--                                        <div class="post-bar">-->
+            <!--                                            <span class="post-date">22 September 2021</span>-->
+            <!--                                            <a href="" class="btn btn-link-orange">Baca Selengkapnya →</a>-->
+            <!--                                        </div>-->
+            <!--                                    </div>-->
+            <!--                                </div>-->
+            <!--                            </div>-->
+            <!--                        </div>-->
+            <!--                    </div>-->
+            <!--                </div>-->
+            <!--            </div>-->
+
+            <section class="alkeba-benefit mt-5">
+                <div class="container-fluid">
+                    <div class="mb-3 d-flex align-items-center pb-2 justify-content-center">
+                        <h2 id="text-whyus" class="title mb-0 d-flex align-items-center">Kenapa Anda Memilih Alkeba?</h2>
+                    </div>
+                    <div class="d-flex benefit-slider">
+                        <div class="list-benefit">
+                            <img src="/theme_alkeba/static/src/images/alkeba_icon/2.png"/>
+                            <h6 style="text-align:center;font-weight:bold;">Gratis Ongkir</h6>
+                            <p style="text-align:center;">Dapatkan keuntungan gratis ongkir khusus member Alkeba.id</p>
+                        </div>
+                        <div class="list-benefit">
+                            <img src="/theme_alkeba/static/src/images/alkeba_icon/1.png"/>
+                            <h6 style="text-align:center;font-weight:bold;">24Jam Support</h6>
+                            <p style="text-align:center;">Kami Siap Melayani Demi Pengalaman Belanja Yang Mudah</p>
+                        </div>
+                        <div class="list-benefit">
+                            <img src="/theme_alkeba/static/src/images/alkeba_icon/4.png"/>
+                            <h6 style="text-align:center;font-weight:bold;">Mesin Bergaransi</h6>
+                            <p style="text-align:center;">Setiap Mesin Yang Dibeli Memiliki Garansi Selama 2 Tahun</p>
+                        </div>
+                        <div class="list-benefit">
+                            <img src="/theme_alkeba/static/src/images/alkeba_icon/5.png"/>
+                            <h6 style="text-align:center;font-weight:bold;">Pembayaran Aman &amp; Mudah</h6>
+                            <p style="text-align:center;">Anda Dapat Melakukan Pembayaran Melalui Banyak Bank</p>
+                        </div>
+                        <div class="list-benefit">
+                            <img src="/theme_alkeba/static/src/images/alkeba_icon/3.png"/>
+                            <h6 style="text-align:center;font-weight:bold;">Harga Terbaik</h6>
+                            <p style="text-align:center;">Kami Menjual Produk Dengan Harga Yang Kompetitif</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </t>
+    </template>
+
+</odoo>

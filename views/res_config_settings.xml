@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="theme_alkeba_res_config_settings_view_form" model="ir.ui.view">
+            <field name="name">res.config.settings.view.form.inherit.theme.alkeba</field>
+            <field name="model">res.config.settings</field>
+            <field name="inherit_id" ref="website.res_config_settings_view_form"/>
+            <field name="arch" type="xml">
+
+                <div id="gift_card_programs" position="after">
+                    <div class="col-12 col-lg-6 o_setting_box" id="alkeba_website_active_product_pricelist">
+                        <div class="o_setting_left_pane"/>
+                        <div class="o_setting_right_pane" name="alkeba_website_active_product_pricelist">
+                            <span class="o_form_label">Active Pricelist</span>
+                            <div class="text-muted">
+                                Pricelist used for defining product price in website
+                            </div>
+                            <div class="text-muted">
+                                <field name="website_pricelist_id"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <xpath expr="//div[@id='website_settings']" position="inside">
+                    <div class="col-12 col-lg-6 o_setting_box" id="custom_field_section">
+                        <!-- <div class="o_setting_left_pane"> -->
+                            <label string="Text for Website Header Promo" for="website_dynamic_text"/>
+                        <!-- </div> -->
+                        <div class="o_setting_right_pane">
+                            <field name="website_dynamic_text"/>
+                        </div>
+                    </div>
+                </xpath>
+
+            </field>
+        </record>
+
+    </data>
+</odoo>

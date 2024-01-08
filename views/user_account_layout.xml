@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <template id="alkeba_user_page_layout" name="Alkeba User Page Layout">
+            <t t-call="theme_alkeba.alkeba_bradcrumbs_empty_bottom">
+
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12 greeting-user">
+                            <h2 class="mb-4 mt-4">Selamat datang,
+                                <t t-esc="user['name']"/>
+                            </h2>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="sidebar-user">
+                                <div class="d-flex">
+                                    <span class="ava-user">
+                                        <t t-set="avatar_source" t-value="image_data_uri(user_id.avatar_256)"/>
+                                        <img t-att-src="avatar_source"/>
+                                    </span>
+                                    <div>
+                                        <h6>
+                                            <t t-esc="user['name']"/>
+                                        </h6>
+                                        <span class="badge-account">
+                                            <i class="icon-user"></i>
+                                            Akun Personal
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="box-riwayat-poin">
+                                    <div class="d-flex justify-content-start">
+                                        <img src="/theme_alkeba/static/src/images/poin-logo.svg"/>
+                                        <div>
+                                            <p>Poin Alkeba</p>
+                                            <h2>
+                                                <!-- <t t-esc="user['partner_id'].point"/> -->
+                                                <t t-esc="user_id.partner_id.point"/>
+                                            </h2>
+<!--                                            <a href="">Cek riwayat poin</a>-->
+                                        </div>
+                                    </div>
+                                </div>
+<!--                                <a href="#" class="btn btn-outline w-100 mb-3">Daftar Akun B2B</a>-->
+                                <t t-if="active_menu == 'dashboard'">
+                                    <a class="dropdown-item active" href="/dashboard">
+                                        <i class="icon-home"></i>
+                                        Dashboard
+                                    </a>
+                                </t>
+                                <t t-else="">
+                                    <a class="dropdown-item" href="/dashboard">
+                                        <i class="icon-home"></i>
+                                        Dashboard
+                                    </a>
+                                </t>
+
+                                <t t-if="active_menu == 'my_order'">
+                                    <a class="dropdown-item active" href="/my-orders">
+                                        <i class="icon-shopping-bag"></i>
+                                        Pesanan Saya
+                                    </a>
+                                </t>
+                                <t t-else="">
+                                    <a class="dropdown-item" href="/my-orders">
+                                        <i class="icon-shopping-bag"></i>
+                                        Pesanan Saya
+                                    </a>
+                                </t>
+
+                                <t t-if="active_menu == 'address_setting'">
+                                    <a class="dropdown-item active" href="/address-settings">
+                                        <i class="icon-location-marker"></i>
+                                        Pengaturan Alamat
+                                    </a>
+                                </t>
+                                <t t-else="">
+                                    <a class="dropdown-item" href="/address-settings">
+                                        <i class="icon-location-marker"></i>
+                                        Pengaturan Alamat
+                                    </a>
+                                </t>
+
+                                <t t-if="active_menu == 'my_review'">
+                                    <a class="dropdown-item active" href="/my-reviews">
+                                        <i class="icon-pencil-alt"></i>
+                                        Ulasan Saya
+                                    </a>
+                                </t>
+                                <t t-else="">
+                                    <a class="dropdown-item" href="/my-reviews">
+                                        <i class="icon-pencil-alt"></i>
+                                        Ulasan Saya
+                                    </a>
+                                </t>
+
+                                <t t-if="active_menu == 'wishlist'">
+                                    <a class="dropdown-item active" href="/wishlist">
+                                        <i class="icon-heart"></i>
+                                        Wishlist
+                                    </a>
+                                </t>
+                                <t t-else="">
+                                    <a class="dropdown-item" href="/wishlist">
+                                        <i class="icon-heart"></i>
+                                        Wishlist
+                                    </a>
+                                </t>
+
+                                <t t-if="active_menu == 'account_setting'">
+                                    <a class="dropdown-item active" href="/account-settings">
+                                        <i class="icon-cog"></i>
+                                        Pengaturan Akun
+                                    </a>
+                                </t>
+                                <t t-else="">
+                                    <a class="dropdown-item" href="/account-settings">
+                                        <i class="icon-cog"></i>
+                                        Pengaturan Akun
+                                    </a>
+                                </t>
+
+                                <a class="dropdown-item" t-attf-href="/web/session/logout?redirect=/">
+                                    <i class="icon-logout-1"></i>
+                                    Keluar
+                                </a>
+<!--                                <a href="" class="banner-b2b-daftar mt-3">-->
+<!--                                    <img src="/theme_alkeba/static/src/images/banner-sidebar.png"/>-->
+<!--                                </a>-->
+                            </div>
+                        </div>
+
+                        <t t-out="0"/>
+                    </div>
+                </div>
+
+            </t>
+        </template>
+
+    </data>
+</odoo>

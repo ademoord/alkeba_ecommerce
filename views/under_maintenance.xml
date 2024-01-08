@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<template id="alkeba_under_maintenance" name="Alkeba Under Maintenance">
+		<t t-call="theme_alkeba.alkeba_bradcrumbs_empty_bottom">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-md-8 m-auto">
+						<div class="text-center mt-4 mb-5">
+							<img src="/theme_alkeba/static/src/images/under_maintenance.png"
+							style="height:auto;max-width:80%;"
+							/>
+						</div>
+					</div>
+				</div>
+			</div>	
+		</t>
+	</template>
+</odoo>        

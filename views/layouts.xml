@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="alkeba_custom_layout" inherit_id="website.layout" name="Alkeba Custom Layout">
+        <xpath expr="//div[@id='wrapwrap']" position="before">
+            <div id="overlay">
+                <div id="progstat"></div>
+                <div id="progress"></div>
+            </div>
+        </xpath>
+    </template>
+</odoo>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="alkeba_tracking_order_shipment_detail" name="Alkeba Order Tracking Shipment Detail">
+        <t t-call="theme_alkeba.alkeba_user_page_layout">
+            <div class="col-md-9">
+                <div class="card mt-3 my-order-list ">
+                    <div class="tab-filter-order">
+                        <p>
+                            <b>Lacak Pesanan <t t-esc="sale_order_id.name"/></b>
+                        </p>
+                    </div>
+                    <hr/>
+                    <t t-if="history">
+                        <div class="address-info-card">
+                            <div class="address-card-content">
+                                <div class="address-label" tabindex="0">Alamat Pengiriman</div>
+                                <div class="recipient-info">
+                                    <div class="recipient-name">
+                                        <b><t t-esc="user['name']" /></b>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="delivery-details">
+                                <div class="recipient">
+                                    <div class="recipient-contact">
+                                        <t t-esc="destination" /><br/>
+                                        No Resi: <t t-esc="sale_order_id.no_resi"/><br/>
+                                        <t t-if="sale_order_id.warehouse_id.name == 'Toko'">
+                                            Lion Parcel <t t-esc="sale_order_id.selected_service_lionbdg"/><br/>
+                                        </t>
+                                        <t t-elif="sale_order_id.warehouse_id.name == 'Jakarta'">
+                                            Lion Parcel <t t-esc="sale_order_id.selected_service_lionjkt"/><br/>
+                                        </t>
+                                        <t t-else="">
+                                            Lion Parcel <t t-esc="sale_order_id.selected_service_lionsby"/><br/>
+                                        </t>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    <div class="status-card">
+                        <div class="status-card-content">
+                            <t t-foreach="history" t-as="status">
+                                <div class="status-item">
+                                    <div class="status-timeline">
+                                        <div class="status-point"></div>
+                                    </div>
+                                    <div class="status-details">
+                                        <div class="status-time"><t t-esc="status['datetime']" /></div>
+                                        <div class="status-description">
+                                            <p class="status-label"><t t-esc="status['remarks']" /></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </t>
+                        </div>
+                    </div>
+                    </t>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>

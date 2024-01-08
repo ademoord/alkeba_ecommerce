@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <!-- <template id="alkeba_footer" inherit_id="website.layout" name="Alkeba Footer"> -->
+        <template id="alkeba_footer" inherit_id="website.footer_custom" name="Alkeba Footer">
+            
+            <xpath expr="//div[@class='o_footer_copyright o_colored_level o_cc']" position="replace"></xpath>
+            <xpath expr="//section[@class='s_text_block pt40 pb16']" position="replace"></xpath>
+            <!-- <xpath expr="//div[@id='footer']" position="replace"> -->
+            <xpath expr="//footer[@id='bottom']" position="before">
+                <div class="footer">
+                    <div class="footer-top">
+                        <div class="container-fluid">
+                            <div class="row d-flex justify-content-between">
+                                <div class="col-md-7">
+                                    <img src="/theme_alkeba/static/src/images/logo-alkeba-black.svg" class="img-fluid"/>
+                                    <h4 class="mb-2 mt-3">Solusi Total e-procurement B2B &amp; B2C Produk Kebersihan di
+                                        Indonesia
+                                    </h4>
+                                    <p id="footer-company-text">
+                                        Alkeba adalah e-commerce pertama di Indonesia yang fokus kepada
+                                        kebutuhan peralatan kebersihan dan sanitary. Alkeba hadir menjadi mitra
+                                        strategis usaha anda baik untuk kebutuhan peralatan cleaning hospitality,
+                                        support pekerjaan cleaning service, perkantoran atau pun kebutuhan peralatan
+                                        kebersihan hunian pribadi.
+                                    </p>
+                                </div>
+                                <!-- DINYALAKAN APABILA SMTP SUDAH AKTIF DAN BERITA SUDAH DAILY DI BIKIN -->
+                                <!-- <div class="col-md-4">
+                                    <div class="newsletter-form">
+                                        <h6>NEWSLETTER</h6>
+                                        <form class="d-flex justify-content-between">
+                                            <input type="text" name="" placeholder="Masukkan Email Anda.."
+                                                   class="form-control"/>
+                                            <button type="submit" class="btn btn-secondary rounded-0">
+                                                <img src="/theme_alkeba/static/src/images/icon/newsletter.svg"/>
+                                            </button>
+                                        </form>
+                                        <p>Dapatkan promo-promo menarik setiap hari.</p>
+                                    </div>
+                                </div> -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="footer-bottom pt-4">
+                        <div class="container-fluid">
+                            <div class="row d-flex justify-content-between">
+                                <div class="col-md-3 text-center">
+                                    <img src="/theme_alkeba/static/src/images/revisi 11.png"/>
+<!--                                    <div class="d-flex justify-content-between mt-3">-->
+<!--                                        <a href="" class="me-2">-->
+<!--                                            <img src="/theme_alkeba/static/src/images/download_app_1.png"/>-->
+<!--                                        </a>-->
+<!--                                        <a href="">-->
+<!--                                            <img src="/theme_alkeba/static/src/images/download_app_2.png"/>-->
+<!--                                        </a>-->
+<!--                                    </div>-->
+                                </div>
+                                <div class="col-md-3">
+                                    <h6 class="mb-2">Layanan Pelanggan</h6>
+                                    <ul class="list-unstyled support-alkeba">
+                                        <li>
+                                        </li>
+                                        <li>
+                                            <a href="" class="link-dark">
+                                                <img src="/theme_alkeba/static/src/images/icon/contact_2.svg"/>
+                                                081223551615
+                                                <br/>
+                                                082113843335
+                                                <br/>
+                                                (022) 20534324
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="" class="link-dark">
+                                                <img src="/theme_alkeba/static/src/images/icon/contact_3.svg"/>
+                                                alkebaofficial@alkeba.id
+                                            </a>
+                                        </li>
+                                        <li style="padding-top:10px;">
+                                            <a href="https://api.whatsapp.com/send?phone=6283817934830&amp;text=Saya%20tertarik%20untuk%20membeli%20produk%20Alkeba" class="link-dark">
+                                                <img style="max-width:20px;" src="/theme_alkeba/static/src/images/icon/whatsapp-icon.svg"/>
+                                                Whatsapp Admin Alkeba
+                                            </a>                                   
+                                        </li>
+                                    </ul>
+                                    <div class="follow-alkeba mt-2">
+                                        <span class="me-2">Temukan Alkeba di</span>
+                                        <ul class="list-unstyled">
+                                            <!-- <li>
+                                                <a href="">
+                                                    <img src="/theme_alkeba/static/src/images/social/social-01.svg"/>
+                                                </a>
+                                            </li>
+                                            -->
+                                            <!-- <li>
+                                                <a href="">
+                                                    <img src="/theme_alkeba/static/src/images/social/tiktok.svg"/>
+                                                </a>
+                                            </li>  -->
+                                            <li>
+                                                <a href="https://www.tiktok.com/@alkeba.store">
+                                                    <img src="/theme_alkeba/static/src/images/social/tiktok.svg" style="height:20px;width:2opx;"/>
+                                                </a>
+                                            </li> 
+                                            <li>
+                                                <a href="https://www.youtube.com/channel/UCMm38_2UEzrJElitL8xSZ6w/videos">
+                                                    <img src="/theme_alkeba/static/src/images/social/social-03.svg"/>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="https://www.instagram.com/alkeba.id/?hl=en">
+                                                    <img src="/theme_alkeba/static/src/images/social/social-04.svg"/>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="https://www.linkedin.com/company/alkebaid/">
+                                                    <img src="/theme_alkeba/static/src/images/social/social-05.svg"/>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <h6 class="mb-2">TENTANG KAMI</h6>
+                                    <ul class="list-unstyled">
+                                        <li>
+                                            <a href="/about-us" class="link-dark">Tentang Alkeba</a>
+                                        </li>
+                                        <li>
+                                            <a href="/privacy-policy" class="link-dark">Kebijakan Privasi</a>
+                                        </li>
+                                        <li>
+                                            <a href="/payment-instructions" class="link-dark">Cara Pembayaran</a>
+                                        </li>
+                                        <li>
+                                            <a href="/contact-us" class="link-dark">Kontak Kami</a>
+                                        </li>
+                                        <li>
+                                            <a href="/terms" class="link-dark">Syarat &amp; Ketentuan</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <!-- <div class="col-md-3">
+                                    <h6 class="mb-2">FAQ</h6>
+                                    <ul class="list-unstyled">
+
+                                    </ul>
+                                </div> -->
+                                <div class="col-md-3">
+                                    <h6 class="mb-2">BANDUNG</h6>
+                                    <ul class="list-unstyled mb-4">
+                                        <li>
+                                            <p>Ruko Harmoni, Kavling 8-9
+                                                <br/>
+                                                Jl. Terusan Jakarta No. 181 Antapani Kidul, 40291
+                                            </p>
+                                        </li>
+                                    </ul>
+                                    <h6 class="mb-2">JAKARTA</h6>
+                                    <ul class="list-unstyled">
+                                        <li>
+                                            <p>
+                                                Kav. DKI Blok F No. 2
+                                                <br/>
+                                                Jl. Swadaya Raya
+                                                <br/>
+                                                Duren Sawit, Jakarta Timur
+                                            </p>
+                                        </li>
+                                    </ul>
+                                    <h6 class="mb-2">SURABAYA</h6>
+                                    <ul class="list-unstyled">
+                                        <li>
+                                            <p>
+                                                Jl. Kutisari I No.26, Kutisari, Tenggilis Mejoyo
+                                                <br/>
+                                                Surabaya, Jawa Timur 60291
+                                            </p>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="method-info mt-4">
+                        <div class="container-fluid">
+                            <div class="row d-flex justify-content-between">
+                                <div class="col-md-6">
+                                    <h6>Metode Pembayaran</h6>
+                                    <ul>
+                                        <li>
+                                            <img src="/theme_alkeba/static/src/images/metode/payment_1.png"/>
+                                        </li>
+                                        <li>
+                                            <img src="/theme_alkeba/static/src/images/metode/payment_2.png"/>
+                                        </li>
+                                        <li>
+                                            <img src="/theme_alkeba/static/src/images/metode/payment_3.png"/>
+                                        </li>
+                                        <li>
+                                            <img src="/theme_alkeba/static/src/images/metode/payment_4.png"/>
+                                        </li>
+                                        <!-- <li>
+                                            <img src="/theme_alkeba/static/src/images/metode/payment_5.png"/>
+                                        </li> -->
+                                        <!-- <li>
+                                            <img src="/theme_alkeba/static/src/images/metode/payment_6.png"/>
+                                        </li> -->
+                                        <li>
+                                            <img src="/theme_alkeba/static/src/images/metode/payment_7.png"/>
+                                        </li>
+                                        <li>
+                                            <img src="/theme_alkeba/static/src/images/metode/payment_8.png"/>
+                                        </li>
+                                        <!-- <li>
+                                            <img src="/theme_alkeba/static/src/images/metode/payment_9.png"/>
+                                        </li> -->
+                                        <!-- <li>
+                                            <img src="/theme_alkeba/static/src/images/metode/payment_10.png"/>
+                                        </li> -->
+                                    </ul>
+                                </div>
+                                <div class="col-md-6">
+                                    <h6>Jasa Pengiriman</h6>
+                                    <ul>
+                                        <!-- <li>
+                                            <img src="/theme_alkeba/static/src/images/metode/pengiriman_1.png"/>
+                                        </li> -->
+                                        <li>
+                                            <img src="/theme_alkeba/static/src/images/metode/pengiriman_2.png"/>
+                                        </li>
+                                        <!-- <li>
+                                            <img src="/theme_alkeba/static/src/images/metode/pengiriman_3.png"/>
+                                        </li> -->
+                                        <!-- <li>
+                                            <img src="/theme_alkeba/static/src/images/metode/pengiriman_4.png"/>
+                                        </li> -->
+                                        <!-- <li>
+                                            <img src="/theme_alkeba/static/src/images/metode/pengiriman_5.png"/>
+                                        </li> -->
+                                        <!-- <li>
+                                            <img src="/theme_alkeba/static/src/images/metode/pengiriman_6.png"/>
+                                        </li> -->
+                                        <!-- <li>
+                                            <img src="/theme_alkeba/static/src/images/metode/pengiriman_7.png"/>
+                                        </li> -->
+                                        <!-- <li>
+                                            <img src="/theme_alkeba/static/src/images/metode/pengiriman_8.png"/>
+                                        </li> -->
+                                        <!-- <li>
+                                            <img src="/theme_alkeba/static/src/images/metode/pengiriman_9.png"/>
+                                        </li> -->
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="copyright pt-4 pb-4">
+                        <div class="container-fluid text-center">
+                            <p>Hak Cipta © PT Sinergi Pangan Sawargi</p>
+                            <p>Disclaimer: Foto produk pada website ini adalah hak kekayaan intelektual dari alkeba
+                                yang diatur dan dilindungi oleh peraturan perundang - undangan indonesia
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </template>
+    </data>
+</odoo>

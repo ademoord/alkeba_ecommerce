@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="alkeba_dashboard_customer" name="Alkeba Dashboard Customer">
+        <t t-call="theme_alkeba.alkeba_user_page_layout">
+
+            <div class="col-md-9">
+                <h6>Dashboard</h6>
+                <div class="buyer-info">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="d-flex justify-content-between mb-3">
+                                    <h6 class="mb-0">Profil personal</h6>
+                                    <!--                                    <a href="javascript:void(0)" data-bs-toggle="modal"-->
+                                    <!--                                       data-bs-target="#UbahProfilModal" class="btn btn-link-orange pt-0">Ubah-->
+                                    <!--                                    </a>-->
+                                </div>
+                                <div class="mt-2">
+                                    <p>
+                                        <b>
+                                            <t t-esc="partner.name"/>
+                                        </b>
+                                        <br/>
+                                        <t t-esc="partner.email"/>
+                                        <br/>
+                                        <t t-esc="partner.mobile"/>
+                                    </p>
+                                </div>
+                                <!--                                <div class="checkbox mb-3 mt-4">-->
+                                <!--                                    <input type="checkbox" id="checkAll" checked="checked"/>-->
+                                <!--                                    <label for="checkAll">Menerima Email Marketing</label>-->
+                                <!--                                </div>-->
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card">
+                                <div class="d-flex justify-content-between mb-2">
+                                    <h6 class="mb-2">Alamat Saya</h6>
+
+                                    <!--                                    <a href="javascript:void(0)" data-bs-toggle="modal"-->
+                                    <!--                                       data-bs-target="#TambahAlamatPengirimanModal"-->
+                                    <!--                                       class="btn btn-link-orange pt-0">+ Tambah Alamat-->
+                                    <!--                                    </a>-->
+                                </div>
+                                <!--=============================================  -->
+                                <t t-if="address.id == false">
+                                    <div class="AlertAddress">
+                                    <!-- ======================== -->
+                                        <div id="deliveryAddress">
+                                            <center>
+                                                <img src="/theme_alkeba/static/src/images/icon/remove.png" style="width:30px; padding-top:30px;"/>
+                                                <br/>
+                                                <p>
+                                                    <b style="color:#000000; font-size: 25px;">
+                                                        Alamat Masih Kosong
+                                                    </b>
+                                                </p>
+                                            </center>
+                                        </div>
+                                    </div>
+                                </t>
+                                <t t-if="address.is_primary_address">
+                                    <div class="d-flex mt-2">
+                                        <div class="address-info">
+                                            <p class="mb-2">Alamat Pengiriman Anda</p>
+                                            <p>
+                                                <i class="icon-location-marker"></i>
+                                                <b>
+                                                    <t t-esc="address.name"/>
+                                                </b>
+                                                <br/>
+                                                <t t-esc="address.street"/>,
+                                                Desa/Kel.<t t-esc="address.village_ids.name"/>, Kec.<t
+                                                t-esc="address.districts_ids.name"/>,
+                                                Kota/Kab.<t t-esc="address.city_ids.name"/>,
+                                                <t t-esc="address.state_ids.name"/>
+                                                <t t-esc="address.zip"/>
+                                            </p>
+                                            <!--                                        <a href="#" data-bs-toggle="modal"-->
+                                            <!--                                           data-bs-target="#UbahAlamatPengirimanModal"-->
+                                            <!--                                           class="btn btn-link-orange">Ubah-->
+                                            <!--                                        </a>-->
+                                        </div>
+                                    </div>
+                                </t>
+                                    <!--                                    <div class="address-info">-->
+                                    <!--                                        <p class="mb-2">Alamat Penagihan Anda</p>-->
+                                    <!--                                        <p>-->
+                                    <!--                                            <i class="icon-location-marker"></i>-->
+                                    <!--                                            <b>Rumah</b>-->
+                                    <!--                                            <br/>-->
+                                    <!--                                            Jl. Industri II No.7, Utama, Kec. Cimahi Selatan, Kota Cimahi, Jawa-->
+                                    <!--                                            Barat 40533-->
+                                    <!--                                        </p>-->
+                                    <!--                                        <a href="#" data-bs-toggle="modal"-->
+                                    <!--                                           data-bs-target="#UbahAlamatPenagihanModal"-->
+                                    <!--                                           class="btn btn-link-orange">Ubah-->
+                                    <!--                                        </a>-->
+                                    <!--                                    </div>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card mt-3 my-order-list ">
+                    <h6 class="mb-0"><b>Pesanan Terakhir</b></h6>
+                    <t t-if="order_all">
+                        <div id="order-tabContent">
+                            <div id="semua-tab" class="tabs-content">
+                                <t t-foreach="order_all" t-as="order">
+                                    <div class="card card-order">
+                                        <div class="card-header d-flex justify-content-between">
+                                            <div class="form-group">
+                                                <label class="grey">Nomor Pesanan</label>
+                                                <p>
+                                                   <b>
+                                                       <t t-esc="order.name"/>
+                                                   </b>
+                                                </p>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="grey">Tanggal Pesanan</label>
+                                                <p>
+                                                   <b>
+                                                       <t t-esc="order.date_order"/>
+                                                   </b>
+                                                </p>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="grey">Metode Pembayaran</label>
+                                                <p>
+                                                   <b>
+                                                       <t t-esc="order.payment_option"/>
+                                                   </b>
+                                                </p>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="grey">Total Pembayaran</label>
+                                                <p>
+                                                   <b>
+                                                        Rp <t t-esc="'{0:,.2f}'.format(int(order.amount_untaxed))"/>
+                                                   </b>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="card-body pb-0">
+                                            <div class="d-flex">
+                                                <p class="mb-0 me-3">
+                                                    <b>Pesanan Saya (2)</b>
+                                                </p>
+                                                <span class="badge badge-light-blue badge-sm">
+                                                   <t t-esc="order.delivery_state"/>
+                                                </span>
+                                            </div>
+                                          
+                                                <table class="table mb-0">
+                                                    <tbody>
+                                                        <t t-foreach="order['order_line']" t-as="product">
+                                                            <t t-if="product.product_id.detailed_type != 'service'">
+                                                                <tr>
+                                                                    <td width="45%">
+                                                                        <div class="d-flex">
+                                                                            <div class="left-cart">
+                                                                                <t t-if="product.product_id.image_1920">
+                                                                                    <img t-att-src="image_data_uri(product.product_id.image_1920)"
+                                                                                        class="img-fluid"
+                                                                                        alt="..."/>
+                                                                                </t>
+                                                                                <t t-else="">
+                                                                                    <img src="/theme_alkeba/static/src/images/tmp/test_img_replacer.png" class="img-fluid" alt="No Image"/>
+                                                                                </t>
+                                                                            </div>
+                                                                            <div class="right-cart">
+                                                                                <t t-esc="product.product_id.name"/>
+                                                                                <div class="d-block">
+                                                                                    <span>Berat: <t t-esc="product.product_id.weight"/></span>
+                                                                                    <span>SKU: 976006MT</span>
+                                                                                </div>
+                                                                                <div class="notes-form edited saved">
+                                                                                    <i class="icon-document-text"></i>
+                                                                                    <p>Notes</p>
+                                                                                    <div class="notes-input">
+                                                                                        <textarea class="auto-grow" disabled="disabled">
+                                                                                            <t t-esc="product.name"/>
+                                                                                        </textarea>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td width="20%" valign="middle">
+                                                                        <p>
+                                                                            <b>Qty: <t t-esc="product.product_uom_qty"/></b>
+                                                                        </p>
+                                                                    </td>
+                                                                    <!-- DONT REMOVE IT< DISCUSS ABOUT IT -->
+                                                                    <!-- ================================ -->
+                                                                    <!-- <td width="15%" valign="middle">
+                                                                        <div class="card-product h-auto">
+                                                                            <p class="card-price price-discount">Rp.32.500
+                                                                                <span class="price-before">Rp.35.000</span>
+                                                                            </p>
+                                                                        </div>
+                                                                    </td> -->
+                                                                    <td width="10%" valign="middle" align="center">
+                                                                        <div class="card-product h-auto">
+                                                                            <p class="card-price">
+                                                                                Rp <t t-esc="'{0:,.2f}'.format(int(product.price_unit))"/>
+                                                                            </p>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                            </t>
+                                                        </t>
+                                                    </tbody>
+                                                </table>
+                                          
+                                            <div class="card-footer d-flex justify-content-between align-items-baseline  mt-0 border-0">
+                                               <a t-attf-href="/order/{{ order.id }}" class="btn btn-link">Lihat Detail Pesanan</a>
+                                               <div class="d-flex">
+                                                    <a href="" class="btn btn-outline-orange me-3">Batalkan Pesanan</a>
+                                                    <a href="" class="btn btn-primary">Bayar Sekarang</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </t>
+                            </div>
+                        </div>
+                    </t>
+                    <t t-if="not order_all">
+                        <div class="col-7 m-auto blankslate text-center">
+                           <img src="/theme_alkeba/static/src/images/blankslate-order.png" />
+                           <h6><b>Anda belum pernah melakukan Transaksi.</b></h6>
+                           <p>Yuk, mulai belanja dan penuhi berbagai kebutuhanmu Alat Kebersihan di Alkeba Store</p>
+                           <a href="/products" class="btn btn-primary">
+                              <i class="icon-shopping-bag"></i> Mulai Belanja
+                           </a>
+                        </div>
+                    </t>
+                </div>
+            </div>
+
+        </t>
+    </template>
+</odoo>

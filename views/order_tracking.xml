@@ -1,0 +1,1305 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="alkeba_tracking_order_shipment" name="Alkeba Order Tracking Shipment">
+        <t t-call="theme_alkeba.alkeba_user_page_layout">
+            <div class="col-md-9">
+                <div class="card mt-3 my-order-list ">
+                    <div class="tab-filter-order">
+                        <p>
+                            <b>Lacak Pesanan Saya</b>
+                        </p>
+                    </div>
+                    <hr/>
+                    <t t-if="order_all">
+                        <div id="order-tabContent">
+                            <div id="semua-tab" class="tabs-content">
+                                <t t-foreach="order_all" t-as="order">
+                                    <div class="card card-order">
+                                        <div class="card-header d-flex justify-content-between">
+                                            <div class="form-group">
+                                                <label class="grey">Nomor Pesanan</label>
+                                                <p>
+                                                    <b>
+                                                        <t t-esc="order.name"/>
+                                                    </b>
+                                                </p>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="grey">Tanggal Pesanan</label>
+                                                <p>
+                                                    <b>
+                                                        <t t-esc="order.date_order"/>
+                                                    </b>
+                                                </p>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="grey">Total Pembayaran</label>
+                                                <p>
+                                                    <b>Rp <t t-esc="'{0:,.2f}'.format(int(order.amount_untaxed))"/></b>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="card-body pb-0">
+                                            <div class="d-flex">
+                                                <t t-if="order.delivery_state == 'packing'">
+                                                    <span class="badge badge-light-blue badge-sm">Dikemas</span>
+                                                </t>
+                                                <t t-if="order.delivery_state == 'shipped'">
+                                                    <span class="badge badge-light-blue badge-sm">Sedang Dikirim</span>
+                                                </t>
+                                                <t t-if="order.delivery_state == 'received'">
+                                                    <span class="badge badge-light-blue badge-sm">Diterima</span>
+                                                </t>
+                                                <t t-if="order.delivery_state == 'returned'">
+                                                    <span class="badge badge-light-blue badge-sm">Dikembalikan</span>
+                                                </t>
+                                            </div>
+                                            <hr/>
+                                            <table class="table mb-0">
+                                                <tbody>
+                                                    <t t-foreach="order.order_line" t-as="line">
+                                                        <t t-if="line.product_id.detailed_type not in ['service', 'consu']">
+                                                            <tr>
+                                                                <td width="45%">
+                                                                    <div class="d-flex">
+                                                                        <div class="left-cart">
+                                                                            <t t-if="line.product_id.image_1920">
+                                                                                <img
+                                                                                    t-att-src="image_data_uri(line.product_id.image_1920)"
+                                                                                    class="img-fluid"
+                                                                                    t-att-alt="line.product_id.name"/>
+                                                                            </t>
+                                                                            <t t-else="">
+                                                                                <img
+                                                                                    src="/web/static/img/placeholder.png"
+                                                                                    class="img-fluid"
+                                                                                    alt="..."/>
+                                                                            </t>
+                                                                        </div>
+                                                                        <div class="right-cart">
+                                                                            <t t-esc="line.product_id.name"/>
+                                                                            <div class="d-block">
+                                                                                <span>Berat:
+                                                                                    <t t-esc="line.product_id.weight"/>
+                                                                                    <t t-esc="line.product_id.weight_uom_name"/>
+                                                                                </span>
+                                                                                <span>SKU:
+                                                                                    <t t-esc="line.product_id.barcode"/>
+                                                                                </span>
+                                                                            </div>
+                                                                            <div
+                                                                                class="notes-form edited saved">
+                                                                                <i class="icon-document-text"></i>
+                                                                                <p>Notes
+                                                                                </p>
+                                                                                <div class="notes-input">
+                                                                                    <textarea class="auto-grow" disabled="disabled"> <t t-esc="line.name"/></textarea>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </td>
+                                                                <td width="20%" valign="middle">
+                                                                    <p>
+                                                                        <b>Qty : <t t-esc="line.product_uom_qty"/></b>
+                                                                    </p>
+                                                                </td>
+                                                                <td width="15%" valign="middle">
+                                                                    <div class="card-product h-auto">
+                                                                        <p class="card-price price-discount">Rp <t t-esc="'{0:,.2f}'.format(int(line.price_unit))"/></p>
+                                                                    </div>
+                                                                </td>
+                                                                <td width="10%" valign="middle" align="center">
+                                                                    <div class="card-product h-auto">
+                                                                        <p class="card-price">Rp <t t-esc="'{0:,.2f}'.format(int(line.price_subtotal))"/></p>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                        </t>
+                                                    </t>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div
+                                            class="card-footer d-flex justify-content-between align-items-baseline  mt-0 border-0">
+                                            <a t-attf-href="/track-order/{{ order.id }}" id="btnlacakPesanan" class="btn clear-filter-btn">
+                                                Lacak Pesanan Ini
+                                            </a>
+                                            <div class="d-flex">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </t>
+                            </div>
+                            <div id="menunggu-tab" class="tabs-content">
+                                <t t-foreach="order_waiting_payment" t-as="order">
+                                    <div class="card card-order">
+                                        <div class="card-header d-flex justify-content-between">
+                                            <div class="form-group">
+                                                <label class="grey">Nomor Pesanan</label>
+                                                <p>
+                                                    <b>
+                                                        <t t-esc="order.name"/>
+                                                    </b>
+                                                </p>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="grey">Tanggal Pesanan</label>
+                                                <p>
+                                                    <b>
+                                                        <t t-esc="order.date_order"/>
+                                                    </b>
+                                                </p>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="grey">Metode Pembayaran</label>
+                                                <t t-if="order.payment_option == 'cod'">
+                                                    <p>
+                                                        <b>COD</b>
+                                                    </p>
+                                                </t>
+                                                <t t-if="order.payment_option == 'shop'">
+                                                    <p>
+                                                        <b>Bayar di Toko</b>
+                                                    </p>
+                                                </t>
+                                                <t t-if="order.payment_option == 'direct_debit'">
+                                                    <p>
+                                                        <b>Direct Debit</b>
+                                                    </p>
+                                                </t>
+                                                <t t-if="order.payment_option == 'va_bca'">
+                                                    <p>
+                                                        <b>Virtual Account BCA</b>
+                                                    </p>
+                                                </t>
+                                                <t t-if="order.payment_option == 'va_bri'">
+                                                    <p>
+                                                        <b>Virtual Account BRI</b>
+                                                    </p>
+                                                </t>
+                                                <t t-if="order.payment_option == 'va_bni'">
+                                                    <p>
+                                                        <b>Virtual Account BNI</b>
+                                                    </p>
+                                                </t>
+                                                <t t-if="order.payment_option == 'va_man'">
+                                                    <p>
+                                                        <b>Virtual Account Bank Mandiri</b>
+                                                    </p>
+                                                </t>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="grey">Total Pembayaran</label>
+                                                <p>
+                                                    <b>Rp <t t-esc="'{0:,.2f}'.format(int(order.amount_untaxed))"/></b>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="card-body pb-0">
+                                            <div class="d-flex">
+                                                <p class="mb-0 me-3">
+                                                    <b>Pesanan Saya</b>
+                                                </p>
+                                                <t t-if="order.delivery_state == 'packing'">
+                                                    <span class="badge badge-light-blue badge-sm">Dikemas</span>
+                                                </t>
+                                                <t t-if="order.delivery_state == 'shipped'">
+                                                    <span class="badge badge-light-blue badge-sm">Sedang Dikirim</span>
+                                                </t>
+                                                <t t-if="order.delivery_state == 'received'">
+                                                    <span class="badge badge-light-blue badge-sm">Diterima</span>
+                                                </t>
+                                                <t t-if="order.delivery_state == 'returned'">
+                                                    <span class="badge badge-light-blue badge-sm">Dikembalikan</span>
+                                                </t>
+                                            </div>
+                                            <hr/>
+                                            <table class="table mb-0">
+                                                <tbody>
+                                                    <t t-foreach="order.order_line" t-as="line">
+                                                        <t t-if="line.product_id.detailed_type not in ['service', 'consu']">
+                                                            <tr>
+                                                                <td width="45%">
+                                                                    <div class="d-flex">
+                                                                        <div class="left-cart">
+                                                                            <t t-if="line.product_id.image_1920">
+                                                                                <img
+                                                                                    t-att-src="image_data_uri(line.product_id.image_1920)"
+                                                                                    class="img-fluid"
+                                                                                    t-att-alt="line.product_id.name"/>
+                                                                            </t>
+                                                                            <t t-else="">
+                                                                                <img
+                                                                                    src="/web/static/img/placeholder.png"
+                                                                                    class="img-fluid"
+                                                                                    alt="..."/>
+                                                                            </t>
+                                                                        </div>
+                                                                        <div class="right-cart">
+                                                                            <t t-esc="line.product_id.name"/>
+                                                                            <div class="d-block">
+                                                                                <span>Berat:
+                                                                                    <t t-esc="line.product_id.weight"/>
+                                                                                    <t t-esc="line.product_id.weight_uom_name"/>
+                                                                                </span>
+                                                                                <span>SKU:
+                                                                                    <t t-esc="line.product_id.barcode"/>
+                                                                                </span>
+                                                                            </div>
+                                                                            <div
+                                                                                class="notes-form edited saved">
+                                                                                <i class="icon-document-text"></i>
+                                                                                <p>Notes
+                                                                                </p>
+                                                                                <div class="notes-input">
+                                                                                    <textarea class="auto-grow" disabled="disabled"> <t t-esc="line.name"/></textarea>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </td>
+                                                                <td width="20%" valign="middle">
+                                                                    <p>
+                                                                        <b>Qty : <t t-esc="line.product_uom_qty"/></b>
+                                                                    </p>
+                                                                </td>
+                                                                <td width="15%" valign="middle">
+                                                                    <div class="card-product h-auto">
+                                                                        <p class="card-price price-discount">Rp <t t-esc="'{0:,.2f}'.format(int(line.price_unit))"/></p>
+                                                                    </div>
+                                                                </td>
+                                                                <td width="10%" valign="middle" align="center">
+                                                                    <div class="card-product h-auto">
+                                                                        <p class="card-price">Rp <t t-esc="'{0:,.2f}'.format(int(line.price_subtotal))"/></p>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                        </t>
+                                                    </t>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div
+                                            class="card-footer d-flex justify-content-between align-items-baseline  mt-0 border-0">
+                                            <a t-attf-href="/order/{{ order.id }}" class="btn btn-link">Lihat Detail Pesanan</a>
+                                            <div class="d-flex">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </t>
+                            </div>
+
+                            <div id="diproses-tab" class="tabs-content">
+                                <t t-foreach="order_paid" t-as="orderpaid">
+                                    <div class="card card-order">
+                                        <div class="card-header d-flex justify-content-between">
+                                            <div class="form-group">
+                                                <label class="grey">Nomor Pesanan</label>
+                                                <p>
+                                                    <b>
+                                                        <t t-esc="orderpaid.name"/>
+                                                    </b>
+                                                </p>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="grey">Tanggal Pesanan</label>
+                                                <p>
+                                                    <b>
+                                                        <t t-esc="orderpaid.date_order"/>
+                                                    </b>
+                                                </p>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="grey">Metode Pembayaran</label>
+                                                <t t-if="orderpaid.payment_option == 'cod'">
+                                                    <p>
+                                                        <b>COD</b>
+                                                    </p>
+                                                </t>
+                                                <t t-if="orderpaid.payment_option == 'shop'">
+                                                    <p>
+                                                        <b>Bayar di Toko</b>
+                                                    </p>
+                                                </t>
+                                                <t t-if="orderpaid.payment_option == 'direct_debit'">
+                                                    <p>
+                                                        <b>Direct Debit</b>
+                                                    </p>
+                                                </t>
+                                                <t t-if="orderpaid.payment_option == 'va_bca'">
+                                                    <p>
+                                                        <b>Virtual Account BCA</b>
+                                                    </p>
+                                                </t>
+                                                <t t-if="orderpaid.payment_option == 'va_bri'">
+                                                    <p>
+                                                        <b>Virtual Account BRI</b>
+                                                    </p>
+                                                </t>
+                                                <t t-if="orderpaid.payment_option == 'va_bni'">
+                                                    <p>
+                                                        <b>Virtual Account BNI</b>
+                                                    </p>
+                                                </t>
+                                                <t t-if="orderpaid.payment_option == 'va_man'">
+                                                    <p>
+                                                        <b>Virtual Account Bank Mandiri</b>
+                                                    </p>
+                                                </t>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="grey">Total Pembayaran</label>
+                                                <p>
+                                                    <b>Rp <t t-esc="'{0:,.2f}'.format(int(orderpaid.amount_untaxed))"/></b>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="card-body pb-0">
+                                            <div class="d-flex">
+                                                <p class="mb-0 me-3">
+                                                    <b>Pesanan Saya</b>
+                                                </p>
+                                                <t t-if="order.delivery_state == 'packing'">
+                                                    <span class="badge badge-light-blue badge-sm">Dikemas</span>
+                                                </t>
+                                                <t t-if="order.delivery_state == 'shipped'">
+                                                    <span class="badge badge-light-blue badge-sm">Sedang Dikirim</span>
+                                                </t>
+                                                <t t-if="order.delivery_state == 'received'">
+                                                    <span class="badge badge-light-blue badge-sm">Diterima</span>
+                                                </t>
+                                                <t t-if="order.delivery_state == 'returned'">
+                                                    <span class="badge badge-light-blue badge-sm">Dikembalikan</span>
+                                                </t>
+                                            </div>
+                                            <hr/>
+                                            <table class="table mb-0">
+                                                <tbody>
+                                                    <t t-foreach="order.order_line" t-as="line">
+                                                        <t t-if="line.product_id.detailed_type not in ['service', 'consu']">
+                                                            <tr>
+                                                                <td width="45%">
+                                                                    <div class="d-flex">
+                                                                        <div class="left-cart">
+                                                                            <t t-if="line.product_id.image_1920">
+                                                                                <img
+                                                                                    t-att-src="image_data_uri(line.product_id.image_1920)"
+                                                                                    class="img-fluid"
+                                                                                    t-att-alt="line.product_id.name"/>
+                                                                            </t>
+                                                                            <t t-else="">
+                                                                                <img
+                                                                                    src="/web/static/img/placeholder.png"
+                                                                                    class="img-fluid"
+                                                                                    alt="..."/>
+                                                                            </t>
+                                                                        </div>
+                                                                        <div class="right-cart">
+                                                                            <t t-esc="line.product_id.name"/>
+                                                                            <div class="d-block">
+                                                                                <span>Berat:
+                                                                                    <t t-esc="line.product_id.weight"/>
+                                                                                    <t t-esc="line.product_id.weight_uom_name"/>
+                                                                                </span>
+                                                                                <span>SKU:
+                                                                                    <t t-esc="line.product_id.barcode"/>
+                                                                                </span>
+                                                                            </div>
+                                                                            <div
+                                                                                class="notes-form edited saved">
+                                                                                <i class="icon-document-text"></i>
+                                                                                <p>Notes
+                                                                                </p>
+                                                                                <div class="notes-input">
+                                                                                    <textarea class="auto-grow" disabled="disabled"> <t t-esc="line.name"/></textarea>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </td>
+                                                                <td width="20%" valign="middle">
+                                                                    <p>
+                                                                        <b>Qty : <t t-esc="line.product_uom_qty"/></b>
+                                                                    </p>
+                                                                </td>
+                                                                <td width="15%" valign="middle">
+                                                                    <div class="card-product h-auto">
+                                                                        <p class="card-price price-discount">Rp <t t-esc="'{0:,.2f}'.format(int(line.price_unit))"/></p>
+                                                                    </div>
+                                                                </td>
+                                                                <td width="10%" valign="middle" align="center">
+                                                                    <div class="card-product h-auto">
+                                                                        <p class="card-price">Rp <t t-esc="'{0:,.2f}'.format(int(line.price_subtotal))"/></p>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                        </t>
+                                                    </t>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div
+                                            class="card-footer d-flex justify-content-between align-items-baseline  mt-0 border-0">
+                                            <a t-attf-href="/order/{{ order.id }}" class="btn btn-link">Lihat Detail Pesanan</a>
+                                            <div class="d-flex">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </t>
+                            </div>
+
+                            <div id="dikemas-tab" class="tabs-content">
+                                <t t-foreach="order_packing" t-as="order">
+                                    <div class="card card-order">
+                                        <div class="card-header d-flex justify-content-between">
+                                            <div class="form-group">
+                                                <label class="grey">Nomor Pesanan</label>
+                                                <p>
+                                                    <b>
+                                                        <t t-esc="order.name"/>
+                                                    </b>
+                                                </p>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="grey">Tanggal Pesanan</label>
+                                                <p>
+                                                    <b>
+                                                        <t t-esc="order.date_order"/>
+                                                    </b>
+                                                </p>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="grey">Metode Pembayaran</label>
+                                                <t t-if="order.payment_option == 'cod'">
+                                                    <p>
+                                                        <b>COD</b>
+                                                    </p>
+                                                </t>
+                                                <t t-if="order.payment_option == 'shop'">
+                                                    <p>
+                                                        <b>Bayar di Toko</b>
+                                                    </p>
+                                                </t>
+                                                <t t-if="order.payment_option == 'direct_debit'">
+                                                    <p>
+                                                        <b>Direct Debit</b>
+                                                    </p>
+                                                </t>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="grey">Total Pembayaran</label>
+                                                <p>
+                                                    <b>Rp <t t-esc="'{0:,.2f}'.format(int(order.amount_untaxed))"/></b>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="card-body pb-0">
+                                            <div class="d-flex">
+                                                <p class="mb-0 me-3">
+                                                    <b>Pesanan Saya</b>
+                                                </p>
+                                                <t t-if="order.delivery_state == 'packing'">
+                                                    <span class="badge badge-light-blue badge-sm">Dikemas</span>
+                                                </t>
+                                                <t t-if="order.delivery_state == 'shipped'">
+                                                    <span class="badge badge-light-blue badge-sm">Sedang Dikirim</span>
+                                                </t>
+                                                <t t-if="order.delivery_state == 'received'">
+                                                    <span class="badge badge-light-blue badge-sm">Diterima</span>
+                                                </t>
+                                                <t t-if="order.delivery_state == 'returned'">
+                                                    <span class="badge badge-light-blue badge-sm">Dikembalikan</span>
+                                                </t>
+                                            </div>
+                                            <hr/>
+                                            <table class="table mb-0">
+                                                <tbody>
+                                                    <t t-foreach="order.order_line" t-as="line">
+                                                        <t t-if="line.product_id.detailed_type not in ['service', 'consu']">
+                                                            <tr>
+                                                                <td width="45%">
+                                                                    <div class="d-flex">
+                                                                        <div class="left-cart">
+                                                                            <t t-if="line.product_id.image_1920">
+                                                                                <img
+                                                                                    t-att-src="image_data_uri(line.product_id.image_1920)"
+                                                                                    class="img-fluid"
+                                                                                    t-att-alt="line.product_id.name"/>
+                                                                            </t>
+                                                                            <t t-else="">
+                                                                                <img
+                                                                                    src="/web/static/img/placeholder.png"
+                                                                                    class="img-fluid"
+                                                                                    alt="..."/>
+                                                                            </t>
+                                                                        </div>
+                                                                        <div class="right-cart">
+                                                                            <t t-esc="line.product_id.name"/>
+                                                                            <div class="d-block">
+                                                                                <span>Berat:
+                                                                                    <t t-esc="line.product_id.weight"/>
+                                                                                    <t t-esc="line.product_id.weight_uom_name"/>
+                                                                                </span>
+                                                                                <span>SKU:
+                                                                                    <t t-esc="line.product_id.barcode"/>
+                                                                                </span>
+                                                                            </div>
+                                                                            <div
+                                                                                class="notes-form edited saved">
+                                                                                <i class="icon-document-text"></i>
+                                                                                <p>Notes
+                                                                                </p>
+                                                                                <div class="notes-input">
+                                                                                    <textarea class="auto-grow" disabled="disabled"> <t t-esc="line.name"/></textarea>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </td>
+                                                                <td width="20%" valign="middle">
+                                                                    <p>
+                                                                        <b>Qty : <t t-esc="line.product_uom_qty"/></b>
+                                                                    </p>
+                                                                </td>
+                                                                <td width="15%" valign="middle">
+                                                                    <div class="card-product h-auto">
+                                                                        <p class="card-price price-discount">Rp <t t-esc="'{0:,.2f}'.format(int(line.price_unit))"/></p>
+                                                                    </div>
+                                                                </td>
+                                                                <td width="10%" valign="middle" align="center">
+                                                                    <div class="card-product h-auto">
+                                                                        <p class="card-price">Rp <t t-esc="'{0:,.2f}'.format(int(line.price_subtotal))"/></p>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                        </t>
+                                                    </t>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div
+                                            class="card-footer d-flex justify-content-between align-items-baseline  mt-0 border-0">
+                                            <a t-attf-href="/order/{{ order.id }}" class="btn btn-link">Lihat Detail Pesanan</a>
+                                            <div class="d-flex">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </t>
+                            </div>
+                            <div id="dikirim-tab" class="tabs-content">
+                                <t t-foreach="order_shipped" t-as="order">
+                                    <div class="card card-order">
+                                        <div class="card-header d-flex justify-content-between">
+                                            <div class="form-group">
+                                                <label class="grey">Nomor Pesanan</label>
+                                                <p>
+                                                    <b>
+                                                        <t t-esc="order.name"/>
+                                                    </b>
+                                                </p>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="grey">Tanggal Pesanan</label>
+                                                <p>
+                                                    <b>
+                                                        <t t-esc="order.date_order"/>
+                                                    </b>
+                                                </p>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="grey">Metode Pembayaran</label>
+                                                <t t-if="order.payment_option == 'cod'">
+                                                    <p>
+                                                        <b>COD</b>
+                                                    </p>
+                                                </t>
+                                                <t t-if="order.payment_option == 'shop'">
+                                                    <p>
+                                                        <b>Bayar di Toko</b>
+                                                    </p>
+                                                </t>
+                                                <t t-if="order.payment_option == 'direct_debit'">
+                                                    <p>
+                                                        <b>Direct Debit</b>
+                                                    </p>
+                                                </t>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="grey">Total Pembayaran</label>
+                                                <p>
+                                                    <b>Rp <t t-esc="'{0:,.2f}'.format(int(order.amount_untaxed))"/></b>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="card-body pb-0">
+                                            <div class="d-flex">
+                                                <p class="mb-0 me-3">
+                                                    <b>Pesanan Saya</b>
+                                                </p>
+                                                <t t-if="order.delivery_state == 'packing'">
+                                                    <span class="badge badge-light-blue badge-sm">Dikemas</span>
+                                                </t>
+                                                <t t-if="order.delivery_state == 'shipped'">
+                                                    <span class="badge badge-light-blue badge-sm">Sedang Dikirim</span>
+                                                </t>
+                                                <t t-if="order.delivery_state == 'received'">
+                                                    <span class="badge badge-light-blue badge-sm">Diterima</span>
+                                                </t>
+                                                <t t-if="order.delivery_state == 'returned'">
+                                                    <span class="badge badge-light-blue badge-sm">Dikembalikan</span>
+                                                </t>
+                                            </div>
+                                            <hr/>
+                                            <table class="table mb-0">
+                                                <tbody>
+                                                    <t t-foreach="order.order_line" t-as="line">
+                                                        <t t-if="line.product_id.detailed_type not in ['service', 'consu']">
+                                                            <tr>
+                                                                <td width="45%">
+                                                                    <div class="d-flex">
+                                                                        <div class="left-cart">
+                                                                            <t t-if="line.product_id.image_1920">
+                                                                                <img
+                                                                                    t-att-src="image_data_uri(line.product_id.image_1920)"
+                                                                                    class="img-fluid"
+                                                                                    t-att-alt="line.product_id.name"/>
+                                                                            </t>
+                                                                            <t t-else="">
+                                                                                <img
+                                                                                    src="/web/static/img/placeholder.png"
+                                                                                    class="img-fluid"
+                                                                                    alt="..."/>
+                                                                            </t>
+                                                                        </div>
+                                                                        <div class="right-cart">
+                                                                            <t t-esc="line.product_id.name"/>
+                                                                            <div class="d-block">
+                                                                                <span>Berat:
+                                                                                    <t t-esc="line.product_id.weight"/>
+                                                                                    <t t-esc="line.product_id.weight_uom_name"/>
+                                                                                </span>
+                                                                                <span>SKU:
+                                                                                    <t t-esc="line.product_id.barcode"/>
+                                                                                </span>
+                                                                            </div>
+                                                                            <div
+                                                                                class="notes-form edited saved">
+                                                                                <i class="icon-document-text"></i>
+                                                                                <p>Notes
+                                                                                </p>
+                                                                                <div class="notes-input">
+                                                                                    <textarea class="auto-grow" disabled="disabled"> <t t-esc="line.name"/></textarea>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </td>
+                                                                <td width="20%" valign="middle">
+                                                                    <p>
+                                                                        <b>Qty : <t t-esc="line.product_uom_qty"/></b>
+                                                                    </p>
+                                                                </td>
+                                                                <td width="15%" valign="middle">
+                                                                    <div class="card-product h-auto">
+                                                                        <p class="card-price price-discount">Rp <t t-esc="'{0:,.2f}'.format(int(line.price_unit))"/></p>
+                                                                    </div>
+                                                                </td>
+                                                                <td width="10%" valign="middle" align="center">
+                                                                    <div class="card-product h-auto">
+                                                                        <p class="card-price">Rp <t t-esc="'{0:,.2f}'.format(int(line.price_subtotal))"/></p>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                        </t>
+                                                    </t>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div
+                                            class="card-footer d-flex justify-content-between align-items-baseline  mt-0 border-0">
+                                            <a t-attf-href="/order/{{ order.id }}" class="btn btn-link">Lihat Detail Pesanan</a>
+                                            <div class="d-flex">
+                                                <!--  <a href="javascript:void(0)"  data-bs-toggle="modal" data-bs-target="#BatalkanPesananModal" class="btn btn-outline-orange me-3">Batalkan Pesanan</a>
+                                                   <a href="" class="btn btn-primary">Bayar Sekarang</a> -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </t>
+                            </div>
+                            <div id="diterima-tab" class="tabs-content">
+                                <t t-foreach="order_received" t-as="order">
+                                    <div class="card card-order">
+                                        <div class="card-header d-flex justify-content-between">
+                                            <div class="form-group">
+                                                <label class="grey">Nomor Pesanan</label>
+                                                <p>
+                                                    <b>
+                                                        <t t-esc="order.name"/>
+                                                    </b>
+                                                </p>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="grey">Tanggal Pesanan</label>
+                                                <p>
+                                                    <b>
+                                                        <t t-esc="order.date_order"/>
+                                                    </b>
+                                                </p>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="grey">Metode Pembayaran</label>
+                                                <t t-if="order.payment_option == 'cod'">
+                                                    <p>
+                                                        <b>COD</b>
+                                                    </p>
+                                                </t>
+                                                <t t-if="order.payment_option == 'shop'">
+                                                    <p>
+                                                        <b>Bayar di Toko</b>
+                                                    </p>
+                                                </t>
+                                                <t t-if="order.payment_option == 'direct_debit'">
+                                                    <p>
+                                                        <b>Direct Debit</b>
+                                                    </p>
+                                                </t>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="grey">Total Pembayaran</label>
+                                                <p>
+                                                    <b>Rp <t t-esc="'{0:,.2f}'.format(int(order.amount_untaxed))"/></b>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="card-body pb-0">
+                                            <div class="d-flex">
+                                                <p class="mb-0 me-3">
+                                                    <b>Pesanan Saya</b>
+                                                </p>
+                                                <t t-if="order.delivery_state == 'packing'">
+                                                    <span class="badge badge-light-blue badge-sm">Dikemas</span>
+                                                </t>
+                                                <t t-if="order.delivery_state == 'shipped'">
+                                                    <span class="badge badge-light-blue badge-sm">Sedang Dikirim</span>
+                                                </t>
+                                                <t t-if="order.delivery_state == 'received'">
+                                                    <span class="badge badge-light-blue badge-sm">Diterima</span>
+                                                </t>
+                                                <t t-if="order.delivery_state == 'returned'">
+                                                    <span class="badge badge-light-blue badge-sm">Dikembalikan</span>
+                                                </t>
+                                            </div>
+                                            <hr/>
+                                            <table class="table mb-0">
+                                                <tbody>
+                                                    <t t-foreach="order.order_line" t-as="line">
+                                                        <t t-if="line.product_id.detailed_type not in ['service', 'consu']">
+                                                            <tr>
+                                                                <td width="45%">
+                                                                    <div class="d-flex">
+                                                                        <div class="left-cart">
+                                                                            <t t-if="line.product_id.image_1920">
+                                                                                <img
+                                                                                    t-att-src="image_data_uri(line.product_id.image_1920)"
+                                                                                    class="img-fluid"
+                                                                                    t-att-alt="line.product_id.name"/>
+                                                                            </t>
+                                                                            <t t-else="">
+                                                                                <img
+                                                                                    src="/web/static/img/placeholder.png"
+                                                                                    class="img-fluid"
+                                                                                    alt="..."/>
+                                                                            </t>
+                                                                        </div>
+                                                                        <div class="right-cart">
+                                                                            <t t-esc="line.product_id.name"/>
+                                                                            <div class="d-block">
+                                                                                <span>Berat:
+                                                                                    <t t-esc="line.product_id.weight"/>
+                                                                                    <t t-esc="line.product_id.weight_uom_name"/>
+                                                                                </span>
+                                                                                <span>SKU:
+                                                                                    <t t-esc="line.product_id.barcode"/>
+                                                                                </span>
+                                                                            </div>
+                                                                            <div
+                                                                                class="notes-form edited saved">
+                                                                                <i class="icon-document-text"></i>
+                                                                                <p>Notes
+                                                                                </p>
+                                                                                <div class="notes-input">
+                                                                                    <textarea class="auto-grow" disabled="disabled"> <t t-esc="line.name"/></textarea>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </td>
+                                                                <td width="20%" valign="middle">
+                                                                    <p>
+                                                                        <b>Qty : <t t-esc="line.product_uom_qty"/></b>
+                                                                    </p>
+                                                                </td>
+                                                                <td width="15%" valign="middle">
+                                                                    <div class="card-product h-auto">
+                                                                        <p class="card-price price-discount">Rp <t t-esc="'{0:,.2f}'.format(int(line.price_unit))"/></p>
+                                                                    </div>
+                                                                </td>
+                                                                <td width="10%" valign="middle" align="center">
+                                                                    <div class="card-product h-auto">
+                                                                        <p class="card-price">Rp <t t-esc="'{0:,.2f}'.format(int(line.price_subtotal))"/></p>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                        </t>
+                                                    </t>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div
+                                            class="card-footer d-flex justify-content-between align-items-baseline  mt-0 border-0">
+                                            <a t-attf-href="/order/{{ order.id }}" class="btn btn-link">Lihat Detail Pesanan</a>
+                                            <div class="d-flex">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </t>
+                            </div>
+                            <div id="selesai-tab" class="tabs-content">
+                                <t t-foreach="order_done" t-as="order">
+                                    <div class="card card-order">
+                                        <div class="card-header d-flex justify-content-between">
+                                            <div class="form-group">
+                                                <label class="grey">Nomor Pesanan</label>
+                                                <p>
+                                                    <b>
+                                                        <t t-esc="order.name"/>
+                                                    </b>
+                                                </p>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="grey">Tanggal Pesanan</label>
+                                                <p>
+                                                    <b>
+                                                        <t t-esc="order.date_order"/>
+                                                    </b>
+                                                </p>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="grey">Metode Pembayaran</label>
+                                                <t t-if="order.payment_option == 'cod'">
+                                                    <p>
+                                                        <b>COD</b>
+                                                    </p>
+                                                </t>
+                                                <t t-if="order.payment_option == 'shop'">
+                                                    <p>
+                                                        <b>Bayar di Toko</b>
+                                                    </p>
+                                                </t>
+                                                <t t-if="order.payment_option == 'direct_debit'">
+                                                    <p>
+                                                        <b>Direct Debit</b>
+                                                    </p>
+                                                </t>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="grey">Total Pembayaran</label>
+                                                <p>
+                                                    <b>Rp <t t-esc="'{0:,.2f}'.format(int(order.amount_untaxed))"/></b>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="card-body pb-0">
+                                            <div class="d-flex">
+                                                <p class="mb-0 me-3">
+                                                    <b>Pesanan Saya</b>
+                                                </p>
+                                                <t t-if="order.delivery_state == 'packing'">
+                                                    <span class="badge badge-light-blue badge-sm">Dikemas</span>
+                                                </t>
+                                                <t t-if="order.delivery_state == 'shipped'">
+                                                    <span class="badge badge-light-blue badge-sm">Sedang Dikirim</span>
+                                                </t>
+                                                <t t-if="order.delivery_state == 'received'">
+                                                    <span class="badge badge-light-blue badge-sm">Diterima</span>
+                                                </t>
+                                                <t t-if="order.delivery_state == 'returned'">
+                                                    <span class="badge badge-light-blue badge-sm">Dikembalikan</span>
+                                                </t>
+                                            </div>
+                                            <hr/>
+                                            <table class="table mb-0">
+                                                <tbody>
+                                                    <t t-foreach="order.order_line" t-as="line">
+                                                        <t t-if="line.product_id.detailed_type not in ['service', 'consu']">
+                                                            <tr>
+                                                                <td width="45%">
+                                                                    <div class="d-flex">
+                                                                        <div class="left-cart">
+                                                                            <t t-if="line.product_id.image_1920">
+                                                                                <img
+                                                                                    t-att-src="image_data_uri(line.product_id.image_1920)"
+                                                                                    class="img-fluid"
+                                                                                    t-att-alt="line.product_id.name"/>
+                                                                            </t>
+                                                                            <t t-else="">
+                                                                                <img
+                                                                                    src="/web/static/img/placeholder.png"
+                                                                                    class="img-fluid"
+                                                                                    alt="..."/>
+                                                                            </t>
+                                                                        </div>
+                                                                        <div class="right-cart">
+                                                                            <t t-esc="line.product_id.name"/>
+                                                                            <div class="d-block">
+                                                                                <span>Berat:
+                                                                                    <t t-esc="line.product_id.weight"/>
+                                                                                    <t t-esc="line.product_id.weight_uom_name"/>
+                                                                                </span>
+                                                                                <span>SKU:
+                                                                                    <t t-esc="line.product_id.barcode"/>
+                                                                                </span>
+                                                                            </div>
+                                                                            <div
+                                                                                class="notes-form edited saved">
+                                                                                <i class="icon-document-text"></i>
+                                                                                <p>Notes
+                                                                                </p>
+                                                                                <div class="notes-input">
+                                                                                    <textarea class="auto-grow" disabled="disabled"> <t t-esc="line.name"/></textarea>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </td>
+                                                                <td width="20%" valign="middle">
+                                                                    <p>
+                                                                        <b>Qty : <t t-esc="line.product_uom_qty"/></b>
+                                                                    </p>
+                                                                </td>
+                                                                <td width="15%" valign="middle">
+                                                                    <div class="card-product h-auto">
+                                                                        <p class="card-price price-discount">Rp <t t-esc="'{0:,.2f}'.format(int(line.price_unit))"/></p>
+                                                                    </div>
+                                                                </td>
+                                                                <td width="10%" valign="middle" align="center">
+                                                                    <div class="card-product h-auto">
+                                                                        <p class="card-price">Rp <t t-esc="'{0:,.2f}'.format(int(line.price_subtotal))"/></p>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                        </t>
+                                                    </t>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div
+                                            class="card-footer d-flex justify-content-between align-items-baseline  mt-0 border-0">
+                                            <a t-attf-href="/order/{{ order.id }}" class="btn btn-link">Lihat Detail Pesanan</a>
+                                            <div class="d-flex">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </t>
+                            </div>
+                            <div id="retur-tab" class="tabs-content">
+                                <t t-foreach="order_returned" t-as="order">
+                                    <div class="card card-order">
+                                        <div class="card-header d-flex justify-content-between">
+                                            <div class="form-group">
+                                                <label class="grey">Nomor Pesanan</label>
+                                                <p>
+                                                    <b>
+                                                        <t t-esc="order.name"/>
+                                                    </b>
+                                                </p>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="grey">Tanggal Pesanan</label>
+                                                <p>
+                                                    <b>
+                                                        <t t-esc="order.date_order"/>
+                                                    </b>
+                                                </p>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="grey">Metode Pembayaran</label>
+                                                <t t-if="order.payment_option == 'cod'">
+                                                    <p>
+                                                        <b>COD</b>
+                                                    </p>
+                                                </t>
+                                                <t t-if="order.payment_option == 'shop'">
+                                                    <p>
+                                                        <b>Bayar di Toko</b>
+                                                    </p>
+                                                </t>
+                                                <t t-if="order.payment_option == 'direct_debit'">
+                                                    <p>
+                                                        <b>Direct Debit</b>
+                                                    </p>
+                                                </t>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="grey">Total Pembayaran</label>
+                                                <p>
+                                                    <b>Rp <t t-esc="'{0:,.2f}'.format(int(order.amount_untaxed))"/></b>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="card-body pb-0">
+                                            <div class="d-flex">
+                                                <p class="mb-0 me-3">
+                                                    <b>Pesanan Saya</b>
+                                                </p>
+                                                <t t-if="order.delivery_state == 'packing'">
+                                                    <span class="badge badge-light-blue badge-sm">Dikemas</span>
+                                                </t>
+                                                <t t-if="order.delivery_state == 'shipped'">
+                                                    <span class="badge badge-light-blue badge-sm">Sedang Dikirim</span>
+                                                </t>
+                                                <t t-if="order.delivery_state == 'received'">
+                                                    <span class="badge badge-light-blue badge-sm">Diterima</span>
+                                                </t>
+                                                <t t-if="order.delivery_state == 'returned'">
+                                                    <span class="badge badge-light-blue badge-sm">Dikembalikan</span>
+                                                </t>
+                                            </div>
+                                            <hr/>
+                                            <table class="table mb-0">
+                                                <tbody>
+                                                    <t t-foreach="order.order_line" t-as="line">
+                                                        <t t-if="line.product_id.detailed_type not in ['service', 'consu']">
+                                                            <tr>
+                                                                <td width="45%">
+                                                                    <div class="d-flex">
+                                                                        <div class="left-cart">
+                                                                            <t t-if="line.product_id.image_1920">
+                                                                                <img
+                                                                                    t-att-src="image_data_uri(line.product_id.image_1920)"
+                                                                                    class="img-fluid"
+                                                                                    t-att-alt="line.product_id.name"/>
+                                                                            </t>
+                                                                            <t t-else="">
+                                                                                <img
+                                                                                    src="/web/static/img/placeholder.png"
+                                                                                    class="img-fluid"
+                                                                                    alt="..."/>
+                                                                            </t>
+                                                                        </div>
+                                                                        <div class="right-cart">
+                                                                            <t t-esc="line.product_id.name"/>
+                                                                            <div class="d-block">
+                                                                                <span>Berat:
+                                                                                    <t t-esc="line.product_id.weight"/>
+                                                                                    <t t-esc="line.product_id.weight_uom_name"/>
+                                                                                </span>
+                                                                                <span>SKU:
+                                                                                    <t t-esc="line.product_id.barcode"/>
+                                                                                </span>
+                                                                            </div>
+                                                                            <div
+                                                                                class="notes-form edited saved">
+                                                                                <i class="icon-document-text"></i>
+                                                                                <p>Notes
+                                                                                </p>
+                                                                                <div class="notes-input">
+                                                                                    <textarea class="auto-grow" disabled="disabled"> <t t-esc="line.name"/></textarea>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </td>
+                                                                <td width="20%" valign="middle">
+                                                                    <p>
+                                                                        <b>Qty : <t t-esc="line.product_uom_qty"/></b>
+                                                                    </p>
+                                                                </td>
+                                                                <td width="15%" valign="middle">
+                                                                    <div class="card-product h-auto">
+                                                                        <p class="card-price price-discount">Rp <t t-esc="'{0:,.2f}'.format(int(line.price_unit))"/></p>
+                                                                    </div>
+                                                                </td>
+                                                                <td width="10%" valign="middle" align="center">
+                                                                    <div class="card-product h-auto">
+                                                                        <p class="card-price">Rp <t t-esc="'{0:,.2f}'.format(int(line.price_subtotal))"/></p>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                        </t>
+                                                    </t>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div
+                                            class="card-footer d-flex justify-content-between align-items-baseline  mt-0 border-0">
+                                            <a t-attf-href="/order/{{ order.id }}" class="btn btn-link">Lihat Detail Pesanan</a>
+                                            <div class="d-flex">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </t>
+                            </div>
+                            <div id="dibatalkan-tab" class="tabs-content">
+                                <t t-foreach="order_cancelled" t-as="order">
+                                    <div class="card card-order">
+                                        <div class="card-header d-flex justify-content-between">
+                                            <div class="form-group">
+                                                <label class="grey">Nomor Pesanan</label>
+                                                <p>
+                                                    <b>
+                                                        <t t-esc="order.name"/>
+                                                    </b>
+                                                </p>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="grey">Tanggal Pesanan</label>
+                                                <p>
+                                                    <b>
+                                                        <t t-esc="order.date_order"/>
+                                                    </b>
+                                                </p>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="grey">Metode Pembayaran</label>
+                                                <t t-if="order.payment_option == 'cod'">
+                                                    <p>
+                                                        <b>COD</b>
+                                                    </p>
+                                                </t>
+                                                <t t-if="order.payment_option == 'shop'">
+                                                    <p>
+                                                        <b>Bayar di Toko</b>
+                                                    </p>
+                                                </t>
+                                                <t t-if="order.payment_option == 'direct_debit'">
+                                                    <p>
+                                                        <b>Direct Debit</b>
+                                                    </p>
+                                                </t>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="grey">Total Pembayaran</label>
+                                                <p>
+                                                    <b>Rp <t t-esc="'{0:,.2f}'.format(int(order.amount_untaxed))"/></b>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="card-body pb-0">
+                                            <div class="d-flex">
+                                                <p class="mb-0 me-3">
+                                                    <b>Pesanan Saya</b>
+                                                </p>
+                                                <t t-if="order.delivery_state == 'packing'">
+                                                    <span class="badge badge-light-blue badge-sm">Dikemas</span>
+                                                </t>
+                                                <t t-if="order.delivery_state == 'shipped'">
+                                                    <span class="badge badge-light-blue badge-sm">Sedang Dikirim</span>
+                                                </t>
+                                                <t t-if="order.delivery_state == 'received'">
+                                                    <span class="badge badge-light-blue badge-sm">Diterima</span>
+                                                </t>
+                                                <t t-if="order.delivery_state == 'returned'">
+                                                    <span class="badge badge-light-blue badge-sm">Dikembalikan</span>
+                                                </t>
+                                            </div>
+                                            <hr/>
+                                            <table class="table mb-0">
+                                                <tbody>
+                                                    <t t-foreach="order.order_line" t-as="line">
+                                                        <t t-if="line.product_id.detailed_type not in ['service', 'consu']">
+                                                            <tr>
+                                                                <td width="45%">
+                                                                    <div class="d-flex">
+                                                                        <div class="left-cart">
+                                                                            <t t-if="line.product_id.image_1920">
+                                                                                <img
+                                                                                    t-att-src="image_data_uri(line.product_id.image_1920)"
+                                                                                    class="img-fluid"
+                                                                                    t-att-alt="line.product_id.name"/>
+                                                                            </t>
+                                                                            <t t-else="">
+                                                                                <img
+                                                                                    src="/web/static/img/placeholder.png"
+                                                                                    class="img-fluid"
+                                                                                    alt="..."/>
+                                                                            </t>
+                                                                        </div>
+                                                                        <div class="right-cart">
+                                                                            <t t-esc="line.product_id.name"/>
+                                                                            <div class="d-block">
+                                                                                <span>Berat:
+                                                                                    <t t-esc="line.product_id.weight"/>
+                                                                                    <t t-esc="line.product_id.weight_uom_name"/>
+                                                                                </span>
+                                                                                <span>SKU:
+                                                                                    <t t-esc="line.product_id.barcode"/>
+                                                                                </span>
+                                                                            </div>
+                                                                            <div
+                                                                                class="notes-form edited saved">
+                                                                                <i class="icon-document-text"></i>
+                                                                                <p>Notes
+                                                                                </p>
+                                                                                <div class="notes-input">
+                                                                                    <textarea class="auto-grow" disabled="disabled"> <t t-esc="line.name"/></textarea>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </td>
+                                                                <td width="20%" valign="middle">
+                                                                    <p>
+                                                                        <b>Qty : <t t-esc="line.product_uom_qty"/></b>
+                                                                    </p>
+                                                                </td>
+                                                                <td width="15%" valign="middle">
+                                                                    <div class="card-product h-auto">
+                                                                        <p class="card-price price-discount">Rp <t t-esc="'{0:,.2f}'.format(int(line.price_unit))"/></p>
+                                                                    </div>
+                                                                </td>
+                                                                <td width="10%" valign="middle" align="center">
+                                                                    <div class="card-product h-auto">
+                                                                        <p class="card-price">Rp <t t-esc="'{0:,.2f}'.format(int(line.price_subtotal))"/></p>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                        </t>
+                                                    </t>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="card-footer d-flex justify-content-between align-items-baseline  mt-0 border-0">
+                                            <!-- <a t-attf-href="/order/{{ order.id }}" class="btn btn-link">Lihat Detail Pesanan</a> -->
+                                            <a t-attf-href="/track-order/{{ order.id }}" class="btn clear-filter-btn">
+                                                Lacak Pesanan Ini
+                                            </a>
+                                            <div class="d-flex">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </t>
+                            </div>
+                        </div>
+                    </t>
+                    <t t-else="">
+                        <div class="col-7 m-auto blankslate text-center">
+                            <img src="/theme_alkeba/static/src/images/order-empty.png"/>
+                            <h6>Anda belum pernah melakukan Transaksi.</h6>
+                            <p>Yuk, mulai belanja dan penuhi berbagai kebutuhanmu Alat Kebersihan di Alkeba Store</p>
+                            <a href="/" class="btn btn-primary">
+                                <i class="icon-shopping-bag"></i>
+                                Mulai Belanja
+                            </a>
+                        </div>
+                    </t>
+
+                </div>
+            </div>
+
+        </t>
+    </template>
+
+</odoo>

@@ -1,0 +1,1278 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>    
+    <template id="alkeba_cart_address_options" name="Alkeba Address Option">
+        <t t-call="theme_alkeba.alkeba_bradcrumbs_empty_bottom">
+
+            <div class="modal fade" id="ChooseAlamatCartModal"  t-attf-id="ChooseAlamatCartModal{{addresses.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="tab-content" id="pills-tabContent">
+                            <div class="tab-pane fade show active" id="pills-akun" role="tabpanel"
+                             aria-labelledby="pills-akun-tab">
+                                <div class="">
+                                    <h6 style="margin-left:17px; margin-top:3px;"><b>Daftar Alamat</b></h6>
+                                    <div class="buyer-info setup-address">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="card">
+                                                    <table class="table">
+                                                        <thead>
+                                                            <tr style="vertical-align: middle;">
+                                                                <th width="20%">Nama</th>
+                                                                <th width="50%">Alamat</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <t t-if="checkout_addresses">
+                                                            <tbody>
+                                                                <t t-foreach="checkout_addresses" t-as="address">
+                                                                    <tr>
+                                                                        <td>
+                                                                            <t t-esc="address.name"/>
+                                                                        </td>
+                                                                        <td>
+                                                                            <div class="address-info">
+                                                                                <p>
+                                                                                    <i class="icon-location-marker"></i>
+                                                                                    <b>
+                                                                                        <t t-esc="address.parent_id.name"/>
+                                                                                    </b>
+                                                                                    <br/>
+                                                                                    <t t-esc="address.street"/>,
+                                                                                    Desa/Kel. <t t-esc="address.village_ids.name"/>, Kec. <t t-esc="address.districts_ids.name"/>,
+                                                                                    Kab./Kota <t t-esc="address.city_ids.name"/>, <t t-esc="address.state_ids.name"/>,
+                                                                                    <t t-esc="address.zip"/>
+                                                                                </p>
+                                                                            </div>
+                                                                        </td>
+                                                                        <td class="text-center">
+                                                                            <t t-if="address.is_primary_address">
+                                                                                <div class="text-center">
+                                                                                    <p class="green">
+                                                                                        <i class="icon-check-circle"></i>
+                                                                                        Alamat Utama
+                                                                                    </p>
+                                                                                </div>
+                                                                            </t>
+                                                                            <t t-else="">
+                                                                                <div class="text-center">
+                                                                                    <a t-attf-href="/set-primary-checkout-address/{{ address.id }}/{{ request.httprequest.args.get('ap') }}"
+                                                                                        class="btn btn-outline-orange btn-small">
+                                                                                    <!-- <a t-attf-href="/set-primary-checkout-address/{{ address.id }}"
+                                                                                    class="btn btn-outline-orange btn-small "> -->
+                                                                                        Pilih
+                                                                                    </a>
+                                                                                </div>
+                                                                            </t>
+                                                                        </td>
+                                                                    </tr>
+                                                                </t>
+                                                            </tbody>
+                                                        </t>
+                                                        <t t-else="">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td colspan="3">
+                                                                        <div class="col-7 m-auto blankslate text-center">
+                                                                            <img
+                                                                                src="/theme_alkeba/static/src/images/illust-hapus-alamat-blankslate.png"/>
+                                                                            <h6>Belum Ada Alamat Yang Ditambahkan</h6>
+                                                                            <p>Kami tidak dapat menemukan Alamat Anda,
+                                                                                silahkan tambahkan alamat Anda
+                                                                            </p>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </t>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                       </div>
+                    </div>
+                </div>                            
+            </div>   
+
+            <!-- Tambah -->
+            <div class="modal fade" id="TambahAlamatPengirimanModalCart" tabindex="-1" aria-labelledby="exampleModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">Tambah Alamat Pengiriman
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                <i class="icon-x"></i>
+                            </button>
+                        </div>
+                        <div class="AlertAddress">
+                            <div>
+                                <center>
+                                    <img src="/theme_alkeba/static/src/images/icon/remove.png" style="width:30px; padding-top:30px;"/>
+                                    <br/>
+                                    <p>
+                                        <b style="color:#000000; font-size: 25px;">
+                                            Sementara Hanya Untuk Area Kota Bandung
+                                        </b>
+                                    </p>
+                                </center>
+                            </div>
+                        </div>
+                        <form action="/add-address" method="POST">
+                            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <label class="grey">Label Alamat</label>
+                                    <input type="text" name="label" class="form-control" value=""/>
+                                </div>
+                                <div class="form-group">
+                                    <label class="grey">Alamat</label>
+                                    <input type="text" name="street" class="form-control" value=""/>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <div class="form-group col-6 pe-3">
+                                        <label class="grey">Pilih Provinsi</label>
+                                        <select class="select-styled" name="state">
+                                            <option value="0">Pilih Provinsi</option>
+                                            <t t-foreach="address_values['states']" t-as="state">
+                                                <option t-attf-value="{{ state.id }}">
+                                                    <t t-esc="state.name"/>
+                                                </option>
+                                            </t>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-6">
+                                        <label class="grey">Pilih Kota/Kabupaten</label>
+                                        <select class="select-styled" name="city">
+                                            <option value="0">Pilih Kota/Kabupaten</option>
+                                            <t t-foreach="address_values['cities']" t-as="city">
+                                                <option t-attf-value="{{ city.id }}">
+                                                    <t t-esc="city.name"/>
+                                                </option>
+                                            </t>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <div class="form-group  col-6 pe-3">
+                                        <label class="grey">Pilih Kelurahan</label>
+                                        <select class="select-styled" name="village">
+                                            <option value="0">Pilih Kelurahan</option>
+                                            <t t-foreach="address_values['villages']" t-as="village">
+                                                <option t-attf-value="{{ village.id }}">
+                                                    <t t-esc="village.name"/>
+                                                </option>
+                                            </t>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-6">
+                                        <label class="grey">Pilih Kecamatan</label>
+                                        <select class="select-styled" name="district">
+                                            <option value="0">Pilih Kecamatan</option>
+                                            <t t-foreach="address_values['districts']" t-as="district">
+                                                <option t-attf-value="{{ district.id }}">
+                                                    <t t-esc="district.name"/>
+                                                </option>
+                                            </t>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="grey">Kode Pos</label>
+                                    <input type="text" name="zip" class="form-control" value=""/>
+                                </div>
+                            </div>
+                            <div class="modal-footer d-flex justify-content-center">
+                                <a href="#" class="btn btn-outline" data-bs-dismiss="modal">Batal</a>
+                                <input type="submit" class="btn btn-secondary" value="Simpan"/>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="AlertAddressPayment" tabindex="-1" aria-labelledby="exampleModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-body text-center p-4">
+                            <img src="/theme_alkeba/static/src/images/icon/remove.png" style="width:30px"/>
+                            <br/>
+                            <br/>
+                            <p>
+                                <!-- <i class="icon-heart"></i> -->
+                                <strong>
+                                    Alamat Kosong <br/>
+                                    Pastikan Isi Alamat dan Pilih Alamat Utama
+                                </strong>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="AlertCourier" tabindex="-1" aria-labelledby="exampleModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-body text-center p-4">
+                            <img src="/theme_alkeba/static/src/images/icon/remove.png" style="width:30px"/>
+                            <br/>
+                            <br/>
+                            <p>
+                                <!-- <i class="icon-heart"></i> -->
+                                <strong>
+                                   Kurir Belum Dipilih
+                                </strong>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="wizard-checkout">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <ul class="d-flex align-items-baseline justify-content-center list-unstyled cart-step-wizard ">
+                                <li class="active line">
+                                    <button>
+                                        <div class="box">
+                                            <i class="icon-shopping-bag"></i>
+                                        </div>
+                                        <span>Keranjang Belanja</span>
+                                    </button>
+                                </li>
+                                <li class="active">
+                                    <button>
+                                        <div class="box">
+                                            <i class="icon-archive"></i>
+                                        </div>
+                                        <span>Pilih Pengiriman</span>
+                                    </button>
+                                </li>
+                                <li class="">
+                                    <button>
+                                        <div class="box">
+                                            <i class="icon-cash"></i>
+                                        </div>
+                                        <span>Pembayaran</span>
+                                    </button>
+                                </li>
+                                <li class="">
+                                    <button>
+                                        <div class="box">
+                                            <i class="icon-clipboard-check"></i>
+                                        </div>
+                                        <span>Konfirmasi Pembayaran</span>
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cart checkout mt-5">
+                <div class="container-fluid">
+                    <div class="cart-filled">
+                        <div class="row">
+                            <div class="col-md-9">
+                                <div class="nav-cart">
+                                    <a href="02.product-list.html" class="mobile-only">
+                                        <i class="icon-arrow-left"></i>
+                                    </a>
+                                    <h2 class="title mb-3">Pilih Pengiriman &amp; Detail Pembeli</h2>
+                                </div>
+                                <h6 class="mt-5 mb-3">Detail Pembeli</h6>
+                                <div class="buyer-info">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="card">
+                                                <h6>Profil personal</h6>
+                                                <div class="mt-2">
+                                                    <p>
+                                                        <b>
+                                                            <t t-esc="user['user'].name"/>
+                                                        </b>
+                                                        <br/>
+                                                        <t t-esc="user['user'].partner_id.email"/>
+                                                        <br/>
+                                                        <t t-esc="user['user'].partner_id.mobile"/>
+                                                    </p>
+                                                </div>
+                                                <!-- <a href="#" data-bs-toggle="modal" data-bs-target="#UbahProfilModal" class="btn btn-link-orange mt-4"> -->
+                                                <a href="javascript:void(0)" id="UbahProfilCartModal" class="btn btn-link-orange mt-4">
+                                                   Ubah
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="card">
+                                                <h6>Alamat Saya</h6>
+                                                
+                                                <t t-if="is_address == false">
+                                                    <div class="AlertAddress">
+                                                        <div>
+                                                            <center>
+                                                                <img src="/theme_alkeba/static/src/images/icon/attention.png" style="width:30px; padding-top:30px;"/>
+                                                                <br/>
+                                                                <p>
+                                                                    <b style="color:#000000; font-size: 25px;">
+                                                                        Alamat Belum Dipilih
+                                                                    </b>
+                                                                </p>
+                                                            </center>
+                                                        </div>
+                                                    </div>
+                                                    <ul style="width: 400px;">
+                                                        <!-- <li style="display:inline-block; width: 120px;">
+                                                            <a href="javascript:void(0)" data-bs-toggle="modal"
+                                                            data-bs-target="#TambahAlamatPengirimanModalCart"
+                                                            class="btn btn-link-orange">
+                                                                Tambah Alamat
+                                                            </a>
+                                                        </li> -->
+                                                        <li style="display:inline-block; width: 120px;">
+                                                            <a href="/address-settings" class="btn btn-link-orange">
+                                                            <!-- <a href="javascript:void(0)" id="pilihAlamatCart" class="btn btn-link-orange"> -->
+                                                                Pilih Alamat
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </t>
+
+                                                <t t-if="is_address == true">
+                                                    <div class="address-info" id="deliveryAddress"
+                                                        t-attf-data-delivery-address-id="{{ addresses.id }}">
+                                                        <p class="mb-0">Alamat Pengiriman Anda</p>
+                                                        <p>
+                                                            <i class="icon-location-marker"></i>
+                                                            <b id="nameAddressCart">
+                                                                <t t-esc="addresses.name"/>
+                                                            </b>
+                                                            <br/>
+                                                            <t t-esc="addresses.street"/>,
+                                                            Desa/Kel. <t t-esc="addresses.village_ids.name"/>, Kec. <t t-esc="addresses.districts_ids.name"/>,
+                                                            Kab./Kota <t t-esc="addresses.city_ids.name"/>, <t t-esc="addresses.state_ids.name"/>,
+                                                            <t t-esc="addresses.zip"/>
+                                                        </p>
+
+                                                        <!-- <a href="#" data-bs-toggle="modal"
+                                                        t-attf-data-bs-target="#UbahAlamatPengirimanModal{{ address.id }}"
+                                                        class="btn btn-link-orange">Ubah
+                                                        </a> -->
+
+                                                        <ul style="width: 400px;">
+                                                            <li style="display:inline-block; width: 120px;">
+                                                                <a href="#" data-bs-toggle="modal"
+                                                                t-attf-data-bs-target="#UbahAlamatPengirimanModal{{ addresses.id }}"
+                                                                class="btn btn-link-orange">
+                                                                    Ubah
+                                                                </a>
+                                                            </li>
+                                                            <li style="display:inline-block; width: 120px;">
+                                                                <a href="javascript:void(0)" data-bs-toggle="modal"
+                                                                data-bs-target="#TambahAlamatPengirimanCheckoutModal"
+                                                                class="btn btn-link-orange">
+                                                                    Tambah
+                                                                </a>
+                                                            </li>
+                                                            <li style="display:inline-block; width: 120px;">
+                                                                <a href="#" data-bs-toggle="modal"
+                                                                t-attf-data-bs-target="#ChooseAlamatCartModal{{ addresses.id }}"
+                                                                t-attf-data-ap="request.httprequest.args.get('ap')"
+                                                                class="btn btn-link-orange">
+                                                                    <t t-if="request.httprequest.args.get('ap') == 'proceed-checkout'">
+                                                                        Pilih Alamat  
+                                                                    </t>
+                                                                    <t t-else="">
+                                                                        Pilih
+                                                                    </t>
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </t>
+                                                <!-- ======================== -->
+                                                    <!-- <t t-foreach="addresses" t-as="address">
+                                                        <t t-if="address.id == false">
+                                                            <div class="address-info" id="deliveryAddress"
+                                                                t-attf-data-delivery-address-id="{{ address.id }}">
+                                                                <p>MASUK</p>
+                                                            </div>
+                                                        </t>
+                                                        <t t-if="address.id">
+                                                            <div class="address-info" id="deliveryAddress"
+                                                                t-attf-data-delivery-address-id="{{ address.id }}">
+                                                                <p class="mb-0">Alamat Pengiriman Anda</p>
+                                                                <p>
+                                                                    <i class="icon-location-marker"></i>
+                                                                    <b>
+                                                                        <t t-esc="address.name"/>
+                                                                    </b>
+                                                                    <br/>
+                                                                    <t t-esc="address.street"/>,
+                                                                    Desa/Kel. <t t-esc="address.village_ids.name"/>, Kec. <t t-esc="address.districts_ids.name"/>,
+                                                                    Kab./Kota <t t-esc="address.city_ids.name"/>, <t t-esc="address.state_ids.name"/>,
+                                                                    <t t-esc="address.zip"/>
+                                                                </p>
+                                                                <a href="#" data-bs-toggle="modal"
+                                                                t-attf-data-bs-target="#UbahAlamatPengirimanModal{{ address.id }}"
+                                                                class="btn btn-link-orange">Ubah
+                                                                </a>
+                                                            </div>
+                                                        </t>
+                                                    </t> -->
+                                                    <!-- ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+                                                    <!--                                                    <div class="address-info">-->
+                                                    <!--                                                        <p class="mb-0">Alamat Penagihan Anda</p>-->
+                                                    <!--                                                        <p>-->
+                                                    <!--                                                            <i class="icon-location-marker"></i>-->
+                                                    <!--                                                            <b>Rumah</b>-->
+                                                    <!--                                                            <br/>-->
+                                                    <!--                                                            Jl. Industri II No.7, Utama, Kec. Cimahi Selatan, Kota-->
+                                                    <!--                                                            Cimahi, Jawa Barat 40533-->
+                                                    <!--                                                        </p>-->
+                                                    <!--                                                        <a href="#" data-bs-toggle="modal"-->
+                                                    <!--                                                           data-bs-target="#UbahAlamatPenagihanModal"-->
+                                                    <!--                                                           class="btn btn-link-orange">Ubah-->
+                                                    <!--                                                        </a>-->
+                                                    <!--                                                    </div>-->
+                                                <!-- </div> -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <h6 class="mb-3 mt-4">Pilih Kurir Pengiriman</h6>
+                                <t t-foreach="products_by_location" t-as="location">
+                                    <div class="table-responsive mb-4">
+                                        <div
+                                            class="d-flex align-items-center card-header-courier justify-content-between">
+                                            <div class="location-selected"
+                                                 t-attf-data-loc-id="{{ location['location_id'] }}"
+                                                 t-attf-data-loc-name="{{ location['area_name'] }}"
+                                                 >
+                                                <label>Area Pengiriman:</label>
+                                                <t t-esc="location['area_name']"/>
+                                            </div>
+                                            <div class="d-flex align-items-center ">
+                                                <label class="standard">Pilih Kurir:</label>
+                                                <div class="dropdown dropdown-courier">
+
+                                                    <select t-attf-id="selectCourier{{ location['area_name'] }}" class="form-select" aria-label="Select courier">
+                                                        <option value="">Pilih Kurir</option>
+                                                        <t t-foreach="courier_ids" t-as="couriers">
+                                                            <option class="courier-option"
+                                                                t-attf-data-courier="{{ couriers.name }}"
+                                                                t-attf-data-courier-id="{{ couriers.id }}"
+                                                                t-attf-data-loc-id="{{ location['location_id'] }}"
+                                                                t-attf-data-loc-name="{{ location['area_name'] }}"
+                                                                href="javascript:void(0)">
+                                                                <div class="custom-dropdown">
+                                                                    <div class="dropdown-content" data-value="{{ couriers.id }}">
+                                                                        <img src="/theme_alkeba/static/src/images/courier/courier-02.png" alt="{{ couriers.name }}" />
+                                                                        <span><t t-esc="couriers.name"/></span>
+                                                                    </div>
+                                                                </div>
+                                                            </option>
+                                                        </t>
+                                                    </select>
+
+                                                    <!-- <button id="selectCourier" class="btn btn-input dropdown-toggle" type="button"
+                                                        t-attf-id="dropdownMenuButton{{ location['location_id'] }}"
+                                                        data-bs-toggle="dropdown"
+                                                        aria-expanded="false">
+                                                    
+                                                        <img src="/theme_alkeba/static/src/images/courier/courier-02.png"/>
+                                                        <span id="CourierSelected" class="courier-selected">Pilih Kurir</span>
+                                                    </button>
+
+                                                    <ul class="dropdown-menu"
+                                                        t-attfaria-labelledby="dropdownMenuButton{{ location['location_id'] }}">
+                                                        <t t-foreach="courier_ids" t-as="couriers">
+                                                            <li>
+                                                                <a class="dropdown-item active courier-option"
+                                                                data-courier-selected="" 
+                                                                t-attf-data-courier-id="{{couriers.id}}" 
+                                                                t-attf-data-courier="{{couriers.name}}"
+                                                                t-attf-data-loc-id="{{ location['location_id'] }}"
+                                                                href="javascript:void(0)">
+                                                                    <span id="CourierName" class="courier">
+                                                                        <img src="/theme_alkeba/static/src/images/courier/courier-02.png"/>
+                                                                        <t t-esc="couriers.name"/>
+                                                                    </span>
+                                                                </a>
+                                                            </li>
+                                                        </t>
+                                                    </ul> -->
+
+                                                        <!--  -->
+                                                        <!--                                                        <li>-->
+                                                        <!--                                                            <a class="dropdown-item" href="javascript:void(0)">-->
+                                                        <!--                                                                <span class="courier">-->
+                                                        <!--                                                                    <img-->
+                                                        <!--                                                                        src="/theme_alkeba/static/src/images/courier/courier-03.png"/>-->
+                                                        <!--                                                                    Gosend-->
+                                                        <!--                                                                </span>-->
+                                                        <!--                                                            </a>-->
+                                                        <!--                                                        </li>-->
+                                                        <!--                                                        <li>-->
+                                                        <!--                                                            <a class="dropdown-item" href="javascript:void(0)">-->
+                                                        <!--                                                                <span class="courier">-->
+                                                        <!--                                                                    <img-->
+                                                        <!--                                                                        src="/theme_alkeba/static/src/images/courier/courier-04.png"/>-->
+                                                        <!--                                                                    Grab Express-->
+                                                        <!--                                                                </span>-->
+                                                        <!--                                                            </a>-->
+                                                        <!--                                                        </li>-->
+                                                        <!--                                                        <li class="dropdown-submenu">-->
+                                                        <!--                                                            <span class="dropdown-item  " href="javascript:void(0)">-->
+                                                        <!--                                                                <span class="courier">-->
+                                                        <!--                                                                    <img-->
+                                                        <!--                                                                        src="/theme_alkeba/static/src/images/courier/courier-01.png"/>-->
+                                                        <!--                                                                    Sicepat-->
+                                                        <!--                                                                </span>-->
+                                                        <!--                                                            </span>-->
+                                                        <!--                                                            <ul class="dropdown-menu">-->
+                                                        <!--                                                                <li>-->
+                                                        <!--                                                                    <a class="dropdown-item" href="javascript:void(0)">-->
+                                                        <!--                                                                        <span class="courier">Sicepat REG</span>-->
+                                                        <!--                                                                        <div class="d-flex justify-content-between">-->
+                                                        <!--                                                                            <small>Estimasi 1 - 2 hari</small>-->
+                                                        <!--                                                                            <small>Rp. 100.000</small>-->
+                                                        <!--                                                                        </div>-->
+                                                        <!--                                                                    </a>-->
+                                                        <!--                                                                </li>-->
+                                                        <!--                                                                <li>-->
+                                                        <!--                                                                    <a class="dropdown-item" href="javascript:void(0)">-->
+                                                        <!--                                                                        <span class="courier">Sicepat BEST</span>-->
+                                                        <!--                                                                        <div class="d-flex justify-content-between">-->
+                                                        <!--                                                                            <small>Estimasi 1 hari</small>-->
+                                                        <!--                                                                            <small>Rp. 120.000</small>-->
+                                                        <!--                                                                        </div>-->
+                                                        <!--                                                                    </a>-->
+                                                        <!--                                                                </li>-->
+                                                        <!--                                                                <li>-->
+                                                        <!--                                                                    <a class="dropdown-item" href="javascript:void(0)">-->
+                                                        <!--                                                                        <span class="courier">Sicepat HALU</span>-->
+                                                        <!--                                                                        <div class="d-flex justify-content-between">-->
+                                                        <!--                                                                            <small>Estimasi Same Day</small>-->
+                                                        <!--                                                                            <small>Rp. 140.000</small>-->
+                                                        <!--                                                                        </div>-->
+                                                        <!--                                                                    </a>-->
+                                                        <!--                                                                </li>-->
+                                                        <!--                                                            </ul>-->
+                                                        <!--                                                        </li>-->
+                                                        <!--                                                        <li class="dropdown-submenu">-->
+                                                        <!--                                                            <span class="dropdown-item" href="javascript:void(0)">-->
+                                                        <!--                                                                <span class="courier">-->
+                                                        <!--                                                                    <img-->
+                                                        <!--                                                                        src="/theme_alkeba/static/src/images/courier/courier-05.png"/>-->
+                                                        <!--                                                                    JNE-->
+                                                        <!--                                                                </span>-->
+                                                        <!--                                                            </span>-->
+                                                        <!--                                                            <ul class="dropdown-menu">-->
+                                                        <!--                                                                <li>-->
+                                                        <!--                                                                    <a class="dropdown-item" href="javascript:void(0)">-->
+                                                        <!--                                                                        <span class="courier">JNE REG</span>-->
+                                                        <!--                                                                        <div class="d-flex justify-content-between">-->
+                                                        <!--                                                                            <small>Estimasi 1 - 2 hari</small>-->
+                                                        <!--                                                                            <small>Rp. 100.000</small>-->
+                                                        <!--                                                                        </div>-->
+                                                        <!--                                                                    </a>-->
+                                                        <!--                                                                </li>-->
+                                                        <!--                                                                <li>-->
+                                                        <!--                                                                    <a class="dropdown-item" href="javascript:void(0)">-->
+                                                        <!--                                                                        <span class="courier">JNE BEST</span>-->
+                                                        <!--                                                                        <div class="d-flex justify-content-between">-->
+                                                        <!--                                                                            <small>Estimasi 1 hari</small>-->
+                                                        <!--                                                                            <small>Rp. 120.000</small>-->
+                                                        <!--                                                                        </div>-->
+                                                        <!--                                                                    </a>-->
+                                                        <!--                                                                </li>-->
+                                                        <!--                                                                <li>-->
+                                                        <!--                                                                    <a class="dropdown-item" href="javascript:void(0)">-->
+                                                        <!--                                                                        <span class="courier">JNE HALU</span>-->
+                                                        <!--                                                                        <div class="d-flex justify-content-between">-->
+                                                        <!--                                                                            <small>Estimasi Same Day</small>-->
+                                                        <!--                                                                            <small>Rp. 140.000</small>-->
+                                                        <!--                                                                        </div>-->
+                                                        <!--                                                                    </a>-->
+                                                        <!--                                                                </li>-->
+                                                        <!--                                                            </ul>-->
+                                                        <!--                                                        </li>-->
+                                                        <!--                                                        <li class="dropdown-submenu">-->
+                                                        <!--                                                            <span class="dropdown-item" href="javascript:void(0)">-->
+                                                        <!--                                                                <span class="courier">-->
+                                                        <!--                                                                    <img-->
+                                                        <!--                                                                        src="/theme_alkeba/static/src/images/courier/courier-06.png"/>-->
+                                                        <!--                                                                    J&amp;T-->
+                                                        <!--                                                                </span>-->
+                                                        <!--                                                            </span>-->
+                                                        <!--                                                            <ul class="dropdown-menu">-->
+                                                        <!--                                                                <li>-->
+                                                        <!--                                                                    <a class="dropdown-item" href="javascript:void(0)">-->
+                                                        <!--                                                                        <span class="courier">J&amp;T REG</span>-->
+                                                        <!--                                                                        <div class="d-flex justify-content-between">-->
+                                                        <!--                                                                            <small>Estimasi 1 - 2 hari</small>-->
+                                                        <!--                                                                            <small>Rp. 100.000</small>-->
+                                                        <!--                                                                        </div>-->
+                                                        <!--                                                                    </a>-->
+                                                        <!--                                                                </li>-->
+                                                        <!--                                                                <li>-->
+                                                        <!--                                                                    <a class="dropdown-item" href="javascript:void(0)">-->
+                                                        <!--                                                                        <span class="courier">J&amp;T BEST</span>-->
+                                                        <!--                                                                        <div class="d-flex justify-content-between">-->
+                                                        <!--                                                                            <small>Estimasi 1 hari</small>-->
+                                                        <!--                                                                            <small>Rp. 120.000</small>-->
+                                                        <!--                                                                        </div>-->
+                                                        <!--                                                                    </a>-->
+                                                        <!--                                                                </li>-->
+                                                        <!--                                                                <li>-->
+                                                        <!--                                                                    <a class="dropdown-item" href="javascript:void(0)">-->
+                                                        <!--                                                                        <span class="courier">J&amp;T HALU</span>-->
+                                                        <!--                                                                        <div class="d-flex justify-content-between">-->
+                                                        <!--                                                                            <small>Estimasi Same Day</small>-->
+                                                        <!--                                                                            <small>Rp. 140.000</small>-->
+                                                        <!--                                                                        </div>-->
+                                                        <!--                                                                    </a>-->
+                                                        <!--                                                                </li>-->
+                                                        <!--                                                            </ul>-->
+                                                        <!--                                                        </li>-->
+                                                        <!--                                                        <li>-->
+                                                        <!--                                                            <a class="dropdown-item" href="javascript:void(0)">-->
+                                                        <!--                                                                <span class="courier">-->
+                                                        <!--                                                                    <img-->
+                                                        <!--                                                                        src="/theme_alkeba/static/src/images/courier/courier-07.png"/>-->
+                                                        <!--                                                                    Tiki-->
+                                                        <!--                                                                </span>-->
+                                                        <!--                                                            </a>-->
+                                                        <!--                                                        </li>-->
+                                                        <!--                                                        <li>-->
+                                                        <!--                                                            <a class="dropdown-item" href="javascript:void(0)">-->
+                                                        <!--                                                                <span class="courier">-->
+                                                        <!--                                                                    <img-->
+                                                        <!--                                                                        src="/theme_alkeba/static/src/images/courier/courier-09.png"/>-->
+                                                        <!--                                                                    Pos Indonesia-->
+                                                        <!--                                                                </span>-->
+                                                        <!--                                                            </a>-->
+                                                        <!--                                                        </li>-->
+                                                        <!--                                                        <li>-->
+                                                        <!--                                                            <a class="dropdown-item" href="javascript:void(0)">-->
+                                                        <!--                                                                <span class="courier">-->
+                                                        <!--                                                                    <img-->
+                                                        <!--                                                                        src="/theme_alkeba/static/src/images/courier/courier-010.png"/>-->
+                                                        <!--                                                                    Wahana-->
+                                                        <!--                                                                </span>-->
+                                                        <!--                                                            </a>-->
+                                                        <!--                                                        </li>-->
+
+                                                </div>
+                                            </div>
+                                            <p>Total Volume:
+                                                <span>
+                                                    <t t-esc="location['volume']"/>
+                                                    m3
+                                                </span>
+                                            </p>
+                                            <p>Total Berat:
+                                                <span id="weightSpan">
+                                                    <t t-esc="location['weight']"/>
+                                                    Kg
+                                                </span>
+                                            </p>
+                                        </div>
+                                        <table class="table">
+                                            <thead>
+                                                <tr t-attf-style="background-color: {{ location['area_name'] == 'Bandung' and '#91cdeb' or location['area_name'] == 'Jakarta' and '#edc168' or location['area_name'] == 'Surabaya' and '#e68e96' }}">
+                                                    <th colspan="1" width="45%">
+                                                        Produk (<t t-esc="location['product_count']"/>)
+                                                    </th>
+                                                    <th width="20%">Kuantitas</th>
+                                                    <th width="15%">Harga</th>
+                                                    <th width="10%">Subtotal</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td colspan="5">
+                                                        <table class="table">
+                                                            <tbody>
+                                                                <t t-foreach="location['products']" t-as="product">
+                                                                    <tr>
+                                                                        <td width="45%">
+                                                                            <div class="d-flex">
+                                                                                <div class="left-cart">
+                                                                                    <t t-if="product['product'].image_1920">
+                                                                                        <img
+                                                                                            t-att-src="image_data_uri(product['product'].image_1920)"
+                                                                                            class="img-fluid"
+                                                                                            t-att-alt="product['product_name']"/>
+                                                                                    </t>
+                                                                                    <t t-else="">
+                                                                                        <img
+                                                                                            src="/web/static/img/placeholder.png"
+                                                                                            class="img-fluid"
+                                                                                            alt="..."/>
+                                                                                    </t>
+                                                                                </div>
+                                                                                <div class="right-cart">
+                                                                                    <t t-esc="product['product_name']"/>
+                                                                                    <div class="d-block">
+                                                                                        <span>Berat:
+                                                                                            <t t-esc="product['product_weight']"/>
+                                                                                            <t t-esc="product['product_weight_uom']"/>
+                                                                                        </span>
+                                                                                        <span>SKU:
+                                                                                            <t t-esc="product['product_sku']"/>
+                                                                                        </span>
+                                                                                    </div>
+                                                                                    <div
+                                                                                        class="notes-form edited saved">
+                                                                                        <i class="icon-document-text"></i>
+                                                                                        <p>Notes
+                                                                                        </p>
+                                                                                        <div class="notes-input">
+                                                                                            <textarea class="auto-grow"
+                                                                                                      disabled="disabled">
+                                                                                                <t t-esc="product['notes']"/>
+                                                                                            </textarea>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </td>
+                                                                        <td width="20%" valign="middle">
+                                                                            <div class="qty-buy qty-disabled no-border">
+                                                                                <div class="number">
+                                                                                    <input type="text"
+                                                                                           t-attf-value="{{ product['qty'] }}"
+                                                                                           disabled="disabled"/>
+                                                                                </div>
+                                                                            </div>
+                                                                        </td>
+                                                                        <td width="15%" valign="middle">
+                                                                            <div class="card-product h-auto">
+                                                                                Rp
+                                                                                <t t-esc="'{0:,.2f}'.format(int(product['price']))"/>
+                                                                            </div>
+                                                                        </td>
+                                                                        <td width="10%" valign="middle" align="center">
+                                                                            <div class="card-product h-auto">
+                                                                                Rp
+                                                                                <t t-esc="'{0:,.2f}'.format(int(product['subtotal']))"/>
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                </t>
+                                                            </tbody>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </t>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="floating-share">
+                                    <div class="qty-buy">
+                                        <h3>Ringkasan Pesanan</h3>
+                                        <div class=" p-3 pt-0">
+                                            <div class="d-flex align-items-center mt-4">
+                                                <p class="mb-0 ">Sub Total:</p>
+                                                <p class="mb-0 standard ms-auto" id="totalPrice">Rp
+                                                    <t t-esc="'{0:,.2f}'.format(int(subtotal))"/>
+                                                </p>
+                                            </div>
+                                            <hr/>
+                                            <t t-if="name_promo">
+                                                <div class="voucher-code">
+                                                    <p>Promo Yang Digunakan</p>
+                                                    <b><t t-esc="name_promo"/></b>
+                                                    <br/>
+                                                    <input style="display:None;" type="text" id="code_prg" t-attf-value="{{ code_promo }}"/>
+                                                </div>
+                                                <hr/>
+                                            </t>
+                                            <p>Est. Ongkos Kirim:</p>
+                                                <t t-foreach="shipping_price_per_location" t-as="location">
+                                                    <div class="mt-3">
+                                                        <p>
+                                                            <b><t t-esc="location['area_name'] == 'Toko' and 'Bandung' or location['area_name']"/></b>
+                                                        </p>
+                                                        <div class="d-flex align-items-center ">
+                                                            <p class="mb-0" id="courierNameSelected" t-attf-id="courierNameLoc{{ location['area_name'] == 'Toko' and 'Bandung' or location['area_name'] }}">
+                                                                Kurir Belum Dipilih
+                                                            </p>
+                                                            <p class="mb-0 standard ms-auto" t-attf-id="courierPriceLoc{{ location['area_name'] == 'Toko' and 'Bandung' or location['area_name'] }}">
+                                                                Rp <t t-esc="'{0:,.2f}'.format(int(location['price']))"/>
+                                                            </p>
+                                                            <p class="mb-0 standard ms-auto" t-attf-id="courierPriceLocHidden{{ location['area_name'] == 'Toko' and 'Bandung' or location['area_name'] }}">
+                                                                Rp <t t-esc="'{0:,.2f}'.format(int(location['price']))"/>
+                                                            </p>
+                                                        </div>
+                                                        <br/>
+                                                        <select t-attf-id="selectLionParcelServiceType{{ location['area_name'] == 'Toko' and 'Bandung' or location['area_name'] }}" style="display: none" class="form-select" aria-label="Select courier">
+                                                            <option 
+                                                            t-attf-data-lion-service-name=""
+                                                            t-attf-data-lion-service-price=""
+                                                            value="">Pilih Jenis Layanan</option>
+                                                        </select>
+                                                        <t t-if="shipping_price_per_location and len(shipping_price_per_location) > 1">
+                                                            <input aria-hidden="true" t-attf-id="courierName{{ location['location_id'] }}" type="text" value=""/>
+                                                        </t>
+                                                        <t t-else="">
+                                                            <input aria-hidden="true" id="courierName" type="text" value=""/>
+                                                        </t>
+                                                    </div>
+                                                    <hr/>
+                                                </t>
+                                            
+                                            <!-- HIDE UNTUK SEMENTARA -->
+                                            <!-- JANGAN DI HAPUS -->
+                                            <!-- ================================= -->
+                                            <!-- <div class="voucher-code">
+                                                <p>Kode Voucher</p>
+                                                <form class="d-flex">
+                                                    <div class="position-relative  me-2">
+                                                        <input type="text" class="form-control"
+                                                               placeholder="Masukkan disini..." value=""/>
+                                                        <i class="icon-x-circle"></i>
+                                                    </div>
+                                                    <a href="javascript:void(0)"
+                                                       class="btn btn-outline-orange apply-voucher">Pakai
+                                                    </a>
+                                                    <a href="javascript:void(0)"
+                                                       class="btn btn-outline-red delete-voucher">Hapus
+                                                    </a>
+                                                </form>
+                                                <div class="d-flex align-items-center mt-3">
+                                                    <p class="mb-0 ">Voucher Diskon</p>
+                                                    <p class="mb-0 standard ms-auto" style="color: #D82731">Rp 0
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <hr/> -->
+                                            <div class="use-alkeba-point clearfix">
+                                                <p>Gunakan Poin</p>
+                                                <span id="CurrentPoint" class="current-point">
+                                                    <t t-esc="cart.user_id.point"/> Poin
+                                                    <!-- <span>(-Rp 0)</span> -->
+                                                </span>
+                                                <span id="nominalPoint">
+                                                    (-Rp. <t t-esc="'{0:,.2f}'.format(int(is_existing_point))"/>)
+                                                </span>
+                                                <br/>
+                                                <!-- <label class="switch">
+                                                    <input type="checkbox" id="CheckboxPoint" value="{{ active_point }}"/>
+                                                    <span class="slider round"></span>
+                                                </label> -->
+                                                <br/>
+                                                <t t-if="active_point == int(1)">
+                                                    <span>
+                                                        <b>Belanja Dengan Point Aktif</b>
+                                                    </span>
+                                                </t>
+                                                <t t-if="not active_point == int(1)">
+                                                    <span>
+                                                        <b>Belanja Tidak Menggunakan Point</b>
+                                                    </span>
+                                                </t>
+                                            </div>
+                                            <hr/>
+                                            <div class="use-alkeba-point clearfix">
+                                                <p>Point Yang Akan Dapat
+                                                </p>
+                                                <span id="getPoint" class="current-point" t-attf-data-point="{{ point }}">
+                                                    <t t-esc="point"/> Point
+                                                </span>
+                                            </div>
+                                            <hr/>
+                                            <div class="nav-cart-total">
+                                                <div id="totalOrder" class="d-flex align-items-center mt-3">
+                                                    <p class="mb-0 ">
+                                                        <strong>Total</strong>
+                                                    </p>
+                                                    <p class="mb-0 standard ms-auto text-end" id="grandTotal">
+                                                        Rp
+                                                        <t t-esc="'{0:,.2f}'.format(int(grand_total))"/>
+                                                        <br/>
+                                                        <!--                                                        <span class="price-before">Rp.88,900</span>-->
+                                                    </p>
+                                                </div>
+                                                <div class="button mt-4">
+                                                    <a href="javascript:void(0)" id="btnProceedToPayment"
+                                                       class="btn btn-primary d-block w-100">
+                                                        Lanjutkan ke Pembayaran
+                                                    </a>
+                                                    <!--                                                    <a href="/proceed-payment" class="btn btn-primary d-block w-100">-->
+                                                    <!--                                                        Lanjutkan ke-->
+                                                    <!--                                                        Pembayaran-->
+                                                    <!--                                                    </a>-->
+                                                </div>
+                                            </div>
+                                            <p class="help-info">Mengalami kesulitan dalam pemesanan?<br></br>
+                                                <a href="https://api.whatsapp.com/send?phone=6283817934830&amp;text=Saya%20terkendala%20dalam%20memesan%20produk%20di%20Alkeba.id">
+                                                    Hubungi Kami disini
+                                                </a>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal Ubah Profil-->
+            <div class="modal fade" id="UbahProfilModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">Ubah foto Profil
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                <i class="icon-x"></i>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <div class="form-group">
+                                    <label class="grey">Nama Pembeli</label>
+                                    <input id="nameProfileCart" type="text" class="form-control" t-attf-value="{{ user['user'].name }}"/>
+                                </div>
+                                <div class="form-group">
+                                    <label class="grey">Telepon/Handphone</label>
+                                    <input id="phoneProfileCart" type="text" class="form-control"
+                                           t-attf-value="{{ user['user'].partner_id.mobile }}"/>
+                                </div>
+                                <div class="form-group">
+                                    <label class="grey">Alamat Email</label>
+                                    <input id="emailProfileCart" type="text" class="form-control"
+                                           t-attf-value="{{ user['user'].partner_id.email }}"/>
+                                </div>
+                                <div class="form-group" hidden="hidden">
+                                    <label class="grey">Date Birth</label>
+                                    <input id="datebirthProfileCart" type="text" class="form-control"
+                                           t-attf-value="{{ user['user'].partner_id.date_birth }}"/>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer d-flex justify-content-center">
+                            <a href="#" class="btn btn-outline">Batal</a>
+                            <!-- <a href="#" class="btn btn-secondary">Simpan</a> -->
+                            <a href="javascript:void(0)" id="updateProfileCart" class="btn btn-outline" data-bs-dismiss="modal">Simpan</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal ubah alamat pengiriman-->
+            <t t-foreach="addresses" t-as="address">
+                <div class="modal fade" t-attf-id="UbahAlamatPengirimanModal{{ address.id }}" tabindex="-1"
+                     aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">Ubah Alamat Pengiriman
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                    <i class="icon-x"></i>
+                                </button>
+                            </div>
+                            <form t-attf-action="/update-address-in-cart/{{ address.id }}" method="POST">
+                                <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                                <input type="hidden" id="address_id" name="address_id" t-attf-value="{{ address.id }}"/>
+                                <div class="modal-body">
+
+                                    <!--                                    <div class="form-group">-->
+                                    <!--                                        <label class="grey">Nama Penerima</label>-->
+                                    <!--                                        <input type="text" class="form-control" value="Januari Satya Kencana"/>-->
+                                    <!--                                    </div>-->
+                                    <div class="form-group">
+                                        <label class="grey">Label Alamat</label>
+                                        <input id="labelAlamat" type="text" name="label" class="form-control" t-attf-value="{{ address.name }}"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="grey">Alamat</label>
+                                        <input id="detailAlamat" type="text" name="street" class="form-control" t-attf-value="{{ address.street }}"/>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <div class="form-group col-6 pe-3">
+                                            <label class="grey">Provinsi</label>
+                                            <!-- <select class="select-styled" name="state"> -->
+                                            <select id="province" class="select-styled province" name="state">
+                                                <option value="0">Pilih Provinsi</option>
+                                                <t t-foreach="address_values['states']" t-as="state">
+                                                    <t t-if="state.id == address.state_ids.id">
+                                                        <option t-attf-value="{{ state.id }}" selected="selected">
+                                                            <t t-esc="state.name"/>
+                                                        </option>
+                                                    </t>
+                                                    <t t-else="">
+                                                        <option t-attf-value="{{ state.id }}">
+                                                            <t t-esc="state.name"/>
+                                                        </option>
+                                                    </t>
+                                                </t>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-6">
+                                            <label class="grey">Kota/Kabupaten</label>
+                                            <!-- <select class="select-styled" name="city"> -->
+                                            <select id="citylist" class="select-styled citylist" name="city">
+                                                <option value="0">Pilih Kota/Kabupaten</option>
+                                                <!-- <t t-foreach="address_values['cities']" t-as="city">
+                                                    <t t-if="city.id == address.city_ids.id">
+                                                        <option t-attf-value="{{ city.id }}" selected="selected">
+                                                            <t t-esc="city.name"/>
+                                                        </option>
+                                                    </t>
+                                                    <t t-else="">
+                                                        <option t-attf-value="{{ city.id }}">
+                                                            <t t-esc="city.name"/>
+                                                        </option>
+                                                    </t>
+                                                </t> -->
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <div class="form-group  col-6 pe-3">
+                                            <label class="grey">Kelurahan</label>
+                                            <!-- <select class="select-styled" name="village"> -->
+                                            <select id="villagelist" class="select-styled villagelist" name="village">
+                                                <option value="0">Pilih Kelurahan</option>
+                                                <!-- <t t-foreach="address_values['villages']" t-as="village">
+                                                    <t t-if="village.id == address.village_ids.id">
+                                                        <option t-attf-value="{{ village.id }}" selected="selected">
+                                                            <t t-esc="village.name"/>
+                                                        </option>
+                                                    </t>
+                                                    <t t-else="">
+                                                        <option t-attf-value="{{ village.id }}">
+                                                            <t t-esc="village.name"/>
+                                                        </option>
+                                                    </t>
+                                                </t> -->
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-6">
+                                            <label class="grey ">Kecamatan</label>
+                                            <!-- <select class="select-styled" name="district"> -->
+                                            <select id="districtlist" class="select-styled districtlist" name="district">
+                                                <option value="0">Pilih Kecamatan</option>
+                                                <!-- <t t-foreach="address_values['districts']" t-as="district">
+                                                    <t t-if="district.id == address.districts_ids.id">
+                                                        <option t-attf-value="{{ district.id }}" selected="selected">
+                                                            <t t-esc="district.name"/>
+                                                        </option>
+                                                    </t>
+                                                    <t t-else="">
+                                                        <option t-attf-value="{{ district.id }}">
+                                                            <t t-esc="district.name"/>
+                                                        </option>
+                                                    </t>
+                                                </t> -->
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="grey">Kode Pos</label>
+                                        <input id="postcode" type="text" name="zip" class="form-control" t-attf-value="{{ address.zip }}"/>
+                                        <!-- <input type="text" name="zip" class="form-control" t-attf-value="{{ address.zip }}"/> -->
+                                    </div>
+
+                                </div>
+                                <div class="modal-footer d-flex justify-content-center">
+                                    <a href="#" class="btn btn-outline" data-bs-dismiss="modal">Batal</a>
+                                    <!-- <input type="submit" class="btn btn-secondary" value="Simpan"/> -->
+                                    <a href="javascript:void(0)" id="submitAddress" class="btn btn-outline" data-bs-dismiss="modal" data-value="isupdatecart">Simpan</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>                
+            </t>
+
+            <!-- Modal tambah alamat pengiriman di checkout page -->
+            <div class="modal fade" id="TambahAlamatPengirimanCheckoutModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">Tambah Alamat Pengiriman
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                <i class="icon-x"></i>
+                            </button>
+                        </div>
+                        <div>
+                            <center>
+                                <img src="/theme_alkeba/static/src/images/icon/attention.png" style="width:15px; padding-top:10px;"/>
+                                <br/>
+                                <p>
+                                    <b style="color:#000000; font-size: 10px;">
+                                        Sementara Hanya Untuk Area Kota Bandung
+                                    </b>
+                                </p>
+                            </center>
+                        </div>
+                        <form>
+                            <input type="hidden" name="csrf_token" t-attf-value="request.csrf_token()"/>
+                            <!-- <input type="hidden" id="address_id" name="address_id" t-attf-value="{{ address.id }}"/> -->
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <label class="grey">Label Alamat</label>
+                                    <input id="labelAlamatCheckout" type="text" name="label" class="form-control" />
+                                </div>
+                                <div class="form-group">
+                                    <label class="grey">Alamat
+                                    </label>
+                                    <input id="detailAlamatCheckout" type="text" name="street" class="form-control" />
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <div class="form-group col-6 pe-3">
+                                        <label class="grey">Provinsi</label>
+                                        <select id="province" class="select2-container select-styled province" name="state">
+                                            <option value="">
+                                                <!-- Pilih Provinsi -->
+                                            </option>
+                                            <t t-foreach="address_values['states']" t-as="state">
+                                                <option t-attf-value="{{ state.id }}">
+                                                    <t t-esc="state.name"/>
+                                                </option>
+                                            </t>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-6">
+                                        <label class="grey">Kota/Kabupaten</label>
+                                        <select id="citylist" class="select-styled citylist" name="city">
+                                            <option value="">
+                                                <!-- Pilih Kota/Kabupaten -->
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <div class="form-group col-6">
+                                        <label class="grey ">Kecamatan</label>
+                                        <select id="districtlist" class="select-styled districtlist" name="district">
+                                            <option value="">
+                                                <!-- Pilih Kecamatan -->
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group  col-6 pe-3">
+                                        <label class="grey">Kelurahan</label>
+                                        <select id="villagelist" class="select-styled villagelist" name="village">
+                                            <option value="">
+                                                <!-- Pilih Kelurahan -->
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="grey">Kode Pos</label>
+                                    <input id="postcodeCheckout" type="text" name="zip" class="form-control" value=""/>
+                                </div>
+                            </div>
+                            <div class="modal-footer d-flex justify-content-center">
+                                <a href="#" class="btn btn-outline" data-bs-dismiss="modal">Batal</a>
+                                <a href="javascript:void(0)" id="submitAddress" class="btn btn-outline" data-bs-dismiss="modal" data-value="isAddAddress">Simpan</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>                
+
+
+            <!-- Modal alamat penagihan-->
+            <div class="modal fade" id="UbahAlamatPenagihanModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">Ubah Alamat Penagihan
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                <i class="icon-x"></i>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <div class="checkbox mb-3">
+                                    <input type="checkbox" id="checkAll"/>
+                                    <label for="checkAll">Gunakan Alamat Pengiriman sebagai Alamat Penagihan</label>
+                                </div>
+                                <div class="form-group">
+                                    <label class="grey">Nama Penerima</label>
+                                    <input type="text" class="form-control" value="Januari Satya Kencana"/>
+                                </div>
+                                <div class="form-group">
+                                    <label class="grey">Label Alamat</label>
+                                    <input type="text" class="form-control" value="Rumah"/>
+                                </div>
+                                <div class="form-group">
+                                    <label class="grey">Alamat</label>
+                                    <input type="text" class="form-control"
+                                           value="Jl. Masjid Zamrud II A-2 No.26 RT 005/012"/>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <div class="form-group col-6 pe-3">
+                                        <label class="grey">Provinsi</label>
+                                        <select class="select-styled">
+                                            <option>Pilih Provinsi</option>
+                                            <option value="CA">California</option>
+                                            <option value="NV">Nevada</option>
+                                            <option value="OR">Oregon</option>
+                                            <option value="WA">Washington</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-6">
+                                        <label class="grey">Kota/Kabupaten</label>
+                                        <select class="select-styled">
+                                            <option>Pilih Kota/Kabupaten</option>
+                                            <option value="CA">California</option>
+                                            <option value="NV">Nevada</option>
+                                            <option value="OR">Oregon</option>
+                                            <option value="WA">Washington</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <div class="form-group  col-6 pe-3">
+                                        <label class="grey">Kelurahan</label>
+                                        <select class="select-styled">
+                                            <option>Pilih Kelurahan</option>
+                                            <option value="CA">California</option>
+                                            <option value="NV">Nevada</option>
+                                            <option value="OR">Oregon</option>
+                                            <option value="WA">Washington</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-6">
+                                        <label class="grey ">Kecamatan</label>
+                                        <select class="select-styled">
+                                            <option>Pilih Kecamatan</option>
+                                            <option value="CA">California</option>
+                                            <option value="NV">Nevada</option>
+                                            <option value="OR">Oregon</option>
+                                            <option value="WA">Washington</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="grey">Kode Pos</label>
+                                    <input type="text" class="form-control" value="40378"/>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer d-flex justify-content-center">
+                            <a href="#" class="btn btn-outline">Batal</a>
+                            <a href="#" class="btn btn-secondary">Simpan</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </t>
+    </template>
+</odoo>

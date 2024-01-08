@@ -1,0 +1,408 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo> 
+    <template id="alkeba_header_1" inherit_id="website.layout" name="Alkeba Header Phase1">
+        <!-- <xpath expr="//div[@id='wrapwrap']" position="before"> -->
+        <!-- <xpath expr="//div[@id='overlay']" position="before"> -->
+        <!-- <xpath expr="//header" position="replace"> -->
+        <xpath expr="//header[@id='top']" position="replace">
+            <div id="wrapper">
+                <header class="header">
+                    <div class="header-info">
+                        <div class="container-fluid d-flex justify-content-between">
+                            <ul class="mobile-only">
+                                <li>
+                                    <a href="/products">New Arrival</a>
+                                </li>
+                                <li>
+                                    <a href="/promo">Promo</a>
+                                </li>
+                                <li>
+                                    <a href="/under_maintenance">Berita</a>
+                                </li>
+                                <li>
+                                    <a href="/about-us">Tentang Kami</a>
+                                </li>
+                            </ul>
+                                <!-- dynamic promo text -->
+                                <a id="dynamic-text-header" href="/products">
+                                    <t t-esc="promo_text_header"/>
+                                </a>
+                            <!-- <ul class="select-language">
+                                <li>
+                                    <a href="" class="active">
+                                        <i class="icon-globe-alt"></i>
+                                        IDN
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="">ENG</a>
+                                </li>
+                            </ul> -->
+                        </div>
+                    </div>
+                    <div class="header-top">
+                        <div class="container-fluid d-flex justify-content-between  align-items-center pb-2">
+                            <div class="d-flex logo">
+                                <button class="navbar-toggler" type="button" id="ic-nav-mobile">
+                                    <span class="navbar-toggler-icon">
+                                        <div id="nav-icon">
+                                            <span></span>
+                                            <span></span>
+                                            <span></span>
+                                        </div>
+                                    </span>
+                                </button>
+                                <a href="/" class="text-decoration-none">
+                                    <!-- <img t-attf-src="/web/binary/company_logo" class="img-fluid"/> -->
+                                    <img src="/theme_alkeba/static/src/images/Logo-for-web.png" class="img-fluid"/>
+                                    <img src="/theme_alkeba/static/src/images/Logo-for-web.png" class="img-fluid logo-mobile"/>
+                                </a>
+                            </div>
+                            <form class="search-box col-md-7">
+                                <div class="search-header">
+                                    <input type="search" class="form-control" id="searchBox"
+                                        placeholder="Cari alat kebersihan yang anda perlukan disini..."
+                                        aria-label="Search"/>
+                                    <button type="button" id="searchBtn">
+                                        <i class="icon-search"></i>
+                                    </button>
+                                </div>
+                            </form>
+                            <div class="d-flex align-items-center">
+                                <t t-if="user_id._is_public()">
+                                    <ul class="list-unstyled authentication d-flex align-items-center mb-0">
+                                        <li class="login-btn">
+                                            <a href="/web/login" class="user-account">
+                                                <i class="icon-user"></i>
+                                            </a>
+                                            <a t-attf-href="/web/login" class="btn btn-primary">Masuk</a>
+                                        </li>
+                                        <li class="">
+                                            <a t-attf-href="/web/signup" class="btn btn-outline">Daftar</a>
+                                        </li>
+                                    </ul>
+                                </t>
+                                <t t-else="">
+                                    <div class="cart-btn ms-auto me-3 header-cart-btn">
+                                        <a href="/cart">
+                                            <i class="icon-shopping-bag"></i>
+                                            <span><t t-esc="cart_product_count"/></span>
+                                        </a>
+                                    </div>
+
+                                    <!-- NOTIFICATION -->
+                                    <ul class="list-unstyled authentication-after-login d-flex align-items-center mb-0">
+                                        <!-- HIDE UNTUK SEMENTARA -->
+                                        <!-- ===================== -->
+                                        
+                                        <li>
+                                            <div class="dropdown dropdown-notif">
+                                                <button class="dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown">
+                                                    <i class="icon-bell"></i>
+                                                    
+                                                    <t t-if="total_notif is not None and total_notif >= 0">
+                                                        <span class="notif-badge"><t t-esc="total_notif"/></span>
+                                                    </t>
+                                                </button>
+                                                <div class="dropdown-menu  dropdown-menu-end p-0"
+                                                    aria-labelledby="dropdownMenuButton">
+                                                    <h6>Notifikasi
+                                                        <span t-esc="total_notif"/>
+                                                    </h6>
+                                                    <ul class="list-unstyled mb-0">
+                                                        <t t-foreach="detail_notif" t-as="notif">
+                                                            <li>
+                                                                <a t-att-href="'/order/' + str(notif['res_id'])" class="py-2 d-flex new" t-on-click="markAsRead(notif)">
+                                                                    <div class="notif-img">
+                                                                        <i class="icon-shopping-bag"></i>
+                                                                    </div>
+                                                                    <div class="clearfix">
+                                                                        <div class="d-flex justify-content-end">
+                                                                            <span class="notif-date">
+                                                                                <i class="icon-clock"></i>
+                                                                                <t t-raw="notif['date']"/>
+                                                                            </span>
+                                                                        </div>
+                                                                        <h3 class="content-title f-14 mb-2">
+                                                                            <t t-raw="notif['subject']"/>
+                                                                        </h3>
+                                                                        <p class="mb-2 f-12">
+                                                                            <t t-raw="notif['body']"/>
+                                                                        </p>
+                                                                    </div>
+                                                                </a>
+                                                            </li>
+                                                        </t>
+
+                                                        <li>
+                                                            <a href="/my-notif" class="py-2 d-flex see-more">Lihat Semua Notifikasi
+                                                                <i class="icon-arrow-right"></i>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div> 
+                                            </div>
+                                        </li>
+                                       
+
+                                        <li>
+                                            <div class="dropdown dropdown-account">
+                                                <button class="dropdown-toggle" type="button" id="dropdownMenuButton"
+                                                        data-bs-toggle="dropdown">
+                                                    <span class="ava-user">
+                                                        <t t-set="avatar_source"
+                                                        t-value="image_data_uri(user_id.avatar_256)"/>
+                                                        <img t-att-src="avatar_source"/>
+                                                    </span>
+                                                    <span t-esc="user_id.name"/>
+                                                    <i class="icon-cheveron-down ms-2"></i>
+                                                </button>
+                                                <div class="dropdown-menu  dropdown-menu-end p-0"
+                                                    aria-labelledby="dropdownMenuButton">
+                                                    <div class="box-riwayat-poin">
+                                                        <div class="d-flex justify-content-start">
+                                                            <img src="/theme_alkeba/static/src/images/poin-logo.svg"/>
+                                                            <div>
+                                                                <p>Poin Alkeba</p>
+                                                                <h2 id="pointUsers">
+                                                                    <span t-esc="user_id.partner_id.point"/>
+                                                                </h2>
+    <!--                                                            <a href="">Cek riwayat poin</a>-->
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <a href="#" class="btn btn-secondary">Daftar Akun B2B</a>
+                                                    <a class="dropdown-item" href="/dashboard">
+                                                        <i class="icon-home"></i>
+                                                        Dashboard
+                                                    </a>
+                                                    <a class="dropdown-item" href="/my-orders">
+                                                        <i class="icon-shopping-bag"></i>
+                                                        Pesanan Saya
+                                                    </a>
+                                                    <a class="dropdown-item" href="/address-settings">
+                                                        <i class="icon-location-marker"></i>
+                                                        Pengaturan Alamat
+                                                    </a>
+                                                    <!-- HIDE SEMENTARA -->
+                                                    <!-- JANGAN DI HAPUS -->
+                                                    <!-- <a class="dropdown-item" href="/my-reviews">
+                                                        <i class="icon-pencil-alt"></i>
+                                                        Ulasan Saya
+                                                    </a> -->
+                                                    <a class="dropdown-item" href="/wishlist">
+                                                        <i class="icon-heart"></i>
+                                                        Wishlist
+                                                    </a>
+                                                    <a class="dropdown-item" href="/account-settings">
+                                                        <i class="icon-cog"></i>
+                                                        Pengaturan Akun
+                                                    </a>
+                                                    <a class="dropdown-item" t-attf-href="/web/session/logout?redirect=/">
+                                                        <i class="icon-logout-1"></i>
+                                                        Keluar
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </t>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="header-bottom">
+                        <div class="container-fluid d-flex flex-wrap justify-content-center">
+                            <div class="col-md-3">
+                                <a href="/" class="text-sm font-medium mobile-only">
+                                    <span class="ic-home"></span>
+                                    Home
+                                </a>
+                                <div class="select-category">
+                                    <div class="dropdown">
+                                        <nav class="navbar navbar-expand-lg navbar-dark multilevel">
+                                            <ul class="navbar-nav w-100">
+                                                <li class="nav-item dropdown w-100">
+                                                    <a class="nav-link dropdown-toggle nav-category" href="#"
+                                                    data-bs-toggle="dropdown">
+                                                        <i class="icon-view-grid"></i>
+                                                        <span class="ic-category"></span>
+                                                        Semua Kategori
+                                                    </a>
+                                                    <ul class="dropdown-menu dropdown-category">
+                                                        <div href="javascript:void(0)" class="close-category">
+                                                            <i class="icon-x-circle"></i>
+                                                            Tutup
+                                                        </div>
+                                                        <t t-foreach="product_categories" t-as="category">
+                                                            <li class="has-submenu">
+                                                                <a class="dropdown-item dropdown-toggle" t-attf-href="/products?categ={{ category.id }}">
+                                                                    <t t-if="category.image_1920">
+                                                                        <img class="image-category-icon" t-attf-src="/web/image/product.public.category/{{ category.id }}/image_1920"/>
+                                                                    </t>
+                                                                    <span t-esc="category.name"/>
+                                                                </a>
+                                                                <div class="megasubmenu dropdown-menu">
+                                                                    <ul class="list-unstyled">
+                                                                        <t t-foreach="category.child_id" t-as="second_level_category">
+                                                                            <t t-if="second_level_category.id">
+                                                                                <li>
+                                                                                    <h3 class="content-title f-18"><a t-attf-href="/products?categ={{ second_level_category.id }}"><span t-esc="second_level_category.name"/></a></h3>
+                                                                                    <!-- ======================================= -->
+                                                                                    <!-- <ul class="list-unstyled row sub-level"> -->
+                                                                                        <!-- <t t-foreach="second_level_category.child_id" t-as="third_level_category"> -->
+                                                                                            <!-- <t t-if="third_level_category.id in ready_stock_categs"> -->
+                                                                                            <!-- <t t-if="third_level_category.id">
+                                                                                                <li class="col-md-6">
+                                                                                                    <a class="dropdown-item" t-attf-href="/products?categ={{ third_level_category.id }}">
+                                                                                                        <span t-esc="third_level_category.name"/>
+                                                                                                    </a>
+                                                                                                </li>
+                                                                                            </t>
+                                                                                        </t> -->
+                                                                                    <!-- </ul> -->
+                                                                                    <!-- ======================================= -->
+                                                                                </li>
+                                                                            </t>
+                                                                        </t>
+                                                                    </ul>
+                                                                </div>
+                                                            </li>
+                                                        </t>
+
+
+                                                        <li>
+                                                            <a class="dropdown-item text-center view-all"
+                                                            href="/products">Lihat Semua Kategori
+                                                                <i class="icon-arrow-right"></i>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            <div class="col-md-9 d-flex justify-content-end">
+                                <ul class="nav-menu">
+                                    <li>
+                                        <a href="/products" class="text-sm font-medium  desktop-only">
+                                            <b>New Arrival</b>
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="/promo" class="text-sm font-medium  desktop-only">
+                                            <b class="promo-nav">Promo Gift</b>
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                       <a class="text-sm font-medium dropdown-toggle" href="javascript:void(0)" role="button"
+                                          id="shopbybrandBtn" data-bs-toggle="dropdown" aria-expanded="false">
+                                           <span class="ic-brand"></span>
+                                           Shop by Brand
+                                       </a>
+                                        <div class="dropdown-menu dropdown-brand" aria-labelledby="dropdownMenuLink">
+                                            <a href="javascript:void(0)" class="close-shop-brand">
+                                                <i class="icon-x-circle"></i>
+                                                Tutup
+                                            </a>
+                                            <div class="d-flex justify-content-between">
+                                                <div class="search-brand">
+                                                    <h6>Shop by Brands</h6>
+                                                    <!-- HIDE UNTUK SEMENTARA, JANGAN DI HAPUS -->
+                                                    <!-- ===================================== -->
+                                                    <!-- <input type="text" class="form-control"
+                                                        placeholder="Cari brand disini.."/> -->
+                                                    <div id="brandListAlphabets" class="d-flex flex-wrap filter-brand">
+                                                        <!-- <a href="javascript:void(0)">Semua</a> -->
+                                                    </div>
+                                                    <div id="brandList" class="list-brands">
+                                                        <!-- CONTOH FORMAT LIST BRAND, JANGAN DI HAPUS -->
+                                                        <!-- ===================================== -->
+                                                        <!-- <div id="brandList" class="brand-box"> -->
+                                                            <!-- <h6>A</h6> -->
+                                                            <!-- <ul id="brandisA"> -->
+                                                                <!-- <li>
+                                                                    <a href="">Alamanda</a>
+                                                                </li> -->
+                                                            <!-- </ul> -->
+                                                        <!-- </div> -->
+                                                    </div>
+                                                </div>
+
+                                                <div class="featured-brand">
+                                                    <h6>Featured Brands</h6>
+                                                    <div class="d-flex flex-wrap justify-content-between featured-brand-list">
+
+                                                        <!-- check if the objects is not empty  -->
+                                                        <t t-if="product_brands">
+                                                            <t t-foreach="product_brands" t-as="brand">
+                                                                <t t-if="brand.brand_image">
+                                                                    <a href="">
+                                                                        <img t-att-src="'data:image/png;base64,' + brand.brand_image.decode('utf-8')"/>
+                                                                    </a>
+                                                                </t>
+                                                            </t>
+                                                        </t>
+
+                                                        <!-- pass the static assets if empty -->
+                                                        <t t-else="">
+                                                            <a href="">
+                                                                <img src="/theme_alkeba/static/src/images/brand/brand_1.jpg"/>
+                                                            </a>
+                                                            <a href="">
+                                                                <img src="/theme_alkeba/static/src/images/brand/brand_2.jpg"/>
+                                                            </a>
+                                                            <a href="">
+                                                                <img src="/theme_alkeba/static/src/images/brand/brand_3.jpg"/>
+                                                            </a>
+                                                            <a href="">
+                                                                <img src="/theme_alkeba/static/src/images/brand/brand_4.jpg"/>
+                                                            </a>
+                                                            <a href="">
+                                                                <img src="/theme_alkeba/static/src/images/brand/brand_5.jpg"/>
+                                                            </a>
+                                                            <a href="">
+                                                                <img src="/theme_alkeba/static/src/images/brand/brand_6.jpg"/>
+                                                            </a>
+                                                            <a href="">
+                                                                <img src="/theme_alkeba/static/src/images/brand/brand_7.jpg"/>
+                                                            </a>
+                                                            <a href="">
+                                                                <img src="/theme_alkeba/static/src/images/brand/brand_8.jpg"/>
+                                                            </a>
+                                                        </t>
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <a href="/blog" class="text-sm font-medium desktop-only">Berita</a>
+                                    </li>
+                                    <li>
+                                        <a href="/about-us" class="text-sm font-medium pr-5 desktop-only">Tentang Kami</a>
+                                    </li>
+                                   <li>
+                                       <!-- <a href="#" class="text-sm font-medium pl-5"> -->
+                                       <!-- <a href="/under_maintenance" class="text-sm font-medium"> -->
+                                       <a href="/order-shipment-tracking" class="text-sm font-medium">
+                                           <i class="icon-location-marker"></i>
+                                           <span class="ic-tracking"></span>
+                                           <b>Tracking Order</b>
+                                       </a>
+                                   </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </header>
+            </div>
+        </xpath>
+    </template>
+</odoo>

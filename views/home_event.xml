@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="alkeba_home_event_form_view" model="ir.ui.view">
+            <field name="name">alkeba.home.event.form.view</field>
+            <field name="model">alkeba.home.event</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="background_image" widget="image" class="oe_avatar"/>
+                            </group>
+                            <group>
+                                <field name="active" widget="boolean_toggle"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page name="category" string="Category">
+                                <field name="category_ids" nolabel="1">
+                                    <tree editable="bottom">
+                                        <field name="category_id"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="alkeba_home_event_tree_view" model="ir.ui.view">
+            <field name="name">alkeba.home.event.tree.view</field>
+            <field name="model">alkeba.home.event</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="active" widget="boolean_toggle"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="alkeba_home_event_action" model="ir.actions.act_window">
+            <field name="name">Event</field>
+            <field name="res_model">alkeba.home.event</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+    </data>
+</odoo>

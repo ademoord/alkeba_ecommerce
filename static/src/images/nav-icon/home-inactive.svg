@@ -1,0 +1,21 @@
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Home - Inactive">
+<g id="Group 13059" style="mix-blend-mode:luminosity">
+<g id="Icon">
+<path d="M12.7071 4.70711C12.3166 4.31658 11.6834 4.31658 11.2929 4.70711L5.77778 10.2222V19.1111C5.77778 19.602 6.17575 20 6.66667 20H9.33333C9.82425 20 10.2222 19.602 10.2222 19.1111V15.5556C10.2222 15.0646 10.6202 14.6667 11.1111 14.6667H12.8889C13.3798 14.6667 13.7778 15.0646 13.7778 15.5556V19.1111C13.7778 19.602 14.1757 20 14.6667 20H17.3333C17.8243 20 18.2222 19.602 18.2222 19.1111V10.2222L12.7071 4.70711Z" fill="url(#paint0_linear_879_131759)"/>
+<path d="M4 12L5.77778 10.2222M5.77778 10.2222L11.2929 4.70711C11.6834 4.31658 12.3166 4.31658 12.7071 4.70711L18.2222 10.2222M5.77778 10.2222V19.1111C5.77778 19.602 6.17575 20 6.66667 20H9.33333M18.2222 10.2222L20 12M18.2222 10.2222V19.1111C18.2222 19.602 17.8243 20 17.3333 20H14.6667M9.33333 20C9.82425 20 10.2222 19.602 10.2222 19.1111V15.5556C10.2222 15.0646 10.6202 14.6667 11.1111 14.6667H12.8889C13.3798 14.6667 13.7778 15.0646 13.7778 15.5556V19.1111C13.7778 19.602 14.1757 20 14.6667 20M9.33333 20H14.6667" stroke="#999999" stroke-width="2" stroke-linecap="round"/>
+</g>
+<rect id="Rectangle 2607" x="10" y="14" width="4" height="5" rx="1" fill="url(#paint1_linear_879_131759)" stroke="#D1D1D1" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+</g>
+<defs>
+<linearGradient id="paint0_linear_879_131759" x1="12" y1="4" x2="1.74973" y2="24.2083" gradientUnits="userSpaceOnUse">
+<stop stop-color="#07876A"/>
+<stop offset="0.722028" stop-color="#07876A" stop-opacity="0"/>
+</linearGradient>
+<linearGradient id="paint1_linear_879_131759" x1="12" y1="14" x2="9.29881" y2="19.8584" gradientUnits="userSpaceOnUse">
+<stop stop-color="#FF9000"/>
+<stop offset="1" stop-color="#FFC843"/>
+</linearGradient>
+</defs>
+</svg>

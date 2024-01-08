@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+
+    <!-- post page -->
+    <template id="alkeba_news_list" name="Alkeba News List">
+        <t t-call="theme_alkeba.alkeba_bradcrumbs_empty_bottom">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12 my-4">
+                        <h3 class="text-start">Berita Kami</h3>
+                    </div>
+
+                    <!-- featured main post -->
+                    <div class="col-md-7">
+                        <div class="card-berita-box berita-featured">
+                            <div class="card-berita-head">
+                                <t t-if="posts[0].active_blog_alkeba">
+                                    <img t-att-src="'/web/image/blog.post/' + str(posts[0].id) + '/blog_image_alkeba/'"/>
+                                </t>
+                            </div>
+                            <div class="card-berita-body">
+                                <t t-if="posts[0].active_blog_alkeba">
+                                    <p class="grey">
+                                        <small><t t-esc="posts[0].post_date.strftime('%B %d, %Y')"/></small>
+                                    </p>
+                                    <h6><t t-esc="posts[0].name"/></h6>
+                                    <p><t t-esc="posts[0].content_blog_alkeba[:200]"/> ..... </p>
+                                    <p>
+                                        <a t-att-href="'/blog/detail/' + str(posts[0].id)" class="orange">Lihat Detail</a>
+                                    </p>
+                                </t>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- featured side posts -->
+                    <div class="col-md-5">
+                        <ul class="list-berita-simple">
+                            <!-- variable to limiting the side post -->
+                            <t t-set="count" t-value="0" />
+                            <!-- loop through the posts -->
+                            <t t-foreach="posts" t-as="p">
+                                <!-- check if the post is active -->
+                                <t t-if="p.active_blog_alkeba">
+                                    <!-- check if the id isn't equal to the one that looped and the count is less than 2 -->
+                                    <t t-if="p.id != posts[0].id and count &lt; 2">
+                                        <!-- increment the count to adjust the logics -->
+                                        <t t-set="count" t-value="count + 1" />
+                                        <li class="d-flex">
+                                            <div class="card-berita-head-side">
+                                                <img t-att-src="'/web/image/blog.post/' + str(p.id) + '/blog_image_alkeba/'"/>
+                                            </div>
+                                            <div class="card-berita-body-side">
+                                                <p class="grey">
+                                                    <small><t t-esc="p.post_date.strftime('%B %d, %Y')"/></small>
+                                                </p>
+                                                <h6><t t-esc="p.name"/></h6>
+                                                <p>
+                                                    <a t-att-href="'/blog/detail/' + str(p.id)" class="orange">Lihat Detail</a>
+                                                </p>
+                                            </div>
+                                        </li>
+                                    </t>
+                                </t>
+                            </t>
+                        </ul>
+                    </div>
+                    
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <hr class="mt-3 mb-5"/>
+                        <h6 class="text-left mb-4">Artikel Rekomendasi</h6>
+                    </div>
+
+                    <!-- recommended posts -->
+                    <div class="row">
+                        <!-- loop through each post in the 'posts' variable -->
+                        <t t-foreach="posts" t-as="blog">
+                            <!-- check if the 'active_blog_alkeba' field is true -->
+                            <t t-if="blog.active_blog_alkeba">
+                                <!-- if the field is true, display the post -->
+                                <div class="col-md-4">
+                                    <ul class="card-berita-box">
+                                        <li class="d-flex">
+                                            <div class="card-berita-head">
+                                                <img t-att-src="'/web/image/blog.post/' + str(blog.id) + '/blog_image_alkeba/'" />
+                                            </div>
+                                            <div class="card-berita-body">
+                                                <p class="grey">
+                                                    <small><t t-esc="blog.post_date.strftime('%B %d, %Y')"/></small>
+                                                </p>
+                                                <h6><t t-esc="blog.name"/></h6>
+                                                <p>
+                                                    <a t-att-href="'/blog/detail/' + str(blog.id)" class="orange">Lihat Detail</a>
+                                                </p>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </t>
+                        </t>
+                    </div>
+
+                    <div class="pagination-bottom d-flex align-items-center justify-content-between">
+                        <p class="mb-0">Menampilkan <t t-esc="len([blog for blog in posts if blog.active_blog_alkeba])"/> dari <t t-esc="len(posts)"/></p>
+                        <ul class="list-unstyled mb-0">
+                            <li class="active">
+                                <button class="btn">1</button>
+                            </li>
+                            <li>
+                                <button class="btn">2</button>
+                            </li>
+                            <li>
+                                <button class="btn">3</button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <!-- detail page -->
+    <template id="alkeba_news_detail" name="Alkeba News Detail">
+        <t t-call="theme_alkeba.alkeba_bradcrumbs_empty_bottom">
+            <div class="container-fluid">
+
+                <!-- main article -->
+                <div class="row"> 
+                    <div class="col-md-8 m-auto">
+                        <div class="text-center mt-4 mb-5">
+                            <p class="grey"><t t-esc="post.post_date.strftime('%B %d, %Y')"/></p>
+                            <h2><t t-esc="post.name"/></h2>
+                            <div class="social-share mt-3">
+                                Share:
+                                <a href="">
+                                    <img src="/theme_alkeba/static/src/images/social-share-1.svg"/>
+                                </a>
+                                <a href="">
+                                    <img src="/theme_alkeba/static/src/images/social-share-2.svg"/>
+                                </a>
+                                <a href="">
+                                    <img src="/theme_alkeba/static/src/images/social-share-3.svg"/>
+                                </a>
+                                <a href="">
+                                    <img src="/theme_alkeba/static/src/images/social-share-4.svg"/>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="card-berita-img">
+                            <img t-att-src="'/web/image/blog.post/' + str(id) + '/blog_image_alkeba/'"/>
+                        </div>
+                        <div class="card-berita-body">
+                            <t t-esc="post.content_blog_alkeba"/>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- recommended article -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <h6 class="text-center my-5">Artikel Lainnya</h6>
+                    </div>
+                    <div class="slider-berita">
+                        <t t-foreach="posts" t-as="post">
+                            <div class="col-md-4">
+                                <div class="card-berita-box">
+                                    <div class="card-berita-head">
+                                        <img t-att-src="'/web/image/blog.post/' + str(post.id) + '/blog_image_alkeba'" />
+                                    </div>
+                                    <div class="card-berita-body">
+                                        <p class="grey">
+                                            <small t-esc="post.create_date.strftime('%B %d, %Y')" />
+                                        </p>
+                                        <h6 t-esc="post.name" />
+                                        <p>
+                                            <a t-att-href="'/blog/detail/' + str(post.id)" class="orange">Lihat Detail</a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </div>
+                </div>
+
+            </div>
+        </t>
+    </template>
+
+</odoo>

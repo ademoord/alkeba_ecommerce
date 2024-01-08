@@ -1,0 +1,18 @@
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Tracking - Active">
+<g id="Group 13058">
+<path id="Ellipse 99" d="M20 11C20 15.1288 16.1576 17.8285 12.7164 21.1023C12.3163 21.483 11.684 21.4835 11.2821 21.1047C8.13002 18.1327 4 15.0983 4 11C4 6.58172 7.58172 3 12 3C16.4183 3 20 6.58172 20 11Z" fill="url(#paint0_linear_879_131764)" stroke="#09755D" stroke-width="2"/>
+<circle id="Ellipse 100" cx="12" cy="10" r="2" fill="url(#paint1_linear_879_131764)" stroke="#C26900" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+</g>
+<defs>
+<linearGradient id="paint0_linear_879_131764" x1="12" y1="3" x2="-1.12916" y2="25.029" gradientUnits="userSpaceOnUse">
+<stop stop-color="#07876A"/>
+<stop offset="0.722028" stop-color="#07876A" stop-opacity="0"/>
+</linearGradient>
+<linearGradient id="paint1_linear_879_131764" x1="12" y1="8" x2="10.1548" y2="13.0024" gradientUnits="userSpaceOnUse">
+<stop stop-color="#FF9000"/>
+<stop offset="1" stop-color="#FFC843"/>
+</linearGradient>
+</defs>
+</svg>

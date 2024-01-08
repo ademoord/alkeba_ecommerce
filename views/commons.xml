@@ -1,0 +1,1280 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<template id="alkeba_about_us" name="Alkeba About Us">
+		<t t-call="theme_alkeba.alkeba_bradcrumbs_empty_bottom">
+
+			<div class="about-01">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-6 pt-5">
+							<h1 class="green">WELCOME TO ALKEBA</h1>
+							<h3 class="green"><i>"Cleaner is Easier"</i></h3>
+							<br/>
+							<br/>
+							<br/>
+							<h2 class="green">SITUS PRODUK KEBERSIHAN DAN SANITASI TERLENGKAP #1 DI <br/> INDONESIA</h2>
+							<br/>
+							<br/>
+							<p class="paragraf">
+								alkeba.id (Alkeba Store) adalah e-commerce pertama di Indonesia yang fokus kepada penyediaan product kebersihan dan sanitasi.
+								Alkeba Store hadir menjadi mitra strategis usaha anda baik untuk kebutuhan peralatan cleaning dunia hospitality, support pekerjaan cleaning service, perkantoran atau pun kebutuhan peralatan kebersihan untuk hunian pribadi.
+							</p>
+						</div>
+						<div class="col-md-6">
+							<img src="/theme_alkeba/static/src/images/about-us/4.png" style="width:643px;padding-top:160px;"/>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="about-02">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-5">
+							<img src="/theme_alkeba/static/src/images/about-us/Woodworker-rafiki.png" style="width: 728px;"/>
+						</div>
+						<div class="col-md-7 paragraf_about_2">
+							<br/>
+							<br/>
+							<br/>
+							<h2 class="green">
+								KOMBINASI PRODUK PABRIKASI IMPORT DAN LOCAL SERTA PRODUK PENGRAJIN UMKM
+							</h2>
+							<br/>
+							<br/>
+							<p class="paragraf">
+								ALKEBA hadir dengan visi menjadi pusat pembelanjaan produk kebersihan dan sanitasi terbesar di Indonesia.
+								ALKEBA menyediakan produk kebersihan dari brand brand pilihan baik produk import atau pun local serta pengrajin UMKM alat kebersihan dengan tetap memperhatikan asas tepat guna dan tepat harga, sehingga product yang disediakan selain berkualitas tinggi juga ekonomis.
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="about-03">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-6">
+							<br/>
+							<br/>
+							<br/>
+							<h2 class="green mt-5">GARANSI PENGIRIMAN</h2>
+							<br/>
+							<br/>
+							<p class="paragraf">
+								Alkeba hadir memberikan pelayanan gratis ongkir sesuai dengan keberadaan Gudang dikota tersebut. Sambil berkembang membuka Gudang Gudang lain di Indonesia, kami berkolaborasi dengan ekspedisi kargo ternama di tiap kota untuk bisa menjangkau daerah daerah di nusantara dengan harga yang terjangkau
+							</p>
+						</div>
+						<div class="col-md-6">
+							<img src="/theme_alkeba/static/src/images/about-us/5.png" style="width:627px;padding-top:25px;"/>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="about-04">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-6">
+							<img src="/theme_alkeba/static/src/images/about-us/Online-article-rafiki.png" style="width: 728px;"/>
+						</div>
+						<div class="col-md-6 paragraf_about_4">
+							<h2 class="green mt-5">BACAAN HARIAN UNTUK SEMUA HAL KEBERSIHAN</h2>
+							<br/>
+							<br/>
+							<p class="paragraf">
+								Menjadi pusat informasi dan standar gaya hidup masyarakat Indonesia dalam rangka menciptakan suasana hidup sehat baik di hunian pribadi atau perkantoran, alkeba berkomitmen untuk senantiasa menghadirkan jurnal kebersihan dan portal media berisi berita kebersihan terupdate untuk semua masyarakat Indonesia
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="about-04">
+				<div class="container-fluid">
+<!--                    <div class="row">-->
+<!--                        <div class="col-md-6 m-auto text-center">-->
+<!--                            <h2>Tim Alkeba</h2>-->
+<!--                            <p>Accumsan, ultrices ultrices in accumsan fermentum, curabitur. Consequat diam consectetur-->
+<!--                                placerat et in quam velit. Bibendum mi arcu eget eget etiam.-->
+<!--                            </p>-->
+<!--                        </div>-->
+<!--                        <div class="col-md-12 mb-5 mt-5">-->
+<!--                            <div class="slider-team">-->
+<!--                                <div class="team-box">-->
+<!--                                    <div class="team-img">-->
+<!--                                        <img src="/theme_alkeba/static/src/images/team-people-1.png"/>-->
+<!--                                    </div>-->
+<!--                                    <div class="team-body">-->
+<!--                                        <p>-->
+<!--                                            <b>Denis Adisa</b>-->
+<!--                                        </p>-->
+<!--                                        <p class="grey">Founder</p>-->
+<!--                                        <div class="d-flex">-->
+<!--                                            <a href="">-->
+<!--                                                <img src="/theme_alkeba/static/src/images/team-social-1.svg"/>-->
+<!--                                            </a>-->
+<!--                                            <a href="">-->
+<!--                                                <img src="/theme_alkeba/static/src/images/team-social-2.svg"/>-->
+<!--                                            </a>-->
+<!--                                            <a href="">-->
+<!--                                                <img src="/theme_alkeba/static/src/images/team-social-3.svg"/>-->
+<!--                                            </a>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+
+<!--                                <div class="team-box">-->
+<!--                                    <div class="team-img">-->
+<!--                                        <img src="/theme_alkeba/static/src/images/team-people-2.png"/>-->
+<!--                                    </div>-->
+<!--                                    <div class="team-body">-->
+<!--                                        <p>-->
+<!--                                            <b>Denis Adisa</b>-->
+<!--                                        </p>-->
+<!--                                        <p class="grey">Founder</p>-->
+<!--                                        <div class="d-flex">-->
+<!--                                            <a href="">-->
+<!--                                                <img src="/theme_alkeba/static/src/images/team-social-1.svg"/>-->
+<!--                                            </a>-->
+<!--                                            <a href="">-->
+<!--                                                <img src="/theme_alkeba/static/src/images/team-social-2.svg"/>-->
+<!--                                            </a>-->
+<!--                                            <a href="">-->
+<!--                                                <img src="/theme_alkeba/static/src/images/team-social-3.svg"/>-->
+<!--                                            </a>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+
+<!--                                <div class="team-box">-->
+<!--                                    <div class="team-img">-->
+<!--                                        <img src="/theme_alkeba/static/src/images/team-people-3.png"/>-->
+<!--                                    </div>-->
+<!--                                    <div class="team-body">-->
+<!--                                        <p>-->
+<!--                                            <b>Denis Adisa</b>-->
+<!--                                        </p>-->
+<!--                                        <p class="grey">Founder</p>-->
+<!--                                        <div class="d-flex">-->
+<!--                                            <a href="">-->
+<!--                                                <img src="/theme_alkeba/static/src/images/team-social-1.svg"/>-->
+<!--                                            </a>-->
+<!--                                            <a href="">-->
+<!--                                                <img src="/theme_alkeba/static/src/images/team-social-2.svg"/>-->
+<!--                                            </a>-->
+<!--                                            <a href="">-->
+<!--                                                <img src="/theme_alkeba/static/src/images/team-social-3.svg"/>-->
+<!--                                            </a>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+
+<!--                                <div class="team-box">-->
+<!--                                    <div class="team-img">-->
+<!--                                        <img src="/theme_alkeba/static/src/images/team-people-4.png"/>-->
+<!--                                    </div>-->
+<!--                                    <div class="team-body">-->
+<!--                                        <p>-->
+<!--                                            <b>Denis Adisa</b>-->
+<!--                                        </p>-->
+<!--                                        <p class="grey">Founder</p>-->
+<!--                                        <div class="d-flex">-->
+<!--                                            <a href="">-->
+<!--                                                <img src="/theme_alkeba/static/src/images/team-social-1.svg"/>-->
+<!--                                            </a>-->
+<!--                                            <a href="">-->
+<!--                                                <img src="/theme_alkeba/static/src/images/team-social-2.svg"/>-->
+<!--                                            </a>-->
+<!--                                            <a href="">-->
+<!--                                                <img src="/theme_alkeba/static/src/images/team-social-3.svg"/>-->
+<!--                                            </a>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+
+<!--                                <div class="team-box">-->
+<!--                                    <div class="team-img">-->
+<!--                                        <img src="/theme_alkeba/static/src/images/team-people-5.png"/>-->
+<!--                                    </div>-->
+<!--                                    <div class="team-body">-->
+<!--                                        <p>-->
+<!--                                            <b>Denis Adisa</b>-->
+<!--                                        </p>-->
+<!--                                        <p class="grey">Founder</p>-->
+<!--                                        <div class="d-flex">-->
+<!--                                            <a href="">-->
+<!--                                                <img src="/theme_alkeba/static/src/images/team-social-1.svg"/>-->
+<!--                                            </a>-->
+<!--                                            <a href="">-->
+<!--                                                <img src="/theme_alkeba/static/src/images/team-social-2.svg"/>-->
+<!--                                            </a>-->
+<!--                                            <a href="">-->
+<!--                                                <img src="/theme_alkeba/static/src/images/team-social-3.svg"/>-->
+<!--                                            </a>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+
+<!--                                <div class="team-box">-->
+<!--                                    <div class="team-img">-->
+<!--                                        <img src="/theme_alkeba/static/src/images/team-people-6.png"/>-->
+<!--                                    </div>-->
+<!--                                    <div class="team-body">-->
+<!--                                        <p>-->
+<!--                                            <b>Denis Adisa</b>-->
+<!--                                        </p>-->
+<!--                                        <p class="grey">Founder</p>-->
+<!--                                        <div class="d-flex">-->
+<!--                                            <a href="">-->
+<!--                                                <img src="/theme_alkeba/static/src/images/team-social-1.svg"/>-->
+<!--                                            </a>-->
+<!--                                            <a href="">-->
+<!--                                                <img src="/theme_alkeba/static/src/images/team-social-2.svg"/>-->
+<!--                                            </a>-->
+<!--                                            <a href="">-->
+<!--                                                <img src="/theme_alkeba/static/src/images/team-social-3.svg"/>-->
+<!--                                            </a>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                                <div class="team-box">-->
+<!--                                    <div class="team-img">-->
+<!--                                        <img src="/theme_alkeba/static/src/images/team-people-1.png"/>-->
+<!--                                    </div>-->
+<!--                                    <div class="team-body">-->
+<!--                                        <p>-->
+<!--                                            <b>Denis Adisa</b>-->
+<!--                                        </p>-->
+<!--                                        <p class="grey">Founder</p>-->
+<!--                                        <div class="d-flex">-->
+<!--                                            <a href="">-->
+<!--                                                <img src="/theme_alkeba/static/src/images/team-social-1.svg"/>-->
+<!--                                            </a>-->
+<!--                                            <a href="">-->
+<!--                                                <img src="/theme_alkeba/static/src/images/team-social-2.svg"/>-->
+<!--                                            </a>-->
+<!--                                            <a href="">-->
+<!--                                                <img src="/theme_alkeba/static/src/images/team-social-3.svg"/>-->
+<!--                                            </a>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+
+<!--                                <div class="team-box">-->
+<!--                                    <div class="team-img">-->
+<!--                                        <img src="/theme_alkeba/static/src/images/team-people-2.png"/>-->
+<!--                                    </div>-->
+<!--                                    <div class="team-body">-->
+<!--                                        <p>-->
+<!--                                            <b>Denis Adisa</b>-->
+<!--                                        </p>-->
+<!--                                        <p class="grey">Founder</p>-->
+<!--                                        <div class="d-flex">-->
+<!--                                            <a href="">-->
+<!--                                                <img src="/theme_alkeba/static/src/images/team-social-1.svg"/>-->
+<!--                                            </a>-->
+<!--                                            <a href="">-->
+<!--                                                <img src="/theme_alkeba/static/src/images/team-social-2.svg"/>-->
+<!--                                            </a>-->
+<!--                                            <a href="">-->
+<!--                                                <img src="/theme_alkeba/static/src/images/team-social-3.svg"/>-->
+<!--                                            </a>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+
+<!--                                <div class="team-box">-->
+<!--                                    <div class="team-img">-->
+<!--                                        <img src="/theme_alkeba/static/src/images/team-people-3.png"/>-->
+<!--                                    </div>-->
+<!--                                    <div class="team-body">-->
+<!--                                        <p>-->
+<!--                                            <b>Denis Adisa</b>-->
+<!--                                        </p>-->
+<!--                                        <p class="grey">Founder</p>-->
+<!--                                        <div class="d-flex">-->
+<!--                                            <a href="">-->
+<!--                                                <img src="/theme_alkeba/static/src/images/team-social-1.svg"/>-->
+<!--                                            </a>-->
+<!--                                            <a href="">-->
+<!--                                                <img src="/theme_alkeba/static/src/images/team-social-2.svg"/>-->
+<!--                                            </a>-->
+<!--                                            <a href="">-->
+<!--                                                <img src="/theme_alkeba/static/src/images/team-social-3.svg"/>-->
+<!--                                            </a>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+
+<!--                                <div class="team-box">-->
+<!--                                    <div class="team-img">-->
+<!--                                        <img src="/theme_alkeba/static/src/images/team-people-4.png"/>-->
+<!--                                    </div>-->
+<!--                                    <div class="team-body">-->
+<!--                                        <p>-->
+<!--                                            <b>Denis Adisa</b>-->
+<!--                                        </p>-->
+<!--                                        <p class="grey">Founder</p>-->
+<!--                                        <div class="d-flex">-->
+<!--                                            <a href="">-->
+<!--                                                <img src="/theme_alkeba/static/src/images/team-social-1.svg"/>-->
+<!--                                            </a>-->
+<!--                                            <a href="">-->
+<!--                                                <img src="/theme_alkeba/static/src/images/team-social-2.svg"/>-->
+<!--                                            </a>-->
+<!--                                            <a href="">-->
+<!--                                                <img src="/theme_alkeba/static/src/images/team-social-3.svg"/>-->
+<!--                                            </a>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+
+<!--                                <div class="team-box">-->
+<!--                                    <div class="team-img">-->
+<!--                                        <img src="/theme_alkeba/static/src/images/team-people-5.png"/>-->
+<!--                                    </div>-->
+<!--                                    <div class="team-body">-->
+<!--                                        <p>-->
+<!--                                            <b>Denis Adisa</b>-->
+<!--                                        </p>-->
+<!--                                        <p class="grey">Founder</p>-->
+<!--                                        <div class="d-flex">-->
+<!--                                            <a href="">-->
+<!--                                                <img src="/theme_alkeba/static/src/images/team-social-1.svg"/>-->
+<!--                                            </a>-->
+<!--                                            <a href="">-->
+<!--                                                <img src="/theme_alkeba/static/src/images/team-social-2.svg"/>-->
+<!--                                            </a>-->
+<!--                                            <a href="">-->
+<!--                                                <img src="/theme_alkeba/static/src/images/team-social-3.svg"/>-->
+<!--                                            </a>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+
+<!--                                <div class="team-box">-->
+<!--                                    <div class="team-img">-->
+<!--                                        <img src="/theme_alkeba/static/src/images/team-people-6.png"/>-->
+<!--                                    </div>-->
+<!--                                    <div class="team-body">-->
+<!--                                        <p>-->
+<!--                                            <b>Denis Adisa</b>-->
+<!--                                        </p>-->
+<!--                                        <p class="grey">Founder</p>-->
+<!--                                        <div class="d-flex">-->
+<!--                                            <a href="">-->
+<!--                                                <img src="/theme_alkeba/static/src/images/team-social-1.svg"/>-->
+<!--                                            </a>-->
+<!--                                            <a href="">-->
+<!--                                                <img src="/theme_alkeba/static/src/images/team-social-2.svg"/>-->
+<!--                                            </a>-->
+<!--                                            <a href="">-->
+<!--                                                <img src="/theme_alkeba/static/src/images/team-social-3.svg"/>-->
+<!--                                            </a>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+
+					<div class="row">
+						<div class="col-md-6 m-auto text-center mt-5 mb-5">
+							<!-- <h2>Mitra Kami</h2>
+							<section class="customer-logos slider">
+								<div class="slide-item" style="display: block !important;">
+									<img src="/theme_alkeba/static/src/images/merk/merk-1.png" class="img-fluid"/>
+								</div>
+								<div class="slide-item" style="display: block !important;">
+									<img src="/theme_alkeba/static/src/images/merk/merk-1.png" class="img-fluid"/>
+								</div>
+								<div class="slide-item" style="display: block !important;">
+									<img src="/theme_alkeba/static/src/images/merk/merk-1.png" class="img-fluid"/>
+								</div>
+								<div class="slide-item" style="display: block !important;">
+									<img src="/theme_alkeba/static/src/images/merk/merk-1.png" class="img-fluid"/>
+								</div>
+							</section> -->
+							<!-- <p class="paragraf">
+								Venenatis a leo non ut. Sem arcu, volutpat aliquet rhoncus. Imperdiet dignissim
+								pellentesque laoreet pulvinar suspendisse senectus nisi, urna. Odio.
+							</p> -->
+						</div>
+						<div class="col-md-12 text-center">
+							<div class="d-flex justify-content-center about-merk">
+								<span>
+									<img src="/theme_alkeba/static/src/images/merk/merk-1.png"/>
+								</span>
+								<span>
+									<img src="/theme_alkeba/static/src/images/merk/merk-2.png"/>
+								</span>
+								<span>
+									<img src="/theme_alkeba/static/src/images/merk/merk-3.png"/>
+								</span>
+								<span>
+									<img src="/theme_alkeba/static/src/images/merk/merk-4.png"/>
+								</span>
+								<span>
+									<img src="/theme_alkeba/static/src/images/merk/merk-5.png"/>
+								</span>
+								<span>
+									<img src="/theme_alkeba/static/src/images/merk/merk-6.png"/>
+								</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</t>
+	</template>
+
+	<template id="alkeba_contact_us" name="Alkeba Contact Us">
+		<t t-call="theme_alkeba.alkeba_bradcrumbs_empty_bottom">
+
+			<div class="container-fluid">
+				<h2>Kontak Kami</h2>
+				<div class="map-contact">
+					<script>
+						function myMap() {
+							var mapProp= {
+								center:new google.maps.LatLng(51.508742,-0.120850),
+								zoom:5,
+							};
+							var map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
+						}
+					</script>
+
+					<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3960.811871795933!2d107.65469572695311!3d-6.913083699999977!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e68e72d3c42cd27%3A0x83bb7a48798cb243!2sALKEBA%20STORE!5e0!3m2!1sen!2sid!4v1666367338218!5m2!1sen!2sid" 
+						width="100%" 
+						height="500px" 
+						style="border:0;" 
+						allowfullscreen="" 
+						loading="lazy" 
+						referrerpolicy="no-referrer-when-downgrade">
+					</iframe>">
+
+					<!-- <div id="googleMap" style="width:100%;height:500px;"></div> -->
+				</div>
+				<div class="contact-box">
+					<div class="row">
+						<div class="col-md-7">
+							<div class="card card-contact">
+								<h4>Temukan Kami</h4>
+								<p class="grey">
+									Kami siap membantu Anda, silahkan isi form atau kirim email dan hubungi kami
+								</p>
+								<div class="row">
+									<div class="col-md-7">
+										<h6 class="mb-4">Alamat Kami</h6>
+										<div class="contact-address">
+											<p>
+												<i class="icon-office-building"></i>
+												<b>Bandung</b>
+												<br/>
+												<span class="grey">
+													Ruko Harmoni, Jl. Terusan Jakarta No.181, Antapani Kulon, Kec.
+													Antapani, Kota Bandung, Jawa Barat 40291
+												</span>
+											</p>
+											<p>
+												<i class="icon-office-building"></i>
+												<b>Jakarta</b>
+												<br/>
+												<span class="grey">
+        											Kav. DKI Blok F No. 2, Jl. Swadaya Raya Duren Sawit, Jakarta Timur 
+												</span>
+											</p>
+											<p>
+												<i class="icon-office-building"></i>
+												<b>Surabaya</b>
+												<br/>
+												<span class="grey">
+													Jl. Kutisari Indah Barat V No. 58
+												</span>
+											</p>
+										</div>
+									</div>
+									<div class="col-md-5">
+										<h6 class="mb-4">Hubungi Kami</h6>
+										<div class="contact-info-detail">
+											<p class="grey">
+												<i class="icon-mail"></i>
+												<span>
+												</span>Info@alkeba.id
+											</p>
+											<p class="grey">
+												<i class="icon-phone"></i>
+												<span>
+												</span>081223551615
+												<br/>082113843335
+												<br/>(022) 20534324
+												<br/>
+											</p>
+											<h6 class="mt-4">Sosial Media</h6>
+											<ul class="list-unstyled">
+												<!-- <li>
+													<a href="">
+														<img
+															src="/theme_alkeba/static/src/images/social/social-01.svg"/>
+													</a>
+												</li> -->
+												<li>
+													<a href="">
+														<img
+															src="/theme_alkeba/static/src/images/social/tiktok.svg"/>
+													</a>
+												</li>
+												<li>
+													<a href="">
+														<img
+															src="/theme_alkeba/static/src/images/social/social-03.svg"/>
+													</a>
+												</li>
+												<li>
+													<a href="">
+														<img
+															src="/theme_alkeba/static/src/images/social/social-04.svg"/>
+													</a>
+												</li>
+												<li>
+													<a href="">
+														<img
+															src="/theme_alkeba/static/src/images/social/social-05.svg"/>
+													</a>
+												</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-5">
+							<div class="card card-contact">
+								<form>
+									<div class="form-group">
+										<label class="grey">Nama Lengkap</label>
+										<input type="text" class="form-control"
+											   placeholder="Masukan nama lengkap Anda"/>
+									</div>
+									<div class="form-group">
+										<label class="grey">Email</label>
+										<input type="text" class="form-control" placeholder="Masukan alamat email"/>
+									</div>
+									<div class="form-group">
+										<label class="grey">Subjek Pesan</label>
+										<input type="text" class="form-control" placeholder="Masukan subjek pesan"/>
+									</div>
+									<div class="form-group">
+										<label class="grey">Detail Pesan</label>
+										<textarea type="text" class="form-control" placeholder="Masukan detail pesan"
+												  style="min-height: 120px"></textarea>
+									</div>
+									<div class="form-group text-end">
+										<a href="" class="btn btn-secondary">Kirim</a>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</t>
+	</template>
+
+	<template id="alkeba_faq" name="Alkeba FAQ">
+		<t t-call="theme_alkeba.alkeba_bradcrumbs_empty_bottom">
+
+			<div class="container-fluid">
+				<div class="row blok-kebijakan blok-syarat">
+					<div class="blok-title-kebijakan blok-title-syarat col-md-12 m-auto">
+						<h2 class="title-kebijakan title-syarat">
+							Frequently Asked Questions
+						</h2>
+						<span class="subtitle-kebijakan subtitle-syarat">
+							Ada Pertanyaan? kami disini untuk membantu
+						</span>
+					</div>
+					<hr/>
+					<div class="row main-content">
+						<div class="content-topik-faq">
+							<div class="title-topik-faq">
+								<span>Pilihan topik yang sering di tanyakan</span>
+							</div>
+							<div class="box-kategori">
+								<div class="row list-kategori-faq">
+									<div class="faq-kategori">
+										<span>Akun dan Keamanan</span>
+									</div>
+									<div class="faq-kategori">
+										<span>Pesanan</span>
+									</div>
+									<div class="faq-kategori">
+										<span>Pembayaran</span>
+									</div>
+									<div class="faq-kategori">
+										<span>Pengiriman</span>
+									</div>
+								</div>
+								<div class="row list-kategori-faq">
+									<div class="faq-kategori">
+										<span>Retur Pesanan</span>
+									</div>
+									<!-- <div class="faq-kategori">
+										<span>Komplain Pesanan</span>
+									</div> -->
+									<div class="faq-kategori">
+										<span>Komplain Pesanan</span>
+									</div>
+									<div class="faq-kategori">
+										<span>Pelaporan</span>
+									</div>
+								</div>
+							</div>
+							<div class="title-topik-faq">
+								<span>Hal yang sering ditanyakan</span>
+							</div>
+							<div class="box-accordion">
+								<div class="m-4">
+									<div class="accordion" id="Accordionfaq">
+										<div class="accordion-item accordion-faq">
+											<h2 class="accordion-header" id="headingOne">
+												<button type="button" class="accordion-button collapsed"
+														data-bs-toggle="collapse" data-bs-target="#collapseOne">
+													Informasi Seputar Gratis Ongkir Alkeba Express
+												</button>
+											</h2>
+											<div id="collapseOne" class="accordion-collapse collapse"
+												 data-bs-parent="#Accordionfaq">
+												<div class="card-body">
+													<p>
+														Tellus mollis nunc lectus nulla. Mattis massa bibendum penatibus
+														diam. Accumsan, risus arcu, volutpat mauris gravida nulla orci
+														neque. Rhoncus risus, vulputate vel magna nunc. Curabitur felis
+														blandit suspendisse nibh eget tellus erat sed mi. Ultricies
+														pharetra urna risus odio tristique.
+														Et purus, dolor accumsan, ac. Quisque aliquam volutpat urna eget
+														risus ac varius pellentesque. Consequat ut tincidunt vel ut.
+													</p>
+												</div>
+											</div>
+										</div>
+										<div class="accordion-item accordion-faq">
+											<h2 class="accordion-header" id="headingOne">
+												<button type="button" class="accordion-button collapsed"
+														data-bs-toggle="collapse" data-bs-target="#collapsedua">
+													Cara menjadi member alkeba.id
+												</button>
+											</h2>
+											<div id="collapsedua" class="accordion-collapse collapse"
+												 data-bs-parent="#Accordionfaq">
+												<div class="card-body">
+													<p>
+														Tellus mollis nunc lectus nulla. Mattis massa bibendum penatibus
+														diam. Accumsan, risus arcu, volutpat mauris gravida nulla orci
+														neque. Rhoncus risus, vulputate vel magna nunc. Curabitur felis
+														blandit suspendisse nibh eget tellus erat sed mi. Ultricies
+														pharetra urna risus odio tristique.
+														Et purus, dolor accumsan, ac. Quisque aliquam volutpat urna eget
+														risus ac varius pellentesque. Consequat ut tincidunt vel ut.
+													</p>
+												</div>
+											</div>
+										</div>
+										<div class="accordion-item accordion-faq">
+											<h2 class="accordion-header" id="headingOne">
+												<button type="button" class="accordion-button collapsed"
+														data-bs-toggle="collapse" data-bs-target="#collapsetiga">
+													Cara Berbelanja di Alkeba Store
+												</button>
+											</h2>
+											<div id="collapsetiga" class="accordion-collapse collapse"
+												 data-bs-parent="#Accordionfaq">
+												<div class="card-body">
+													<p>
+														Tellus mollis nunc lectus nulla. Mattis massa bibendum penatibus
+														diam. Accumsan, risus arcu, volutpat mauris gravida nulla orci
+														neque. Rhoncus risus, vulputate vel magna nunc. Curabitur felis
+														blandit suspendisse nibh eget tellus erat sed mi. Ultricies
+														pharetra urna risus odio tristique.
+														Et purus, dolor accumsan, ac. Quisque aliquam volutpat urna eget
+														risus ac varius pellentesque. Consequat ut tincidunt vel ut.
+													</p>
+												</div>
+											</div>
+										</div>
+										<div class="accordion-item accordion-faq">
+											<h2 class="accordion-header" id="headingOne">
+												<button type="button" class="accordion-button collapsed"
+														data-bs-toggle="collapse" data-bs-target="#collapseempat">
+													Apakah mendukung untuk bayar ditempat (COD) ?
+												</button>
+											</h2>
+											<div id="collapseempat" class="accordion-collapse collapse"
+												 data-bs-parent="#Accordionfaq">
+												<div class="card-body">
+													<p>
+														Tellus mollis nunc lectus nulla. Mattis massa bibendum penatibus
+														diam. Accumsan, risus arcu, volutpat mauris gravida nulla orci
+														neque. Rhoncus risus, vulputate vel magna nunc. Curabitur felis
+														blandit suspendisse nibh eget tellus erat sed mi. Ultricies
+														pharetra urna risus odio tristique.
+														Et purus, dolor accumsan, ac. Quisque aliquam volutpat urna eget
+														risus ac varius pellentesque. Consequat ut tincidunt vel ut.
+													</p>
+												</div>
+											</div>
+										</div>
+										<div class="accordion-item accordion-faq">
+											<h2 class="accordion-header" id="headingOne">
+												<button type="button" class="accordion-button collapsed"
+														data-bs-toggle="collapse" data-bs-target="#collapselima">
+													Apa saya bisa melakukan pembayaran di toko ?
+												</button>
+											</h2>
+											<div id="collapselima" class="accordion-collapse collapse"
+												 data-bs-parent="#Accordionfaq">
+												<div class="card-body">
+													<p>
+														Tellus mollis nunc lectus nulla. Mattis massa bibendum penatibus
+														diam. Accumsan, risus arcu, volutpat mauris gravida nulla orci
+														neque. Rhoncus risus, vulputate vel magna nunc. Curabitur felis
+														blandit suspendisse nibh eget tellus erat sed mi. Ultricies
+														pharetra urna risus odio tristique.
+														Et purus, dolor accumsan, ac. Quisque aliquam volutpat urna eget
+														risus ac varius pellentesque. Consequat ut tincidunt vel ut.
+													</p>
+												</div>
+											</div>
+										</div>
+										<div class="accordion-item accordion-faq">
+											<h2 class="accordion-header" id="headingOne">
+												<button type="button" class="accordion-button collapsed"
+														data-bs-toggle="collapse" data-bs-target="#collapseenam">
+													Apakah aman melakukan transaksi di alkeba.id ?
+												</button>
+											</h2>
+											<div id="collapseenam" class="accordion-collapse collapse"
+												 data-bs-parent="#Accordionfaq">
+												<div class="card-body">
+													<p>
+														Tellus mollis nunc lectus nulla. Mattis massa bibendum penatibus
+														diam. Accumsan, risus arcu, volutpat mauris gravida nulla orci
+														neque. Rhoncus risus, vulputate vel magna nunc. Curabitur felis
+														blandit suspendisse nibh eget tellus erat sed mi. Ultricies
+														pharetra urna risus odio tristique.
+														Et purus, dolor accumsan, ac. Quisque aliquam volutpat urna eget
+														risus ac varius pellentesque. Consequat ut tincidunt vel ut.
+													</p>
+												</div>
+											</div>
+										</div>
+										<div class="accordion-item accordion-faq">
+											<h2 class="accordion-header" id="headingOne">
+												<button type="button" class="accordion-button collapsed"
+														data-bs-toggle="collapse" data-bs-target="#collapsetujuh">
+													Bagaimana cara tracking pesanan?
+												</button>
+											</h2>
+											<div id="collapsetujuh" class="accordion-collapse collapse"
+												 data-bs-parent="#Accordionfaq">
+												<div class="card-body">
+													<p>
+														Tellus mollis nunc lectus nulla. Mattis massa bibendum penatibus
+														diam. Accumsan, risus arcu, volutpat mauris gravida nulla orci
+														neque. Rhoncus risus, vulputate vel magna nunc. Curabitur felis
+														blandit suspendisse nibh eget tellus erat sed mi. Ultricies
+														pharetra urna risus odio tristique.
+														Et purus, dolor accumsan, ac. Quisque aliquam volutpat urna eget
+														risus ac varius pellentesque. Consequat ut tincidunt vel ut.
+													</p>
+												</div>
+											</div>
+										</div>
+										<div class="accordion-item accordion-faq">
+											<h2 class="accordion-header" id="headingOne">
+												<button type="button" class="accordion-button collapsed"
+														data-bs-toggle="collapse" data-bs-target="#collapsedelapan">
+													Bagaimana memasukan kupon diskon?
+												</button>
+											</h2>
+											<div id="collapsedelapan" class="accordion-collapse collapse"
+												 data-bs-parent="#Accordionfaq">
+												<div class="card-body">
+													<p>
+														Tellus mollis nunc lectus nulla. Mattis massa bibendum penatibus
+														diam. Accumsan, risus arcu, volutpat mauris gravida nulla orci
+														neque. Rhoncus risus, vulputate vel magna nunc. Curabitur felis
+														blandit suspendisse nibh eget tellus erat sed mi. Ultricies
+														pharetra urna risus odio tristique.
+														Et purus, dolor accumsan, ac. Quisque aliquam volutpat urna eget
+														risus ac varius pellentesque. Consequat ut tincidunt vel ut.
+													</p>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</t>
+	</template>
+
+	<template id="alkeba_payment_instructions" name="Alkeba Cara Pembayaran">
+		<t t-call="theme_alkeba.alkeba_bradcrumbs_empty_bottom">
+
+			<div class="container-fluid">
+				<div class="row blok-kebijakan blok-syarat">
+					<div class="blok-title-kebijakan blok-title-syarat col-md-12 m-auto">
+						<h2 class="title-kebijakan title-syarat">
+							Cara Pembayaran
+						</h2>
+						<span class="subtitle-kebijakan subtitle-syarat">
+							Demi kemudahan kamu bertransaksi di Alkeba, kami telah menyediakan berbagai pilihan metode
+							pembayaran.
+						</span>
+					</div>
+					<hr/>
+					<div class="row main-content">
+						<div class="blok-sidemenu col-md-3">
+
+							<div class="floating-share">
+								<div class="list-sidemenu">
+									<span>
+										<a class="inactive" href="">COD (Bayar di Tempat)</a>
+									</span>
+									<hr/>
+									<span>
+										<a class="inactive" href="">Bayar di Toko</a>
+									</span>
+									<hr/>
+									<span>
+										<a href="#teks_layanan">Virtual Account</a>
+									</span>
+									<hr/>
+									<span>
+										<a class="inactive" href="">Kartu Kredit</a>
+									</span>
+									<hr/>
+									<span>
+										<a class="inactive" href="">E-Wallet</a>
+									</span>
+									<hr/>
+									<span>
+										<a class="inactive" href="">QR Code</a>
+									</span>
+									<hr/>
+									<span>
+										<a class="inactive" href="">Direct Debit</a>
+									</span>
+									<hr/>
+									<span>
+										<a class="inactive" href="">Retail Outlets</a>
+									</span>
+									<hr/>
+									<span>
+										<a class="inactive" href="">Cardless Credit</a>
+									</span>
+								</div>
+							</div>
+						</div>
+						<div class="blok-content-sidemenu col-md-9">
+							<div class="content-teks">
+								<div class="content-paragraf">
+									<h1 class="title-paragraf">Cara melakukan pembayaran dengan Virtual Account</h1>
+									<p class="subtitle-paragraf">
+										Berikut adalah syarat dan ketentuan pembayaran transaksi menggunakan BCA Virtual
+										Account:
+									</p>
+									<ul class="teks-cara-pembayaran">
+										<li>
+											Pembeli dapat melakukan pembayaran melalui transfer dana ke rekening BCA
+											Virtual Account Alkeba dengan memasukkan nomor rekening 31423410 (kode
+											perusahaan) + nomor telepon yang sudah terverifikasi di akun Alkeba pembeli.
+										</li>
+										<li>
+											Contoh: 31423410 - 081312567890.
+										</li>
+										<li>
+											Rekening BCA Virtual Account tersebut atas nama PT. Sinergi Pangan Sawargi, Pembayaran
+											transaksi menggunakan BCA Virtual Account tanpa dikenakan biaya pelayanan.
+										</li>
+										<li>
+											Pembeli dapat melakukan pembayaran melalui transfer dana ke rekening BCA
+											Virtual Account Alkeba dengan memasukkan nomor rekening 31423410 (kode
+											perusahaan) + nomor telepon yang sudah terverifikasi di akun Alkeba pembeli.
+										</li>
+										<li>
+											Contoh: 31423410 - 081312567890.
+										</li>
+										<li>
+											Satu nomor virtual account hanya berlaku untuk satu akun (tidak
+											berubah-ubah).
+										</li>
+										<li>
+											Pembayaran dengan virtual account hanya berlaku untuk satu tagihan terbaru
+											(untuk nomor telepon pembeli yang sudah terverifikasi atau belum
+											terverifikasi di akun Bukalapak namun keduanya sudah login).
+										</li>
+										<li>
+											Satu nomor virtual account hanya berlaku untuk satu tagihan. Tagihan
+											berikutnya akan dibuatkan nomor virtual account baru secara otomatis (untuk
+											pembeli tanpa login).
+										</li>
+										<li>
+											Pembeli tidak dapat mengganti nomor telepon yang sudah terdaftar di Alkeba
+											sebelum tagihan terbaru virtual account dibayar.
+										</li>
+										<li>
+											Pembayaran tagihan menggunakan Virtual Account BCA memiliki akumulasi limit
+											dalam satu hari yaitu Rp 20.000.000, apabila ingin melakukan transaksi
+											melebihi nominal tersebut, pembeli dapat menggunakan KlikBCA maupun Transfer
+											melalui ATM BCA.
+										</li>
+										<li>
+											Pembayaran tagihan menggunakan Virtual Account BCA memiliki Limit nominal
+											dalam satu transaksi yaitu Rp 50.000.000.
+										</li>
+									</ul>
+									<p class="subtitle-paragraf">
+										Dibawah ini adalah langkah-langkah yang dapat pembeli lakukan ketika ingin
+										membayar transaksi mengggunakan BCA Virtual Account:
+									</p>
+									<div class="point-method">
+										<div class="method-list">
+											<ol class="method-number">
+												<li>
+													Klik tombol Masukan Keranjang Belanja pada produk yang ingin dibeli.
+													<div class="img-method">
+														<img src="/theme_alkeba/static/src/images/img-cara-bayar1.jpg"/>
+													</div>
+												</li>
+												<li>
+													Isi semua data pembeli dengan lengkap, kemudian klik tombol
+													Lanjutkan ke Pembayaran.
+													<div class="img-method">
+														<img src="/theme_alkeba/static/src/images/img-cara-bayar2.jpg"/>
+													</div>
+												</li>
+												<li>
+													Pilih metode pembayaran Transfer Virtual Account. Kemudian pilih
+													Bank BCA, selanjutnya klik tombol Bayar.
+													<div class="img-method">
+														<img src="/theme_alkeba/static/src/images/img-cara-bayar3.jpg"/>
+													</div>
+												</li>
+												<li>
+													Transfer dana sesuai dengan nomor virtual account. Pastikan pembeli
+													melakukan transfer dana sesuai dengan tagihan atau cek notifikasi
+													email untuk melihat detail tagihannya.
+												</li>
+											</ol>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</t>
+	</template>
+
+	<!-- <== Kang Dims version, not an inherited template ==> -->
+	<!-- <template id="alkeba_t_and_c" name="Alkeba Syarat dan Ketentuan">
+		<t t-call="theme_alkeba.alkeba_bradcrumbs_empty_bottom">
+ 
+		This contents are moved to exclusive and separated template
+
+		</t>
+	</template> -->
+
+	<template id="alkeba_privacy_policy" name="Alkeba Kebijakan Privasi">
+		<t t-call="theme_alkeba.alkeba_bradcrumbs_empty_bottom">
+
+			<div class="container-fluid">
+				<div class="row blok-kebijakan">
+					<div class="blok-title-kebijakan col-md-12 m-auto">
+						<h2 class="title-kebijakan">
+							Kebijakan Privasi
+						</h2>
+						<span class="subtitle-kebijakan">
+							Temukan tentang kebijakan privasi dari kami
+						</span>
+					</div>
+					<hr/>
+					<div class="row main-content">
+
+						<div class="blok-sidemenu col-md-3">
+							<div class="floating-share">
+								<div class="list-sidemenu">
+									<span>
+										<a href="#teks_pendahuluan">Pendahuluan</a>
+									</span>
+									<hr/>
+									<span>
+										<a class="inactive" href="#teks_pendahuluan">Hukum dan Peraturan</a>
+									</span>
+									<hr/>
+									<span>
+										<a class="inactive" href="#teks_perlindungan_data">Perlindungan Data</a>
+									</span>
+									<hr/>
+									<span>
+										<a class="inactive" href="#teks_data_pengguna">Data Pengguna</a>
+									</span>
+									<hr/>
+									<span>
+										<a class="inactive" href="#teks_tanggung_jawab">Tanggung Jawab</a>
+									</span>
+									<hr/>
+									<span>
+										<a class="inactive" href="#teks_cookies">Cookies</a>
+									</span>
+									<hr/>
+									<span>
+										<a class="inactive" href="#teks_hak_kekayaan">Hak Kekayaan Itelektual</a>
+									</span>
+									<hr/>
+									<span>
+										<a class="inactive" href="">Kontak</a>
+									</span>
+									<hr/>
+									<span>
+										<a class="inactive" href="">Tanggal Berlaku</a>
+									</span>
+								</div>
+							</div>
+						</div>
+						<div class="blok-content-sidemenu col-md-9">
+							<div class="content-teks">
+								<div id="teks_pendahuluan" class="content-paragraf">
+									<h1 class="title-paragraf">Pendahuluan</h1>
+									<p class="paragraf-teks">
+										Sit tristique eu, mattis libero. Integer viverra nulla laoreet tristique
+										tincidunt. Tellus turpis quis faucibus lectus in rhoncus, elit nec. Purus neque,
+										mattis consequat, amet, vitae aliquet. Nulla mi fames neque, et. Et in ornare
+										nascetur nulla consectetur vitae tortor, velit quis.
+										<br/>
+										Nec leo ut volutpat id porttitor arcu. Netus aliquet cursus libero ac massa
+										varius amet viverra. Libero eu aliquet molestie arcu. Malesuada eu metus lacus,
+										risus nunc tristique at. Purus vulputate tortor quis adipiscing sagittis quam.
+										In faucibus amet interdum elit mi suspendisse nec habitasse leo.
+										<br/>
+										Id augue adipiscing velit habitasse gravida odio nec consequat. Elementum sed
+										congue mauris fusce lacus, rhoncus. Placerat at scelerisque ipsum feugiat erat
+										risus. Morbi ut nulla feugiat quam semper scelerisque amet.
+									</p>
+								</div>
+								<div id="teks_hukum_peraturan" class="content-paragraf">
+									<h1 class="title-paragraf">Hukum dan Peraturan</h1>
+									<p class="paragraf-teks">
+										Sit tristique eu, mattis libero. Integer viverra nulla laoreet tristique
+										tincidunt. Tellus turpis quis faucibus lectus in rhoncus, elit nec. Purus neque,
+										mattis consequat, amet, vitae aliquet. Nulla mi fames neque, et. Et in ornare
+										nascetur nulla consectetur vitae tortor, velit quis.
+										<br/>
+										Nec leo ut volutpat id porttitor arcu. Netus aliquet cursus libero ac massa
+										varius amet viverra. Libero eu aliquet molestie arcu. Malesuada eu metus lacus,
+										risus nunc tristique at. Purus vulputate tortor quis adipiscing sagittis quam.
+										In faucibus amet interdum elit mi suspendisse nec habitasse leo.
+										<br/>
+										Id augue adipiscing velit habitasse gravida odio nec consequat. Elementum sed
+										congue mauris fusce lacus, rhoncus. Placerat at scelerisque ipsum feugiat erat
+										risus. Morbi ut nulla feugiat quam semper scelerisque amet.
+										<br/>
+										Tincidunt tortor, faucibus lobortis quam. Pulvinar at et proin pellentesque. Ut
+										odio ipsum, vitae condimentum mauris. Non, dignissim aenean id scelerisque et
+										tempus. At blandit ut lobortis tempus odio et. Ipsum eget porta morbi vel
+										molestie est ullamcorper. Netus iaculis odio integer massa vel interdum a.
+										Commodo placerat commodo metus, amet. Nunc tincidunt mi commodo amet et risus et
+										purus sagittis.
+										<br/>
+										Neque molestie vel vitae urna lorem magna. Gravida pulvinar maecenas hac gravida
+										posuere id adipiscing elit. At faucibus blandit risus consectetur mattis.
+										Adipiscing aliquam, vitae, ultrices condimentum lectus molestie nisi. Morbi in
+										sem euismod in habitant a vitae phasellus. Lectus duis eget sit sed amet libero
+										tristique. Quam orci eu ut eros, varius convallis ornare consectetur ipsum. Eu
+										augue sit risus, nec augue feugiat. Neque, amet nunc ut nunc libero eu. Purus
+										eu, aenean odio nunc. Commodo sapien, et duis amet, justo, morbi justo.
+									</p>
+								</div>
+								<div id="teks_perlindungan_data" class="content-paragraf">
+									<h1 class="title-paragraf">Perlindungan Data</h1>
+									<p class="paragraf-teks">
+										Sit tristique eu, mattis libero. Integer viverra nulla laoreet tristique
+										tincidunt. Tellus turpis quis faucibus lectus in rhoncus, elit nec. Purus neque,
+										mattis consequat, amet, vitae aliquet. Nulla mi fames neque, et. Et in ornare
+										nascetur nulla consectetur vitae tortor, velit quis.
+										<br/>
+										Nec leo ut volutpat id porttitor arcu. Netus aliquet cursus libero ac massa
+										varius amet viverra. Libero eu aliquet molestie arcu. Malesuada eu metus lacus,
+										risus nunc tristique at. Purus vulputate tortor quis adipiscing sagittis quam.
+										In faucibus amet interdum elit mi suspendisse nec habitasse leo.
+										<br/>
+										Id augue adipiscing velit habitasse gravida odio nec consequat. Elementum sed
+										congue mauris fusce lacus, rhoncus. Placerat at scelerisque ipsum feugiat erat
+										risus. Morbi ut nulla feugiat quam semper scelerisque amet.
+										<br/>
+										Tincidunt tortor, faucibus lobortis quam. Pulvinar at et proin pellentesque. Ut
+										odio ipsum, vitae condimentum mauris. Non, dignissim aenean id scelerisque et
+										tempus. At blandit ut lobortis tempus odio et. Ipsum eget porta morbi vel
+										molestie est ullamcorper. Netus iaculis odio integer massa vel interdum a.
+										Commodo placerat commodo metus, amet. Nunc tincidunt mi commodo amet et risus et
+										purus sagittis.
+										<br/>
+										Neque molestie vel vitae urna lorem magna. Gravida pulvinar maecenas hac gravida
+										posuere id adipiscing elit. At faucibus blandit risus consectetur mattis.
+										Adipiscing aliquam, vitae, ultrices condimentum lectus molestie nisi. Morbi in
+										sem euismod in habitant a vitae phasellus. Lectus duis eget sit sed amet libero
+										tristique. Quam orci eu ut eros, varius convallis ornare consectetur ipsum. Eu
+										augue sit risus, nec augue feugiat. Neque, amet nunc ut nunc libero eu. Purus
+										eu, aenean odio nunc. Commodo sapien, et duis amet, justo, morbi justo.
+									</p>
+								</div>
+								<div id="teks_data_pengguna" class="content-paragraf">
+									<h1 class="title-paragraf">Data Pengguna</h1>
+									<p class="paragraf-teks">
+										Sit tristique eu, mattis libero. Integer viverra nulla laoreet tristique
+										tincidunt. Tellus turpis quis faucibus lectus in rhoncus, elit nec. Purus neque,
+										mattis consequat, amet, vitae aliquet. Nulla mi fames neque, et. Et in ornare
+										nascetur nulla consectetur vitae tortor, velit quis.
+										<br/>
+										Nec leo ut volutpat id porttitor arcu. Netus aliquet cursus libero ac massa
+										varius amet viverra. Libero eu aliquet molestie arcu. Malesuada eu metus lacus,
+										risus nunc tristique at. Purus vulputate tortor quis adipiscing sagittis quam.
+										In faucibus amet interdum elit mi suspendisse nec habitasse leo.
+										<br/>
+										Id augue adipiscing velit habitasse gravida odio nec consequat. Elementum sed
+										congue mauris fusce lacus, rhoncus. Placerat at scelerisque ipsum feugiat erat
+										risus. Morbi ut nulla feugiat quam semper scelerisque amet.
+										<br/>
+										Tincidunt tortor, faucibus lobortis quam. Pulvinar at et proin pellentesque. Ut
+										odio ipsum, vitae condimentum mauris. Non, dignissim aenean id scelerisque et
+										tempus. At blandit ut lobortis tempus odio et. Ipsum eget porta morbi vel
+										molestie est ullamcorper. Netus iaculis odio integer massa vel interdum a.
+										Commodo placerat commodo metus, amet. Nunc tincidunt mi commodo amet et risus et
+										purus sagittis.
+										<br/>
+										Neque molestie vel vitae urna lorem magna. Gravida pulvinar maecenas hac gravida
+										posuere id adipiscing elit. At faucibus blandit risus consectetur mattis.
+										Adipiscing aliquam, vitae, ultrices condimentum lectus molestie nisi. Morbi in
+										sem euismod in habitant a vitae phasellus. Lectus duis eget sit sed amet libero
+										tristique. Quam orci eu ut eros, varius convallis ornare consectetur ipsum. Eu
+										augue sit risus, nec augue feugiat. Neque, amet nunc ut nunc libero eu. Purus
+										eu, aenean odio nunc. Commodo sapien, et duis amet, justo, morbi justo.
+									</p>
+								</div>
+								<div id="teks_tanggung_jawab" class="content-paragraf">
+									<h1 class="title-paragraf">Tanggung Jawab</h1>
+									<p class="paragraf-teks">
+										Sit tristique eu, mattis libero. Integer viverra nulla laoreet tristique
+										tincidunt. Tellus turpis quis faucibus lectus in rhoncus, elit nec. Purus neque,
+										mattis consequat, amet, vitae aliquet. Nulla mi fames neque, et. Et in ornare
+										nascetur nulla consectetur vitae tortor, velit quis.
+										<br/>
+										Nec leo ut volutpat id porttitor arcu. Netus aliquet cursus libero ac massa
+										varius amet viverra. Libero eu aliquet molestie arcu. Malesuada eu metus lacus,
+										risus nunc tristique at. Purus vulputate tortor quis adipiscing sagittis quam.
+										In faucibus amet interdum elit mi suspendisse nec habitasse leo.
+										<br/>
+										Id augue adipiscing velit habitasse gravida odio nec consequat. Elementum sed
+										congue mauris fusce lacus, rhoncus. Placerat at scelerisque ipsum feugiat erat
+										risus. Morbi ut nulla feugiat quam semper scelerisque amet.
+										<br/>
+										Tincidunt tortor, faucibus lobortis quam. Pulvinar at et proin pellentesque. Ut
+										odio ipsum, vitae condimentum mauris. Non, dignissim aenean id scelerisque et
+										tempus. At blandit ut lobortis tempus odio et. Ipsum eget porta morbi vel
+										molestie est ullamcorper. Netus iaculis odio integer massa vel interdum a.
+										Commodo placerat commodo metus, amet. Nunc tincidunt mi commodo amet et risus et
+										purus sagittis.
+										<br/>
+										Neque molestie vel vitae urna lorem magna. Gravida pulvinar maecenas hac gravida
+										posuere id adipiscing elit. At faucibus blandit risus consectetur mattis.
+										Adipiscing aliquam, vitae, ultrices condimentum lectus molestie nisi. Morbi in
+										sem euismod in habitant a vitae phasellus. Lectus duis eget sit sed amet libero
+										tristique. Quam orci eu ut eros, varius convallis ornare consectetur ipsum. Eu
+										augue sit risus, nec augue feugiat. Neque, amet nunc ut nunc libero eu. Purus
+										eu, aenean odio nunc. Commodo sapien, et duis amet, justo, morbi justo.
+									</p>
+								</div>
+								<div id="teks_cookies" class="content-paragraf">
+									<h1 class="title-paragraf">Cookies</h1>
+									<p class="paragraf-teks">
+										Sit tristique eu, mattis libero. Integer viverra nulla laoreet tristique
+										tincidunt. Tellus turpis quis faucibus lectus in rhoncus, elit nec. Purus neque,
+										mattis consequat, amet, vitae aliquet. Nulla mi fames neque, et. Et in ornare
+										nascetur nulla consectetur vitae tortor, velit quis.
+										<br/>
+										Nec leo ut volutpat id porttitor arcu. Netus aliquet cursus libero ac massa
+										varius amet viverra. Libero eu aliquet molestie arcu. Malesuada eu metus lacus,
+										risus nunc tristique at. Purus vulputate tortor quis adipiscing sagittis quam.
+										In faucibus amet interdum elit mi suspendisse nec habitasse leo.
+										<br/>
+										Id augue adipiscing velit habitasse gravida odio nec consequat. Elementum sed
+										congue mauris fusce lacus, rhoncus. Placerat at scelerisque ipsum feugiat erat
+										risus. Morbi ut nulla feugiat quam semper scelerisque amet.
+										<br/>
+										Tincidunt tortor, faucibus lobortis quam. Pulvinar at et proin pellentesque. Ut
+										odio ipsum, vitae condimentum mauris. Non, dignissim aenean id scelerisque et
+										tempus. At blandit ut lobortis tempus odio et. Ipsum eget porta morbi vel
+										molestie est ullamcorper. Netus iaculis odio integer massa vel interdum a.
+										Commodo placerat commodo metus, amet. Nunc tincidunt mi commodo amet et risus et
+										purus sagittis.
+										<br/>
+										Neque molestie vel vitae urna lorem magna. Gravida pulvinar maecenas hac gravida
+										posuere id adipiscing elit. At faucibus blandit risus consectetur mattis.
+										Adipiscing aliquam, vitae, ultrices condimentum lectus molestie nisi. Morbi in
+										sem euismod in habitant a vitae phasellus. Lectus duis eget sit sed amet libero
+										tristique. Quam orci eu ut eros, varius convallis ornare consectetur ipsum. Eu
+										augue sit risus, nec augue feugiat. Neque, amet nunc ut nunc libero eu. Purus
+										eu, aenean odio nunc. Commodo sapien, et duis amet, justo, morbi justo.
+									</p>
+								</div>
+								<div id="teks_hak_kekayaan" class="content-paragraf">
+									<h1 class="title-paragraf">Hak Kekayaan Intelektual</h1>
+									<p class="paragraf-teks">
+										Sit tristique eu, mattis libero. Integer viverra nulla laoreet tristique
+										tincidunt. Tellus turpis quis faucibus lectus in rhoncus, elit nec. Purus neque,
+										mattis consequat, amet, vitae aliquet. Nulla mi fames neque, et. Et in ornare
+										nascetur nulla consectetur vitae tortor, velit quis.
+										<br/>
+										Nec leo ut volutpat id porttitor arcu. Netus aliquet cursus libero ac massa
+										varius amet viverra. Libero eu aliquet molestie arcu. Malesuada eu metus lacus,
+										risus nunc tristique at. Purus vulputate tortor quis adipiscing sagittis quam.
+										In faucibus amet interdum elit mi suspendisse nec habitasse leo.
+										<br/>
+										Id augue adipiscing velit habitasse gravida odio nec consequat. Elementum sed
+										congue mauris fusce lacus, rhoncus. Placerat at scelerisque ipsum feugiat erat
+										risus. Morbi ut nulla feugiat quam semper scelerisque amet.
+										<br/>
+										Tincidunt tortor, faucibus lobortis quam. Pulvinar at et proin pellentesque. Ut
+										odio ipsum, vitae condimentum mauris. Non, dignissim aenean id scelerisque et
+										tempus. At blandit ut lobortis tempus odio et. Ipsum eget porta morbi vel
+										molestie est ullamcorper. Netus iaculis odio integer massa vel interdum a.
+										Commodo placerat commodo metus, amet. Nunc tincidunt mi commodo amet et risus et
+										purus sagittis.
+										<br/>
+										Neque molestie vel vitae urna lorem magna. Gravida pulvinar maecenas hac gravida
+										posuere id adipiscing elit. At faucibus blandit risus consectetur mattis.
+										Adipiscing aliquam, vitae, ultrices condimentum lectus molestie nisi. Morbi in
+										sem euismod in habitant a vitae phasellus. Lectus duis eget sit sed amet libero
+										tristique. Quam orci eu ut eros, varius convallis ornare consectetur ipsum. Eu
+										augue sit risus, nec augue feugiat. Neque, amet nunc ut nunc libero eu. Purus
+										eu, aenean odio nunc. Commodo sapien, et duis amet, justo, morbi justo.
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</t>
+	</template>
+
+</odoo>

@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="alkeba_dashboard_detail_order_received" name="Alkeba Dashboard Detail Order - Receive">
+        <t t-call="theme_alkeba.alkeba_user_page_layout">
+
+            <div class="col-md-9 detail-info-order">
+                <h6>Detail Pesanan</h6>
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="card-body detail-info-header">
+                            <div class="d-flex justify-content-between">
+                                <div class="form-group mb-0">
+                                    <label class="grey">Nomor Pesanan</label>
+                                    <p>
+                                        <b>
+                                            <t t-esc="number_so"/>
+                                            <input id="idSOReceived" type="hidden" name="csrf_token" t-att-value="order_id"/>
+
+                                        </b>
+                                        <!-- <a href="" class="btn btn-link-orange p-0 d-inline-block ms-2">Salin</a> -->
+                                    </p>
+                                </div>
+                                <div class="form-group mb-0">
+                                    <label class="grey">Tanggal Pesanan</label>
+                                    <p>
+                                        <b>
+                                            <t t-esc="date_order"/>
+                                        </b>
+                                    </p>
+                                </div>
+                                <div class="form-group mb-0">
+                                    <span class="badge badge-light-red badge-sm"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body detail-info-delivery">
+                            <div class="d-flex justify-content-between">
+                                <p class="mb-0 me-3">
+                                    <b>Status Pengiriman :</b>
+                                    <span class="status-delivery green">
+                                        Diterima
+                                    </span>
+                                </p>
+                            </div>
+                            <hr/>
+                            <ul class="d-flex align-items-baseline justify-content-center list-unstyled cart-step-wizard w-100">
+                                <!-- DIPROSES STATE -->
+                                <li class="active">
+                                    <button>
+                                        <div class="box">
+                                            <i class="icon-archive"></i>
+                                        </div>
+                                        <span>Diproses</span>
+                                    </button>
+                                </li>
+
+                                <!-- DIKIRIM STATE -->
+                                <li class="active">
+                                    <button>
+                                        <div class="box">
+                                            <img src="/theme_alkeba/static/src/images/ic-dikirim.svg"/>
+                                            <img src="/theme_alkeba/static/src/images/ic-dikirim-white.svg"
+                                                class="ic-white"/>
+                                        </div>
+                                        <span>Dikirim</span>
+                                    </button>
+                                </li>
+                                <li class="active">
+                                    <button>
+                                        <div class="box">
+                                            <img src="/theme_alkeba/static/src/images/ic-diterima.svg"/>
+                                            <img src="/theme_alkeba/static/src/images/ic-diterima-white.svg"
+                                                 class="ic-white"/>
+                                        </div>
+                                        <span>Diterima</span>
+                                    </button>
+                                </li>
+                                <li>
+                                    <button>
+                                        <div class="box">
+                                            <i class="icon-clipboard-check"></i>
+                                        </div>
+                                        <span>Selesai</span>
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="card-body detail-info-product">
+                            <div class="d-flex justify-content-between">
+                                <p class="mb-0 me-3">
+                                    <b>
+                                        Daftar Pesanan Saya (<t t-esc="total_product_order"/>)
+                                    </b>
+                                </p>
+                            </div>
+                            <hr/>
+                            <div class="daftar-pesanan">
+                                <t t-foreach="products_ids" t-as="op">
+                                    <t t-if="op.product_id.detailed_type != 'service'">
+                                        <div class="d-flex">
+                                            <!-- THIS BLOCK IS BUGGY, TEMPORARILY HIDDEN -->
+                                            <!-- <div class="left-cart">
+                                                <img t-att-src="image_data_uri(op.product_id.image_1920)" class="img-fluid" t-att-alt="op.product_id.name"/>
+                                            </div> -->
+                                            <div class="right-cart">
+                                                <div class="d-flex justify-content-between">
+                                                    <div>
+                                                        <t t-esc="op.product_id.name"/>
+                                                        <div class="card-product h-auto p-0">
+                                                            <p class="card-price price-discount">
+                                                                <t t-esc="'{0:,.2f}'.format(int(op.price_unit))"/>
+                                                            </p>
+                                                        </div>
+                                                        <div class="d-block">
+                                                            <span>Berat: <t t-esc="op.product_id.weight"/></span>
+                                                            <span>SKU: 976006MT</span>
+                                                            <span>Qty: <t t-esc="op.product_uom_qty"/></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card-product h-auto text-end p-0">
+                                                        <label class="me-0 mb-0">Total Harga</label>
+                                                        <p class="card-price my-0">Rp. <t t-esc="'{0:,.2f}'.format(int(op.price_subtotal))"/></p>
+                                                    </div>
+                                                </div>
+                                                <div class="notes-form edited saved">
+                                                    <i class="icon-document-text"></i>
+                                                    <p>Notes
+                                                    </p>
+                                                    <div class="notes-input">
+                                                        <p>
+                                                            <t t-esc="op.name"/>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </t>
+                                </t>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card-body detail-total-order">
+                            <div class="form-group">
+                                <label class="grey">Total Pembayaran</label>
+                                <div class="d-flex justify-content-between">
+                                    <p>
+                                        <b class="green">
+                                            Rp <t t-esc="'{0:,.2f}'.format(int(amount_total))"/>
+                                        </b>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="grey">Metode Pembayaran</label>
+                                <p>
+                                    <b>
+                                        <t t-esc="payment_option"/>
+                                    </b>
+                                </p>
+                            </div>
+                            <div class="form-group">
+                                <label class="grey">Tanggal Pembayaran</label>
+                                <p>
+                                    <b>
+                                        <t t-esc="payment_date"/>
+                                    </b>
+                                </p>
+                            </div>
+                            <div class="form-group">
+                                <label class="grey">Est. Tanggal Terima Barang</label>
+                                <p>
+                                    <b>
+                                        <t t-esc="date_receive"/>
+                                    </b>
+                                </p>
+                            </div>
+                            <div class="form-group">
+                                <label class="grey">Area Pangiriman &amp; Kurir</label>
+                                <div class="mt-3">
+                                    <p>
+                                        <b>
+                                            <t t-esc="delivery_destination"/>
+                                        </b>
+                                    </p>
+                                    <div class="d-flex align-items-center ">
+                                        <p class="mb-0 ">
+                                            <t t-esc="expedition_name"/>
+                                        </p>
+                                        <p class="mb-0 standard ms-auto grey">1 - 3 hari</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="grey">Detail Info Pengiriman</label>
+                                <p>
+                                    <b>
+                                        <t t-esc="address_destination"/>
+                                    </b>
+                                </p>
+                            </div>
+                            <!-- <div class="d-flex  justify-content-between mt-3"> -->
+                            <div class="form-group">
+                                <label class="grey">Telepon:</label>
+                                <p>
+                                    <b>
+                                        <t t-esc="mobile_number"/>
+                                    </b>
+                                </p>
+                            </div>
+
+                            <a href="javascript:void(0)" class="btn btn-primary w-100 mb-3">Pesan Lagi</a>
+                            <a href="javascript:void(0)" id="doneOrder" class="btn btn-primary w-100 mb-3">Selesai</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </t>
+    </template>
+
+</odoo>

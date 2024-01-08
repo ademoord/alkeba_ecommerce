@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="alkeba_home_slider_form_view" model="ir.ui.view">
+            <field name="name">alkeba.home.slider.form.view</field>
+            <field name="model">alkeba.home.slider</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                            </group>
+                            <group>
+                                <field name="status" widget="boolean_toggle"/>
+                            </group>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="image1" widget="image" class="oe_avatar"/>
+                                <field name="image2" widget="image" class="oe_avatar"/>
+                                <field name="image3" widget="image" class="oe_avatar"/>
+                            </group>
+                            <group>
+                                <field name="image4" widget="image" class="oe_avatar"/>
+                                <field name="image5" widget="image" class="oe_avatar"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="alkeba_home_slider_tree_view" model="ir.ui.view">
+            <field name="name">alkeba.home.slider.tree.view</field>
+            <field name="model">alkeba.home.slider</field>
+            <field name="arch" type="xml">
+                <tree decoration-info="status == True">
+                    <field name="name"/>
+                    <field name="status"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="alkeba_home_slider_action" model="ir.actions.act_window">
+            <field name="name">Home Slider</field>
+            <field name="res_model">alkeba.home.slider</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+    </data>
+</odoo>

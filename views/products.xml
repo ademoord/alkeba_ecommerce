@@ -1,0 +1,1751 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="alkeba_product_list" name="Alkeba Product List">
+        <t t-call="theme_alkeba.alkeba_bradcrumbs_with_benefit">
+
+            <div class="product-list mt-4 mb-3">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="product-list-banner mb-5">
+                                <a href="#">
+                                    <img src="/theme_alkeba/static/src/images/produk-list-banner-3.png"/>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <a href="javascript:void(0)" class="mobile-only nav-filter">
+                            <i class="icon-filter"></i>
+                            Filter Product
+                        </a>
+                        <form class="col-md-4 left-product filter-form ">
+                            <h2 class="title">Filters
+                                <a href="javascript:void(0)" class="btn mobile-only close-filter-modal">
+                                    <i class="icon-x"></i>                                               
+                                </a>
+                                <a href="javascript:void(0)" class="btn btn-link mobile-only close-nav-filter">
+                                    Terapkan
+                                </a>
+                            </h2>
+                            <div class="accordion custom-accordion mt-3">
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <div class="accordion-button">
+                                            Kategori Produk
+                                        </div>
+                                    </h2>
+                                    <div class="accordion-collapse collapse show">
+                                        <div class="hierarchy-checkbox child-expanded" rel="example">
+                                            <input class="hierarchy-root-checkbox"
+                                                    type="checkbox" id="checkPromoDiskon"/>
+                                            <label class="hierarchy-root-label">Promo
+                                                <span>
+                                                </span>
+                                            </label>
+                                        </div>
+                                        <div class="hierarchy-checkbox child-expanded" rel="example">
+                                            <input class="hierarchy-root-checkbox"
+                                                    type="checkbox"
+                                                    data-terlaris="true" id="checkProdukTerlaris"/>
+                                            <label class="hierarchy-root-label">Produk Terlaris
+                                                <span>
+                                                </span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="accordion-collapse collapse show">
+                                        <div class="accordion-body">
+                                            <div class="hierarchy-checkboxes child-expanded" rel="example">
+                                                <input class="hierarchy-root-checkbox categ-checkbox"
+                                                       type="checkbox"
+                                                       data-categ="all" id="checkAllCateg"/>
+                                                <label class="hierarchy-root-label">Semua Kategori
+                                                    <span>
+                                                        <!-- (<t t-esc="all_category_count"/>)-->
+                                                    </span>
+                                                </label>
+                                                <div class="hierarchy-root-child hierarchy-node" rel="example"
+                                                     style="left: 32px; top: 468.125px; display: block;">
+                                                    <t t-foreach="categories" t-as="category">
+                                                        <t t-if="category.child_id">
+                                                            <div class="hierarchy-node">
+                                                                <input class="hierarchy-checkbox categ-checkbox"
+                                                                       type="checkbox"
+                                                                       t-attf-data-categ="{{ category.id }}"/>
+                                                                <label class="hierarchy-label">
+                                                                    <t t-esc="category.name"/>
+                                                                    <!-- <span>(COUNT)</span>-->
+                                                                </label>
+                                                                <t t-foreach="category.child_id" t-as="child">
+                                                                    <div class="hierarchy-node leaf">
+                                                                        <input class="hierarchy-checkbox categ-checkbox"
+                                                                               type="checkbox"
+                                                                               t-attf-data-categ="{{ child.id }}"/>
+                                                                        <label class="hierarchy-label">
+                                                                            <t t-esc="child.name"/>
+                                                                            <!-- <span>(COUNT)</span>-->
+                                                                        </label>
+                                                                    </div>
+                                                                </t>
+                                                            </div>
+                                                        </t>
+                                                        <t t-else="">
+                                                            <div class="hierarchy-node leaf">
+                                                                <input class="hierarchy-checkbox categ-checkbox"
+                                                                       type="checkbox"
+                                                                       t-attf-data-categ="{{ category.id }}"/>
+                                                                <label class="hierarchy-label">
+                                                                    <t t-esc="category.name"/>
+                                                                    <!--                                                                    <span>(COUNT)</span>-->
+                                                                </label>
+                                                            </div>
+                                                        </t>
+                                                    </t>
+                                                </div>
+                                            </div>
+                                            <div class="my-3">
+                                                <a href="" class="see-more d-block">+ Lihat Semua</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item-brand">
+                                    <h2 class="accordion-header">
+                                        <div class="accordion-button">
+                                            Brands
+                                        </div>
+                                    </h2>
+                                    <div class="accordion-collapse collapse show">
+                                        <div class="accordion-body">
+                                            <ul class="list-unstyled list-checkbox mb-0">
+                                                <li>
+                                                    <div class="checkbox">
+                                                        <input type="checkbox" class="brand-checkbox" id="checkboxAllBrand" data-brand="all"/>
+                                                        <label for="checkboxAllBrand">Semua Brand
+                                                            <span>
+                                                                (<t t-esc="all_brand_count"/>)
+                                                            </span>
+                                                        </label>
+                                                    </div>
+                                                </li>
+                                                <t t-foreach="brands" t-as="brand">
+                                                    <li>
+                                                        <div class="checkbox">
+                                                            <input type="checkbox" class="brand-checkbox"
+                                                                   t-attf-id="checkbox_{{ brand.id }}"
+                                                                   t-attf-data-brand="{{ brand.id }}"/>
+                                                            <label t-attf-for="checkbox_{{ brand.id }}">
+                                                                <t t-esc="brand.brand_name"/>
+                                                                <span>(<t t-esc="len(brand.product_ids)"/>)
+                                                                </span>
+                                                            </label>
+                                                        </div>
+                                                    </li>
+                                                </t>
+                                            </ul>
+                                            <div class="my-3">
+                                                <a href="#" class="see-more">+ Lihat Semua</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--                                <div class="accordion-item">-->
+                                <!--                                    <h2 class="accordion-header">-->
+                                <!--                                        <div class="accordion-button collapsed">-->
+                                <!--                                            Harga-->
+                                <!--                                        </div>-->
+                                <!--                                    </h2>-->
+                                <!--                                    <div class="" aria-labelledby="panelsStayOpen-headingThree">-->
+                                <!--                                        <div class="accordion-body py-2 px-0 pb-4">-->
+                                <!--                                            <div class="row">-->
+                                <!--                                                <div class="col-md-12">-->
+                                <!--                                                    <div id="slider-range"></div>-->
+                                <!--                                                    <div class="slider-labels">-->
+                                <!--                                                        Harga-->
+                                <!--                                                        <span id="slider-range-value1"></span>-->
+                                <!--                                                        - -->
+                                <!--                                                        <span id="slider-range-value2"></span>-->
+                                <!--                                                    </div>-->
+                                <!--                                                </div>-->
+                                <!--                                            </div>-->
+                                <!--                                            <div class="checkbox mt-3">-->
+                                <!--                                                <input type="checkbox" id="checkbox_12"/>-->
+                                <!--                                                <label for="checkbox_12">Harga Grosir-->
+                                <!--                                                    <span>(COUNT_PRODUCTS_HERE)</span>-->
+                                <!--                                                </label>-->
+                                <!--                                            </div>-->
+                                <!--                                        </div>-->
+                                <!--                                    </div>-->
+                                <!--                                </div>-->
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <div class="accordion-button">
+                                            Lokasi Produk
+                                        </div>
+                                    </h2>
+                                    <div class="accordion-collapse collapse show">
+                                        <div class="accordion-body">
+                                            <ul class="list-unstyled list-checkbox mb-0">
+                                                <li>
+                                                    <div class="checkbox">
+                                                        <input type="checkbox" id="checkbox_30"/>
+                                                        <label for="checkbox_30">Semua Lokasi
+                                                            <span>(<t t-esc="all_location_product_count"/>)
+                                                            </span>
+                                                        </label>
+                                                    </div>
+                                                </li>
+                                                <t t-foreach="locations" t-as="location">
+                                                    <t t-if="location['name'] != 'Bandung'">
+                                                        <li>
+                                                            <div class="checkbox">
+                                                                <input type="checkbox" id="checkbox_25"/>
+                                                                <label for="checkbox_25">
+                                                                    <t t-if="location['name'] == 'Toko'">
+                                                                        <t t-esc="'Bandung'"/>
+                                                                    </t>
+                                                                    <t t-else="">
+                                                                        <t t-esc="location['name']"/>
+                                                                    </t>
+                                                                    <span>(<t t-esc="location['product_count']"/>)</span>
+                                                                </label>
+                                                            </div>
+                                                        </li>
+                                                    </t>
+                                                </t>
+                                            </ul>
+                                            <div class="my-3">
+                                                <a href="" class="see-more">+ Lihat Semua</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="col-md-8 right-product">
+                            <h2 class="title">Semua Produk (<t t-esc="pagination['total_rows']"/>)
+                                <span>Menampilkan
+                                    <t t-esc="pagination['showing']"/>
+                                </span>
+                            </h2>
+
+                            <form class="d-flex align-items-center mb-4 py-2 px-3">
+                                <ul class="list-unstyled sort d-md-flex align-items-center mb-0">
+                                    <li>
+                                        <ul class="list-unstyled mode-product d-flex align-items-center mb-0 me-2">
+                                            <li>
+                                                <a href="javascript:void(0)" class="grid-views active">
+                                                    <i class="icon-list-filter"></i>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0)" class="list-views">
+                                                    <i class="icon-grid-filter"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <div class="dropdown dropdown-sorting">
+                                            <button class="btn btn-input dropdown-toggle" type="button"
+                                                    id="dropdownMenuButton1" data-bs-toggle="dropdown"
+                                                    aria-expanded="false">
+                                                Urut Berdasarkan
+                                            </button>
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                                <li id="alkebaSortByLatest">
+                                                    <a class="dropdown-item" href="javascript:void(0)">Terbaru</a>
+                                                </li>
+                                                <li id="alkebaSortByNameAsc">
+                                                    <a class="dropdown-item" href="javascript:void(0)">Produk A-Z</a>
+                                                </li>
+                                                <li id="alkebaSortByNameDesc">
+                                                    <a class="dropdown-item" href="javascript:void(0)">Produk Z-A</a>
+                                                </li>
+                                                <li id="alkebaSortPriceLowToHigh">
+                                                    <a class="dropdown-item" href="javascript:void(0)">Harga Rendah ke
+                                                        Tinggi
+                                                    </a>
+                                                </li>
+                                                <li id="alkebaSortPriceHighToLow">
+                                                    <a class="dropdown-item" href="javascript:void(0)">Harga Tinggi ke
+                                                        Rendah
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                    <li>             
+                                        <div class="dropdown dropdown-show">
+                                            <button class="btn btn-input dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"> 
+                                                Tampilkan : <t t-if="request.httprequest.args.get('limit')"><t t-esc="request.httprequest.args.get('limit')"/></t><t t-if="not request.httprequest.args.get('limit')">20</t>
+                                            </button>
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                                <li id="showTwenty">
+                                                    <a class="dropdown-item" t-attf-href="/products?search={{ request.params.get('search', '') }}&amp;page=1&amp;limit=20&amp;sort={{ pagination['sort'] }}">Tampilkan: 20</a>
+                                                </li>
+                                                <li id="showThirty">
+                                                    <a class="dropdown-item" t-attf-href="/products?search={{ request.params.get('search', '') }}&amp;page=1&amp;limit=30&amp;sort={{ pagination['sort'] }}">Tampilkan: 30</a>
+                                                </li>
+                                                <li id="showFourty">
+                                                    <a class="dropdown-item" t-attf-href="/products?search={{ request.params.get('search', '') }}&amp;page=1&amp;limit=40&amp;sort={{ pagination['sort'] }}">Tampilkan: 40</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                        <li t-if="request.httprequest.args.get('brand')">
+                                            <div>
+                                                <a t-attf-href="/products?page=1&amp;limit={{ pagination['limit'] }}&amp;sort={{ pagination['sort'] }}" class="btn clear-filter-btn">
+                                                    Hapus Filter
+                                                </a>
+                                            </div>
+                                        </li>
+                                </ul>
+                                <div class="ms-auto d-flex align-items-center">
+                                    <ul class="list-unstyled tab-product d-flex align-items-center mb-0">
+                                        <li>
+                                            <input type="number" id="showByPage" class="form-control"
+                                                   t-attf-value="{{ pagination['page'] }}"
+                                                   t-attf-max="{{ pagination['total_pages'] }}"/>
+                                        </li>
+                                        <li>
+                                            <span>of
+                                                <t t-esc="pagination['total_pages']"/>
+                                            </span>
+                                        </li>
+                                        <li>
+                                            <button>
+                                                <i class="fas fa-long-arrow-alt-right"></i>
+                                            </button>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </form>
+                            <div class="list-product">
+                                <t t-foreach="products" t-as="product">
+                                    <a t-att-href="product.website_url" class="d-block">
+                                        <div class="card card-product">
+                                            <t t-set="product_age"
+                                               t-value="(datetime.datetime.now() - product.create_date).days"/>
+                                            <t t-if="product_age &lt; 15">
+                                                <div class="badge-new">New</div>
+                                            </t>
+                                            <div class="card-img-top">
+                                                <t t-if="product.image_256">
+                                                    <img t-att-src="image_data_uri(product.image_256)"
+                                                        class="img-fluid" t-att-alt="product.name" 
+                                                        style="background-size: 10px 10px;"
+                                                    />
+                                                </t>
+                                                <t t-else="">
+                                                    <img src="/web/static/img/placeholder.png"
+                                                         class="img-fluid" alt="..."/>
+                                                </t>
+                                            </div>
+                                            <div class="card-body">
+                                                <h5 class="card-title">
+                                                    <t t-esc="product.name"/>
+                                                </h5>
+                                                <t t-set="original_price" t-value="product.list_price"/>
+                                                <t t-if="pricelist">
+                                                    <t t-set="pricelist_price"
+                                                       t-value="pricelist.get_product_price(product, 1, user_id.partner_id)"/>
+                                                    <t t-if="pricelist_price &gt; 0.0">
+                                                        <t t-if="original_price &lt; pricelist_price">
+                                                            <p class="card-price">
+                                                                Rp.
+                                                                <t t-esc="'{0:,.0f}'.format(int(original_price)).replace(',', '.')"/>
+                                                            </p>
+                                                        </t>
+                                                        <t t-if="pricelist_price &lt; original_price">
+                                                            <p class="card-price price-discount">
+                                                                Rp
+                                                                <t t-esc="'{0:,.2f}'.format(int(pricelist_price))"/>
+                                                                <span class="price-before">Rp
+                                                                    <t t-esc="'{0:,.0f}'.format(int(original_price)).replace(',', '.')"/>
+                                                                </span>
+                                                            </p>
+                                                        </t>
+                                                        <t t-if="original_price == pricelist_price">
+                                                            <p class="card-price">
+                                                                Rp.
+                                                                <t t-esc="'{0:,.0f}'.format(int(original_price)).replace(',', '.')"/>
+                                                            </p>
+                                                        </t>
+                                                    </t>
+                                                    <t t-else="">
+                                                        <p class="card-price">
+                                                            Rp.
+                                                            <t t-esc="'{0:,.0f}'.format(int(original_price)).replace(',', '.')"/>
+                                                        </p>
+                                                    </t>
+                                                </t>
+                                                <t t-else="">
+                                                    <p class="card-price">
+                                                        Rp.
+                                                        <t t-esc="'{0:,.0f}'.format(int(original_price)).replace(',', '.')"/>
+                                                    </p>
+                                                </t>
+                                                <div>
+                                                    <t t-if="product.qty_available &gt; 0.0">
+                                                        <!-- <span class="badge badge-success">Ready Stock</span> -->
+                                                        <img src="/theme_alkeba/static/src/images/RD-01.png" style="width:70px"/>
+                                                    </t>
+
+                                                    <t t-if="product.qty_available == 0.0">
+                                                        <span class="badge badge-out-stock">Pre Order</span>
+                                                    </t>
+                                                    
+                                                    <span class="badge badge-light">Terjual
+                                                        <t t-esc="int(product.sales_count)"/>
+                                                    </span>
+                                                </div>
+                                                <!--                                                <div class="d-flex align-items-center">-->
+                                                <!--                                                    <div class="rating">-->
+                                                <!--                                                        <i class="icon-star-product active"></i>-->
+                                                <!--                                                        <i class="icon-star-product active"></i>-->
+                                                <!--                                                        <i class="icon-star-product active"></i>-->
+                                                <!--                                                        <i class="icon-star-product active"></i>-->
+                                                <!--                                                        <i class="icon-star-product"></i>-->
+                                                <!--                                                    </div>-->
+                                                <!--                                                    <span>(STAR_COUNT)</span>-->
+                                                <!--                                                </div>-->
+                                            </div>
+                                        </div>
+                                    </a>
+                                </t>
+                            </div>
+                            <t t-call="theme_alkeba.alkeba_bottom_pagination"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </t>
+    </template>
+
+    <template id="alkeba_product_detail" name="Alkeba Product Detail">
+        <t t-call="theme_alkeba.alkeba_bradcrumbs_with_product_recom">
+
+            <!-- alert not login -->
+            <div class="modal fade" id="AlertCartNotLogin" tabindex="-1" aria-labelledby="exampleModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-body text-center p-4">
+                            <a href="" class="closeDialog">
+                                <img src="/theme_alkeba/static/src/images/icon/remove.png" style="width:30px"/>
+                            </a>
+                            <br/>
+                            <br/>
+                            <p>
+                                <!-- <i class="icon-heart"></i> -->
+                                <strong>
+                                    Pastikan Anda sudah Login
+                                    Apabila Anda belum memiliki akun, silakan lakukan registrasi terlebih dahulu.
+                                </strong>
+                            </p>
+                            <a href="/web/login" id="login_button" class="btn btn-outline">
+                                Login
+                            </a>
+                            <a href="/web/signup" id="signup_button" class="btn btn-outline">
+                                Daftar
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- alert warehouse not selected -->
+            <div class="modal fade" id="AlertWarehouseNotSelected" tabindex="-1" aria-labelledby="exampleModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-body text-center p-4">
+                            <a href="" class="closeDialog">
+                                <img src="/theme_alkeba/static/src/images/icon/remove.png" style="width:30px"/>
+                            </a>
+                            <br/>
+                            <br/>
+                            <p>
+                                <strong>
+                                    Anda belum memilih Gudang pengiriman
+                                    Silakan pilih Gudang terlebih dahulu.
+                                </strong>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-detail mb-5 mt-4">
+                <div class="container-fluid">
+                    <div class="row mb-5">
+                        <div class="col-md-9">
+                            <div class="product-about row">
+                                <div class="col-md-6">
+                                    <t t-set="product_images" t-value="product_variant._get_images() if product_variant else product._get_images()"/>
+                                    <!-- core bootstrap carousel with interval -->
+                                    <div id="o-carousel-product" class="carousel slide position-sticky mb-3 overflow-hidden" data-ride="carousel" data-bs-interval="false">
+                                        <div class="o_carousel_product_outer carousel-outer position-relative flex-grow-1">
+                                            <div class="carousel-inner h-100">
+                                                <t t-foreach="product_images" t-as="product_image">
+                                                    <div t-attf-class="carousel-item h-100#{' active' if product_image_first else ''}">
+                                                        <div t-if="product_image._name == 'product.image' and product_image.embed_code" class="d-flex align-items-center justify-content-center h-100 embed-responsive embed-responsive-16by9">
+                                                            <t t-out="product_image.embed_code"/>
+                                                        </div>
+                                                        <div  t-else="" t-field="product_image.image_256" class="d-flex align-items-center justify-content-center h-100" t-options='{"widget": "image", "preview_image": "image_1024", "class": "product_detail_img mh-100", "alt-field": "name", "zoom": product_image.can_image_1024_be_zoomed and "image_256", "itemprop": "image"}'/>
+                                                    </div>
+                                                </t>
+                                            </div>
+                                            <t t-if="len(product_images) > 1">
+                                                <a class="carousel-control-prev" href="#o-carousel-product" role="button" data-slide="prev">
+                                                    <span class="fa fa-chevron-left fa-2x" role="img" aria-label="Previous" title="Previous"/>
+                                                </a>
+                                                <a class="carousel-control-next" href="#o-carousel-product" role="button" data-slide="next">
+                                                    <span class="fa fa-chevron-right fa-2x" role="img" aria-label="Next" title="Next"/>
+                                                </a>
+                                            </t>
+                                        </div>
+                                        <!-- JANGAN DI HAPUS, MENAMPILKAN MINI DISPLAY PRODUCTS-->
+                                        <!-- <div t-ignore="True" t-attf-class="o_carousel_product_indicators">
+                                            <ol t-if="len(product_images) > 1" t-attf-class="carousel-indicators position-static mx-auto my-0 text-left">
+                                                <t t-foreach="product_images" t-as="product_image">
+                                                    <li t-attf-class="m-1 mb-2 align-top {{'active' if product_image_first else ''}}" data-target="#o-carousel-product" t-att-data-slide-to="str(product_image_index)"/>
+                                                    <li data-target="#o-carousel-product" t-att-data-slide-to="str(product_image_index)"/>
+                                                    <li>
+                                                        <div t-field="product_image.image_128" t-options='{"widget": "image", "qweb_img_responsive": False, "class": "o_image_64_contain", "alt-field": "name"}'/>
+                                                        <i t-if="product_image._name == 'product.image' and product_image.embed_code" class="fa fa-2x fa-play-circle o_product_video_thumb"/>
+                                                    </li>
+                                                </t>
+                                            </ol>
+                                        </div> -->
+                                        <t t-call="theme_alkeba.carousel_product_indicators_alkeba">
+                                            <t t-set="indicators_div_class" t-value="'pr-1'"/>
+                                            <t t-set="indicators_list_class" t-value="'p-1'"/>
+                                        </t>
+                                    </div>
+                                    <!--  JANGAN DI HAPUS, CODE MENAMPILKAN IMAGE BY COVATIVE VENDOR -->
+                                    <!-- <div class="floating-share" style="position:relative;">
+                                        <div class="product-detail-slider middle-arrow">
+                                            <t t-if="int(discount_value) > 0">
+                                                <div class="badge-discount"><t t-esc="int(discount_value)"/>% off
+                                                </div>
+                                            </t>
+                                            <div class="product__slider-main" style="display: block !important;">
+                                                <t t-if="product.image_256">
+                                                    <a class="slide blazy__colorbox"
+                                                    t-att-href="image_data_uri(product.image_256)">
+                                                        <img t-att-src="image_data_uri(product.image_256)"
+                                                            t-attf-alt="{{ product.name }}"
+                                                            class="img-responsive"/>
+                                                    </a>
+                                                </t>
+                                                <t t-else="">
+                                                    <a class="slide blazy__colorbox"
+                                                    href="/web/static/img/placeholder.png">
+                                                        <img src="/web/static/img/placeholder.png"
+                                                            alt="..."
+                                                            class="img-responsive"/>
+                                                    </a>
+                                                </t>
+                                            </div>
+                                            <t t-if="product.product_template_image_ids">
+                                                <div class="product__slider-thmb" style="display: block !important;">
+                                                    <t t-foreach="product.product_template_image_ids"
+                                                    t-as="product_img">
+                                                        <div class="slide" style="display: block !important;">
+                                                            <img t-att-src="image_data_uri(product_img.image_256)"
+                                                                alt="" class="img-fluid"/>
+                                                        </div>
+                                                    </t>
+                                                </div>
+                                            </t>
+                                        </div>
+                                    </div> -->
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="product-detail-info">
+                                        <a href="" class="product-category">
+                                            <t t-esc="product.categ_id.name"/>
+                                        </a>
+                                        <h2 class="title">
+                                            <t t-esc="product.name"/>
+                                        </h2>
+
+                                        <t t-set="original_price" t-value="product.list_price"/>
+                                        <t t-if="pricelist">
+                                            <t t-set="pricelist_price"
+                                               t-value="pricelist.get_product_price(product, 1, user_id.partner_id)"/>
+                                            <t t-if="pricelist_price &gt; 0.0">
+                                                <t t-if="original_price &lt; pricelist_price">
+                                                    <div class="product-price">
+                                                        <h4>
+                                                            Rp.
+                                                            <t t-esc="'{0:,.0f}'.format(int(original_price)).replace(',', '.')"/>
+                                                            <input id="price" type="hidden"
+                                                                   t-attf-value="{{ original_price }}"/>
+                                                        </h4>
+                                                    </div>
+                                                </t>
+                                                <t t-if="pricelist_price &lt; original_price">
+                                                    <div class="product-price price-discount">
+                                                        <h4>
+                                                            Rp
+                                                            <t t-esc="'{0:,.2f}'.format(int(pricelist_price))"/>
+                                                            <input id="price" type="hidden"
+                                                                   t-attf-value="{{ pricelist_price }}"/>
+                                                        </h4>
+                                                        <span class="price-before">
+                                                            Rp
+                                                            <t t-esc="'{0:,.0f}'.format(int(original_price)).replace(',', '.')"/>
+                                                        </span>
+                                                    </div>
+                                                </t>
+                                                <t t-if="original_price == pricelist_price">
+                                                    <div class="product-price">
+                                                        <h4>
+                                                            Rp.
+                                                            <t t-esc="'{0:,.0f}'.format(int(original_price)).replace(',', '.')"/>
+                                                            <input id="price" type="hidden"
+                                                                   t-attf-value="{{ original_price }}"/>
+                                                        </h4>
+                                                    </div>
+                                                </t>
+                                            </t>
+                                            <t t-else="">
+                                                <div class="product-price">
+                                                    <h4>
+                                                        Rp.
+                                                        <t t-esc="'{0:,.0f}'.format(int(original_price)).replace(',', '.')"/>
+                                                        <input id="price" type="hidden"
+                                                               t-attf-value="{{ original_price }}"/>
+                                                    </h4>
+                                                </div>
+                                            </t>
+                                        </t>
+                                        <t t-else="">
+                                            <div class="product-price">
+                                                <h4>
+                                                    Rp.
+                                                    <t t-esc="'{0:,.0f}'.format(int(original_price)).replace(',', '.')"/>
+                                                    <input id="price" type="hidden"
+                                                           t-attf-value="{{ original_price }}"/>
+                                                </h4>
+                                            </div>
+                                        </t>
+
+                                        <div class="d-md-flex align-items-center justify-content-between mt-1">
+                                            <p class="pe-1">
+                                                Weight :
+                                                <t t-esc="product.weight"/>
+                                                <t t-esc="product.weight_uom_name"/>
+                                            </p>
+                                            <p class="pe-1">
+                                                Brand :
+                                                <a href="">
+                                                    <t t-esc="product.brand_id.brand_name"/>
+                                                </a>
+                                            </p>
+                                            <!-- <p class="pe-1">
+                                                SKU :
+                                                <t t-esc="product.barcode"/>
+                                            </p> -->
+                                        </div>
+                                        <div
+                                            class="d-flex align-items-center justify-content-between box-rating  list-info">
+                                            <!--                                            <span class="standard me-3 d-flex">-->
+                                            <!--                                                <div class="rating me-1">-->
+                                            <!--                                                    <i class="icon-star1"></i>-->
+                                            <!--                                                    <i class="icon-star1"></i>-->
+                                            <!--                                                    <i class="icon-star1"></i>-->
+                                            <!--                                                    <i class="icon-star1"></i>-->
+                                            <!--                                                    <i class="icon-star1"></i>-->
+                                            <!--                                                </div>-->
+                                            <!--                                                <a href="">(5)</a>-->
+                                            <!--                                            </span>-->
+                                            <!--                                            <span class="standard me-1">Review Pelanggan-->
+                                            <!--                                                <a href="">(COUNT_REVIEWS)</a>-->
+                                            <!--                                            </span>-->
+                                            <span class="standard me-1">Terjual (<t t-esc="int(product.sales_count)"/>)
+                                            </span>
+                                        </div>
+                                        <div class="product-form mt-4">
+                                            <div class="d-flex align-items-center">
+                                                <label class="standard">Pengiriman dari</label>
+                                                <!-- <div class="dropdown dropdown-location">
+                                                    <button class="btn btn-input dropdown-toggle" type="button"
+                                                            id="dropdownMenuButton1" data-bs-toggle="dropdown"
+                                                            aria-expanded="false">
+                                                        <t t-if="stocks">
+                                                            <t t-esc="stocks[0]['name']"/>
+                                                        </t>
+                                                        <t t-else="">
+                                                            Stok Kosong
+                                                        </t>
+                                                    </button>
+                                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                                        <t t-foreach="stocks" t-as="stock">
+                                                            <t t-if="stock['quantity'] > 0">
+                                                                <li>
+                                                                    <a class="warehouse-loc dropdown-item"
+                                                                       t-attf-data-loc="{{ stock['id'] }}"
+                                                                       t-attf-data-qty="{{ stock['quantity'] }}"
+                                                                       href="javascript:void(0)">
+                                                                        <span class="locations">
+                                                                            <t t-esc="stock['name']"/>
+                                                                        </span>
+                                                                        <span>Stok:
+                                                                            <t t-esc="stock['quantity']"/>
+                                                                        </span>
+                                                                    </a>
+                                                                </li>
+                                                            </t>
+                                                            <t t-else="">
+                                                                <li>
+                                                                    <a class="dropdown-item disabled"
+                                                                       href="javascript:void(0)">
+                                                                        <span class="locations">
+                                                                            <t t-esc="stock['name']"/>
+                                                                        </span>
+                                                                        <span>Stok:
+                                                                            <t t-esc="stock['quantity']"/>
+                                                                        </span>
+                                                                    </a>
+                                                                </li>
+                                                            </t>
+                                                        </t>
+                                                    </ul>
+                                                </div> -->
+                                                <div class="dropdown dropdown-location">
+                                                    <button class="btn btn-input dropdown-toggle" type="button" id="dropdownMenuButtonWarehouse" data-bs-toggle="dropdown" aria-expanded="false">
+                                                    <!-- <button class="btn btn-input dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"> -->
+                                                        <t t-if="stocks">
+                                                            <!-- <t t-esc="stocks[0]['name']"/> -->
+                                                            Pilih Gudang Pengiriman
+                                                        </t>
+                                                        <t t-else="">
+                                                            Stok Kosong
+                                                        </t>
+                                                    </button>
+                                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                                        <t t-foreach="stocks" t-as="stock">
+                                                            <t t-if="stock['name'] != 'Bandung'">
+                                                                <li>
+                                                                    <a class="warehouse-loc dropdown-item" t-attf-data-loc="{{ stock['id'] }}" t-attf-data-qty="{{ stock['quantity'] }}" href="javascript:void(0)">
+                                                                        <span class="locations">
+                                                                            <t t-if="stock['name'] == 'Toko'">
+                                                                                <t t-esc="'Bandung'"/>
+                                                                            </t>
+                                                                            <t t-else="">
+                                                                                <t t-esc="stock['name']"/>
+                                                                            </t>
+                                                                        </span>
+                                                                        <span>Stok:
+                                                                            <t t-esc="stock['quantity']"/>
+                                                                        </span>
+                                                                    </a>
+                                                                </li>
+                                                            </t>
+                                                        </t>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <t t-if="number_of_stock_location &gt; 0">
+                                                <small class="d-block w-100">
+                                                    <!-- <i class="icon-information-circle"></i>
+                                                    Produk tersedia di
+                                                    <t t-esc="number_of_stock_location"/>
+                                                    area pengiriman -->
+                                                </small>
+                                            </t>
+                                        </div>
+                                        <div class="nav-product-detail">
+                                            <a href="02.product-list.html" class="mobile-only">
+                                                <i class="icon-arrow-left"></i>
+                                            </a>
+                                            <ul class="action-info">
+                                                <li>
+                                                    <t t-if="in_wishlist">
+                                                        <a href="#" class="add-favorite active">
+                                                            <i class="icon-heart"></i>
+                                                            Wishlist
+                                                        </a>
+                                                    </t>
+                                                    <t t-else="">
+                                                        <a href="#" class="add-favorite">
+                                                            <i class="icon-heart"></i>
+                                                            Wishlist
+                                                        </a>
+                                                    </t>
+                                                </li>
+                                                <!--                                                <li>-->
+                                                <!--                                                    <div class="dropdown dropdown-share">-->
+                                                <!--                                                        <button class="dropdown-toggle" type="button"-->
+                                                <!--                                                                id="dropdownMenuButton1" data-bs-toggle="dropdown"-->
+                                                <!--                                                                aria-expanded="false">-->
+                                                <!--                                                            <i class="icon-share"></i>-->
+                                                <!--                                                            <span>Share</span>-->
+                                                <!--                                                        </button>-->
+                                                <!--                                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">-->
+                                                <!--                                                            <li>-->
+                                                <!--                                                                <a href="#">-->
+                                                <!--                                                                    <img-->
+                                                <!--                                                                        src="/theme_alkeba/static/src/images/icon/share_2.svg"/>-->
+                                                <!--                                                                </a>-->
+                                                <!--                                                                <a href="#">-->
+                                                <!--                                                                    <img-->
+                                                <!--                                                                        src="/theme_alkeba/static/src/images/icon/share_4.svg"/>-->
+                                                <!--                                                                </a>-->
+                                                <!--                                                                <a href="#">-->
+                                                <!--                                                                    <img-->
+                                                <!--                                                                        src="/theme_alkeba/static/src/images/icon/share_3.svg"/>-->
+                                                <!--                                                                </a>-->
+                                                <!--                                                                <a href="#">-->
+                                                <!--                                                                    <img-->
+                                                <!--                                                                        src="/theme_alkeba/static/src/images/icon/share_1.svg"/>-->
+                                                <!--                                                                </a>-->
+                                                <!--                                                            </li>-->
+                                                <!--                                                        </ul>-->
+                                                <!--                                                    </div>-->
+                                                <!--                                                </li>-->
+                                            </ul>
+                                        </div>
+                                        <div class="product-description">
+                                            <div class="card border-0">
+                                                <div class="card-body px-0 pb-0">
+                                                    <h2>Description</h2>
+                                                    <h5>
+                                                        <t t-esc="product.name"/>
+                                                    </h5>
+                                                    <t t-esc="product.description"/>
+                                                    <button class="btn btn-link-orange" id="see-detail-product">Lihat
+                                                        detail selengkapnya
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--                            <div class="product-info">-->
+                            <!--                                <div class="product-review">-->
+                            <!--                                    <div class="card">-->
+                            <!--                                        <div class="card-header">-->
+                            <!--                                            <h5>Review Produk</h5>-->
+                            <!--                                            <p>Review mengenai Instant Handsanitizer 60 ml Cair spray</p>-->
+                            <!--                                        </div>-->
+                            <!--                                        <div class="card-body  px-0">-->
+                            <!--                                            <div class="customer-review">-->
+                            <!--                                                <div class="box-review pb-3">-->
+                            <!--                                                    <div class="row align-items-center">-->
+                            <!--                                                        <div class="col-md-3 total-review">-->
+                            <!--                                                            <p>5-->
+                            <!--                                                                <span>/ 5</span>-->
+                            <!--                                                            </p>-->
+                            <!--                                                            <div class="d-flex justify-content-center">-->
+                            <!--                                                                <i class="icon-star1 active"></i>-->
+                            <!--                                                                <i class="icon-star1 active"></i>-->
+                            <!--                                                                <i class="icon-star1 active"></i>-->
+                            <!--                                                                <i class="icon-star1 active"></i>-->
+                            <!--                                                                <i class="icon-star1"></i>-->
+                            <!--                                                                (22)-->
+                            <!--                                                            </div>-->
+                            <!--                                                            <span>Berdasarkan 120 Review</span>-->
+                            <!--                                                        </div>-->
+                            <!--                                                        <div class="col-md-5">-->
+                            <!--                                                            <div class="row rating-review">-->
+                            <!--                                                                <div class="col-md-12">-->
+                            <!--                                                                    <div class="row align-items-center">-->
+                            <!--                                                                        <div class="col-md-1">-->
+                            <!--                                                                            <div class="star-icon">-->
+                            <!--                                                                                <i class="icon-star1"></i>-->
+                            <!--                                                                                5-->
+                            <!--                                                                            </div>-->
+                            <!--                                                                        </div>-->
+                            <!--                                                                        <div class="col-md-8">-->
+                            <!--                                                                            <div class="progress">-->
+                            <!--                                                                                <div-->
+                            <!--                                                                                    class="progress-bar progress-bar-success"-->
+                            <!--                                                                                    role="progressbar" aria-valuenow="5"-->
+                            <!--                                                                                    aria-valuemin="0" aria-valuemax="5"-->
+                            <!--                                                                                    style="width: 100%">-->
+                            <!--                                                                                    <span class="sr-only">80% Complete-->
+                            <!--                                                                                        (danger)-->
+                            <!--                                                                                    </span>-->
+                            <!--                                                                                </div>-->
+                            <!--                                                                            </div>-->
+                            <!--                                                                        </div>-->
+                            <!--                                                                        <div class="col-md-2 total">1011</div>-->
+                            <!--                                                                    </div>-->
+                            <!--                                                                    <div class="row align-items-center">-->
+                            <!--                                                                        <div class="col-md-1">-->
+                            <!--                                                                            <div class="star-icon">-->
+                            <!--                                                                                <i class="icon-star1"></i>-->
+                            <!--                                                                                4-->
+                            <!--                                                                            </div>-->
+                            <!--                                                                        </div>-->
+                            <!--                                                                        <div class="col-md-8">-->
+                            <!--                                                                            <div class="progress">-->
+                            <!--                                                                                <div-->
+                            <!--                                                                                    class="progress-bar progress-bar-success"-->
+                            <!--                                                                                    role="progressbar" aria-valuenow="5"-->
+                            <!--                                                                                    aria-valuemin="0" aria-valuemax="5"-->
+                            <!--                                                                                    style="width: 50%">-->
+                            <!--                                                                                    <span class="sr-only">80% Complete-->
+                            <!--                                                                                        (danger)-->
+                            <!--                                                                                    </span>-->
+                            <!--                                                                                </div>-->
+                            <!--                                                                            </div>-->
+                            <!--                                                                        </div>-->
+                            <!--                                                                        <div class="col-md-2 total">500</div>-->
+                            <!--                                                                    </div>-->
+                            <!--                                                                    <div class="row align-items-center">-->
+                            <!--                                                                        <div class="col-md-1">-->
+                            <!--                                                                            <div class="star-icon">-->
+                            <!--                                                                                <i class="icon-star1"></i>-->
+                            <!--                                                                                3-->
+                            <!--                                                                            </div>-->
+                            <!--                                                                        </div>-->
+                            <!--                                                                        <div class="col-md-8">-->
+                            <!--                                                                            <div class="progress">-->
+                            <!--                                                                                <div-->
+                            <!--                                                                                    class="progress-bar progress-bar-success"-->
+                            <!--                                                                                    role="progressbar" aria-valuenow="5"-->
+                            <!--                                                                                    aria-valuemin="0" aria-valuemax="5"-->
+                            <!--                                                                                    style="width: 0">-->
+                            <!--                                                                                    <span class="sr-only">80% Complete-->
+                            <!--                                                                                        (danger)-->
+                            <!--                                                                                    </span>-->
+                            <!--                                                                                </div>-->
+                            <!--                                                                            </div>-->
+                            <!--                                                                        </div>-->
+                            <!--                                                                        <div class="col-md-2 total">1011</div>-->
+                            <!--                                                                    </div>-->
+                            <!--                                                                    <div class="row align-items-center">-->
+                            <!--                                                                        <div class="col-md-1">-->
+                            <!--                                                                            <div class="star-icon">-->
+                            <!--                                                                                <i class="icon-star1"></i>-->
+                            <!--                                                                                2-->
+                            <!--                                                                            </div>-->
+                            <!--                                                                        </div>-->
+                            <!--                                                                        <div class="col-md-8">-->
+                            <!--                                                                            <div class="progress">-->
+                            <!--                                                                                <div-->
+                            <!--                                                                                    class="progress-bar progress-bar-success"-->
+                            <!--                                                                                    role="progressbar" aria-valuenow="5"-->
+                            <!--                                                                                    aria-valuemin="0" aria-valuemax="5"-->
+                            <!--                                                                                    style="width: 0">-->
+                            <!--                                                                                    <span class="sr-only">80% Complete-->
+                            <!--                                                                                        (danger)-->
+                            <!--                                                                                    </span>-->
+                            <!--                                                                                </div>-->
+                            <!--                                                                            </div>-->
+                            <!--                                                                        </div>-->
+                            <!--                                                                        <div class="col-md-2 total">1011</div>-->
+                            <!--                                                                    </div>-->
+                            <!--                                                                    <div class="row align-items-center">-->
+                            <!--                                                                        <div class="col-md-1">-->
+                            <!--                                                                            <div class="star-icon">-->
+                            <!--                                                                                <i class="icon-star1"></i>-->
+                            <!--                                                                                1-->
+                            <!--                                                                            </div>-->
+                            <!--                                                                        </div>-->
+                            <!--                                                                        <div class="col-md-8">-->
+                            <!--                                                                            <div class="progress">-->
+                            <!--                                                                                <div-->
+                            <!--                                                                                    class="progress-bar progress-bar-success"-->
+                            <!--                                                                                    role="progressbar" aria-valuenow="5"-->
+                            <!--                                                                                    aria-valuemin="0" aria-valuemax="1"-->
+                            <!--                                                                                    style="width: 4%">-->
+                            <!--                                                                                    <span class="sr-only">80% Complete-->
+                            <!--                                                                                        (danger)-->
+                            <!--                                                                                    </span>-->
+                            <!--                                                                                </div>-->
+                            <!--                                                                            </div>-->
+                            <!--                                                                        </div>-->
+                            <!--                                                                        <div class="col-md-2 total">2</div>-->
+                            <!--                                                                    </div>-->
+                            <!--                                                                </div>-->
+                            <!--                                                            </div>-->
+                            <!--                                                        </div>-->
+                            <!--                                                        <div class="col-md-4 total-photo-review">-->
+                            <!--                                                            <p>Foto dari pembeli (55)</p>-->
+                            <!--                                                            <div class="row photo-review">-->
+                            <!--                                                                <div class="col-md-4">-->
+                            <!--                                                                    <a href="" class="position-relative d-block">-->
+                            <!--                                                                        <img-->
+                            <!--                                                                            src="/theme_alkeba/static/src/images/product/prod-54.jpg"-->
+                            <!--                                                                            class="w-100"/>-->
+                            <!--                                                                    </a>-->
+                            <!--                                                                </div>-->
+                            <!--                                                                <div class="col-md-4">-->
+                            <!--                                                                    <a href="" class="position-relative d-block">-->
+                            <!--                                                                        <img-->
+                            <!--                                                                            src="/theme_alkeba/static/src/images/product/prod-53.jpg"-->
+                            <!--                                                                            class="w-100"/>-->
+                            <!--                                                                    </a>-->
+                            <!--                                                                </div>-->
+                            <!--                                                                <div class="col-md-4">-->
+                            <!--                                                                    <a href="javascript:void(0)" data-bs-toggle="modal"-->
+                            <!--                                                                       data-bs-target="#photoModal"-->
+                            <!--                                                                       class="position-relative d-block photo-modal-btn">-->
+                            <!--                                                                        <div class="more-product">20+</div>-->
+                            <!--                                                                        <img-->
+                            <!--                                                                            src="/theme_alkeba/static/src/images/product/prod-54.jpeg"-->
+                            <!--                                                                            class="w-100 br-2"/>-->
+                            <!--                                                                    </a>-->
+                            <!--                                                                </div>-->
+                            <!--                                                            </div>-->
+                            <!--                                                        </div>-->
+                            <!--                                                    </div>-->
+                            <!--                                                </div>-->
+                            <!--                                                <div class="mt-3 pils-star">-->
+                            <!--                                                    <ul class="nav nav-tabs" id="myTab" role="tablist">-->
+                            <!--                                                        <li class="nav-item" role="presentation">-->
+                            <!--                                                            <button class="nav-link active" id="all-tab"-->
+                            <!--                                                                    data-bs-toggle="tab" data-bs-target="#all"-->
+                            <!--                                                                    type="button" role="tab" aria-controls="all"-->
+                            <!--                                                                    aria-selected="true">All-->
+                            <!--                                                            </button>-->
+                            <!--                                                        </li>-->
+                            <!--                                                        <li class="nav-item" role="presentation">-->
+                            <!--                                                            <button class="nav-link" id="star-one-tab"-->
+                            <!--                                                                    data-bs-toggle="tab" data-bs-target="#star-one"-->
+                            <!--                                                                    type="button" role="tab" aria-controls="star-one"-->
+                            <!--                                                                    aria-selected="false">-->
+                            <!--                                                                <i class="icon-star1"></i>-->
+                            <!--                                                                1-->
+                            <!--                                                            </button>-->
+                            <!--                                                        </li>-->
+                            <!--                                                        <li class="nav-item" role="presentation">-->
+                            <!--                                                            <button class="nav-link" id="star-two-tab"-->
+                            <!--                                                                    data-bs-toggle="tab" data-bs-target="#star-two"-->
+                            <!--                                                                    type="button" role="tab" aria-controls="star-two"-->
+                            <!--                                                                    aria-selected="false">-->
+                            <!--                                                                <i class="icon-star1"></i>-->
+                            <!--                                                                2-->
+                            <!--                                                            </button>-->
+                            <!--                                                        </li>-->
+                            <!--                                                        <li class="nav-item" role="presentation">-->
+                            <!--                                                            <button class="nav-link" id="star-three-tab"-->
+                            <!--                                                                    data-bs-toggle="tab" data-bs-target="#star-three"-->
+                            <!--                                                                    type="button" role="tab" aria-controls="star-three"-->
+                            <!--                                                                    aria-selected="false">-->
+                            <!--                                                                <i class="icon-star1"></i>-->
+                            <!--                                                                3-->
+                            <!--                                                            </button>-->
+                            <!--                                                        </li>-->
+                            <!--                                                        <li class="nav-item" role="presentation">-->
+                            <!--                                                            <button class="nav-link" id="star-four-tab"-->
+                            <!--                                                                    data-bs-toggle="tab" data-bs-target="#star-four"-->
+                            <!--                                                                    type="button" role="tab" aria-controls="star-four"-->
+                            <!--                                                                    aria-selected="false">-->
+                            <!--                                                                <i class="icon-star1"></i>-->
+                            <!--                                                                4-->
+                            <!--                                                            </button>-->
+                            <!--                                                        </li>-->
+                            <!--                                                        <li class="nav-item" role="presentation">-->
+                            <!--                                                            <button class="nav-link" id="star-five-tab"-->
+                            <!--                                                                    data-bs-toggle="tab" data-bs-target="#star-five"-->
+                            <!--                                                                    type="button" role="tab" aria-controls="star-five"-->
+                            <!--                                                                    aria-selected="false">-->
+                            <!--                                                                <i class="icon-star1"></i>-->
+                            <!--                                                                5-->
+                            <!--                                                            </button>-->
+                            <!--                                                        </li>-->
+                            <!--                                                        <li class="nav-item" role="presentation">-->
+                            <!--                                                            <button class="nav-link" id="with-photo-tab"-->
+                            <!--                                                                    data-bs-toggle="tab" data-bs-target="#with-photo"-->
+                            <!--                                                                    type="button" role="tab" aria-controls="with-photo"-->
+                            <!--                                                                    aria-selected="false">Dengan Foto 78-->
+                            <!--                                                            </button>-->
+                            <!--                                                        </li>-->
+                            <!--                                                    </ul>-->
+                            <!--                                                    <div class="tab-content mt-3" id="myTabContent">-->
+                            <!--                                                        <div class="tab-pane fade show active" id="all" role="tabpanel"-->
+                            <!--                                                             aria-labelledby="all-tab">-->
+                            <!--                                                            <div class="review-block">-->
+                            <!--                                                                <div class="row">-->
+                            <!--                                                                    <div class="col-md-1">-->
+                            <!--                                                                        <div class="text-center">-->
+                            <!--                                                                            <img-->
+                            <!--                                                                                src="/theme_alkeba/static/src/images/user/user-01.png"-->
+                            <!--                                                                                class="rounded-circle"/>-->
+                            <!--                                                                        </div>-->
+                            <!--                                                                    </div>-->
+                            <!--                                                                    <div class="col-md-11">-->
+                            <!--                                                                        <div class="review-block-name">h****1</div>-->
+                            <!--                                                                        <div class="review-block-rate">-->
+                            <!--                                                                            <i class="icon-star1 active"></i>-->
+                            <!--                                                                            <i class="icon-star1 active"></i>-->
+                            <!--                                                                            <i class="icon-star1 active"></i>-->
+                            <!--                                                                            <i class="icon-star1 active"></i>-->
+                            <!--                                                                            <i class="icon-star1"></i>-->
+                            <!--                                                                        </div>-->
+                            <!--                                                                        <div class="review-block-description">Pengiriman-->
+                            <!--                                                                            cepat harga murmer-->
+                            <!--                                                                        </div>-->
+                            <!--                                                                        <div class="review-block-time mt-4">02 Oct 2020-->
+                            <!--                                                                            22:11:55-->
+                            <!--                                                                        </div>-->
+                            <!--                                                                    </div>-->
+                            <!--                                                                </div>-->
+                            <!--                                                                <div class="row">-->
+                            <!--                                                                    <div class="col-md-1">-->
+                            <!--                                                                        <div class="text-center">-->
+                            <!--                                                                            <img-->
+                            <!--                                                                                src="/theme_alkeba/static/src/images/user/user-02.png"-->
+                            <!--                                                                                class="rounded-circle"/>-->
+                            <!--                                                                        </div>-->
+                            <!--                                                                    </div>-->
+                            <!--                                                                    <div class="col-md-11">-->
+                            <!--                                                                        <div class="review-block-name">M****n</div>-->
+                            <!--                                                                        <div class="review-block-rate">-->
+                            <!--                                                                            <i class="icon-star1 active"></i>-->
+                            <!--                                                                            <i class="icon-star1 active"></i>-->
+                            <!--                                                                            <i class="icon-star1 active"></i>-->
+                            <!--                                                                            <i class="icon-star1 active"></i>-->
+                            <!--                                                                            <i class="icon-star1"></i>-->
+                            <!--                                                                        </div>-->
+                            <!--                                                                        <div class="review-block-description">pakai-->
+                            <!--                                                                            plastic wrap dan didus. sampai ga sampe satu-->
+                            <!--                                                                            hari. baru kali ini barang diterima ga-->
+                            <!--                                                                            sampai 1 hari. thx!-->
+                            <!--                                                                        </div>-->
+                            <!--                                                                        <div class="review-block-time mt-4">02 Oct 2020-->
+                            <!--                                                                            22:11:55-->
+                            <!--                                                                        </div>-->
+                            <!--                                                                    </div>-->
+                            <!--                                                                </div>-->
+                            <!--                                                                <div class="row">-->
+                            <!--                                                                    <div class="col-md-1">-->
+                            <!--                                                                        <div class="text-center">-->
+                            <!--                                                                            <img-->
+                            <!--                                                                                src="/theme_alkeba/static/src/images/user/user-03.png"-->
+                            <!--                                                                                class="rounded-circle"/>-->
+                            <!--                                                                        </div>-->
+                            <!--                                                                    </div>-->
+                            <!--                                                                    <div class="col-md-11">-->
+                            <!--                                                                        <div class="review-block-name">r****a</div>-->
+                            <!--                                                                        <div class="review-block-rate">-->
+                            <!--                                                                            <i class="icon-star1 active"></i>-->
+                            <!--                                                                            <i class="icon-star1 active"></i>-->
+                            <!--                                                                            <i class="icon-star1 active"></i>-->
+                            <!--                                                                            <i class="icon-star1 active"></i>-->
+                            <!--                                                                            <i class="icon-star1"></i>-->
+                            <!--                                                                        </div>-->
+                            <!--                                                                        <div class="review-block-description">barang-->
+                            <!--                                                                            selalu ori dong, packing juga oke, kurirnya-->
+                            <!--                                                                            juga ramah, dan promo nya lumayan dong..-->
+                            <!--                                                                            thnks jdid-->
+                            <!--                                                                        </div>-->
+                            <!--                                                                        <div class="review-block-time mt-4">02 Oct 2020-->
+                            <!--                                                                            22:11:55-->
+                            <!--                                                                        </div>-->
+                            <!--                                                                    </div>-->
+                            <!--                                                                </div>-->
+                            <!--                                                                <div class="row">-->
+                            <!--                                                                    <div class="col-md-1">-->
+                            <!--                                                                        <div class="text-center">-->
+                            <!--                                                                            <img-->
+                            <!--                                                                                src="/theme_alkeba/static/src/images/user/user-01.png"-->
+                            <!--                                                                                class="rounded-circle"/>-->
+                            <!--                                                                        </div>-->
+                            <!--                                                                    </div>-->
+                            <!--                                                                    <div class="col-md-11">-->
+                            <!--                                                                        <div class="review-block-name">h****1</div>-->
+                            <!--                                                                        <div class="review-block-rate">-->
+                            <!--                                                                            <i class="icon-star1 active"></i>-->
+                            <!--                                                                            <i class="icon-star1 active"></i>-->
+                            <!--                                                                            <i class="icon-star1 active"></i>-->
+                            <!--                                                                            <i class="icon-star1 active"></i>-->
+                            <!--                                                                            <i class="icon-star1"></i>-->
+                            <!--                                                                        </div>-->
+                            <!--                                                                        <div class="review-block-description">Pengiriman-->
+                            <!--                                                                            cepat harga murmer-->
+                            <!--                                                                        </div>-->
+                            <!--                                                                        <div class="review-block-time mt-4">02 Oct 2020-->
+                            <!--                                                                            22:11:55-->
+                            <!--                                                                        </div>-->
+                            <!--                                                                    </div>-->
+                            <!--                                                                </div>-->
+                            <!--                                                                <div class="row">-->
+                            <!--                                                                    <div class="col-md-1">-->
+                            <!--                                                                        <div class="text-center">-->
+                            <!--                                                                            <img-->
+                            <!--                                                                                src="/theme_alkeba/static/src/images/user/user-02.png"-->
+                            <!--                                                                                class="rounded-circle"/>-->
+                            <!--                                                                        </div>-->
+                            <!--                                                                    </div>-->
+                            <!--                                                                    <div class="col-md-11">-->
+                            <!--                                                                        <div class="review-block-name">M****n</div>-->
+                            <!--                                                                        <div class="review-block-rate">-->
+                            <!--                                                                            <i class="icon-star1 active"></i>-->
+                            <!--                                                                            <i class="icon-star1 active"></i>-->
+                            <!--                                                                            <i class="icon-star1 active"></i>-->
+                            <!--                                                                            <i class="icon-star1 active"></i>-->
+                            <!--                                                                            <i class="icon-star1"></i>-->
+                            <!--                                                                        </div>-->
+                            <!--                                                                        <div class="review-block-description">pakai-->
+                            <!--                                                                            plastic wrap dan didus. sampai ga sampe satu-->
+                            <!--                                                                            hari. baru kali ini barang diterima ga-->
+                            <!--                                                                            sampai 1 hari. thx!-->
+                            <!--                                                                        </div>-->
+                            <!--                                                                        <div class="review-block-time mt-4">02 Oct 2020-->
+                            <!--                                                                            22:11:55-->
+                            <!--                                                                        </div>-->
+                            <!--                                                                    </div>-->
+                            <!--                                                                </div>-->
+                            <!--                                                                <div class="row">-->
+                            <!--                                                                    <div class="col-md-1">-->
+                            <!--                                                                        <div class="text-center">-->
+                            <!--                                                                            <img-->
+                            <!--                                                                                src="/theme_alkeba/static/src/images/user/user-03.png"-->
+                            <!--                                                                                class="rounded-circle"/>-->
+                            <!--                                                                        </div>-->
+                            <!--                                                                    </div>-->
+                            <!--                                                                    <div class="col-md-11">-->
+                            <!--                                                                        <div class="review-block-name">r****a</div>-->
+                            <!--                                                                        <div class="review-block-rate">-->
+                            <!--                                                                            <i class="icon-star1 active"></i>-->
+                            <!--                                                                            <i class="icon-star1 active"></i>-->
+                            <!--                                                                            <i class="icon-star1 active"></i>-->
+                            <!--                                                                            <i class="icon-star1 active"></i>-->
+                            <!--                                                                            <i class="icon-star1"></i>-->
+                            <!--                                                                        </div>-->
+                            <!--                                                                        <div class="review-block-description">barang-->
+                            <!--                                                                            selalu ori dong, packing juga oke, kurirnya-->
+                            <!--                                                                            juga ramah, dan promo nya lumayan dong..-->
+                            <!--                                                                            thnks jdid-->
+                            <!--                                                                        </div>-->
+                            <!--                                                                        <div class="review-block-time mt-4">02 Oct 2020-->
+                            <!--                                                                            22:11:55-->
+                            <!--                                                                        </div>-->
+                            <!--                                                                    </div>-->
+                            <!--                                                                </div>-->
+                            <!--                                                                <div class="d-flex justify-content-center my-3">-->
+                            <!--                                                                    <button class="btn btn-outline btn-small">Lihat-->
+                            <!--                                                                        Review Lainnya-->
+                            <!--                                                                    </button>-->
+                            <!--                                                                </div>-->
+                            <!--                                                            </div>-->
+                            <!--                                                        </div>-->
+                            <!--                                                        <div class="tab-pane fade" id="star-one" role="tabpanel"-->
+                            <!--                                                             aria-labelledby="star-one-tab">B-->
+                            <!--                                                        </div>-->
+                            <!--                                                        <div class="tab-pane fade" id="star-two" role="tabpanel"-->
+                            <!--                                                             aria-labelledby="star-two-tab">C-->
+                            <!--                                                        </div>-->
+                            <!--                                                        <div class="tab-pane fade" id="star-three" role="tabpanel"-->
+                            <!--                                                             aria-labelledby="star-three-tab">D-->
+                            <!--                                                        </div>-->
+                            <!--                                                        <div class="tab-pane fade" id="star-four" role="tabpanel"-->
+                            <!--                                                             aria-labelledby="star-four-tab">E-->
+                            <!--                                                        </div>-->
+                            <!--                                                        <div class="tab-pane fade" id="star-five" role="tabpanel"-->
+                            <!--                                                             aria-labelledby="star-five-tab">F-->
+                            <!--                                                        </div>-->
+                            <!--                                                        <div class="tab-pane fade" id="with-photo" role="tabpanel"-->
+                            <!--                                                             aria-labelledby="with-photo-tab">G-->
+                            <!--                                                        </div>-->
+                            <!--                                                    </div>-->
+                            <!--                                                </div>-->
+                            <!--                                            </div>-->
+                            <!--                                        </div>-->
+                            <!--                                    </div>-->
+                            <!--                                </div>-->
+                            <!--                                <div class="product-discussion">-->
+                            <!--                                    <div class="card">-->
+                            <!--                                        <div class="card-header">-->
+                            <!--                                            <h5>Diskusi Produk</h5>-->
+                            <!--                                            <p>Diskusi mengenai Instant Handsanitizer 60 ml Cair spray</p>-->
+                            <!--                                        </div>-->
+                            <!--                                        <div class="card-body px-0">-->
+                            <!--                                            <h6>-->
+                            <!--                                                Ada pertanyaan? Diskusikan dengan penjual atau pengguna lain-->
+                            <!--                                            </h6>-->
+                            <!--                                            <div class="form-group">-->
+                            <!--                                                <textarea class="form-control"-->
+                            <!--                                                          placeholder="Masukan pertanyaan mu disini...."></textarea>-->
+                            <!--                                            </div>-->
+                            <!--                                            <div class="d-flex justify-content-end">-->
+                            <!--                                                <button class="btn btn-secondary">Kirim</button>-->
+                            <!--                                            </div>-->
+                            <!--                                            <div class="list-discussion">-->
+                            <!--                                                <div class="review-block discussion-block">-->
+                            <!--                                                    <div class="box-discuss">-->
+                            <!--                                                        <div class="row ">-->
+                            <!--                                                            <div class="col-md-2">-->
+                            <!--                                                                <div class="text-center">-->
+                            <!--                                                                    <img-->
+                            <!--                                                                        src="/theme_alkeba/static/src/images/user/user-01.png"-->
+                            <!--                                                                        class="rounded-circle"/>-->
+                            <!--                                                                </div>-->
+                            <!--                                                            </div>-->
+                            <!--                                                            <div class="col-md-10">-->
+                            <!--                                                                <div class="boxes">-->
+                            <!--                                                                    <div class="review-block-name">Budi-->
+                            <!--                                                                        <span>12 Januari 2022</span>-->
+                            <!--                                                                    </div>-->
+                            <!--                                                                    <div class="review-block-question">Apakah Produk ini-->
+                            <!--                                                                        masih tersedia ?-->
+                            <!--                                                                    </div>-->
+                            <!--                                                                </div>-->
+                            <!--                                                            </div>-->
+                            <!--                                                        </div>-->
+                            <!--                                                    </div>-->
+                            <!--                                                    <div class="row d-flex justify-content-end">-->
+                            <!--                                                        <div class="col-md-10">-->
+                            <!--                                                            <div class="reply">-->
+                            <!--                                                                <div class="row align-items-center">-->
+                            <!--                                                                    <div class="col-md-2">-->
+                            <!--                                                                        <div class="text-center">-->
+                            <!--                                                                            <img-->
+                            <!--                                                                                src="/theme_alkeba/static/src/images/user/alkeba.png"-->
+                            <!--                                                                                class="rounded-circle"/>-->
+                            <!--                                                                        </div>-->
+                            <!--                                                                    </div>-->
+                            <!--                                                                    <div class="col-md-10">-->
+                            <!--                                                                        <div class="boxes">-->
+                            <!--                                                                            <div class="review-block-name f-12">Alkeba-->
+                            <!--                                                                                <span class="f-10">12 Januari 2022-->
+                            <!--                                                                                </span>-->
+                            <!--                                                                            </div>-->
+                            <!--                                                                            <div class="review-block-question">Hai,-->
+                            <!--                                                                                untuk produk ini masih tersedia,-->
+                            <!--                                                                                silahkan lakukan pemesanan-->
+                            <!--                                                                            </div>-->
+                            <!--                                                                        </div>-->
+                            <!--                                                                    </div>-->
+                            <!--                                                                </div>-->
+                            <!--                                                            </div>-->
+                            <!--                                                            <div class="reply">-->
+                            <!--                                                                <div class="row align-items-center">-->
+                            <!--                                                                    <div class="col-md-2">-->
+                            <!--                                                                        <div class="text-center">-->
+                            <!--                                                                            <img-->
+                            <!--                                                                                src="/theme_alkeba/static/src/images/user/user-01.png"-->
+                            <!--                                                                                class="rounded-circle"/>-->
+                            <!--                                                                        </div>-->
+                            <!--                                                                    </div>-->
+                            <!--                                                                    <div class="col-md-10">-->
+                            <!--                                                                        <div class="boxes">-->
+                            <!--                                                                            <div class="review-block-name f-12">Budi-->
+                            <!--                                                                                <span class="f-10">12 Januari 2022-->
+                            <!--                                                                                </span>-->
+                            <!--                                                                            </div>-->
+                            <!--                                                                            <div class="review-block-question">Hai,-->
+                            <!--                                                                                untuk produk ini masih tersedia,-->
+                            <!--                                                                                silahkan lakukan pemesanan-->
+                            <!--                                                                            </div>-->
+                            <!--                                                                        </div>-->
+                            <!--                                                                    </div>-->
+                            <!--                                                                </div>-->
+                            <!--                                                            </div>-->
+                            <!--                                                            <div class="reply">-->
+                            <!--                                                                <div class="row align-items-center">-->
+                            <!--                                                                    <div class="col-md-2">-->
+                            <!--                                                                        <div class="text-center">-->
+                            <!--                                                                            <img-->
+                            <!--                                                                                src="/theme_alkeba/static/src/images/user/alkeba.png"-->
+                            <!--                                                                                class="rounded-circle"/>-->
+                            <!--                                                                        </div>-->
+                            <!--                                                                    </div>-->
+                            <!--                                                                    <div class="col-md-10">-->
+                            <!--                                                                        <div class="boxes">-->
+                            <!--                                                                            <div class="review-block-name f-12">Alkeba-->
+                            <!--                                                                                <span class="f-10">12 Januari 2022-->
+                            <!--                                                                                </span>-->
+                            <!--                                                                            </div>-->
+                            <!--                                                                            <div class="review-block-question">Hai,-->
+                            <!--                                                                                untuk produk ini masih tersedia,-->
+                            <!--                                                                                silahkan lakukan pemesanan-->
+                            <!--                                                                            </div>-->
+                            <!--                                                                        </div>-->
+                            <!--                                                                    </div>-->
+                            <!--                                                                </div>-->
+                            <!--                                                            </div>-->
+                            <!--                                                        </div>-->
+                            <!--                                                    </div>-->
+                            <!--                                                </div>-->
+                            <!--                                                <div class="review-block discussion-block">-->
+                            <!--                                                    <div class="box-discuss">-->
+                            <!--                                                        <div class="row ">-->
+                            <!--                                                            <div class="col-md-2">-->
+                            <!--                                                                <div class="text-center">-->
+                            <!--                                                                    <img-->
+                            <!--                                                                        src="/theme_alkeba/static/src/images/user/user-02.png"-->
+                            <!--                                                                        class="rounded-circle"/>-->
+                            <!--                                                                </div>-->
+                            <!--                                                            </div>-->
+                            <!--                                                            <div class="col-md-10">-->
+                            <!--                                                                <div class="boxes">-->
+                            <!--                                                                    <div class="review-block-name">Larissa-->
+                            <!--                                                                        <span>12 Januari 2022</span>-->
+                            <!--                                                                    </div>-->
+                            <!--                                                                    <div class="review-block-question">Apakah Produk ini-->
+                            <!--                                                                        masih tersedia ?-->
+                            <!--                                                                    </div>-->
+                            <!--                                                                </div>-->
+                            <!--                                                            </div>-->
+                            <!--                                                        </div>-->
+                            <!--                                                    </div>-->
+                            <!--                                                    <div class="row d-flex justify-content-end">-->
+                            <!--                                                        <div class="col-md-10">-->
+                            <!--                                                            <div class="reply">-->
+                            <!--                                                                <div class="row align-items-center">-->
+                            <!--                                                                    <div class="col-md-2">-->
+                            <!--                                                                        <div class="text-center">-->
+                            <!--                                                                            <img-->
+                            <!--                                                                                src="/theme_alkeba/static/src/images/user/alkeba.png"-->
+                            <!--                                                                                class="rounded-circle"/>-->
+                            <!--                                                                        </div>-->
+                            <!--                                                                    </div>-->
+                            <!--                                                                    <div class="col-md-10">-->
+                            <!--                                                                        <div class="boxes">-->
+                            <!--                                                                            <div class="review-block-name f-12">Alkeba-->
+                            <!--                                                                                <span class="f-10">12 Januari 2022-->
+                            <!--                                                                                </span>-->
+                            <!--                                                                            </div>-->
+                            <!--                                                                            <div class="review-block-question">Hai,-->
+                            <!--                                                                                untuk produk ini masih tersedia,-->
+                            <!--                                                                                silahkan lakukan pemesanan-->
+                            <!--                                                                            </div>-->
+                            <!--                                                                        </div>-->
+                            <!--                                                                    </div>-->
+                            <!--                                                                </div>-->
+                            <!--                                                            </div>-->
+                            <!--                                                            <a href="" class="see-more">Lihat 3 balasan Lainnya</a>-->
+                            <!--                                                        </div>-->
+                            <!--                                                    </div>-->
+                            <!--                                                </div>-->
+                            <!--                                                <div class="review-block discussion-block">-->
+                            <!--                                                    <div class="box-discuss">-->
+                            <!--                                                        <div class="row ">-->
+                            <!--                                                            <div class="col-md-2">-->
+                            <!--                                                                <div class="text-center">-->
+                            <!--                                                                    <img-->
+                            <!--                                                                        src="/theme_alkeba/static/src/images/user/user-03.png"-->
+                            <!--                                                                        class="rounded-circle"/>-->
+                            <!--                                                                </div>-->
+                            <!--                                                            </div>-->
+                            <!--                                                            <div class="col-md-10">-->
+                            <!--                                                                <div class="boxes">-->
+                            <!--                                                                    <div class="review-block-name">Akbar-->
+                            <!--                                                                        <span>12 Januari 2022</span>-->
+                            <!--                                                                    </div>-->
+                            <!--                                                                    <div class="review-block-question">Apakah Produk ini-->
+                            <!--                                                                        masih tersedia ?-->
+                            <!--                                                                    </div>-->
+                            <!--                                                                </div>-->
+                            <!--                                                            </div>-->
+                            <!--                                                        </div>-->
+                            <!--                                                    </div>-->
+                            <!--                                                    <div class="row d-flex justify-content-end">-->
+                            <!--                                                        <div class="col-md-10">-->
+                            <!--                                                            <div class="reply">-->
+                            <!--                                                                <div class="row align-items-center">-->
+                            <!--                                                                    <div class="col-md-2">-->
+                            <!--                                                                        <div class="text-center">-->
+                            <!--                                                                            <img-->
+                            <!--                                                                                src="/theme_alkeba/static/src/images/user/alkeba.png"-->
+                            <!--                                                                                class="rounded-circle"/>-->
+                            <!--                                                                        </div>-->
+                            <!--                                                                    </div>-->
+                            <!--                                                                    <div class="col-md-10">-->
+                            <!--                                                                        <div class="boxes">-->
+                            <!--                                                                            <div class="review-block-name f-12">Alkeba-->
+                            <!--                                                                                <span class="f-10">12 Januari 2022-->
+                            <!--                                                                                </span>-->
+                            <!--                                                                            </div>-->
+                            <!--                                                                            <div class="review-block-question">Hai,-->
+                            <!--                                                                                untuk produk ini masih tersedia,-->
+                            <!--                                                                                silahkan lakukan pemesanan-->
+                            <!--                                                                            </div>-->
+                            <!--                                                                        </div>-->
+                            <!--                                                                    </div>-->
+                            <!--                                                                </div>-->
+                            <!--                                                            </div>-->
+                            <!--                                                            <a href="" class="see-more">Lihat 3 balasan Lainnya</a>-->
+                            <!--                                                        </div>-->
+                            <!--                                                    </div>-->
+                            <!--                                                </div>-->
+                            <!--                                            </div>-->
+                            <!--                                        </div>-->
+                            <!--                                    </div>-->
+                            <!--                                </div>-->
+                            <!--                            </div>-->
+                        </div>
+                        <div class="col-md-3">
+                            <div class="floating-share">
+                                <div class="product-about-right">
+                                    <div class="qty-buy p-3 mb-4">
+                                        <h3>Masukkan Produk
+                                            ke Keranjang?
+                                        </h3>
+                                        <p>Silakan masukan jumlah barang yang akan dibeli terlebih dahulu.</p>
+                                        <div class="qty-spinner">
+                                            <p>
+                                                <b>Kuantitas</b>
+                                            </p>
+                                            <div class="number ms-auto">
+                                                <span class="minus">-</span>
+                                                <input id="quantity" type="number" value="1"/>
+                                                <span class="plus">+</span>
+                                            </div>
+                                            <!-- <p class="stock-info">
+                                                <i class="icon-information-circle"></i>
+                                                Stock Produk tersedia:
+                                                <b>STOCK_COUNT</b>
+                                            </p> -->
+                                        </div>
+                                        <div class="button mt-2">
+                                            <button id="addProductToCart" class="btn btn-secondary d-block w-100">
+                                                Masukkan Keranjang
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <!-- HIDE UNTUK SEMENTARA, JANGAN DI HAPUS -->
+                                    <!-- ===================================== -->
+                                    <!-- <div class="contact-help">
+                                        <div class="card">
+                                            <h5 class="card-header">Butuh Bantuan? Hubungi:</h5>
+                                            <div class="card-body">
+                                                <a href="javascript:void(0)" id="chat_button" class="btn btn-outline">
+                                                    <i class="icon-chat"></i>
+                                                    Chat
+                                                </a>
+                                                <a href="" class="btn btn-outline">
+                                                    <i class="icon-mail"></i>
+                                                    Email
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div> -->
+                                    <div class="green-box ">
+                                        <div class="card">
+                                            <h5 class="card-header">Perlindungan Pembeli</h5>
+                                            <div class="card-body">
+                                                <ul class="product-policy">
+                                                    <li>
+                                                        <i class="icon-shield-check"></i>
+                                                        Dijamin original dan bergaransi
+                                                    </li>
+                                                    <li>
+                                                        <i class="icon-shield-check"></i>
+                                                        Full refund jika pesanan tidak diterima dan produk yang tidak
+                                                        sesuai dengan deskripsi
+                                                    </li>
+                                                    <li>
+                                                        <i class="icon-shield-check"></i>
+                                                        Full refund jika barang datang dalam keadaan rusak
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal Wishlist-->
+            <div class="modal fade" id="favouriteModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-body text-center p-4">
+                            <p>
+                                <i class="icon-heart"></i>
+                                <strong>Produk berhasil dimasukkan ke dalam Wishlist Anda.</strong>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="unFavouriteModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-body text-center p-4">
+                            <p>
+                                <i class="icon-heart"></i>
+                                <strong>Produk berhasil dihapus dari Wishlist Anda.</strong>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal Add to Cart-->
+            <div class="modal fade" id="addToCartModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-body text-center p-4">
+                            <p>
+                                <i class="icon-heart"></i>
+                                <strong>Produk berhasil dimasukkan ke dalam Keranjang Belanja.</strong>
+                            </p>
+                            <a href="" id="backToProducts" class="btn btn-outline">
+                                Lanjut Belanja
+                            </a>
+                            <a href="/cart" id="productToCart" class="btn btn-outline">
+                                Lihat Keranjang
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="qtyExceedingStockModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-body text-center p-4">
+                            <p>
+                                <i class="icon-heart"></i>
+                                <strong>Kuantitas yang anda masukan melebihi stok yang tersedia.</strong>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="qtyStockEmptyModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-body text-center p-4">
+                            <p>
+                                <i class="icon-heart"></i>
+                                <strong>Stock produk sedang kosong.</strong>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal Foto-->
+            <div class="modal fade" id="photoModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">Foto dan video dari pembeli
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                <i class="icon-x"></i>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="wrap-modal-slider">
+                                <div class="slider-photo-review">
+                                    <div class="box-photo-review">
+                                        <div class="caption-review">
+                                            <div class="ava-user text-center">
+                                                <img src="/theme_alkeba/static/src/images/user/user-01.png"
+                                                     class="rounded-circle"/>
+                                            </div>
+                                            <div class="review-block-name">r****a</div>
+                                            <div class="review-block-rate">
+                                                <i class="icon-star1 active"></i>
+                                                <i class="icon-star1 active"></i>
+                                                <i class="icon-star1 active"></i>
+                                                <i class="icon-star1 active"></i>
+                                                <i class="icon-star1"></i>
+                                            </div>
+                                            <div class="review-block-description">barang selalu ori dong, packing juga
+                                                oke, kurirnya juga ramah, dan promo nya lumayan dong.. thnks jdid
+                                            </div>
+                                            <div class="review-block-time mt-4">02 Oct 2020 22:11:55</div>
+                                        </div>
+                                        <img src="/theme_alkeba/static/src/images/product/prod-54.jpg"/>
+                                    </div>
+                                    <div class="box-photo-review">
+                                        <div class="caption-review">
+                                            <div class="ava-user text-center">
+                                                <img src="/theme_alkeba/static/src/images/user/user-01.png"
+                                                     class="rounded-circle"/>
+                                            </div>
+                                            <div class="review-block-name">r****a</div>
+                                            <div class="review-block-rate">
+                                                <i class="icon-star1 active"></i>
+                                                <i class="icon-star1 active"></i>
+                                                <i class="icon-star1 active"></i>
+                                                <i class="icon-star1 active"></i>
+                                                <i class="icon-star1"></i>
+                                            </div>
+                                            <div class="review-block-description">barang selalu ori dong, packing juga
+                                                oke, kurirnya juga ramah, dan promo nya lumayan dong.. thnks jdid
+                                            </div>
+                                            <div class="review-block-time mt-4">02 Oct 2020 22:11:55</div>
+                                        </div>
+                                        <img src="/theme_alkeba/static/src/images/product/prod-54.jpg"/>
+                                    </div>
+                                    <div class="box-photo-review">
+                                        <div class="caption-review">
+                                            <div class="ava-user text-center">
+                                                <img src="/theme_alkeba/static/src/images/user/user-01.png"
+                                                     class="rounded-circle"/>
+                                            </div>
+                                            <div class="review-block-name">r****a</div>
+                                            <div class="review-block-rate">
+                                                <i class="icon-star1 active"></i>
+                                                <i class="icon-star1 active"></i>
+                                                <i class="icon-star1 active"></i>
+                                                <i class="icon-star1 active"></i>
+                                                <i class="icon-star1"></i>
+                                            </div>
+                                            <div class="review-block-description">barang selalu ori dong, packing juga
+                                                oke, kurirnya juga ramah, dan promo nya lumayan dong.. thnks jdid
+                                            </div>
+                                            <div class="review-block-time mt-4">02 Oct 2020 22:11:55</div>
+                                        </div>
+                                        <img src="/theme_alkeba/static/src/images/product/prod-52.jpg"/>
+                                    </div>
+                                    <div class="box-photo-review">
+                                        <div class="caption-review">
+                                            <div class="ava-user text-center">
+                                                <img src="/theme_alkeba/static/src/images/user/user-01.png"
+                                                     class="rounded-circle"/>
+                                            </div>
+                                            <div class="review-block-name">r****a</div>
+                                            <div class="review-block-rate">
+                                                <i class="icon-star1 active"></i>
+                                                <i class="icon-star1 active"></i>
+                                                <i class="icon-star1 active"></i>
+                                                <i class="icon-star1 active"></i>
+                                                <i class="icon-star1"></i>
+                                            </div>
+                                            <div class="review-block-description">barang selalu ori dong, packing juga
+                                                oke, kurirnya juga ramah, dan promo nya lumayan dong.. thnks jdid
+                                            </div>
+                                            <div class="review-block-time mt-4">02 Oct 2020 22:11:55</div>
+                                        </div>
+                                        <img src="/theme_alkeba/static/src/images/product/prod-53.jpg"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </t>
+    </template>
+
+    <template id="carousel_product_indicators_alkeba" name="Carousel Product">
+        <div t-ignore="True" t-attf-class="o_carousel_product_indicators {{indicators_div_class}}">
+            <ol t-if="len(product_images) > 1" t-attf-class="carousel-indicators {{indicators_list_class}} position-static mx-auto my-0 text-left">
+                <t t-foreach="product_images" t-as="product_image"><li t-attf-class="m-1 mb-2 align-top {{'active' if product_image_first else ''}}" data-target="#o-carousel-product" t-att-data-slide-to="str(product_image_index)">
+                    <div t-field="product_image.image_128" t-options='{"widget": "image", "qweb_img_responsive": False, "class": "o_image_64_contain", "alt-field": "name"}'/>
+                    <i t-if="product_image._name == 'product.image' and product_image.embed_code" class="fa fa-2x fa-play-circle o_product_video_thumb"/>
+                </li></t>
+            </ol>
+        </div>
+    </template>
+
+</odoo>

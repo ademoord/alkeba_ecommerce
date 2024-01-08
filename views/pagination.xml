@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="alkeba_bottom_pagination" name="Alkeba Bottom Pagination">
+
+        <div class="pagination-bottom d-flex align-items-center justify-content-between">
+            <p class="mb-0">Menampilkan <t t-esc="pagination['showing']" />
+            </p>
+            <t t-if="pagination['total_pages'] &gt; 0">
+                <ul class="list-unstyled mb-0">
+
+                    <!-- prev button -->
+                    <!-- check if search param is an actual value -->
+                    <t t-if="request.params.get('search', '') != 'false'">
+                        <!-- check if page greater than 1 -->
+                        <t t-if="pagination['page'] &gt; 1">
+                            <li>
+                                <!-- then assign the search param to the prev button url -->
+                                <a t-attf-href="/products?search={{ request.params.get('search', '') }}&amp;page={{ pagination['page'] - 1 }}&amp;limit={{ pagination['limit'] }}&amp;sort={{ pagination['sort'] }}" class="btn">
+                                    &lt;
+                                </a>
+                            </li>
+                        </t>
+                    </t>
+
+                    <!-- check if search param is an actual value -->
+                    <t t-if="request.params.get('search', '') != 'false'">
+                        <!-- check if page greater than 3 -->
+                        <t t-if="pagination['page'] &gt; 3">
+                            <li>
+                                <!-- then assign the search param to the advanced number button url -->
+                                <a
+                                    t-attf-href="/products?search={{ request.params.get('search', '') }}&amp;page=1&amp;limit={{ pagination['limit'] }}&amp;sort={{ pagination['sort'] }}"
+                                    class="btn">
+                                    1
+                                </a>
+                            </li>
+                            <li>
+                                ...
+                            </li>
+                        </t>
+                    </t>
+                    <t
+                        t-foreach="range(max(1, pagination['page'] - 2), min(pagination['total_pages'], pagination['page'] + 1) + 1)"
+                        t-as="page_num">
+                        <t t-if="page_num == pagination['page']">
+                            <li class="active">
+                                <!-- check if search param is an actual value -->
+                                <t t-if="request.params.get('search', '') != 'false'">
+                                    <!-- then assign the search param to the prev button url -->
+                                    <a
+                                        t-attf-href="/products?search={{ request.params.get('search', '') }}&amp;page={{ page_num }}&amp;limit={{ pagination['limit'] }}&amp;sort={{ pagination['sort'] }}"
+                                        class="btn">
+                                        <t t-esc="page_num" />
+                                    </a>
+                                </t>
+                            </li>
+                        </t>
+                        <t t-else="">
+                            <li>
+                                <!-- check if search param is an actual value -->
+                                <t t-if="request.params.get('search', '') != 'false'">
+                                    <!-- then assign the search param to the prev button url -->
+                                    <a
+                                        t-attf-href="/products?search={{ request.params.get('search', '') }}&amp;page={{ page_num }}&amp;limit={{ pagination['limit'] }}&amp;sort={{ pagination['sort'] }}"
+                                        class="btn">
+                                        <t t-esc="page_num" />
+                                    </a>
+                                </t>
+                            </li>
+                        </t>
+                    </t>
+                    <!-- check if the page less than and equal to total page to unduplicate the last page -->
+                    <t t-if="pagination['page'] &lt;= pagination['total_pages'] - 2">
+                        <li>
+                            ...
+                        </li>
+
+                        <li>
+                            <!-- check if search param is an actual value -->
+                            <t t-if="request.params.get('search', '') != 'false'">
+                                <!-- assign the search params when it's not empty, as usual -->
+                                <a
+                                    t-attf-href="/products?search={{ request.params.get('search', '') }}&amp;page={{ pagination['total_pages'] }}&amp;limit={{ pagination['limit'] }}&amp;sort={{ pagination['sort'] }}"
+                                    class="btn">
+                                    <!-- don't duplicate the last page -->
+                                    <t t-esc="pagination['total_pages']" />
+                                </a>
+                            </t>
+                        </li>
+    
+                        <!-- next button -->
+                        <li>
+                            <!-- check if search param is an actual value -->
+                            <t t-if="request.params.get('search', '') != 'false'">
+                                <!-- then assign the search param to the next button url -->
+                                <a
+                                    t-attf-href="/products?search={{ request.params.get('search', '') }}&amp;page={{ pagination['page'] + 1 }}&amp;limit={{ pagination['limit'] }}&amp;sort={{ pagination['sort'] }}"
+                                    class="btn">
+                                    &gt;
+                                </a>
+                            </t>
+                        </li>
+                    </t>
+                </ul>
+            </t>
+        </div>
+        <t t-if="len(products) == 0">
+            <div id="no-prod">
+                <img src="/theme_alkeba/static/src/images/order-empty.png"/>
+                <h6>Produk yang Anda cari tidak ditemukan</h6>
+                <p>Silakan periksa kembali kata kunci pencarian anda.</p>
+            </div>
+        </t>
+    </template>
+
+</odoo>
